@@ -1,100 +1,56 @@
-import PropTypes from 'prop-types';
-import React from "react";
+// i18n
+import './locales/i18n';
 
-import { Switch, BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
+// scroll bar
+import 'simplebar/src/simplebar.css';
 
-// Import Routes all
-import { authProtectedRoutes, publicRoutes } from "./routes";
+// lazy image
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
-// Import all middleware
-import Authmiddleware from "./routes/route";
+// ----------------------------------------------------------------------
 
-// layouts Format
-import VerticalLayout from "./components/VerticalLayout/";
-import HorizontalLayout from "./components/HorizontalLayout/";
-import NonAuthLayout from "./components/NonAuthLayout";
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+// routes
+import Router from './routes';
+// theme
+import ThemeProvider from './theme';
+// locales
+import ThemeLocalization from './locales';
+// components
+import SnackbarProvider from './components/snackbar';
+import { ThemeSettings, SettingsProvider } from './components/settings';
+import { MotionLazyContainer } from './components/animate';
+import ScrollToTop from './components/scroll-to-top';
 
-// Import scss
-import "./assets/scss/theme.scss";
+// Check our docs
+// https://docs.minimals.cc/authentication/js-version
 
-// Import Firebase Configuration file
-// import { initFirebaseBackend } from "./helpers/firebase_helper";
+import { AuthProvider } from './auth/JwtContext';
 
-import fakeBackend from "./helpers/AuthType/fakeBackend"
+// ----------------------------------------------------------------------
 
-// Activating fake backend
-fakeBackend()
-
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_APIKEY,
-//   authDomain: process.env.REACT_APP_AUTHDOMAIN,
-//   databaseURL: process.env.REACT_APP_DATABASEURL,
-//   projectId: process.env.REACT_APP_PROJECTID,
-//   storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-//   messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
-//   appId: process.env.REACT_APP_APPID,
-//   measurementId: process.env.REACT_APP_MEASUREMENTID,
-// };
-
-// init firebase backend
-// initFirebaseBackend(firebaseConfig);
-
-const App = props => {
-
-  function getLayout() {
-    let layoutCls = VerticalLayout;
-    switch (props.layout.layoutType) {
-      case "horizontal":
-        layoutCls = HorizontalLayout;
-        break;
-      default:
-        layoutCls = VerticalLayout;
-        break;
-    }
-    return layoutCls;
-  }
-
-  const Layout = getLayout();
+export default function App() {
   return (
-    <React.Fragment>
-      <Router>
-        <Switch>
-          {publicRoutes.map((route, idx) => (
-            <Authmiddleware
-              path={route.path}
-              layout={NonAuthLayout}
-              component={route.component}
-              key={idx}
-              isAuthProtected={false}
-              exact
-            />
-          ))}
-
-          {authProtectedRoutes.map((route, idx) => (
-            <Authmiddleware
-              path={route.path}
-              layout={Layout}
-              component={route.component}
-              key={idx}
-              isAuthProtected={true}
-              exact
-            />
-          ))}
-        </Switch>
-      </Router>
-    </React.Fragment>
+    <AuthProvider>
+      <HelmetProvider>
+        <SettingsProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <MotionLazyContainer>
+              <ThemeProvider>
+                <ThemeSettings>
+                  <ThemeLocalization>
+                    <SnackbarProvider>
+                      <Router />
+                    </SnackbarProvider>
+                  </ThemeLocalization>
+                </ThemeSettings>
+              </ThemeProvider>
+            </MotionLazyContainer>
+          </BrowserRouter>
+        </SettingsProvider>
+      </HelmetProvider>
+    </AuthProvider>
   );
-};
-
-App.propTypes = {
-  layout: PropTypes.any
-};
-
-const mapStateToProps = state => {
-  return {
-    layout: state.Layout,
-  };
-};
-
-export default connect(mapStateToProps, null)(App);
+}

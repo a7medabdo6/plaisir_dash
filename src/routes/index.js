@@ -1,34 +1,69 @@
-import React from "react"
-import { Redirect } from "react-router-dom"
+import { Navigate, useRoutes } from 'react-router-dom';
+// auth
+import AuthGuard from '../auth/AuthGuard';
+import GuestGuard from '../auth/GuestGuard';
+// layouts
+import CompactLayout from '../layouts/compact';
+import DashboardLayout from '../layouts/dashboard';
+// config
+import { PATH_AFTER_LOGIN } from '../config-global';
+//
+import {
+  Page404,
+  PageOne,
+  PageTwo,
+  PageSix,
+  PageFour,
+  PageFive,
+  LoginPage,
+  PageThree,
+} from './elements';
 
-// Profile
-import UserProfile from "../pages/Authentication/user-profile"
+// ----------------------------------------------------------------------
 
-// Authentication related pages
-import Login from "../pages/Authentication/Login"
-import Logout from "../pages/Authentication/Logout"
-import Register from "../pages/Authentication/Register"
-import ForgetPwd from "../pages/Authentication/ForgetPassword"
-
-// Dashboard
-import Dashboard from "../pages/Dashboard/index"
-
-const authProtectedRoutes = [
-  { path: "/dashboard", component: Dashboard },
-
-  // //profile
-  { path: "/profile", component: UserProfile },
-
-  // this route should be at the end of all other routes
-  // eslint-disable-next-line react/display-name
-  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
-]
-
-const publicRoutes = [
-  { path: "/logout", component: Logout },
-  { path: "/login", component: Login },
-  { path: "/forgot-password", component: ForgetPwd },
-  { path: "/register", component: Register },
-]
-
-export { publicRoutes, authProtectedRoutes }
+export default function Router() {
+  return useRoutes([
+    {
+      path: '/',
+      children: [
+        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        {
+          path: 'login',
+          element: (
+            <GuestGuard>
+              <LoginPage />
+            </GuestGuard>
+          ),
+        },
+      ],
+    },
+    {
+      path: '/dashboard',
+      element: (
+        <AuthGuard>
+          <DashboardLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        { path: 'one', element: <PageOne /> },
+        { path: 'two', element: <PageTwo /> },
+        { path: 'three', element: <PageThree /> },
+        {
+          path: 'user',
+          children: [
+            { element: <Navigate to="/dashboard/user/four" replace />, index: true },
+            { path: 'four', element: <PageFour /> },
+            { path: 'five', element: <PageFive /> },
+            { path: 'six', element: <PageSix /> },
+          ],
+        },
+      ],
+    },
+    {
+      element: <CompactLayout />,
+      children: [{ path: '404', element: <Page404 /> }],
+    },
+    { path: '*', element: <Navigate to="/404" replace /> },
+  ]);
+}
