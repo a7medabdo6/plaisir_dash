@@ -16,7 +16,10 @@ import {
   PageFour,
   PageFive,
   LoginPage,
+  EcommerceProductCreatePage,
+
   PageThree,
+  Category,
 } from './elements';
 
 // ----------------------------------------------------------------------
@@ -49,6 +52,16 @@ export default function Router() {
         { path: 'one', element: <PageOne /> },
         { path: 'two', element: <PageTwo /> },
         { path: 'three', element: <PageThree /> },
+        { path: 'category', element: <Category /> },
+        // {
+        //   path: 'category',
+        //   children: [
+        //     { element: <Navigate to="/dashboard/category/four" replace />, index: true },
+        //     { path: 'four', element: <Category /> },
+        //     // { path: 'new', element: <EcommerceProductCreatePage /> },
+        //     // { path: 'product/:name/edit', element: <EcommerceProductEditPage /> },
+        //   ],
+        // },
         {
           path: 'user',
           children: [

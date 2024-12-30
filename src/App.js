@@ -22,13 +22,20 @@ import SnackbarProvider from './components/snackbar';
 import { ThemeSettings, SettingsProvider } from './components/settings';
 import { MotionLazyContainer } from './components/animate';
 import ScrollToTop from './components/scroll-to-top';
-
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 // Check our docs
 // https://docs.minimals.cc/authentication/js-version
 
 import { AuthProvider } from './auth/JwtContext';
 
 // ----------------------------------------------------------------------
+const queryClient = new QueryClient()
 
 export default function App() {
   return (
@@ -42,7 +49,11 @@ export default function App() {
                 <ThemeSettings>
                   <ThemeLocalization>
                     <SnackbarProvider>
-                      <Router />
+                      <QueryClientProvider client={queryClient}>
+
+                        <Router />
+                      </QueryClientProvider>
+
                     </SnackbarProvider>
                   </ThemeLocalization>
                 </ThemeSettings>

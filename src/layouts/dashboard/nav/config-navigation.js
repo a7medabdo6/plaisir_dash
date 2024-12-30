@@ -14,6 +14,8 @@ const ICONS = {
   ecommerce: icon('ic_ecommerce'),
   analytics: icon('ic_analytics'),
   dashboard: icon('ic_dashboard'),
+  category: icon('ic_category'),  // إضافة أيقونة جديدة
+
 };
 
 const navConfig = [
@@ -22,9 +24,11 @@ const navConfig = [
   {
     subheader: 'general v4.1.0',
     items: [
-      { title: 'One', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
-      { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
-      { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
+      // { title: 'One', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
+      // { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
+      // { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
+      { title: 'category', path: PATH_DASHBOARD.category, icon: ICONS.category },
+
     ],
   },
 

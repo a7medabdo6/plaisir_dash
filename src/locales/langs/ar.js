@@ -15,11 +15,17 @@ const ar = {
     description: `تحتاج مساعدة؟ \n الرجاء مراجعة مستنداتنا`,
     documentation: `توثيق`,
   },
+  table: {
+    create: `أنشاء`,
+   
+  },
   app: `تطبيق`,
   user: `المستعمل`,
   list: `قائمة`,
   edit: `تعديل`,
   shop: `متجر`,
+  category: `الفئات`,
+
   blog: `مقالات`,
   post: `بريد`,
   mail: `بريد`,

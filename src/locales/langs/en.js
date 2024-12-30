@@ -15,8 +15,18 @@ const en = {
     description: `Need help? \n Please check our docs.`,
     documentation: `documentation`,
   },
+  table: {
+    create: `Create`,
+    category: `category`,
+    all: `All`,
+    banned: `Banned`,
+
+   
+  },
   app: `app`,
   user: `user`,
+  category: `category`,
+
   list: `list`,
   edit: `edit`,
   shop: `shop`,
