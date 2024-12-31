@@ -42,32 +42,9 @@ import { useLocales } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['all', 'active', 'banned'];
 
-const ROLE_OPTIONS = [
-  'all',
-  'ux designer',
-  'full stack designer',
-  'backend developer',
-  'project manager',
-  'leader',
-  'ui designer',
-  'ui/ux designer',
-  'front end developer',
-  'full stack developer',
-];
 
-const TABLE_HEAD = [
-  { id: 'name_ar', label: 'Name_ar', align: 'left' },
-  { id: 'name_en', label: 'Name_en', align: 'left' },
-  { id: 'image', label: 'image', align: 'left' },
 
-  // { id: 'company', label: 'Company', align: 'left' },
-  // { id: 'role', label: 'Role', align: 'left' },
-  { id: 'isVerified', label: 'Verified', align: 'center' },
-  { id: 'status', label: 'Status', align: 'left' },
-  { id: '' },
-];
 
 // ----------------------------------------------------------------------
 
@@ -90,10 +67,22 @@ export default function UserListPage() {
     onChangePage,
     onChangeRowsPerPage,
   } = useTable();
-  const { translate } = useLocales();
 
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
+  const TABLE_HEAD = [
+    { id: 'image', label: `${translate('category.image')}`, align: 'left' },
 
+    { id: 'name_ar', label: `${translate('category.NameAr')}`, align: 'left' },
+    { id: 'name_en', label: `${translate('category.NameEn')}`, align: 'left' },
+  
+    // { id: 'company', label: 'Company', align: 'left' },
+    // { id: 'role', label: 'Role', align: 'left' },
+    { id: 'isVerified', label: `${translate('category.Verified')}`, align: 'center' },
+    { id: 'status', label: `${translate('category.status')}`, align: 'left' },
+    { id: '' },
+  ];
+  
   const navigate = useNavigate();
 
   const [tableData, setTableData] = useState(_userList);
@@ -102,9 +91,9 @@ export default function UserListPage() {
 
   const [filterName, setFilterName] = useState('');
 
-  const [filterRole, setFilterRole] = useState('all');
+  const [filterRole, setFilterRole] = useState(`${translate('category.all')}`);
 
-  const [filterStatus, setFilterStatus] = useState('all');
+  const [filterStatus, setFilterStatus] = useState(`${translate('category.all')}`);
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -112,13 +101,27 @@ export default function UserListPage() {
     filterName,
     filterRole,
     filterStatus,
+    translate
   });
+  const STATUS_OPTIONS = [`${translate('category.all')}`, `${translate('category.active')}`, `${translate('category.banned')}`];
+  const ROLE_OPTIONS = [
+    `${translate('category.all')}`,
+    'ux designer',
+    'full stack designer',
+    'backend developer',
+    'project manager',
+    'leader',
+    'ui designer',
+    'ui/ux designer',
+    'front end developer',
+    'full stack developer',
+  ];
 
   const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const denseHeight = dense ? 52 : 72;
 
-  const isFiltered = filterName !== '' || filterRole !== 'all' || filterStatus !== 'all';
+  const isFiltered = filterName !== '' || filterRole !== `${translate('category.all')}`|| filterStatus !== `${translate('category.all')}`;
 
   const isNotFound =
     (!dataFiltered.length && !!filterName) ||
@@ -183,15 +186,15 @@ export default function UserListPage() {
 
   const handleResetFilter = () => {
     setFilterName('');
-    setFilterRole('all');
-    setFilterStatus('all');
+    setFilterRole(`${translate('category.all')}`);
+    setFilterStatus(`${translate('category.all')}`);
   };
 
 
   const handleClick = () => {
     console.log(PATH_DASHBOARD.category.new);
     
-    navigate('category/new');
+    navigate('dashboard/user/six');
   };
 
   return (
@@ -202,21 +205,21 @@ export default function UserListPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="User List"
+          heading={`${translate('category.category')}`}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'List' },
+            { name: `${translate('category.category')}`, href: PATH_DASHBOARD.user.root },
+            { name: `${translate('category.list')}` },
           ]}
           action={
             <Button
 
               component={RouterLink}
-              to={PATH_DASHBOARD.category.new}
+              to="/dashboard/category/new"
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              {`${translate('table.create')}`}
+              {`${translate('category.create')}`}
             </Button>
           }
         />
@@ -259,7 +262,7 @@ export default function UserListPage() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title={`${translate('category.delet')}`}>
                   <IconButton color="primary" onClick={handleOpenConfirm}>
                     <Iconify icon="eva:trash-2-outline" />
                   </IconButton>
@@ -325,7 +328,7 @@ export default function UserListPage() {
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title="Delete"
+        title={`${translate('category.delet')}`}
         content={
           <>
             Are you sure want to delete <strong> {selected.length} </strong> items?
@@ -340,7 +343,7 @@ export default function UserListPage() {
               handleCloseConfirm();
             }}
           >
-            Delete
+            {`${translate('category.delet')}`}
           </Button>
         }
       />
@@ -350,7 +353,7 @@ export default function UserListPage() {
 
 // ----------------------------------------------------------------------
 
-function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole }) {
+function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole,translate }) {
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
   stabilizedThis.sort((a, b) => {
@@ -367,11 +370,11 @@ function applyFilter({ inputData, comparator, filterName, filterStatus, filterRo
     );
   }
 
-  if (filterStatus !== 'all') {
+  if (filterStatus !== `${translate('category.all')}`) {
     inputData = inputData.filter((user) => user.status === filterStatus);
   }
 
-  if (filterRole !== 'all') {
+  if (filterRole !== `${translate('category.all')}`) {
     inputData = inputData.filter((user) => user.role === filterRole);
   }
 

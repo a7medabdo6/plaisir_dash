@@ -17,6 +17,7 @@ import Label from '../../../../components/label';
 import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
 import ConfirmDialog from '../../../../components/confirm-dialog';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,7 @@ UserTableRow.propTypes = {
 
 export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const { name, avatarUrl, company, role, isVerified, status } = row;
+  const { translate } = useLocales();
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -62,9 +64,9 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
           <Stack direction="row" alignItems="center" spacing={2}>
             <Avatar alt={name} src={avatarUrl} />
 
-            <Typography variant="subtitle2" noWrap>
+            {/* <Typography variant="subtitle2" noWrap>
               {name}
-            </Typography>
+            </Typography> */}
           </Stack>
         </TableCell>
 
@@ -117,7 +119,8 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
           sx={{ color: 'error.main' }}
         >
           <Iconify icon="eva:trash-2-outline" />
-          Delete
+          {`${translate('category.delet')}`}
+
         </MenuItem>
 
         <MenuItem
@@ -127,18 +130,18 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
           }}
         >
           <Iconify icon="eva:edit-fill" />
-          Edit
+          {`${translate('category.Edit')}`}
         </MenuItem>
       </MenuPopover>
 
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title="Delete"
-        content="Are you sure want to delete?"
+        title={`${translate('category.delet')}`}
+        content= {`${translate('category.are_you_sure_to_delete')}`}
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>
-            Delete
+            {`${translate('category.delet')}`}
           </Button>
         }
       />

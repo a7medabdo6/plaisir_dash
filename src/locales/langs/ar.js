@@ -15,8 +15,44 @@ const ar = {
     description: `تحتاج مساعدة؟ \n الرجاء مراجعة مستنداتنا`,
     documentation: `توثيق`,
   },
-  table: {
-    create: `أنشاء`,
+  category: {
+    create: `انشاء`,
+    category: `الفئات`,
+    all: `الكل`,
+    banned: `غير نشط`,
+    active:'نشط',
+    image:'الصوره',
+    Verified:"موثق",
+    status:"الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel:"ألغاء",
+
+    search:'بحث',
+    NewCategory:'فئه جديدة',
+    CreateanewCategory:'انشاء فئه جديده',
+    NameAr:'الاسم بالعربي',
+NameEn:'الاسم بالانجليزيه',
+images:'الصور',
+IsActive:'نشط',
+SaveChanges:'حفظ',
+CreateCategory:'انشاء',
+list:'القائمة',
+delet:'حذف',
+Edit:'تعديل',
+
+
+errors: {
+  name_en_required: 'الاسم بالإنجليزية مطلوب',
+  name_ar_required: 'الاسم بالعربية مطلوب',
+  images_required: 'الصور مطلوبة',
+  tags_required: 'يجب إضافة على الأقل علامتين',
+  price_required: 'السعر يجب أن يكون أكبر من 0',
+  description_required: 'الوصف مطلوب',
+} 
+
+
+
+
    
   },
   app: `تطبيق`,
@@ -24,7 +60,7 @@ const ar = {
   list: `قائمة`,
   edit: `تعديل`,
   shop: `متجر`,
-  category: `الفئات`,
+  categorydash:'الفئات',
 
   blog: `مقالات`,
   post: `بريد`,

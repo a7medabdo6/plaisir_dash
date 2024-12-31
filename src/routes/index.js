@@ -53,15 +53,9 @@ export default function Router() {
         { path: 'two', element: <PageTwo /> },
         { path: 'three', element: <PageThree /> },
         { path: 'category', element: <Category /> },
-        // {
-        //   path: 'category',
-        //   children: [
-        //     { element: <Navigate to="/dashboard/category/four" replace />, index: true },
-        //     { path: 'four', element: <Category /> },
-        //     // { path: 'new', element: <EcommerceProductCreatePage /> },
-        //     // { path: 'product/:name/edit', element: <EcommerceProductEditPage /> },
-        //   ],
-        // },
+        { path: 'category/new', element: <EcommerceProductCreatePage /> },
+
+       
         {
           path: 'user',
           children: [

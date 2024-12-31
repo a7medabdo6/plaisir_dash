@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Stack, InputAdornment, TextField, MenuItem, Button } from '@mui/material';
 // components
 import Iconify from '../../../../components/iconify';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,8 @@ export default function UserTableToolbar({
   onFilterRole,
   onResetFilter,
 }) {
+  const { translate } = useLocales();
+
   return (
     <Stack
       spacing={2}
@@ -75,7 +78,7 @@ export default function UserTableToolbar({
         fullWidth
         value={filterName}
         onChange={onFilterName}
-        placeholder="Search..."
+        placeholder={`${translate('category.search')}`}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

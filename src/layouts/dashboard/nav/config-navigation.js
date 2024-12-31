@@ -27,7 +27,7 @@ const navConfig = [
       // { title: 'One', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
       // { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
       // { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
-      { title: 'category', path: PATH_DASHBOARD.category, icon: ICONS.category },
+      { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
 
     ],
   },

@@ -7,32 +7,36 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { useSettingsContext } from '../../../components/settings';
 import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
 // sections
-import ProductNewEditForm from '../../../sections/@dashboard/e-commerce/ProductNewEditForm';
+import CategoryNewEditForm from '../../../sections/@dashboard/e-commerce/CategoryNewEditForm';
+import { useLocales } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductCreatePage() {
+export default function EcommerceCategoryCreatePage() {
+    const { translate } = useLocales();
+  
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title> Ecommerce: Create a new product | Minimal UI</title>
+        <title> Ecommerce: Create a new Category | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Create a new product"
+          heading={`${translate('category.CreateanewCategory')}`}
           links={[
+            
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             {
-              name: 'E-Commerce',
-              href: PATH_DASHBOARD.eCommerce.root,
+              name:   `${translate('category.category')}`,
+              href: PATH_DASHBOARD.category.root,
             },
-            { name: 'New product' },
+            { name: `${translate('category.NewCategory')}` },
           ]}
         />
-        <ProductNewEditForm />
+        <CategoryNewEditForm />
       </Container>
     </>
   );

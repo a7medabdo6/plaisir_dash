@@ -21,10 +21,9 @@ export const PATH_DASHBOARD = {
   categoryNew: path(ROOTS_DASHBOARD, '/category/new'),
 
   // category: {
-  //   root: path(ROOTS_DASHBOARD, '/category'),
-  //   four: path(ROOTS_DASHBOARD, '/category/four'),
-   
-    
+  //   root: '/dashboard/ecommerce',
+  //   list: '/dashboard/ecommerce/list',
+  //   create: '/dashboard/ecommerce/new',
   // },
   
   user: {

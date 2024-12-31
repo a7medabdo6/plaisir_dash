@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -21,6 +23,7 @@ import FormProvider, {
   RHFRadioGroup,
   RHFAutocomplete,
 } from '../../../components/hook-form';
+import { useLocales } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -54,45 +57,48 @@ const TAGS_OPTION = [
 
 // ----------------------------------------------------------------------
 
-ProductNewEditForm.propTypes = {
+CategoryNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
-  currentProduct: PropTypes.object,
+  currentCategory: PropTypes.object,
 };
 
-export default function ProductNewEditForm({ isEdit, currentProduct }) {
+export default function CategoryNewEditForm({ isEdit, currentCategory }) {
   const navigate = useNavigate();
+    const { translate } = useLocales();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewProductSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    images: Yup.array().min(1, 'Images is required'),
-    tags: Yup.array().min(2, 'Must have at least 2 tags'),
-    price: Yup.number().moreThan(0, 'Price should not be $0.00'),
-    description: Yup.string().required('Description is required'),
+  const NewCategorySchema = Yup.object().shape({
+    name_en: Yup.string().required(`${translate('category.errors.name_en_required')}`),
+    name_ar: Yup.string().required(`${translate('category.errors.name_ar_required')}`),
+    images: Yup.array().min(1, `${translate('category.errors.images_required')}`),
+    tags: Yup.array().min(2, `${translate('category.errors.tags_required')}`),
+    price: Yup.number().moreThan(0, `${translate('category.errors.price_required')}`),
+    description: Yup.string().required(`${translate('category.errors.description_required')}`),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentProduct?.name || '',
-      description: currentProduct?.description || '',
-      images: currentProduct?.images || [],
-      code: currentProduct?.code || '',
-      sku: currentProduct?.sku || '',
-      price: currentProduct?.price || 0,
-      priceSale: currentProduct?.priceSale || 0,
-      tags: currentProduct?.tags || [TAGS_OPTION[0]],
+      name_en: currentCategory?.name_en || '',
+      name_ar: currentCategory?.name_ar || '',
+      description: currentCategory?.description || '',
+      images: currentCategory?.images || [],
+      code: currentCategory?.code || '',
+      sku: currentCategory?.sku || '',
+      price: currentCategory?.price || 0,
+      priceSale: currentCategory?.priceSale || 0,
+      tags: currentCategory?.tags || [TAGS_OPTION[0]],
       inStock: true,
       taxes: true,
-      gender: currentProduct?.gender || GENDER_OPTION[2].value,
-      category: currentProduct?.category || CATEGORY_OPTION[0].classify[1],
+      gender: currentCategory?.gender || GENDER_OPTION[2].value,
+      category: currentCategory?.category || CATEGORY_OPTION[0].classify[1],
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentProduct]
+    [currentCategory]
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewProductSchema),
+    resolver: yupResolver(NewCategorySchema),
     defaultValues,
   });
 
@@ -107,14 +113,14 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentProduct) {
+    if (isEdit && currentCategory) {
       reset(defaultValues);
     }
     if (!isEdit) {
       reset(defaultValues);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentProduct]);
+  }, [isEdit, currentCategory]);
 
   const onSubmit = async (data) => {
     try {
@@ -158,19 +164,21 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-              <RHFTextField name="name" label="Product Name" />
+              <RHFTextField name="name_ar" label={`${translate('category.NameAr')}`} />
+              <RHFTextField name="name_en" label={`${translate('category.NameEn')}`} />
 
-              <Stack spacing={1}>
+
+              {/* <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                   Description
                 </Typography>
 
                 <RHFEditor simple name="description" />
-              </Stack>
+              </Stack> */}
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                  Images
+                {`${translate('category.images')}`}
                 </Typography>
 
                 <RHFUpload
@@ -184,19 +192,28 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
                   onUpload={() => console.log('ON UPLOAD')}
                 />
               </Stack>
+              <Stack spacing={3}>
+                <Card sx={{ p: 3 }}>
+                  <RHFSwitch name="inStock" label={`${translate('category.IsActive')}`} />
+                </Card>
+                <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting}>
+                {!isEdit ? `${translate('category.CreateCategory')}` : `${translate('category.SaveChanges')}`}
+                </LoadingButton>
+              </Stack>
+
             </Stack>
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        {/* <Grid item xs={12} md={4}>
           <Stack spacing={3}>
             <Card sx={{ p: 3 }}>
               <RHFSwitch name="inStock" label="In stock" />
 
               <Stack spacing={3} mt={2}>
-                <RHFTextField name="code" label="Product Code" />
+                <RHFTextField name="code" label="Category Code" />
 
-                <RHFTextField name="sku" label="Product SKU" />
+                <RHFTextField name="sku" label="Category SKU" />
 
                 <Stack spacing={1}>
                   <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
@@ -274,11 +291,9 @@ export default function ProductNewEditForm({ isEdit, currentProduct }) {
               <RHFSwitch name="taxes" label="Price includes taxes" />
             </Card>
 
-            <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting}>
-              {!isEdit ? 'Create Product' : 'Save Changes'}
-            </LoadingButton>
+            
           </Stack>
-        </Grid>
+        </Grid> */}
       </Grid>
     </FormProvider>
   );
