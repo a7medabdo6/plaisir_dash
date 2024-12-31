@@ -26,6 +26,7 @@ const ar = {
     status:"الحاله",
     are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
     cancel:"ألغاء",
+    Edit:"تعديل",
 
     search:'بحث',
     NewCategory:'فئه جديدة',
@@ -39,6 +40,7 @@ CreateCategory:'انشاء',
 list:'القائمة',
 delet:'حذف',
 Edit:'تعديل',
+Dashboard:"لوحة التحكم",
 
 
 errors: {
@@ -55,12 +57,65 @@ errors: {
 
    
   },
+  coupon: {
+    create: `انشاء`,
+
+    coupon: `كوبون خصم`,
+    category: `الفئات`,
+    all: `الكل`,
+    banned: `غير نشط`,
+    active:'نشط',
+    image:'الصوره',
+    Verified:"موثق",
+    status:"الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel:"ألغاء",
+    Edit:"تعديل",
+    products:'ألمنتجات',
+    code:'كود',
+    expirationDate:'تاريخ الانتهاء',
+    Dashboard:"لوحة التحكم",
+
+    discountPercentage:'النسبة',
+    search:'بحث',
+    NewCoupon:'كوبون جديد',
+CreateanewCoupon:'انشاء كوبون جديد',
+CreateCoupon:'انشاء كوبون',
+    NameAr:'الاسم بالعربي',
+NameEn:'الاسم بالانجليزيه',
+images:'الصور',
+IsActive:'نشط',
+SaveChanges:'حفظ',
+CreateCategory:'انشاء',
+list:'القائمة',
+delet:'حذف',
+Edit:'تعديل',
+
+
+errors: {
+  
+  code: "الكود مطلوب",
+  discountPercentage: "نسبة الخصم مطلوبة",
+  expirationDate: "تاريخ الانتهاء مطلوب",
+  products: {
+    id: "معرف المنتج مطلوب",
+    min: "يجب إضافة منتج واحد على الأقل"
+  }
+
+}
+
+
+
+
+   
+  },
   app: `تطبيق`,
   user: `المستعمل`,
   list: `قائمة`,
   edit: `تعديل`,
   shop: `متجر`,
   categorydash:'الفئات',
+  coupondash:'كوبون',
 
   blog: `مقالات`,
   post: `بريد`,

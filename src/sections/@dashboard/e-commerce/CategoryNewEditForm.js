@@ -33,7 +33,7 @@ const GENDER_OPTION = [
   { label: 'Kids', value: 'Kids' },
 ];
 
-const CATEGORY_OPTION = [
+const Category_OPTION = [
   { group: 'Clothing', classify: ['Shirts', 'T-shirts', 'Jeans', 'Leather'] },
   { group: 'Tailored', classify: ['Suits', 'Blazers', 'Trousers', 'Waistcoats'] },
   { group: 'Accessories', classify: ['Shoes', 'Backpacks and bags', 'Bracelets', 'Face masks'] },
@@ -91,7 +91,7 @@ export default function CategoryNewEditForm({ isEdit, currentCategory }) {
       inStock: true,
       taxes: true,
       gender: currentCategory?.gender || GENDER_OPTION[2].value,
-      category: currentCategory?.category || CATEGORY_OPTION[0].classify[1],
+      Category: currentCategory?.Category || Category_OPTION[0].classify[1],
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentCategory]
@@ -161,7 +161,7 @@ export default function CategoryNewEditForm({ isEdit, currentCategory }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
               <RHFTextField name="name_ar" label={`${translate('category.NameAr')}`} />
@@ -223,11 +223,11 @@ export default function CategoryNewEditForm({ isEdit, currentCategory }) {
                   <RHFRadioGroup row spacing={4} name="gender" options={GENDER_OPTION} />
                 </Stack>
 
-                <RHFSelect native name="category" label="Category">
+                <RHFSelect native name="Category" label="Category">
                   <option value="" />
-                  {CATEGORY_OPTION.map((category) => (
-                    <optgroup key={category.group} label={category.group}>
-                      {category.classify.map((classify) => (
+                  {Category_OPTION.map((Category) => (
+                    <optgroup key={Category.group} label={Category.group}>
+                      {Category.classify.map((classify) => (
                         <option key={classify} value={classify}>
                           {classify}
                         </option>

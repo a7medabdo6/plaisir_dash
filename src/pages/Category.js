@@ -1,9 +1,8 @@
 
-import UserListPage from './components/table/UserListPage'
+import UserListPage from './components/Category/table/UserListPage'
 const Category = () => {
     return (
       <div>
-        Category
         <UserListPage />
       </div>
     );

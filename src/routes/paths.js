@@ -19,6 +19,8 @@ export const PATH_DASHBOARD = {
   three: path(ROOTS_DASHBOARD, '/three'),
   category: path(ROOTS_DASHBOARD, '/category'),
   categoryNew: path(ROOTS_DASHBOARD, '/category/new'),
+  Coupon: path(ROOTS_DASHBOARD, '/Coupon'),
+  CouponNew: path(ROOTS_DASHBOARD, '/Coupon/new'),
 
   // category: {
   //   root: '/dashboard/ecommerce',

@@ -22,16 +22,19 @@ const en = {
     banned: `banned`,
     active:'active',
 search:'Search',
-NewCategory:'New Category',
-CreateanewCategory:'Create a new Category',
-CreateCategory:'Create Category',
 
+Edit:"Edit",
 NameAr:'Name (Arabic)',
 NameEn:'Name (English)',
 images:'images',
 image:'image',
 Verified:"Verified",
 status:"status",
+Dashboard:"Dashboard",
+
+NewCategory:'New Category',
+CreateanewCategory:'Create a new Category',
+CreateCategory:'Create Category',
 are_you_sure_to_delete: "Are you sure want to delete? ",
 cancel:"Cancel",
 IsActive:'Is Active',
@@ -50,9 +53,56 @@ errors: {
 
    
   },
+  coupon: {
+    create: `Create`,
+    coupon: `Coupon`,
+    all: `all`,
+    banned: `banned`,
+    active:'active',
+search:'Search',
+
+NewCoupon:'New Coupon',
+CreateanewCoupon:'Create a new Coupon',
+CreateCoupon:'Create Coupon',
+
+
+Edit:"Edit",
+products:'Droducts',
+code:'Code',
+expirationDate:'ExpirationDate',
+
+discountPercentage:'DiscountPercentage',
+images:'images',
+image:'image',
+Verified:"Verified",
+status:"status",
+Dashboard:"Dashboard",
+
+are_you_sure_to_delete: "Are you sure want to delete? ",
+cancel:"Cancel",
+IsActive:'Is Active',
+SaveChanges:'Save Changes',
+list:'list',
+delet:'Delete',
+Edit:'Edit',
+errors: {
+  
+    code: "Code is required",
+    discountPercentage: "Discount percentage is required",
+    expirationDate: "Expiration date is required",
+    products: {
+      id: "Product ID is required",
+      min: "At least one product is required"
+    }
+  
+}
+
+   
+  },
   app: `app`,
   user: `user`,
   categorydash:'category',
+  coupondash:'Coupon',
   list: `list`,
   edit: `edit`,
   shop: `shop`,

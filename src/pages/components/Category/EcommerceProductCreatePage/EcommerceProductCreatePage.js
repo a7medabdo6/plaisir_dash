@@ -2,13 +2,13 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { Container } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from '../../../../routes/paths';
 // components
-import { useSettingsContext } from '../../../components/settings';
-import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
+import { useSettingsContext } from '../../../../components/settings';
+import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
 // sections
-import CategoryNewEditForm from '../../../sections/@dashboard/e-commerce/CategoryNewEditForm';
-import { useLocales } from '../../../locales';
+import CategoryNewEditForm from '../../../../sections/@dashboard/e-commerce/CategoryNewEditForm';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ export default function EcommerceCategoryCreatePage() {
           heading={`${translate('category.CreateanewCategory')}`}
           links={[
             
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
+            { name: `${translate('category.Dashboard')}`, href: PATH_DASHBOARD.root },
             {
               name:   `${translate('category.category')}`,
               href: PATH_DASHBOARD.category.root,

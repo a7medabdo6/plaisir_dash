@@ -22,6 +22,7 @@ import { useLocales } from '../../../../locales';
 // ----------------------------------------------------------------------
 
 UserTableRow.propTypes = {
+  avtar: PropTypes.bool,
   row: PropTypes.object,
   selected: PropTypes.bool,
   onEditRow: PropTypes.func,
@@ -29,7 +30,7 @@ UserTableRow.propTypes = {
   onSelectRow: PropTypes.func,
 };
 
-export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
+export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, avtar }) {
   const { name, avatarUrl, company, role, isVerified, status } = row;
   const { translate } = useLocales();
 
@@ -62,7 +63,11 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
 
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={name} src={avatarUrl} />
+            {
+              avtar ? <Avatar alt={name} src={avatarUrl} /> :         <TableCell align="left">{company}</TableCell>
+
+
+            }
 
             {/* <Typography variant="subtitle2" noWrap>
               {name}
@@ -75,8 +80,11 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
         <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
           {role}
         </TableCell>
+        {/* <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
+          {role}
+        </TableCell> */}
 
-        <TableCell align="center">
+         <TableCell align="center">
           <Iconify
             icon={isVerified ? 'eva:checkmark-circle-fill' : 'eva:clock-outline'}
             sx={{
@@ -86,7 +94,7 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
               ...(!isVerified && { color: 'warning.main' }),
             }}
           />
-        </TableCell>
+        </TableCell> 
 
         <TableCell align="left">
           <Label
@@ -138,7 +146,7 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
         open={openConfirm}
         onClose={handleCloseConfirm}
         title={`${translate('category.delet')}`}
-        content= {`${translate('category.are_you_sure_to_delete')}`}
+        content={`${translate('category.are_you_sure_to_delete')}`}
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>
             {`${translate('category.delet')}`}

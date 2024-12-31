@@ -28,6 +28,8 @@ const navConfig = [
       // { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
       // { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
       { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
+      { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.category },
+
 
     ],
   },

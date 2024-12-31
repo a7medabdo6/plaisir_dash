@@ -95,7 +95,7 @@ export function RHFMultiSelect({
   const { control } = useFormContext();
 
   const renderValues = (selectedIds) => {
-    const selectedItems = options.filter((item) => selectedIds.includes(item.value));
+    const selectedItems = options.filter((item) => selectedIds && selectedIds.includes(item.value));
 
     if (!selectedItems.length && placeholder) {
       return (
@@ -156,7 +156,7 @@ export function RHFMultiSelect({
             )}
 
             {options.map((option) => {
-              const selected = field.value.includes(option.value);
+              const selected = field.value && field.value.includes(option.value); // تحقق إذا كانت field.value موجودة
 
               return (
                 <MenuItem

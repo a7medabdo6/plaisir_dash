@@ -17,8 +17,11 @@ import {
   PageFive,
   LoginPage,
   EcommerceProductCreatePage,
-
+  EditCategorey,
+  CreateCoupon,
   PageThree,
+  EditCoupon,
+  Coupon,
   Category,
 } from './elements';
 
@@ -54,8 +57,13 @@ export default function Router() {
         { path: 'three', element: <PageThree /> },
         { path: 'category', element: <Category /> },
         { path: 'category/new', element: <EcommerceProductCreatePage /> },
+        { path: 'category/edit:id', element: <EditCategorey /> },
 
-       
+        { path: 'coupon', element: <Coupon /> },
+        { path: 'coupon/new', element: <CreateCoupon /> },
+        { path: 'coupon/edit:id', element: <EditCoupon /> },
+
+        
         {
           path: 'user',
           children: [

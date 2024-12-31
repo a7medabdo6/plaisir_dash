@@ -17,15 +17,15 @@ import {
   TableContainer,
 } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_DASHBOARD } from '../../../../routes/paths';
 // _mock_
-import { _userList } from '../../../_mock/arrays';
+import { _userList } from '../../../../_mock/arrays';
 // components
-import Iconify from '../../../components/iconify';
-import Scrollbar from '../../../components/scrollbar';
-import ConfirmDialog from '../../../components/confirm-dialog';
-import CustomBreadcrumbs from '../../../components/custom-breadcrumbs';
-import { useSettingsContext } from '../../../components/settings';
+import Iconify from '../../../../components/iconify';
+import Scrollbar from '../../../../components/scrollbar';
+import ConfirmDialog from '../../../../components/confirm-dialog';
+import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
+import { useSettingsContext } from '../../../../components/settings';
 import {
   useTable,
   getComparator,
@@ -35,10 +35,10 @@ import {
   TableHeadCustom,
   TableSelectedAction,
   TablePaginationCustom,
-} from '../../../components/table';
+} from '../../../../components/table';
 // sections
-import { UserTableToolbar, UserTableRow } from '../../../sections/@dashboard/user/list/index';
-import { useLocales } from '../../../locales';
+import { UserTableToolbar, UserTableRow } from '../../../../sections/@dashboard/user/list/index';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -103,7 +103,9 @@ export default function UserListPage() {
     filterStatus,
     translate
   });
-  const STATUS_OPTIONS = [`${translate('category.all')}`, `${translate('category.active')}`, `${translate('category.banned')}`];
+  const STATUS_OPTIONS = [`${translate('category.all')}`];
+
+  // const STATUS_OPTIONS = [`${translate('category.all')}`, `${translate('category.active')}`, `${translate('category.banned')}`];
   const ROLE_OPTIONS = [
     `${translate('category.all')}`,
     'ux designer',
@@ -181,7 +183,7 @@ export default function UserListPage() {
   };
 
   const handleEditRow = (id) => {
-    navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
+    navigate("/dashboard/category/edit:4");
   };
 
   const handleResetFilter = () => {
@@ -207,7 +209,7 @@ export default function UserListPage() {
         <CustomBreadcrumbs
           heading={`${translate('category.category')}`}
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
+            { name: `${translate('category.Dashboard')}`, href: PATH_DASHBOARD.root },
             { name: `${translate('category.category')}`, href: PATH_DASHBOARD.user.root },
             { name: `${translate('category.list')}` },
           ]}
@@ -294,6 +296,8 @@ export default function UserListPage() {
                       <UserTableRow
                         key={row.id}
                         row={row}
+                        avtar={true}
+
                         selected={selected.includes(row.id)}
                         onSelectRow={() => onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
