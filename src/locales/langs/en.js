@@ -20,89 +20,128 @@ const en = {
     category: `category`,
     all: `all`,
     banned: `banned`,
-    active:'active',
-search:'Search',
+    active: 'active',
+    search: 'Search',
 
-Edit:"Edit",
-NameAr:'Name (Arabic)',
-NameEn:'Name (English)',
-images:'images',
-image:'image',
-Verified:"Verified",
-status:"status",
-Dashboard:"Dashboard",
+    Edit: "Edit",
+    NameAr: 'Name (Arabic)',
+    NameEn: 'Name (English)',
+    images: 'images',
+    image: 'image',
+    Verified: "Verified",
+    status: "status",
+    Dashboard: "Dashboard",
 
-NewCategory:'New Category',
-CreateanewCategory:'Create a new Category',
-CreateCategory:'Create Category',
-are_you_sure_to_delete: "Are you sure want to delete? ",
-cancel:"Cancel",
-IsActive:'Is Active',
-SaveChanges:'Save Changes',
-list:'list',
-delet:'Delete',
-Edit:'Edit',
-errors: {
-  name_en_required: 'English name is required',
-  name_ar_required: 'Arabic name is required',
-  images_required: 'Images are required',
-  tags_required: 'At least two tags must be added',
-  price_required: 'Price must be greater than 0',
-  description_required: 'Description is required',
-}
+    NewCategory: 'New Category',
+    CreateanewCategory: 'Create a new Category',
+    CreateCategory: 'Create Category',
+    are_you_sure_to_delete: "Are you sure want to delete? ",
+    cancel: "Cancel",
+    IsActive: 'Is Active',
+    SaveChanges: 'Save Changes',
+    list: 'list',
+    delet: 'Delete',
+    Edit: 'Edit',
+    errors: {
+      name_en_required: 'English name is required',
+      name_ar_required: 'Arabic name is required',
+      images_required: 'Images are required',
+      tags_required: 'At least two tags must be added',
+      price_required: 'Price must be greater than 0',
+      description_required: 'Description is required',
+    }
 
-   
+
   },
   coupon: {
     create: `Create`,
     coupon: `Coupon`,
     all: `all`,
     banned: `banned`,
-    active:'active',
-search:'Search',
+    active: 'active',
+    search: 'Search',
 
-NewCoupon:'New Coupon',
-CreateanewCoupon:'Create a new Coupon',
-CreateCoupon:'Create Coupon',
+    NewCoupon: 'New Coupon',
+    CreateanewCoupon: 'Create a new Coupon',
+    CreateCoupon: 'Create Coupon',
 
 
-Edit:"Edit",
-products:'Droducts',
-code:'Code',
-expirationDate:'ExpirationDate',
+    Edit: "Edit",
+    products: 'Droducts',
+    code: 'Code',
+    expirationDate: 'ExpirationDate',
 
-discountPercentage:'DiscountPercentage',
-images:'images',
-image:'image',
-Verified:"Verified",
-status:"status",
-Dashboard:"Dashboard",
+    discountPercentage: 'DiscountPercentage',
+    images: 'images',
+    image: 'image',
+    Verified: "Verified",
+    status: "status",
+    Dashboard: "Dashboard",
 
-are_you_sure_to_delete: "Are you sure want to delete? ",
-cancel:"Cancel",
-IsActive:'Is Active',
-SaveChanges:'Save Changes',
-list:'list',
-delet:'Delete',
-Edit:'Edit',
-errors: {
-  
-    code: "Code is required",
-    discountPercentage: "Discount percentage is required",
-    expirationDate: "Expiration date is required",
-    products: {
-      id: "Product ID is required",
-      min: "At least one product is required"
+    are_you_sure_to_delete: "Are you sure want to delete? ",
+    cancel: "Cancel",
+    IsActive: 'Is Active',
+    SaveChanges: 'Save Changes',
+    list: 'list',
+    delet: 'Delete',
+    Edit: 'Edit',
+    errors: {
+
+      code: "Code is required",
+      discountPercentage: "Discount percentage is required",
+      expirationDate: "Expiration date is required",
+      products: {
+        id: "Product ID is required",
+        min: "At least one product is required"
+      }
+
     }
-  
-}
 
-   
+
+  },
+  features: {
+    create: `Create`,
+    features: `features`,
+    all: `all`,
+    banned: `banned`,
+    active: 'active',
+    search: 'Search',
+
+    Edit: "Edit",
+    NameAr: 'Name (Arabic)',
+    NameEn: 'Name (English)',
+    icon: 'icon',
+    image: 'image',
+    Verified: "Verified",
+    status: "status",
+    Dashboard: "Dashboard",
+
+    NewFeatures: 'New Features',
+    CreateanewFeatures: 'Create a new Features',
+    CreateFeatures: 'Create Features',
+    are_you_sure_to_delete: "Are you sure want to delete? ",
+    cancel: "Cancel",
+    IsActive: 'Is Active',
+    SaveChanges: 'Save Changes',
+    list: 'list',
+    delet: 'Delete',
+    Edit: 'Edit',
+    errors: {
+      name_en_required: 'English name is required',
+      name_ar_required: 'Arabic name is required',
+      images_required: 'Images are required',
+      tags_required: 'At least two tags must be added',
+      price_required: 'Price must be greater than 0',
+      description_required: 'Description is required',
+    }
+
+
   },
   app: `app`,
   user: `user`,
-  categorydash:'category',
-  coupondash:'Coupon',
+  categorydash: 'category',
+  coupondash: 'Coupon',
+  featuresdash:"Features",
   list: `list`,
   edit: `edit`,
   shop: `shop`,

@@ -31,6 +31,10 @@ export const EditCategorey = Loadable(lazy(() => import('../pages/components/Cat
 export const Coupon = Loadable(lazy(() => import('../pages/Coupon')));
 export const EditCoupon = Loadable(lazy(() => import('../pages/components/Coupon/EditCoupon')));
 
-
+export const CreateFeatures = Loadable(
+  lazy(() => import('../pages/components/Features/CreateFeatures'))
+);
+export const Features = Loadable(lazy(() => import('../pages/Features')));
+export const EditFeatures = Loadable(lazy(() => import('../pages/components/Features/EditFeatures/')));
 
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));

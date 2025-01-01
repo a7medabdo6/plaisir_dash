@@ -23,6 +23,8 @@ import { useLocales } from '../../../../locales';
 
 UserTableRow.propTypes = {
   avtar: PropTypes.bool,
+  icon:PropTypes.bool,
+  coupon:PropTypes.bool,
   row: PropTypes.object,
   selected: PropTypes.bool,
   onEditRow: PropTypes.func,
@@ -30,8 +32,8 @@ UserTableRow.propTypes = {
   onSelectRow: PropTypes.func,
 };
 
-export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, avtar }) {
-  const { name, avatarUrl, company, role, isVerified, status } = row;
+export default function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, avtar,icon,coupon }) {
+  const { name, avatarUrl, company, role, isVerified, status,icons } = row;
   const { translate } = useLocales();
 
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -64,10 +66,19 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             {
-              avtar ? <Avatar alt={name} src={avatarUrl} /> :         <TableCell align="left">{company}</TableCell>
+              avtar && <Avatar alt={name} src={avatarUrl} /> 
+
+            }
+             {
+              icon &&   <TableCell align="left">{icons}</TableCell>
 
 
             }
+            {
+               coupon &&   <TableCell align="left">{company}</TableCell>
+
+            }
+              
 
             {/* <Typography variant="subtitle2" noWrap>
               {name}

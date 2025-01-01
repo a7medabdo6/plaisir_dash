@@ -1,10 +1,10 @@
 import React from 'react'
-import UserListPage from './components/Coupon/table/UserListPage'
+import CouponListPage from './components/Coupon/table/CouponListPage'
 
 const Coupon = () => {
     return (
         <div>
-            <UserListPage />
+            <CouponListPage />
 
         </div>
     )

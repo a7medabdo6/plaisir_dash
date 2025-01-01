@@ -23,7 +23,11 @@ import {
   EditCoupon,
   Coupon,
   Category,
+  Features,
+  CreateFeatures,
+  EditFeatures
 } from './elements';
+
 
 // ----------------------------------------------------------------------
 
@@ -63,6 +67,9 @@ export default function Router() {
         { path: 'coupon/new', element: <CreateCoupon /> },
         { path: 'coupon/edit:id', element: <EditCoupon /> },
 
+        { path: 'features', element: <Features /> },
+        { path: 'features/new', element: <CreateFeatures /> },
+        { path: 'features/edit:id', element: <EditFeatures /> },
         
         {
           path: 'user',

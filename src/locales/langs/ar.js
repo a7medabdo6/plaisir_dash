@@ -20,42 +20,42 @@ const ar = {
     category: `الفئات`,
     all: `الكل`,
     banned: `غير نشط`,
-    active:'نشط',
-    image:'الصوره',
-    Verified:"موثق",
-    status:"الحاله",
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
     are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
-    cancel:"ألغاء",
-    Edit:"تعديل",
+    cancel: "ألغاء",
+    Edit: "تعديل",
 
-    search:'بحث',
-    NewCategory:'فئه جديدة',
-    CreateanewCategory:'انشاء فئه جديده',
-    NameAr:'الاسم بالعربي',
-NameEn:'الاسم بالانجليزيه',
-images:'الصور',
-IsActive:'نشط',
-SaveChanges:'حفظ',
-CreateCategory:'انشاء',
-list:'القائمة',
-delet:'حذف',
-Edit:'تعديل',
-Dashboard:"لوحة التحكم",
-
-
-errors: {
-  name_en_required: 'الاسم بالإنجليزية مطلوب',
-  name_ar_required: 'الاسم بالعربية مطلوب',
-  images_required: 'الصور مطلوبة',
-  tags_required: 'يجب إضافة على الأقل علامتين',
-  price_required: 'السعر يجب أن يكون أكبر من 0',
-  description_required: 'الوصف مطلوب',
-} 
+    search: 'بحث',
+    NewCategory: 'فئه جديدة',
+    CreateanewCategory: 'انشاء فئه جديده',
+    NameAr: 'الاسم بالعربي',
+    NameEn: 'الاسم بالانجليزيه',
+    images: 'الصور',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateCategory: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
+    Dashboard: "لوحة التحكم",
 
 
+    errors: {
+      name_en_required: 'الاسم بالإنجليزية مطلوب',
+      name_ar_required: 'الاسم بالعربية مطلوب',
+      images_required: 'الصور مطلوبة',
+      tags_required: 'يجب إضافة على الأقل علامتين',
+      price_required: 'السعر يجب أن يكون أكبر من 0',
+      description_required: 'الوصف مطلوب',
+    }
 
 
-   
+
+
+
   },
   coupon: {
     create: `انشاء`,
@@ -64,58 +64,101 @@ errors: {
     category: `الفئات`,
     all: `الكل`,
     banned: `غير نشط`,
-    active:'نشط',
-    image:'الصوره',
-    Verified:"موثق",
-    status:"الحاله",
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
     are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
-    cancel:"ألغاء",
-    Edit:"تعديل",
-    products:'ألمنتجات',
-    code:'كود',
-    expirationDate:'تاريخ الانتهاء',
-    Dashboard:"لوحة التحكم",
+    cancel: "ألغاء",
+    Edit: "تعديل",
+    products: 'ألمنتجات',
+    code: 'كود',
+    expirationDate: 'تاريخ الانتهاء',
+    Dashboard: "لوحة التحكم",
 
-    discountPercentage:'النسبة',
-    search:'بحث',
-    NewCoupon:'كوبون جديد',
-CreateanewCoupon:'انشاء كوبون جديد',
-CreateCoupon:'انشاء كوبون',
-    NameAr:'الاسم بالعربي',
-NameEn:'الاسم بالانجليزيه',
-images:'الصور',
-IsActive:'نشط',
-SaveChanges:'حفظ',
-CreateCategory:'انشاء',
-list:'القائمة',
-delet:'حذف',
-Edit:'تعديل',
-
-
-errors: {
-  
-  code: "الكود مطلوب",
-  discountPercentage: "نسبة الخصم مطلوبة",
-  expirationDate: "تاريخ الانتهاء مطلوب",
-  products: {
-    id: "معرف المنتج مطلوب",
-    min: "يجب إضافة منتج واحد على الأقل"
-  }
-
-}
+    discountPercentage: 'النسبة',
+    search: 'بحث',
+    NewCoupon: 'كوبون جديد',
+    CreateanewCoupon: 'انشاء كوبون جديد',
+    CreateCoupon: 'انشاء كوبون',
+    NameAr: 'الاسم بالعربي',
+    NameEn: 'الاسم بالانجليزيه',
+    images: 'الصور',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateCategory: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
 
 
+    errors: {
+
+      code: "الكود مطلوب",
+      discountPercentage: "نسبة الخصم مطلوبة",
+      expirationDate: "تاريخ الانتهاء مطلوب",
+      products: {
+        id: "معرف المنتج مطلوب",
+        min: "يجب إضافة منتج واحد على الأقل"
+      }
+
+    }
 
 
-   
+
+
+
+  },
+  features: {
+    create: `انشاء`,
+    features: `الخصائص`,
+    all: `الكل`,
+    banned: `غير نشط`,
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel: "ألغاء",
+    Edit: "تعديل",
+
+    search: 'بحث',
+    NewFeatures: 'خاصية جديدة',
+    CreateanewFeatures: 'انشاء خاصية جديده',
+    NameAr: 'الاسم بالعربي',
+    NameEn: 'الاسم بالانجليزيه',
+    icon: 'ايقونه',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateFeatures: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
+    Dashboard: "لوحة التحكم",
+
+
+    errors: {
+      name_en_required: 'الاسم بالإنجليزية مطلوب',
+      name_ar_required: 'الاسم بالعربية مطلوب',
+      icon_required: 'الايقونة مطلوبة',
+      tags_required: 'يجب إضافة على الأقل علامتين',
+      price_required: 'السعر يجب أن يكون أكبر من 0',
+      description_required: 'الوصف مطلوب',
+    }
+
+
+
+
+
   },
   app: `تطبيق`,
   user: `المستعمل`,
   list: `قائمة`,
   edit: `تعديل`,
   shop: `متجر`,
-  categorydash:'الفئات',
-  coupondash:'كوبون',
+  categorydash: 'الفئات',
+  coupondash: 'كوبون',
+  featuresdash:`الخصائص`,
 
   blog: `مقالات`,
   post: `بريد`,

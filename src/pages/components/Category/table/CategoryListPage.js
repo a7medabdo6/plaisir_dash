@@ -48,7 +48,7 @@ import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
-export default function UserListPage() {
+export default function CategoryListPage() {
   const {
     dense,
     page,
@@ -210,7 +210,7 @@ export default function UserListPage() {
           heading={`${translate('category.category')}`}
           links={[
             { name: `${translate('category.Dashboard')}`, href: PATH_DASHBOARD.root },
-            { name: `${translate('category.category')}`, href: PATH_DASHBOARD.user.root },
+            { name: `${translate('category.category')}`, href: PATH_DASHBOARD.category},
             { name: `${translate('category.list')}` },
           ]}
           action={

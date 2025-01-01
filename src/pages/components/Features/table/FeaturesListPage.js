@@ -19,7 +19,7 @@ import {
 // routes
 import { PATH_DASHBOARD } from '../../../../routes/paths';
 // _mock_
-import { _userList } from '../../../../_mock/arrays';
+import { _userList ,_featuresList} from '../../../../_mock/arrays';
 // components
 import Iconify from '../../../../components/iconify';
 import Scrollbar from '../../../../components/scrollbar';
@@ -48,7 +48,7 @@ import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
-export default function UserListPage() {
+export default function FeaturesListPage() {
   const {
     dense,
     page,
@@ -71,30 +71,29 @@ export default function UserListPage() {
   const { themeStretch } = useSettingsContext();
   const { translate } = useLocales();
   const TABLE_HEAD = [
-    { id: 'code', label: `${translate('coupon.code')}`, align: 'left' },
+    { id: 'icon', label: `${translate('features.icon')}`, align: 'left' },
 
-    { id: 'discountPercentage', label: `${translate('coupon.discountPercentage')}`, align: 'left' },
-    { id: 'expirationDate', label: `${translate('coupon.expirationDate')}`, align: 'left' },
-    { id: 'products', label: `${translate('coupon.products')}`, align: 'left' },
-
+    { id: 'name_ar', label: `${translate('features.NameAr')}`, align: 'left' },
+    { id: 'name_en', label: `${translate('features.NameEn')}`, align: 'left' },
+  
     // { id: 'company', label: 'Company', align: 'left' },
     // { id: 'role', label: 'Role', align: 'left' },
-    // { id: 'isVerified', label: `${translate('coupon.Verified')}`, align: 'center' },
-    { id: 'status', label: `${translate('coupon.status')}`, align: 'left' },
+    { id: 'isVerified', label: `${translate('features.Verified')}`, align: 'center' },
+    { id: 'status', label: `${translate('features.status')}`, align: 'left' },
     { id: '' },
   ];
   
   const navigate = useNavigate();
 
-  const [tableData, setTableData] = useState(_userList);
+  const [tableData, setTableData] = useState(_featuresList);
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const [filterName, setFilterName] = useState('');
 
-  const [filterRole, setFilterRole] = useState(`${translate('coupon.all')}`);
+  const [filterRole, setFilterRole] = useState(`${translate('features.all')}`);
 
-  const [filterStatus, setFilterStatus] = useState(`${translate('coupon.all')}`);
+  const [filterStatus, setFilterStatus] = useState(`${translate('features.all')}`);
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -104,11 +103,11 @@ export default function UserListPage() {
     filterStatus,
     translate
   });
-  const STATUS_OPTIONS = [`${translate('coupon.all')}`];
+  const STATUS_OPTIONS = [`${translate('features.all')}`];
 
-  // const STATUS_OPTIONS = [`${translate('coupon.all')}`, `${translate('coupon.active')}`, `${translate('coupon.banned')}`];
+  // const STATUS_OPTIONS = [`${translate('features.all')}`, `${translate('features.active')}`, `${translate('features.banned')}`];
   const ROLE_OPTIONS = [
-    `${translate('coupon.all')}`,
+    `${translate('features.all')}`,
     'ux designer',
     'full stack designer',
     'backend developer',
@@ -124,7 +123,7 @@ export default function UserListPage() {
 
   const denseHeight = dense ? 52 : 72;
 
-  const isFiltered = filterName !== '' || filterRole !== `${translate('coupon.all')}`|| filterStatus !== `${translate('coupon.all')}`;
+  const isFiltered = filterName !== '' || filterRole !== `${translate('features.all')}`|| filterStatus !== `${translate('features.all')}`;
 
   const isNotFound =
     (!dataFiltered.length && !!filterName) ||
@@ -184,17 +183,21 @@ export default function UserListPage() {
   };
 
   const handleEditRow = (id) => {
-    navigate("/dashboard/coupon/edit:4");
+    navigate(`/dashboard/Features/edit:${id}`);
   };
 
   const handleResetFilter = () => {
     setFilterName('');
-    setFilterRole(`${translate('coupon.all')}`);
-    setFilterStatus(`${translate('coupon.all')}`);
+    setFilterRole(`${translate('featuresNewEditForm.all')}`);
+    setFilterStatus(`${translate('features.all')}`);
   };
 
 
-
+  const handleClick = () => {
+    console.log(PATH_DASHBOARD.features.new);
+    
+    navigate('dashboard/user/six');
+  };
 
   return (
     <>
@@ -204,21 +207,21 @@ export default function UserListPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading={`${translate('coupon.coupon')}`}
+          heading={`${translate('features.features')}`}
           links={[
-            { name: `${translate('coupon.Dashboard')}`, href: PATH_DASHBOARD.root },
-            { name: `${translate('coupon.coupon')}`, href: PATH_DASHBOARD.user.root },
-            { name: `${translate('coupon.list')}` },
+            { name: `${translate('features.Dashboard')}`, href: PATH_DASHBOARD.root },
+            { name: `${translate('features.features')}`, href: PATH_DASHBOARD.features},
+            { name: `${translate('features.list')}` },
           ]}
           action={
             <Button
 
               component={RouterLink}
-              to="/dashboard/coupon/new"
+              to="/dashboard/features/new"
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              {`${translate('coupon.create')}`}
+              {`${translate('features.create')}`}
             </Button>
           }
         />
@@ -261,7 +264,7 @@ export default function UserListPage() {
                 )
               }
               action={
-                <Tooltip title={`${translate('coupon.delet')}`}>
+                <Tooltip title={`${translate('features.delet')}`}>
                   <IconButton color="primary" onClick={handleOpenConfirm}>
                     <Iconify icon="eva:trash-2-outline" />
                   </IconButton>
@@ -293,7 +296,8 @@ export default function UserListPage() {
                       <UserTableRow
                         key={row.id}
                         row={row}
-                        avtar={false}
+                        icon={true}
+
                         selected={selected.includes(row.id)}
                         onSelectRow={() => onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
@@ -328,7 +332,7 @@ export default function UserListPage() {
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title={`${translate('coupon.delet')}`}
+        title={`${translate('features.delet')}`}
         content={
           <>
             Are you sure want to delete <strong> {selected.length} </strong> items?
@@ -343,7 +347,7 @@ export default function UserListPage() {
               handleCloseConfirm();
             }}
           >
-            {`${translate('coupon.delet')}`}
+            {`${translate('features.delet')}`}
           </Button>
         }
       />
@@ -370,11 +374,11 @@ function applyFilter({ inputData, comparator, filterName, filterStatus, filterRo
     );
   }
 
-  if (filterStatus !== `${translate('coupon.all')}`) {
+  if (filterStatus !== `${translate('features.all')}`) {
     inputData = inputData.filter((user) => user.status === filterStatus);
   }
 
-  if (filterRole !== `${translate('coupon.all')}`) {
+  if (filterRole !== `${translate('features.all')}`) {
     inputData = inputData.filter((user) => user.role === filterRole);
   }
 

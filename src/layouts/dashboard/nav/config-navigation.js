@@ -15,6 +15,10 @@ const ICONS = {
   analytics: icon('ic_analytics'),
   dashboard: icon('ic_dashboard'),
   category: icon('ic_category'),  // إضافة أيقونة جديدة
+  Coupon:icon("ic_coupon"),
+  Features: icon("ic_Features")
+
+
 
 };
 
@@ -28,7 +32,9 @@ const navConfig = [
       // { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
       // { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
       { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
-      { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.category },
+      { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon},
+      { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
+
 
 
     ],
