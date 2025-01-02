@@ -16,7 +16,9 @@ const ICONS = {
   dashboard: icon('ic_dashboard'),
   category: icon('ic_category'),  // إضافة أيقونة جديدة
   Coupon:icon("ic_coupon"),
-  Features: icon("ic_Features")
+  Features: icon("ic_Features"),
+  Products: icon("ic_Features")
+
 
 
 
@@ -34,6 +36,8 @@ const navConfig = [
       { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
       { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon},
       { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
+      { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
+
 
 
 

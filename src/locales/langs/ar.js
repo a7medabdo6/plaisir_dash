@@ -151,6 +151,48 @@ const ar = {
 
 
   },
+  products: {
+    create: `انشاء`,
+    products: `المنتجات`,
+    all: `الكل`,
+    banned: `غير نشط`,
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel: "ألغاء",
+    Edit: "تعديل",
+
+    search: 'بحث',
+    NewProducts: 'منتج جديدة',
+    CreateanewProducts: 'انشاء منتج جديده',
+    NameAr: 'الاسم بالعربي',
+    NameEn: 'الاسم بالانجليزيه',
+    icon: 'ايقونه',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateProducts: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
+    Dashboard: "لوحة التحكم",
+
+
+    errors: {
+      name_en_required: 'الاسم بالإنجليزية مطلوب',
+      name_ar_required: 'الاسم بالعربية مطلوب',
+      icon_required: 'الايقونة مطلوبة',
+      tags_required: 'يجب إضافة على الأقل علامتين',
+      price_required: 'السعر يجب أن يكون أكبر من 0',
+      description_required: 'الوصف مطلوب',
+    }
+
+
+
+
+
+  },
   app: `تطبيق`,
   user: `المستعمل`,
   list: `قائمة`,
@@ -159,6 +201,7 @@ const ar = {
   categorydash: 'الفئات',
   coupondash: 'كوبون',
   featuresdash:`الخصائص`,
+  productsdash:"المنتجات",
 
   blog: `مقالات`,
   post: `بريد`,

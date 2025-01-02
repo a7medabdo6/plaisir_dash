@@ -25,7 +25,10 @@ import {
   Category,
   Features,
   CreateFeatures,
-  EditFeatures
+  EditFeatures,
+  Products,
+  CreateProducts,
+  EditProducts
 } from './elements';
 
 
@@ -70,6 +73,11 @@ export default function Router() {
         { path: 'features', element: <Features /> },
         { path: 'features/new', element: <CreateFeatures /> },
         { path: 'features/edit:id', element: <EditFeatures /> },
+
+
+        { path: 'products', element: <Products /> },
+        { path: 'products/new', element: <CreateProducts /> },
+        { path: 'products/edit:id', element: <EditProducts /> },
         
         {
           path: 'user',

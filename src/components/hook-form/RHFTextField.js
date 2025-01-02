@@ -56,6 +56,7 @@ export default function RHFTextField({ name, helperText, type = 'text', ...other
       control={control}
       render={({ field, fieldState: { error } }) => (
         <TextField
+
           {...field}
           fullWidth
           type={type} // تعيين النوع هنا

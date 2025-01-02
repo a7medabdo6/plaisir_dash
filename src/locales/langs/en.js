@@ -137,11 +137,50 @@ const en = {
 
 
   },
+  products: {
+    create: `Create`,
+    products: `products`,
+    all: `all`,
+    banned: `banned`,
+    active: 'active',
+    search: 'Search',
+
+    Edit: "Edit",
+    NameAr: 'Name (Arabic)',
+    NameEn: 'Name (English)',
+    icon: 'icon',
+    image: 'image',
+    Verified: "Verified",
+    status: "status",
+    Dashboard: "Dashboard",
+
+    NewProducts: 'New Products',
+    CreateanewProducts: 'Create a new Products',
+    CreateProducts: 'Create Products',
+    are_you_sure_to_delete: "Are you sure want to delete? ",
+    cancel: "Cancel",
+    IsActive: 'Is Active',
+    SaveChanges: 'Save Changes',
+    list: 'list',
+    delet: 'Delete',
+    Edit: 'Edit',
+    errors: {
+      name_en_required: 'English name is required',
+      name_ar_required: 'Arabic name is required',
+      images_required: 'Images are required',
+      tags_required: 'At least two tags must be added',
+      price_required: 'Price must be greater than 0',
+      description_required: 'Description is required',
+    }
+
+
+  },
   app: `app`,
   user: `user`,
   categorydash: 'category',
   coupondash: 'Coupon',
   featuresdash:"Features",
+  productsdash:"products",
   list: `list`,
   edit: `edit`,
   shop: `shop`,

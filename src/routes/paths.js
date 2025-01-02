@@ -26,6 +26,10 @@ export const PATH_DASHBOARD = {
 
   features: path(ROOTS_DASHBOARD, '/features'),
   featuresNew: path(ROOTS_DASHBOARD, '/features/new'),
+
+
+  products: path(ROOTS_DASHBOARD, '/products'),
+  productsNew: path(ROOTS_DASHBOARD, '/products/new'),
   // category: {
   //   root: '/dashboard/ecommerce',
   //   list: '/dashboard/ecommerce/list',

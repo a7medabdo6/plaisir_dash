@@ -37,4 +37,11 @@ export const CreateFeatures = Loadable(
 export const Features = Loadable(lazy(() => import('../pages/Features')));
 export const EditFeatures = Loadable(lazy(() => import('../pages/components/Features/EditFeatures/')));
 
+
+
+export const CreateProducts = Loadable(
+  lazy(() => import('../pages/components/Products/CreateProducts'))
+);
+export const Products = Loadable(lazy(() => import('../pages/Products')));
+export const EditProducts = Loadable(lazy(() => import('../pages/components/Products/EditProducts/')));
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
