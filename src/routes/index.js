@@ -28,6 +28,7 @@ import {
   EditFeatures,
   Products,
   CreateProducts,
+  GeneralBookingPage,
   EditProducts
 } from './elements';
 
@@ -59,6 +60,8 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        { path: 'booking', element: <GeneralBookingPage /> },
+
         { path: 'one', element: <PageOne /> },
         { path: 'two', element: <PageTwo /> },
         { path: 'three', element: <PageThree /> },
@@ -78,6 +81,10 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'products/new', element: <CreateProducts /> },
         { path: 'products/edit:id', element: <EditProducts /> },
+
+
+        { path: 'booking', element: <GeneralBookingPage /> },
+
         
         {
           path: 'user',

@@ -71,11 +71,12 @@ export default function ProductsListPage() {
   const { themeStretch } = useSettingsContext();
   const { translate } = useLocales();
   const TABLE_HEAD = [
-    { id: 'code', label: `${translate('products.code')}`, align: 'left' },
+    { id: 'image', label: `${translate('products.image')}`, align: 'left' },
 
-    { id: 'discountPercentage', label: `${translate('products.discountPercentage')}`, align: 'left' },
-    { id: 'expirationDate', label: `${translate('products.expirationDate')}`, align: 'left' },
-    { id: 'products', label: `${translate('products.products')}`, align: 'left' },
+    { id: 'code', label: `${translate('products.name')}`, align: 'left' },
+
+    { id: 'price_per_night', label: `${translate('products.price_per_night')}`, align: 'left' },
+    // { id: 'products', label: `${translate('products.products')}`, align: 'left' },
 
     // { id: 'company', label: 'Company', align: 'left' },
     // { id: 'role', label: 'Role', align: 'left' },
@@ -293,7 +294,7 @@ export default function ProductsListPage() {
                       <UserTableRow
                         key={row.id}
                         row={row}
-                        avtar={false}
+                        avtar={true}
                         Products={true}
                         selected={selected.includes(row.id)}
                         onSelectRow={() => onSelectRow(row.id)}

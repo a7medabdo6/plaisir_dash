@@ -26,6 +26,11 @@ export const PageThree = Loadable(lazy(() => import('../pages/PageThree')));
 export const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 export const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
 export const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
+
+
+export const GeneralBookingPage = Loadable(lazy(() => import('../pages/dashboard/GeneralBookingPage')));
+
+
 export const Category = Loadable(lazy(() => import('../pages/Category')));
 export const EditCategorey = Loadable(lazy(() => import('../pages/components/Category/EditCategorey')));
 export const Coupon = Loadable(lazy(() => import('../pages/Coupon')));

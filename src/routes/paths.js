@@ -14,6 +14,8 @@ export const PATH_AUTH = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  booking: path(ROOTS_DASHBOARD, '/booking'),
+
   one: path(ROOTS_DASHBOARD, '/one'),
   two: path(ROOTS_DASHBOARD, '/two'),
   three: path(ROOTS_DASHBOARD, '/three'),
@@ -30,6 +32,11 @@ export const PATH_DASHBOARD = {
 
   products: path(ROOTS_DASHBOARD, '/products'),
   productsNew: path(ROOTS_DASHBOARD, '/products/new'),
+
+
+
+  booking: path(ROOTS_DASHBOARD, '/booking'),
+
   // category: {
   //   root: '/dashboard/ecommerce',
   //   list: '/dashboard/ecommerce/list',

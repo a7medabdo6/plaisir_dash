@@ -7,6 +7,7 @@ import { fCurrency, fPercent } from '../../../../utils/formatNumber';
 // components
 import Iconify from '../../../../components/iconify';
 import Chart, { useChart } from '../../../../components/chart';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,7 @@ export default function BookingTotalIncomes({
   const theme = useTheme();
 
   const { series, options } = chart;
+  const { translate } = useLocales();
 
   const chartOptions = useChart({
     colors: [theme.palette[color].main],
@@ -84,7 +86,7 @@ export default function BookingTotalIncomes({
     >
       <Stack direction="row" justifyContent="space-between" sx={{ mb: 3 }}>
         <div>
-          <Typography sx={{ mb: 2, typography: 'subtitle2' }}>Total Incomes</Typography>
+          <Typography sx={{ mb: 2, typography: 'subtitle2' }}>{`${translate(`book.TotalIncomes`)}`}</Typography>
           <Typography sx={{ typography: 'h3' }}>{fCurrency(total)}</Typography>
         </div>
 

@@ -17,7 +17,8 @@ const ICONS = {
   category: icon('ic_category'),  // إضافة أيقونة جديدة
   Coupon:icon("ic_coupon"),
   Features: icon("ic_Features"),
-  Products: icon("ic_Features")
+  Products: icon("ic_Features"),
+  booking: icon('ic_booking'),
 
 
 
@@ -33,6 +34,8 @@ const navConfig = [
       // { title: 'One', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
       // { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
       // { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
+      { title: 'booking', path: PATH_DASHBOARD.booking, icon: ICONS.booking },
+
       { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
       { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon},
       { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },

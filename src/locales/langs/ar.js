@@ -155,6 +155,115 @@ const ar = {
     create: `انشاء`,
     products: `المنتجات`,
     all: `الكل`,
+    name: `الاسم`,
+
+    price_per_night:'السعر/الليلة',
+
+    banned: `غير نشط`,
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel: "ألغاء",
+    Edit: "تعديل",
+    products: 'المنتجات',
+    discountPercentage: 'النسبة',
+
+    code: 'كود',
+    search: 'بحث',
+    NewProducts: 'منتج جديدة',
+    CreateanewProducts: 'انشاء منتج جديده',
+    NameAr: 'الاسم بالعربي',
+    NameEn: 'الاسم بالانجليزيه',
+    icon: 'ايقونه',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateProducts: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
+    Dashboard: "لوحة التحكم",
+
+
+    errors: {
+      name_en_required: 'الاسم بالإنجليزية مطلوب',
+      name_ar_required: 'الاسم بالعربية مطلوب',
+      icon_required: 'الايقونة مطلوبة',
+      tags_required: 'يجب إضافة على الأقل علامتين',
+      price_required: 'السعر يجب أن يكون أكبر من 0',
+      description_required: 'الوصف مطلوب',
+    },
+    
+    placeholders : {
+      name_en: "أدخل الاسم بالإنجليزية",
+      name_ar: "أدخل الاسم بالعربية",
+      location_en: "أدخل الموقع بالإنجليزية",
+      location_ar: "أدخل الموقع بالعربية",
+      desc_en: "أدخل الوصف بالإنجليزية",
+      desc_ar: "أدخل الوصف بالعربية",
+      working_hours_en: "أدخل ساعات العمل بالإنجليزية",
+      working_hours_ar: "أدخل ساعات العمل بالعربية",
+      policy_en: "أدخل السياسة بالإنجليزية",
+      policy_ar: "أدخل السياسة بالعربية",
+      terms_en: "أدخل الشروط بالإنجليزية",
+      terms_ar: "أدخل الشروط بالعربية",
+      cancellation_policy_en: "أدخل سياسة الإلغاء بالإنجليزية",
+      cancellation_policy_ar: "أدخل سياسة الإلغاء بالعربية",
+      price_per_night: "أدخل السعر لكل ليلة",
+      map: "أدخل رابط الخريطة",
+      photo_id: "أدخل معرف الصورة",
+      categories: "اختر فئة واحدة على الأقل",
+      features: "اختر ميزة واحدة على الأقل",
+      user_id: "أدخل معرف المستخدم"
+    }
+    
+    
+    
+    
+
+
+
+
+
+  },
+  book: {
+    create: `انشاء`,
+    Check_Out: `المغادرة`,
+    Check_in: `الوصول`,
+    BookedRoom: "غرف محجوزة",
+    RoomAvailable: "غرف متاحة",
+    TotalIncomes: "إجمالي ألوصول",
+    Rooms: "غرف",
+    booker:"الاسم",
+    Room: "غرفة",
+    TotalBooking:"اجمالي الحجز",
+
+    Done: "منجز",
+    Cancel: "ملغي",
+    padding: "انتظار",
+    Soldout: "تم البيع بالكامل",
+    Available: "متاح",
+    ReservationStats: "إحصائيات الحجوزات",
+    week: "اسبوع",
+    month: "شهر",
+    year: "عام",
+    inLastyear: "العام الماضي",
+    CustomerReviews: "اراء العملاء",
+    Reject: "رفض",
+    Accept: "قبول",
+    Status: "الحالة",
+    Reviews:"رأي",
+    Phone: "الهاتف",
+    RoomType: "نوع الغرفة",
+    BookingDetails: "تفاصيل الحجز",
+    ViewAll: "عرض الكل",
+  
+  
+
+
+
+    all: `الكل`,
     banned: `غير نشط`,
     active: 'نشط',
     image: 'الصوره',
@@ -186,7 +295,34 @@ const ar = {
       tags_required: 'يجب إضافة على الأقل علامتين',
       price_required: 'السعر يجب أن يكون أكبر من 0',
       description_required: 'الوصف مطلوب',
+    },
+    
+    placeholders : {
+      name_en: "أدخل الاسم بالإنجليزية",
+      name_ar: "أدخل الاسم بالعربية",
+      location_en: "أدخل الموقع بالإنجليزية",
+      location_ar: "أدخل الموقع بالعربية",
+      desc_en: "أدخل الوصف بالإنجليزية",
+      desc_ar: "أدخل الوصف بالعربية",
+      working_hours_en: "أدخل ساعات العمل بالإنجليزية",
+      working_hours_ar: "أدخل ساعات العمل بالعربية",
+      policy_en: "أدخل السياسة بالإنجليزية",
+      policy_ar: "أدخل السياسة بالعربية",
+      terms_en: "أدخل الشروط بالإنجليزية",
+      terms_ar: "أدخل الشروط بالعربية",
+      cancellation_policy_en: "أدخل سياسة الإلغاء بالإنجليزية",
+      cancellation_policy_ar: "أدخل سياسة الإلغاء بالعربية",
+      price_per_night: "أدخل السعر لكل ليلة",
+      map: "أدخل رابط الخريطة",
+      photo_id: "أدخل معرف الصورة",
+      categories: "اختر فئة واحدة على الأقل",
+      features: "اختر ميزة واحدة على الأقل",
+      user_id: "أدخل معرف المستخدم"
     }
+    
+    
+    
+    
 
 
 

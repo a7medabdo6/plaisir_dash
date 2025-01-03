@@ -7,6 +7,7 @@ import { Card, CardHeader, Stack, Box, Typography } from '@mui/material';
 import { fNumber } from '../../../../utils/formatNumber';
 // components
 import Chart, { useChart } from '../../../../components/chart';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +19,7 @@ BookingRoomAvailable.propTypes = {
 
 export default function BookingRoomAvailable({ title, subheader, chart, ...other }) {
   const theme = useTheme();
+  const { translate } = useLocales();
 
   const { colors, series, options } = chart;
 
@@ -50,7 +52,7 @@ export default function BookingRoomAvailable({ title, subheader, chart, ...other
           name: { offsetY: -16 },
           value: { offsetY: 8 },
           total: {
-            label: 'Rooms',
+            label: `${translate(`book.Rooms`)}`,
             formatter: () => fNumber(total),
           },
         },
@@ -79,11 +81,15 @@ export default function BookingRoomAvailable({ title, subheader, chart, ...other
 Legend.propTypes = {
   item: PropTypes.shape({
     label: PropTypes.string,
+    placeholder: PropTypes.string,
+
     value: PropTypes.number,
   }),
 };
 
 function Legend({ item }) {
+  const { translate } = useLocales();
+
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between">
       <Stack direction="row" alignItems="center" spacing={1}>
@@ -100,11 +106,11 @@ function Legend({ item }) {
         />
 
         <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-          {item.label}
+          {item.placeholder}
         </Typography>
       </Stack>
 
-      <Typography variant="subtitle1"> {item.value} Rooms</Typography>
+      <Typography variant="subtitle1"> { ` ${item.value} ${translate(`book.Room`)}`}</Typography>
     </Stack>
   );
 }
