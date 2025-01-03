@@ -142,6 +142,7 @@ export default function BlogNewPostForm() {
 
                 <RHFEditor simple name="content" />
               </Stack>
+              
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>

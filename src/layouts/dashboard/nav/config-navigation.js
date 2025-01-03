@@ -15,10 +15,11 @@ const ICONS = {
   analytics: icon('ic_analytics'),
   dashboard: icon('ic_dashboard'),
   category: icon('ic_category'),  // إضافة أيقونة جديدة
-  Coupon:icon("ic_coupon"),
+  Coupon: icon("ic_coupon"),
   Features: icon("ic_Features"),
   Products: icon("ic_Features"),
   booking: icon('ic_booking'),
+  blog: icon('ic_blog'),
 
 
 
@@ -37,7 +38,7 @@ const navConfig = [
       { title: 'booking', path: PATH_DASHBOARD.booking, icon: ICONS.booking },
 
       { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
-      { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon},
+      { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon },
       { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
       { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
 
@@ -47,23 +48,61 @@ const navConfig = [
     ],
   },
 
+
+  {
+    subheader: 'blog',
+    items: [
+      {
+        title: 'blog',
+        path: PATH_DASHBOARD.blog.root,
+        icon: ICONS.blog,
+        children: [
+          { title: 'posts', path: PATH_DASHBOARD.blog.posts },
+          { title: 'post', path: PATH_DASHBOARD.blog.demoView },
+          { title: 'create', path: PATH_DASHBOARD.blog.new },
+        ],
+      },
+    ],
+  },
   // MANAGEMENT
   // ----------------------------------------------------------------------
   {
     subheader: 'management',
     items: [
+      // USER
       {
         title: 'user',
         path: PATH_DASHBOARD.user.root,
         icon: ICONS.user,
         children: [
-          { title: 'Four', path: PATH_DASHBOARD.user.four },
-          { title: 'Five', path: PATH_DASHBOARD.user.five },
-          { title: 'Six', path: PATH_DASHBOARD.user.six },
+          { title: 'profile', path: PATH_DASHBOARD.user.profile },
+          { title: 'cards', path: PATH_DASHBOARD.user.cards },
+          { title: 'list', path: PATH_DASHBOARD.user.list },
+          { title: 'create', path: PATH_DASHBOARD.user.new },
+          { title: 'edit', path: PATH_DASHBOARD.user.demoEdit },
+          { title: 'account', path: PATH_DASHBOARD.user.account },
         ],
       },
+
+    
+    
     ],
   },
+  // {
+  //   subheader: 'management',
+  //   items: [
+  //     {
+  //       title: 'user',
+  //       path: PATH_DASHBOARD.user.root,
+  //       icon: ICONS.user,
+  //       children: [
+  //         { title: 'Four', path: PATH_DASHBOARD.user.four },
+  //         { title: 'Five', path: PATH_DASHBOARD.user.five },
+  //         { title: 'Six', path: PATH_DASHBOARD.user.six },
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
 
 export default navConfig;

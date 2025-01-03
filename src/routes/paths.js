@@ -36,17 +36,32 @@ export const PATH_DASHBOARD = {
 
 
   booking: path(ROOTS_DASHBOARD, '/booking'),
-
+  blog: {
+    root: path(ROOTS_DASHBOARD, '/blog'),
+    posts: path(ROOTS_DASHBOARD, '/blog/posts'),
+    new: path(ROOTS_DASHBOARD, '/blog/new'),
+    view: (title) => path(ROOTS_DASHBOARD, `/blog/post/${title}`),
+    demoView: path(ROOTS_DASHBOARD, '/blog/post/apply-these-7-secret-techniques-to-improve-event'),
+  },
   // category: {
   //   root: '/dashboard/ecommerce',
   //   list: '/dashboard/ecommerce/list',
   //   create: '/dashboard/ecommerce/new',
   // },
-  
   user: {
     root: path(ROOTS_DASHBOARD, '/user'),
-    four: path(ROOTS_DASHBOARD, '/user/four'),
-    five: path(ROOTS_DASHBOARD, '/user/five'),
-    six: path(ROOTS_DASHBOARD, '/user/six'),
+    new: path(ROOTS_DASHBOARD, '/user/new'),
+    list: path(ROOTS_DASHBOARD, '/user/list'),
+    cards: path(ROOTS_DASHBOARD, '/user/cards'),
+    profile: path(ROOTS_DASHBOARD, '/user/profile'),
+    account: path(ROOTS_DASHBOARD, '/user/account'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
+    demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
   },
+  // user: {
+  //   root: path(ROOTS_DASHBOARD, '/user'),
+  //   four: path(ROOTS_DASHBOARD, '/user/four'),
+  //   five: path(ROOTS_DASHBOARD, '/user/five'),
+  //   six: path(ROOTS_DASHBOARD, '/user/six'),
+  // },
 };

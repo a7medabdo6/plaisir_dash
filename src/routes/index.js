@@ -29,7 +29,16 @@ import {
   Products,
   CreateProducts,
   GeneralBookingPage,
-  EditProducts
+  EditProducts,
+  BlogPostsPage,
+  BlogPostPage,
+  BlogNewPostPage,
+  UserProfilePage,
+  UserCardsPage,
+  UserListPage,
+  UserCreatePage,
+  UserEditPage,
+  UserAccountPage
 } from './elements';
 
 
@@ -84,17 +93,37 @@ export default function Router() {
 
 
         { path: 'booking', element: <GeneralBookingPage /> },
-
-        
+        {
+          path: 'blog',
+          children: [
+            { element: <Navigate to="/dashboard/blog/posts" replace />, index: true },
+            { path: 'posts', element: <BlogPostsPage /> },
+            { path: 'post/:title', element: <BlogPostPage /> },
+            { path: 'new', element: <BlogNewPostPage /> },
+          ],
+        },
         {
           path: 'user',
           children: [
-            { element: <Navigate to="/dashboard/user/four" replace />, index: true },
-            { path: 'four', element: <PageFour /> },
-            { path: 'five', element: <PageFive /> },
-            { path: 'six', element: <PageSix /> },
+            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
+            { path: 'profile', element: <UserProfilePage /> },
+            { path: 'cards', element: <UserCardsPage /> },
+            { path: 'list', element: <UserListPage /> },
+            { path: 'new', element: <UserCreatePage /> },
+            { path: ':name/edit', element: <UserEditPage /> },
+            { path: 'account', element: <UserAccountPage /> },
           ],
         },
+        
+        // {
+        //   path: 'user',
+        //   children: [
+        //     { element: <Navigate to="/dashboard/user/four" replace />, index: true },
+        //     { path: 'four', element: <PageFour /> },
+        //     { path: 'five', element: <PageFive /> },
+        //     { path: 'six', element: <PageSix /> },
+        //   ],
+        // },
       ],
     },
     {

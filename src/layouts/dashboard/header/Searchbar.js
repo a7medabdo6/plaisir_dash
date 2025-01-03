@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useState, memo, useEffect } from 'react';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
@@ -99,12 +101,12 @@ function Searchbar() {
   const reduceItems = NavConfig.map((list) => handleLoop(list.items, list.subheader)).flat();
 
   const allItems = flattenArray(reduceItems).map((option) => {
-    const group = splitPath(reduceItems, option.path);
+    const group = splitPath(reduceItems, option?.path);
 
     return {
-      group: group && group.length > 1 ? group[0] : option.subheader,
-      title: option.title,
-      path: option.path,
+      group: group && group?.length > 1 ? group[0] : option?.subheader,
+      title: option?.title,
+      path: option?.path,
       indexKey: 'minimal',
     };
   });
@@ -159,7 +161,7 @@ function Searchbar() {
               PopperComponent={StyledPopper}
               onInputChange={(event, value) => setSearchQuery(value)}
               noOptionsText={<SearchNotFound query={searchQuery} sx={{ py: 10 }} />}
-              options={allItems.sort((a, b) => -b.group.localeCompare(a.group))}
+              options={allItems?.sort((a, b) => -b.group?.localeCompare(a.group))}
               groupBy={(option) => option.group}
               getOptionLabel={(option) => `${option.title} ${option.path} ${option.indexKey}`}
               renderInput={(params) => (
@@ -234,18 +236,18 @@ export default memo(Searchbar);
 
 function splitPath(array, key) {
   let stack = array.map((item) => ({
-    path: [item.title],
+    path: [item?.title],
     currItem: item,
   }));
 
   while (stack.length) {
     const { path, currItem } = stack.pop();
 
-    if (currItem.path === key) {
+    if (currItem?.path === key) {
       return path;
     }
 
-    if (currItem.children?.length) {
+    if (currItem?.children?.length) {
       stack = stack.concat(
         currItem.children.map((item) => ({
           path: path.concat(item.title),

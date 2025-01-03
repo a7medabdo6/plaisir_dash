@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import PropTypes from 'prop-types';
 // @mui
 import { LoadingButton } from '@mui/lab';

@@ -26,7 +26,19 @@ export const PageThree = Loadable(lazy(() => import('../pages/PageThree')));
 export const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 export const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
 export const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
+// DASHBOARD: BLOG
+export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));
+export const BlogPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostPage')));
+export const BlogNewPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogNewPostPage')));
 
+
+// DASHBOARD: USER
+export const UserProfilePage = Loadable(lazy(() => import('../pages/dashboard/UserProfilePage')));
+export const UserCardsPage = Loadable(lazy(() => import('../pages/dashboard/UserCardsPage')));
+export const UserListPage = Loadable(lazy(() => import('../pages/dashboard/UserListPage')));
+export const UserAccountPage = Loadable(lazy(() => import('../pages/dashboard/UserAccountPage')));
+export const UserCreatePage = Loadable(lazy(() => import('../pages/dashboard/UserCreatePage')));
+export const UserEditPage = Loadable(lazy(() => import('../pages/dashboard/UserEditPage')));
 
 export const GeneralBookingPage = Loadable(lazy(() => import('../pages/dashboard/GeneralBookingPage')));
 

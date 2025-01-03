@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';

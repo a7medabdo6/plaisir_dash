@@ -19,16 +19,16 @@ export default function NavSectionVertical({ data, sx, ...other }) {
 
   return (
     <Stack sx={sx} {...other}>
-      {data.map((group) => {
-        const key = group.subheader || group.items[0].title;
+      {data?.map((group) => {
+const key = group?.subheader || (group?.items?.length ? group.items[0].title : 'default_key');
 
         return (
           <List key={key} disablePadding sx={{ px: 2 }}>
-            {group.subheader && (
+            {group?.subheader && (
               <StyledSubheader disableSticky>{`${translate(group.subheader)}`}</StyledSubheader>
             )}
 
-            {group.items.map((list) => (
+            {group?.items?.map((list) => (
               <NavList
                 key={list.title + list.path}
                 data={list}
