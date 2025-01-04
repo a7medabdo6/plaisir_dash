@@ -157,7 +157,7 @@ const ar = {
     all: `الكل`,
     name: `الاسم`,
 
-    price_per_night:'السعر/الليلة',
+    price_per_night: 'السعر/الليلة',
 
     banned: `غير نشط`,
     active: 'نشط',
@@ -194,8 +194,8 @@ const ar = {
       price_required: 'السعر يجب أن يكون أكبر من 0',
       description_required: 'الوصف مطلوب',
     },
-    
-    placeholders : {
+
+    placeholders: {
       name_en: "أدخل الاسم بالإنجليزية",
       name_ar: "أدخل الاسم بالعربية",
       location_en: "أدخل الموقع بالإنجليزية",
@@ -217,10 +217,10 @@ const ar = {
       features: "اختر ميزة واحدة على الأقل",
       user_id: "أدخل معرف المستخدم"
     }
-    
-    
-    
-    
+
+
+
+
 
 
 
@@ -235,9 +235,9 @@ const ar = {
     RoomAvailable: "غرف متاحة",
     TotalIncomes: "إجمالي ألوصول",
     Rooms: "غرف",
-    booker:"الاسم",
+    booker: "الاسم",
     Room: "غرفة",
-    TotalBooking:"اجمالي الحجز",
+    TotalBooking: "اجمالي الحجز",
 
     Done: "منجز",
     Cancel: "ملغي",
@@ -253,13 +253,13 @@ const ar = {
     Reject: "رفض",
     Accept: "قبول",
     Status: "الحالة",
-    Reviews:"رأي",
+    Reviews: "رأي",
     Phone: "الهاتف",
     RoomType: "نوع الغرفة",
     BookingDetails: "تفاصيل الحجز",
     ViewAll: "عرض الكل",
-  
-  
+
+
 
 
 
@@ -296,8 +296,8 @@ const ar = {
       price_required: 'السعر يجب أن يكون أكبر من 0',
       description_required: 'الوصف مطلوب',
     },
-    
-    placeholders : {
+
+    placeholders: {
       name_en: "أدخل الاسم بالإنجليزية",
       name_ar: "أدخل الاسم بالعربية",
       location_en: "أدخل الموقع بالإنجليزية",
@@ -319,16 +319,121 @@ const ar = {
       features: "اختر ميزة واحدة على الأقل",
       user_id: "أدخل معرف المستخدم"
     }
-    
-    
-    
-    
+
+
+
+
 
 
 
 
 
   },
+  bloging: {
+    create_a_new_post: `إنشاء منشور جديد`,
+    dashboard: `لوحة التحكم`,
+    blog: `مدونة`,
+    create: `إنشاء`,
+    post_title: `عنوان المنشور`,
+    post_details: `تفاصيل المنشور`,
+
+    description: `الوصف`,
+    content: `المحتوى`,
+    normal: `عادي`,
+    write_something_awesome: `اكتب شيئًا رائعًا...`,
+    cover: `الغلاف`,
+    publish: `نشر`,
+    enable_comments: `تمكين التعليقات`,
+    tags: `الوسوم`,
+    the_kid: `الطفل`,
+    meta_title: `عنوان الميتا`,
+    meta_description: `وصف الميتا`,
+    meta_keywords: `كلمات مفتاحية ميتا`,
+    preview: `معاينة`,
+    post: `نشر`,
+    newpost: `منشور جديد`,
+    latest: `الأحدث`,
+    oldest: `الأقدم`,
+    popular: `الأكثر شهرة`,
+    posts: `المنشورات`,
+    serach: `بحث ...`,
+    errors:{
+      title: "العنوان مطلوب",
+      description: "الوصف مطلوب",
+      tags: {
+        min: "يجب أن يحتوي على الأقل على 2 وسم"
+      },
+      metaKeywords: {
+        min: "الكلمات المفتاحية ميتا مطلوبة"
+      },
+      cover: {
+        required: "الغلاف مطلوب",
+        nullable: "الغلاف يمكن أن يكون فارغًا"
+      },
+      content: "المحتوى مطلوب"
+    }
+
+  },
+  users: {
+    User_List: 'قائمة المستخدمين',
+    User: 'مستخدم',
+    List: 'القائمة',
+    dashboard: 'لوحة التحكم',
+    all: 'الكل',
+    banned: 'غير نشط',
+    Edit_user:'تعديل المستخدم',
+    active: 'نشط',
+    Apply_disable_account: 'تعطيل الحساب',
+    Email_Verified: 'التحقق من البريد الإلكتروني',
+    Disabling_verification: 'سيؤدي تعطيل هذا إلى إرسال بريد إلكتروني للتحقق إلى المستخدم تلقائيًا',
+    Full_Name: 'الاسم بالكامل',
+    Email_Address: 'البريد الإلكتروني',
+    Phone_Number: 'رقم الهاتف',
+    Country: 'الدولة',
+    City: 'المدينة',
+    State_region: 'المنطقة',
+    zip_code: 'الرمز البريدي',
+    newuser: 'مستخدم جديد',
+    Clear:`حذف`,
+    Address: 'العنوان',
+    Company: 'الشركة',
+    name:'الاسم',
+    isVerified:`توثيق`,
+    status: "الحاله",
+Create:`انشاء`,
+save:'حفظ',
+    Role: 'الوظيفة',
+    Allowed_File_Types: 'أنواع الملفات المسموح بها: *.jpeg, *.jpg, *.png, *.gif',
+    Max_File_Size: 'الحد الأقصى لحجم الملف: 3.1 ميجابايت',
+    errors :{
+      validation_errors: {
+        name: "الاسم مطلوب",
+        email: {
+          required: "البريد الإلكتروني مطلوب",
+          invalid: "يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صالح"
+        },
+        phoneNumber: "رقم الهاتف مطلوب",
+        address: "العنوان مطلوب",
+        country: "الدولة مطلوبة",
+        company: "الشركة مطلوبة",
+        state: "المنطقة مطلوبة",
+        city: "المدينة مطلوبة",
+        zipCode:"ألرقم البريدي مطلوب",
+
+        role: "الوظيفة مطلوبة",
+        avatarUrl: {
+          required: "الصورة الرمزية مطلوبة",
+          nullable: "الصورة الرمزية يمكن أن تكون فارغة"
+        }
+      }
+    }
+    
+  
+  
+  },
+
+
+
   app: `تطبيق`,
   user: `المستعمل`,
   list: `قائمة`,
@@ -336,8 +441,8 @@ const ar = {
   shop: `متجر`,
   categorydash: 'الفئات',
   coupondash: 'كوبون',
-  featuresdash:`الخصائص`,
-  productsdash:"المنتجات",
+  featuresdash: `الخصائص`,
+  productsdash: "المنتجات",
 
   blog: `مقالات`,
   post: `بريد`,

@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 //
 import { StyledEditor } from './styles';
 import EditorToolbar, { formats } from './EditorToolbar';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,8 @@ export default function Editor({
   sx,
   ...other
 }) {
+    const { translate } = useLocales();
+  
   const modules = {
     toolbar: {
       container: `#${id}`,
@@ -59,7 +62,7 @@ export default function Editor({
           onChange={onChange}
           modules={modules}
           formats={formats}
-          placeholder="Write something awesome..."
+          placeholder={`${translate('bloging.write_something_awesome')}`}
           {...other}
         />
       </StyledEditor>

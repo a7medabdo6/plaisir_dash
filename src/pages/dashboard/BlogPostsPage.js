@@ -15,19 +15,17 @@ import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../../sections/@dashboard/blog';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
-const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'popular', label: 'Popular' },
-  { value: 'oldest', label: 'Oldest' },
-];
+
 
 // ----------------------------------------------------------------------
 
 export default function BlogPostsPage() {
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
 
   const [posts, setPosts] = useState([]);
 
@@ -51,6 +49,11 @@ export default function BlogPostsPage() {
   const handleChangeSortBy = (event) => {
     setSortBy(event.target.value);
   };
+  const SORT_OPTIONS = [
+    { value: 'latest', label: `${translate('bloging.latest')}` },
+    { value: 'popular', label: `${translate('bloging.popular')}` },
+    { value: 'oldest', label: `${translate('bloging.oldest')}` },
+  ];
 
   return (
     <>
@@ -63,15 +66,15 @@ export default function BlogPostsPage() {
           heading="Blog"
           links={[
             {
-              name: 'Dashboard',
+              name: `${translate('bloging.dashboard')}`,
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Blog',
+              name: `${translate('bloging.blog')}`,
               href: PATH_DASHBOARD.blog.root,
             },
             {
-              name: 'Posts',
+              name: `${translate('bloging.posts')}`,
             },
           ]}
           action={
@@ -81,7 +84,7 @@ export default function BlogPostsPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Post
+              {`${translate('bloging.newpost')}`}
             </Button>
           }
         />

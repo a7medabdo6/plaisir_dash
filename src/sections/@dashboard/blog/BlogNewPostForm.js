@@ -20,6 +20,7 @@ import FormProvider, {
 } from '../../../components/hook-form';
 //
 import BlogNewPostPreview from './BlogNewPostPreview';
+import { useLocales } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -43,18 +44,19 @@ const TAGS_OPTION = [
 
 export default function BlogNewPostForm() {
   const navigate = useNavigate();
+  const { translate } = useLocales();
 
   const { enqueueSnackbar } = useSnackbar();
 
   const [openPreview, setOpenPreview] = useState(false);
 
   const NewBlogSchema = Yup.object().shape({
-    title: Yup.string().required('Title is required'),
-    description: Yup.string().required('Description is required'),
-    tags: Yup.array().min(2, 'Must have at least 2 tags'),
-    metaKeywords: Yup.array().min(1, 'Meta keywords is required'),
-    cover: Yup.mixed().required('Cover is required').nullable(true),
-    content: Yup.string().required('Content is required'),
+    title: Yup.string().required(`${translate('bloging.errors.title')}`),
+    description: Yup.string().required(`${translate('bloging.errors.description')}`),
+    tags: Yup.array().min(2, `${translate('bloging.errors.tags.min')}`),
+    metaKeywords: Yup.array().min(1,`${translate( 'bloging.errors.metaKeywords.min')}`),
+    cover: Yup.mixed().required(`${translate('bloging.errors.cover.required')}`).nullable(true),
+    content: Yup.string().required(`${translate('bloging.errors.content')}`),
   });
 
   const defaultValues = {
@@ -131,22 +133,24 @@ export default function BlogNewPostForm() {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-              <RHFTextField name="title" label="Post Title" />
+              <RHFTextField name="title" label={`${translate('bloging.post_title')}`} />
 
-              <RHFTextField name="description" label="Description" multiline rows={3} />
+              <RHFTextField name="description" label={`${translate('bloging.description')}`} multiline rows={3} />
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                  Content
+                  {`${translate('bloging.content')}`}
                 </Typography>
 
                 <RHFEditor simple name="content" />
               </Stack>
-              
+
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                  Cover
+                  {`${translate('bloging.cover')}`}
+
+
                 </Typography>
 
                 <RHFUpload
@@ -166,14 +170,14 @@ export default function BlogNewPostForm() {
               <div>
                 <RHFSwitch
                   name="publish"
-                  label="Publish"
+                  label={`${translate('bloging.publish')}`}
                   labelPlacement="start"
                   sx={{ mb: 1, mx: 0, width: 1, justifyContent: 'space-between' }}
                 />
 
                 <RHFSwitch
                   name="comments"
-                  label="Enable comments"
+                  label={`${translate('bloging.enable_comments')}`}
                   labelPlacement="start"
                   sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
                 />
@@ -181,18 +185,18 @@ export default function BlogNewPostForm() {
 
               <RHFAutocomplete
                 name="tags"
-                label="Tags"
+                label={`${translate('bloging.tags')}`}
                 multiple
                 freeSolo
                 options={TAGS_OPTION.map((option) => option)}
                 ChipProps={{ size: 'small' }}
               />
 
-              <RHFTextField name="metaTitle" label="Meta title" />
+              <RHFTextField name="metaTitle" label={`${translate('bloging.meta_title')}`} />
 
               <RHFTextField
                 name="metaDescription"
-                label="Meta description"
+                label={`${translate('bloging.meta_description')}`}
                 fullWidth
                 multiline
                 rows={3}
@@ -200,7 +204,7 @@ export default function BlogNewPostForm() {
 
               <RHFAutocomplete
                 name="metaKeywords"
-                label="Meta keywords"
+                label={`${translate('bloging.meta_keywords')}`}
                 multiple
                 freeSolo
                 options={TAGS_OPTION.map((option) => option)}
@@ -217,7 +221,7 @@ export default function BlogNewPostForm() {
               size="large"
               onClick={handleOpenPreview}
             >
-              Preview
+              {`${translate('bloging.preview')}`}
             </Button>
 
             <LoadingButton
@@ -227,7 +231,8 @@ export default function BlogNewPostForm() {
               size="large"
               loading={isSubmitting}
             >
-              Post
+              {`${translate('bloging.post')}`}
+
             </LoadingButton>
           </Stack>
         </Grid>

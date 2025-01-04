@@ -11,6 +11,7 @@ import {
   TableCell,
   IconButton,
   Typography,
+  Link,
 } from '@mui/material';
 // components
 import Label from '../../../../components/label';
@@ -18,6 +19,7 @@ import Iconify from '../../../../components/iconify';
 import MenuPopover from '../../../../components/menu-popover';
 import ConfirmDialog from '../../../../components/confirm-dialog';
 import { useLocales } from '../../../../locales';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -63,6 +65,8 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
           <Checkbox checked={selected} onClick={onSelectRow} />
         </TableCell>
 
+        <Link href={PATH_DASHBOARD.user.edit(name)} underline="hover"> {/* Make this a clickable link */}
+
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
             {
@@ -80,11 +84,12 @@ export default function UserTableRow({ row, selected, onEditRow, onSelectRow, on
             }
               
 
-            {/* <Typography variant="subtitle2" noWrap>
+            <Typography variant="subtitle2" noWrap>
               {name}
-            </Typography> */}
+            </Typography>
           </Stack>
         </TableCell>
+        </Link>
 
         <TableCell align="left">{company}</TableCell>
 

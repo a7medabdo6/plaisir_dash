@@ -38,10 +38,11 @@ import {
 } from '../../components/table';
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['all', 'active', 'banned'];
+
 
 const ROLE_OPTIONS = [
   'all',
@@ -56,14 +57,7 @@ const ROLE_OPTIONS = [
   'full stack developer',
 ];
 
-const TABLE_HEAD = [
-  { id: 'name', label: 'Name', align: 'left' },
-  { id: 'company', label: 'Company', align: 'left' },
-  { id: 'role', label: 'Role', align: 'left' },
-  { id: 'isVerified', label: 'Verified', align: 'center' },
-  { id: 'status', label: 'Status', align: 'left' },
-  { id: '' },
-];
+
 
 // ----------------------------------------------------------------------
 
@@ -88,6 +82,7 @@ export default function UserListPage() {
   } = useTable();
 
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
 
   const navigate = useNavigate();
 
@@ -181,7 +176,20 @@ export default function UserListPage() {
     setFilterRole('all');
     setFilterStatus('all');
   };
+  const STATUS_OPTIONS = [
+    { value: 'all', label: `${translate('users.all')}` },
+    { value: 'active', label: `${translate('users.active')}` },
+    { value: 'banned', label: `${translate('users.banned')}` }
+  ];
 
+  const TABLE_HEAD = [
+    { id: 'name', label: `${translate('users.name')}`, align: 'left' },
+    { id: 'company', label: `${translate('users.Company')}`, align: 'left' },
+    { id: 'role', label: `${translate('users.Role')}`, align: 'left' },
+    { id: 'isVerified', label: `${translate('users.isVerified')}`, align: 'center' },
+    { id: 'status', label: `${translate('users.status')}`, align: 'left' },
+    { id: '' },
+  ];
   return (
     <>
       <Helmet>
@@ -192,9 +200,17 @@ export default function UserListPage() {
         <CustomBreadcrumbs
           heading="User List"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'List' },
+            {
+              name: `${translate('users.dashboard')}`,
+              href: PATH_DASHBOARD.root
+            },
+            {
+              name: `${translate('users.User')}`,
+              href: PATH_DASHBOARD.user.root
+            },
+            {
+              name: `${translate('users.List')}`,
+            },
           ]}
           action={
             <Button
@@ -202,8 +218,10 @@ export default function UserListPage() {
               to={PATH_DASHBOARD.user.new}
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              New User
+            >{
+                `${translate('users.newuser')}`
+              }
+
             </Button>
           }
         />
@@ -218,7 +236,7 @@ export default function UserListPage() {
             }}
           >
             {STATUS_OPTIONS.map((tab) => (
-              <Tab key={tab} label={tab} value={tab} />
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
             ))}
           </Tabs>
 

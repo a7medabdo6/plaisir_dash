@@ -14,11 +14,13 @@ import Image from '../../../../components/image';
 import Iconify from '../../../../components/iconify';
 import { CustomTextField } from '../../../../components/custom-input';
 import SearchNotFound from '../../../../components/search-not-found';
+import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
 export default function BlogPostsSearch() {
   const navigate = useNavigate();
+  const { translate } = useLocales();
 
   const [searchPosts, setSearchPosts] = useState('');
 
@@ -77,7 +79,7 @@ export default function BlogPostsSearch() {
         <CustomTextField
           {...params}
           width={220}
-          placeholder="Search..."
+          placeholder={`${translate('bloging.serach')}`}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

@@ -9,11 +9,13 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import { BlogNewPostForm } from '../../sections/@dashboard/blog';
 import 'react-quill/dist/quill.snow.css';  // استيراد أنماط Quill
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
 export default function BlogNewPostPage() {
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
 
   return (
     <>
@@ -21,20 +23,21 @@ export default function BlogNewPostPage() {
         <title> Blog: New Post | Minimal UI</title>
       </Helmet>
 
+
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Create a new post"
+          heading={`${translate('bloging.create_a_new_post')}`}
           links={[
             {
-              name: 'Dashboard',
+              name: `${translate('bloging.dashboard')}`,
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Blog',
+              name: `${translate('bloging.blog')}`,
               href: PATH_DASHBOARD.blog.root,
             },
             {
-              name: 'Create',
+              name: `${translate('bloging.create')}`,
             },
           ]}
         />

@@ -305,6 +305,108 @@ TotalBooking:"Total Booking",
 
 
   },
+  bloging:{
+    create_a_new_post: `Create a new post`,
+    dashboard: `Dashboard`,
+    blog: `Blog`,
+    create: `Create`,
+    post_title: `Post Title`,
+    description: `Description`,
+    content: `Content`,
+    normal: `Normal`,
+    write_something_awesome: `Write something awesome...`,
+    cover: `Cover`,
+    publish: `Publish`,
+    enable_comments: `Enable comments`,
+    tags: `Tags`,
+    the_kid: `The Kid`,
+    meta_title: `Meta title`,
+    meta_description: `Meta description`,
+    meta_keywords: `Meta keywords`,
+    preview: `Preview`,
+    post: `Post`,
+    newpost: `New Post`,
+    latest: `Latest`,
+    post_details: `Post Details`,
+
+    oldest: `Oldest`,
+    popular: `Popular `,
+    posts:'Posts',
+    serach:`Serach...`,
+    errors:{
+      title: "Title is required",
+      description: "Description is required",
+      tags: {
+        min: "Must have at least 2 tags"
+      },
+      metaKeywords: {
+        min: "Meta keywords are required"
+      },
+      cover: {
+        required: "Cover is required",
+        nullable: "Cover can be nullable"
+      },
+      content: "Content is required"
+    }
+
+  },  
+  users: {
+    User_List: 'User List',
+    User: 'User',
+    List: 'List',
+    dashboard: 'Dashboard',
+    all: 'All',
+    banned: 'Inactive',
+    Edit_user:'Edit User',
+    active: 'Active',
+    Apply_disable_account: 'Disable Account',
+    Email_Verified: 'Email Verified',
+    Disabling_verification: 'Disabling this will automatically send a verification email to the user',
+    Full_Name: 'Full Name',
+    Email_Address: 'Email',
+    Phone_Number: 'Phone Number',
+    Country: 'Country',
+    City: 'City',
+    State_region: 'State/Region',
+    zip_code: 'Zip Code',
+    Address: 'Address',
+    Company: 'Company',
+    newuser: 'New User',
+    Clear:`Clear`,
+    isVerified:`Verified`,
+    status: "Status",
+    Create:`Create`,
+    save:'Save',
+    name:'Name',
+    Role: 'Role',
+    Allowed_File_Types: 'Allowed file types: *.jpeg, *.jpg, *.png, *.gif',
+    Max_File_Size: 'Max file size: 3.1 MB',
+    errors:{
+      validation_errors: {
+        name: "Name is required",
+        email: {
+          required: "Email is required",
+          invalid: "Email must be a valid email address"
+        },
+        phoneNumber: "Phone number is required",
+        address: "Address is required",
+        country: "Country is required",
+        company: "Company is required",
+        state: "State is required",
+        city: "City is required",
+        zipCode:"zipCode is required",
+        role: "Role is required",
+        avatarUrl: {
+          required: "Avatar is required",
+          nullable: "Avatar is nullable"
+        }
+      }
+    }
+    
+  
+  
+  },
+
   app: `app`,
   user: `user`,
   categorydash: 'category',

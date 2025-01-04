@@ -22,11 +22,13 @@ import {
   BlogPostCommentList,
   BlogPostCommentForm,
 } from '../../sections/@dashboard/blog';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
 export default function BlogPostPage() {
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
 
   const { title } = useParams();
 
@@ -83,14 +85,14 @@ export default function BlogPostPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Post Details"
+          heading={`${translate('bloging.post_details')}`}
           links={[
             {
-              name: 'Dashboard',
+              name: `${translate('bloging.dashboard')}`,
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Blog',
+              name: `${translate('blog')}`,
               href: PATH_DASHBOARD.blog.root,
             },
             {

@@ -25,6 +25,7 @@ import FormProvider, {
   RHFTextField,
   RHFUploadAvatar,
 } from '../../../components/hook-form';
+import { useLocales } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -35,22 +36,26 @@ UserNewEditForm.propTypes = {
 
 export default function UserNewEditForm({ isEdit = false, currentUser }) {
   const navigate = useNavigate();
+  const { translate } = useLocales();
 
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('Country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role is required'),
-    avatarUrl: Yup.string().required('Avatar is required').nullable(true),
+    name: Yup.string().required(`${translate('users.errors.validation_errors.name')}`),
+    email: Yup.string().required(`${translate('users.errors.validation_errors.email.required')}`).email(`${translate('users.errors.validation_errors.email.invalid')}`),
+    phoneNumber: Yup.string().required(`${translate('users.errors.validation_errors.phoneNumber')}`),
+    address: Yup.string().required(`${translate('users.errors.validation_errors.address')}`),
+    country: Yup.string().required(`${translate('users.errors.validation_errors.country')}`),
+    company: Yup.string().required(`${translate('users.errors.validation_errors.company')}`),
+    state: Yup.string().required(`${translate('users.errors.validation_errors.state')}`),
+    city: Yup.string().required(`${translate('users.errors.validation_errors.city')}`),
+    zipCode: Yup.string().required(`${translate('users.errors.validation_errors.zipCode')}`),
+
+    role: Yup.string().required(`${translate('users.errors.validation_errors.role')}`),
+    avatarUrl: Yup.string().required(`${translate('users.errors.validation_errors.avatarUrl.required')}`).nullable(true),
   });
 
+  
   const defaultValues = useMemo(
     () => ({
       name: currentUser?.name || '',
@@ -154,8 +159,11 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
                       color: 'text.secondary',
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    {
+                      `${translate('users.Allowed_File_Types')} \n ${translate('users.Max_File_Size')} `  
+                    }
+                    {/* Allowed *.jpeg, *.jpg, *.png, *.gif
+                    <br /> max size of {fData(3145728)} */}
                   </Typography>
                 }
               />
@@ -173,7 +181,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
                         {...field}
                         checked={field.value !== 'active'}
                         onChange={(event) =>
-                          field.onChange(event.target.checked ? 'banned' : 'active')
+                          field.onChange(event.target.checked ? `${translate('users.banned')}` : `${translate('users.active')}`)
                         }
                       />
                     )}
@@ -182,10 +190,11 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
                 label={
                   <>
                     <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
+                      {`${translate('users.banned')}`}
+                      
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
+                    {`${translate('users.Apply_disable_account')}`}
                     </Typography>
                   </>
                 }
@@ -199,10 +208,13 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
               label={
                 <>
                   <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
+                  {`${translate('users.Email_Verified')}`}
+
+                    
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the user a verification email
+                  {`${translate('users.Disabling_verification')}`}
+
                   </Typography>
                 </>
               }
@@ -222,11 +234,12 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="name" label=   {`${translate('users.Full_Name')}`}
+ />
+              <RHFTextField name="email" label={`${translate('users.Email_Address')}`} />
+              <RHFTextField name="phoneNumber" label={`${translate('users.Phone_Number')}`} />
 
-              <RHFSelect native name="country" label="Country" placeholder="Country">
+              <RHFSelect native name="country" label={`${translate('users.Country')}`} placeholder="Country">
                 <option value="" />
                 {countries.map((country) => (
                   <option key={country.code} value={country.label}>
@@ -235,17 +248,17 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
+              <RHFTextField name="state" label={`${translate('users.State_region')}`} />
+              <RHFTextField name="city" label={`${translate('users.City')}`} />
+              <RHFTextField name="address" label={`${translate('users.Address')}`} />
+              <RHFTextField name="zipCode" label={`${translate('users.zip_code')}`} />
+              <RHFTextField name="company" label={`${translate('users.Company')}`} />
+              <RHFTextField name="role" label={`${translate('users.Role')}`} />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create User' : 'Save Changes'}
+                {!isEdit ? `${translate('users.Create')}` : `${translate('users.save')}`}
               </LoadingButton>
             </Stack>
           </Card>

@@ -41,7 +41,9 @@ export default function UserTableToolbar({
       <TextField
         fullWidth
         select
-        label="Role"
+        label={
+          `${translate('users.Role')}`
+        }
         value={filterRole}
         onChange={onFilterRole}
         SelectProps={{
@@ -95,7 +97,8 @@ export default function UserTableToolbar({
           onClick={onResetFilter}
           startIcon={<Iconify icon="eva:trash-2-outline" />}
         >
-          Clear
+          {`${translate('category.Clear')}`}
+          
         </Button>
       )}
     </Stack>

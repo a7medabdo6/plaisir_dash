@@ -12,11 +12,13 @@ import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
 export default function UserEditPage() {
   const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
 
   const { name } = useParams();
 
@@ -30,14 +32,14 @@ export default function UserEditPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Edit user"
+          heading={`${translate('users.Edit_user')}`}
           links={[
             {
-              name: 'Dashboard',
+              name:`${translate('users.dashboard')}`,
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'User',
+              name: `${translate('users.User')}`,
               href: PATH_DASHBOARD.user.list,
             },
             { name: currentUser?.name },
