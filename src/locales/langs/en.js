@@ -406,7 +406,66 @@ TotalBooking:"Total Booking",
   
   
   },
-
+  order: {
+    Order_List: 'Order List',
+    Order: 'Order',
+    List: 'List',
+    dashboard: 'Dashboard',
+    all: 'All',
+    Pending: 'Pending',
+    Completed: 'Completed',
+    Refunded: 'Refunded',
+    Cancelled: 'Cancelled',
+    banned: 'Inactive',
+    Edit_Order:'Edit Order',
+    active: 'Active',
+    Apply_disable_account: 'Disable Account',
+    Email_Verified: 'Email Verified',
+    Disabling_verification: 'Disabling this will automatically send a verification email to the Order',
+    Full_Name: 'Full Name',
+    Email_Address: 'Email',
+    Phone_Number: 'Phone Number',
+    Country: 'Country',
+    City: 'City',
+    State_region: 'State/Region',
+    zip_code: 'Zip Code',
+    Address: 'Address',
+    Company: 'Company',
+    neworder: 'New Order',
+    Clear:`Clear`,
+    isVerified:`Verified`,
+    status: "Status",
+    Create:`Create`,
+    save:'Save',
+    name:'Name',
+    Role: 'Role',
+    Allowed_File_Types: 'Allowed file types: *.jpeg, *.jpg, *.png, *.gif',
+    Max_File_Size: 'Max file size: 3.1 MB',
+    errors:{
+      validation_errors: {
+        name: "Name is required",
+        email: {
+          required: "Email is required",
+          invalid: "Email must be a valid email address"
+        },
+        phoneNumber: "Phone number is required",
+        address: "Address is required",
+        country: "Country is required",
+        company: "Company is required",
+        state: "State is required",
+        city: "City is required",
+        zipCode:"zipCode is required",
+        role: "Role is required",
+        avatarUrl: {
+          required: "Avatar is required",
+          nullable: "Avatar is nullable"
+        }
+      }
+    }
+    
+  
+  
+  },
   app: `app`,
   user: `user`,
   categorydash: 'category',

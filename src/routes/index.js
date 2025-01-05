@@ -38,7 +38,9 @@ import {
   UserListPage,
   UserCreatePage,
   UserEditPage,
-  UserAccountPage
+  UserAccountPage,
+  OrderListPage,
+  UserOrederCreatePage
 } from './elements';
 
 
@@ -110,6 +112,18 @@ export default function Router() {
             { path: 'cards', element: <UserCardsPage /> },
             { path: 'list', element: <UserListPage /> },
             { path: 'new', element: <UserCreatePage /> },
+            { path: ':name/edit', element: <UserEditPage /> },
+            { path: 'account', element: <UserAccountPage /> },
+          ],
+        },
+        {
+          path: 'order',
+          children: [
+            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
+            { path: 'profile', element: <UserProfilePage /> },
+            { path: 'cards', element: <UserCardsPage /> },
+            { path: 'list', element: <OrderListPage /> },
+            { path: 'new', element: <UserOrederCreatePage /> },
             { path: ':name/edit', element: <UserEditPage /> },
             { path: 'account', element: <UserAccountPage /> },
           ],

@@ -1,9 +1,15 @@
+import React, { useState } from 'react';
+
 import PropTypes from 'prop-types';
 // @mui
-import { Stack, InputAdornment, TextField, MenuItem, Button } from '@mui/material';
+import { Stack, InputAdornment, TextField, OutlinedInput, Button } from '@mui/material';
 // components
 import Iconify from '../../../../components/iconify';
 import { useLocales } from '../../../../locales';
+import SearchIcon from '@mui/icons-material/Search'; // Importing the MUI Search icon
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import DateRangeIcon from '@mui/icons-material/DateRange';  // استيراد أيقونة التاريخ
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +33,11 @@ export default function UserTableToolbar({
   onResetFilter,
 }) {
   const { translate } = useLocales();
+  const [filterEndDate, setFilterEndDate] = useState(null);
 
+  const onFilterEndDate = (date) => {
+    setFilterEndDate(date);
+  };
   return (
     <Stack
       spacing={2}
@@ -38,43 +48,42 @@ export default function UserTableToolbar({
       }}
       sx={{ px: 2.5, py: 3 }}
     >
-      <TextField
-        fullWidth
-        select
-        label={
-          `${translate('users.Role')}`
+  
+
+
+      <DatePicker
+        selected={filterEndDate}
+        onChange={onFilterEndDate}
+        placeholderText="Start Date"
+        dateFormat="MM/dd/yyyy"
+        customInput={
+          <OutlinedInput
+            sx={{ width: '300px' }}  // عرض المدخل
+            startAdornment={  // إضافة الأيقونة إلى بداية المدخل
+              <InputAdornment position="start">
+                <DateRangeIcon sx={{ color: 'text.disabled' }} />
+              </InputAdornment>
+            }
+          />
         }
-        value={filterRole}
-        onChange={onFilterRole}
-        SelectProps={{
-          MenuProps: {
-            PaperProps: {
-              sx: {
-                maxHeight: 260,
-              },
-            },
-          },
-        }}
-        sx={{
-          maxWidth: { sm: 240 },
-          textTransform: 'capitalize',
-        }}
-      >
-        {optionsRole.map((option) => (
-          <MenuItem
-            key={option}
-            value={option}
-            sx={{
-              mx: 1,
-              borderRadius: 0.75,
-              typography: 'body2',
-              textTransform: 'capitalize',
-            }}
-          >
-            {option}
-          </MenuItem>
-        ))}
-      </TextField>
+      />
+      <DatePicker
+        selected={filterEndDate}
+        onChange={onFilterEndDate}
+        placeholderText="End Date"
+        dateFormat="MM/dd/yyyy"
+        customInput={
+          <OutlinedInput
+            sx={{ width: '300px' }}  // عرض المدخل
+            startAdornment={  // إضافة الأيقونة إلى بداية المدخل
+              <InputAdornment position="start">
+                <DateRangeIcon sx={{ color: 'text.disabled' }} />
+              </InputAdornment>
+            }
+          />
+        }
+      />
+
 
       <TextField
         fullWidth
@@ -98,7 +107,7 @@ export default function UserTableToolbar({
           startIcon={<Iconify icon="eva:trash-2-outline" />}
         >
           {`${translate('category.Clear')}`}
-          
+
         </Button>
       )}
     </Stack>

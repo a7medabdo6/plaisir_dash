@@ -374,14 +374,18 @@ const ar = {
     }
 
   },
-  users: {
-    User_List: 'قائمة المستخدمين',
-    User: 'مستخدم',
+  order: {
+    Order_List: 'قائمة الطلبات',
+    Order: 'طلب',
     List: 'القائمة',
     dashboard: 'لوحة التحكم',
-    all: 'الكل',
-    banned: 'غير نشط',
-    Edit_user:'تعديل المستخدم',
+    Pending: 'قيد الانتظار',
+    All: 'الكل',
+    Completed: 'مكتمل',
+    Refunded: 'تم الاسترداد',
+    Cancelled: 'ملغي',
+        banned: 'غير نشط',
+    Edit_Order:'تعديل الطلب',
     active: 'نشط',
     Apply_disable_account: 'تعطيل الحساب',
     Email_Verified: 'التحقق من البريد الإلكتروني',
@@ -393,7 +397,7 @@ const ar = {
     City: 'المدينة',
     State_region: 'المنطقة',
     zip_code: 'الرمز البريدي',
-    newuser: 'مستخدم جديد',
+    neworder: 'مستخدم جديد',
     Clear:`حذف`,
     Address: 'العنوان',
     Company: 'الشركة',
