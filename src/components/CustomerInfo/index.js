@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import { Box, Card, Stack, Button, Typography, Avatar, CardHeader, CardContent } from '@mui/material';
 import { Edit } from '@mui/icons-material'; // استيراد أيقونة القلم من MUI
+import Iconify from '../iconify';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -17,6 +20,8 @@ export default function CustomerInfo({
   avatarUrl,
   onAddToBlacklist,
 }) {
+  const { translate } = useLocales();
+
   return (
     <Card sx={{ mb: 3 }}>
       <CardHeader
@@ -41,13 +46,19 @@ export default function CustomerInfo({
 
           {/* Add to Blacklist Button */}
           <Button
-            variant="contained"
-            color="error"
+            component={RouterLink}
+            // to={PATH_DASHBOARD.order.new}
             onClick={onAddToBlacklist}
-            sx={{ mt: 2, backgroundColor: 'black', '&:hover': { backgroundColor: 'grey.700' } }}
+
+            variant="contained"
+            startIcon={<Iconify icon="eva:plus-fill" />}
           >
-            Add to Blacklist
+            {
+                `${translate('order.Add_to_Blacklist')}`
+              }
+            
           </Button>
+
         </Stack>
       </CardContent>
       <hr />
@@ -90,46 +101,50 @@ export default function CustomerInfo({
       <Stack spacing={2} m={3}>
         <Stack direction="row" justifyContent="space-between" mt={3} mb={4}>
           <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'black' }}>
-          Shipping
+            {`${translate('order.Shipping')}`}
+            
           </Typography>
           <Edit sx={{ cursor: 'pointer', fontSize: 20, color: 'grey.500' }} /> {/* استبدال النص بـ أيقونة القلم */}
         </Stack>
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'black' }}>
-          Address
+          {`${translate('order.Address')}`}
+            
           </Typography>
-          <Typography variant="body2" sx={{ color: 'grey.600',width:"100px" }}>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Typography>
+          <Typography variant="body2" sx={{ color: 'grey.600', width: "100px" }}>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Typography>
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'black' }}>
-          Phone number
+          {`${translate('order.Phone_Number')}`}
+            
           </Typography>
           <Typography variant="body2" sx={{ color: 'grey.600' }}>365-374-4961</Typography>
         </Stack>
 
-       
 
-      
+
+
       </Stack>
       <hr />
       <Stack spacing={2} m={3}>
         <Stack direction="row" justifyContent="space-between" mt={3} mb={4}>
           <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'black' }}>
-          Payment
+          {`${translate('order.Payment')}`}
+            
           </Typography>
           <Edit sx={{ cursor: 'pointer', fontSize: 20, color: 'grey.500' }} /> {/* استبدال النص بـ أيقونة القلم */}
         </Stack>
         <Stack direction="row" justifyContent="flex-start">
-        
-          <Typography variant="body2" sx={{ color: 'grey.600',width:"100%" }}>**** **** **** 4578</Typography>
+
+          <Typography variant="body2" sx={{ color: 'grey.600', width: "100%" }}>**** **** **** 4578</Typography>
         </Stack>
 
-        
 
-       
 
-      
+
+
+
       </Stack>
     </Card>
   );

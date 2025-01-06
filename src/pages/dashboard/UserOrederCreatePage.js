@@ -14,10 +14,13 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
 import { CheckoutSummary } from 'src/sections/@dashboard/e-commerce/checkout';
 import CustomerInfo from 'src/components/CustomerInfo';
+import { useLocales } from '../../locales';
 
 // ----------------------------------------------------------------------
 
 export default function UserOrederCreatePage() {
+    const { translate } = useLocales();
+  
   const { themeStretch } = useSettingsContext();
   const handleAddToBlacklist = () => {
     alert('Customer added to blacklist!');
@@ -40,11 +43,11 @@ export default function UserOrederCreatePage() {
           heading="Order Details"
           links={[
             {
-              name: 'Dashboard',
+              name: `${translate('order.dashboard')}` ,
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'order',
+              name:`${translate('order.order')}`,
               href: PATH_DASHBOARD.user.list,
             },
             { name: '# order 7842' },
@@ -57,7 +60,7 @@ export default function UserOrederCreatePage() {
               {/* Big Product Info Card */}
       <Card sx={{ mb: 3, padding: 3 }}>
         <CardHeader
-          title="Details"
+          title={`${translate('order.Details')}`}
           sx={{ backgroundColor: '', color: 'black' }}
         />
         <CardContent>
@@ -90,7 +93,7 @@ export default function UserOrederCreatePage() {
         <History events={historyEvents} />
 
       </Card>
-            <CheckoutSummary />
+            {/* <CheckoutSummary /> */}
           </Grid>
 
           {/* Right side: Customer Info (takes 4 columns on medium and up) */}
@@ -110,6 +113,8 @@ export default function UserOrederCreatePage() {
 
 
 function ProductCard({ image, title, description, price, quantity }) {
+    const { translate } = useLocales();
+  
   return (
     <Card sx={{ mb: 3, border: '1px solid #ddd', padding: 2 }}>
       <Stack spacing={2}>
@@ -129,10 +134,11 @@ function ProductCard({ image, title, description, price, quantity }) {
         {/* Product Price and Quantity */}
         <Stack direction="row" justifyContent="space-between" mt={2}>
           <Typography variant="body1" sx={{ color: 'black' }}>
-            Price: ${price}
+          {`${translate('order.Price')} : ${price}`}
           </Typography>
           <Typography variant="body2" sx={{ color: 'grey.600' }}>
-            Quantity: {quantity}
+          {`${translate('order.Quantity')} : ${price}`}
+
           </Typography>
         </Stack>
       </Stack>
@@ -141,6 +147,8 @@ function ProductCard({ image, title, description, price, quantity }) {
 }
 
 function SummaryCard() {
+    const { translate } = useLocales();
+  
   return (
     <Card sx={{ mb: 3, padding: 3 }}>
       <CardHeader
@@ -151,31 +159,31 @@ function SummaryCard() {
         <Stack spacing={2}>
           {/* Subtotal */}
           <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body1" sx={{ color: 'black' }}>Subtotal</Typography>
+            <Typography variant="body1" sx={{ color: 'black' }}> {`${translate('order.Subtotal')}`}</Typography>
             <Typography variant="body1" sx={{ color: 'black' }}>$484.15</Typography>
           </Stack>
 
           {/* Shipping */}
           <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body1" sx={{ color: 'black' }}>Shipping</Typography>
+            <Typography variant="body1" sx={{ color: 'black' }}> {`${translate('order.Shipping')}`}</Typography>
             <Typography variant="body1" sx={{ color: 'red' }}>- $10</Typography>
           </Stack>
 
           {/* Discount */}
           <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body1" sx={{ color: 'black' }}>Discount</Typography>
+            <Typography variant="body1" sx={{ color: 'black' }}> {`${translate('order.Discount')}`}</Typography>
             <Typography variant="body1" sx={{ color: 'red' }}>- $10</Typography>
           </Stack>
 
           {/* Taxes */}
           <Stack direction="row" justifyContent="space-between">
-            <Typography variant="body1" sx={{ color: 'black' }}>Taxes</Typography>
+            <Typography variant="body1" sx={{ color: 'black' }}> {`${translate('order.Taxes')}`}</Typography>
             <Typography variant="body1" sx={{ color: 'black' }}>$10</Typography>
           </Stack>
 
           {/* Total */}
           <Stack direction="row" justifyContent="space-between" sx={{ mt: 2 }}>
-            <Typography variant="h6" sx={{ color: 'black' }}>Total</Typography>
+            <Typography variant="h6" sx={{ color: 'black' }}> {`${translate('order.Total')}`}</Typography>
             <Typography variant="h6" sx={{ color: 'black' }}>$474.15</Typography>
           </Stack>
         </Stack>
@@ -196,6 +204,7 @@ function HistoryEvent({ description, timestamp, isLastEvent }) {
   // تحويل التاريخ إلى كائن Date
   const eventDate = new Date(timestamp);
   const currentDate = new Date();
+  const { translate } = useLocales();
 
   // إذا كان الحدث قد مرَّ عليه (التاريخ أقل من الوقت الحالي)، اللون سيكون أخضر فاتح
   const isEventPast = eventDate < currentDate;
@@ -243,11 +252,13 @@ function HistoryEvent({ description, timestamp, isLastEvent }) {
 }
 
 function History({ events }) {
+    const { translate } = useLocales();
+  
   return (
     <Card sx={{ mb: 3 }}>
       <CardHeader
         title="Shipping History"
-        sx={{ backgroundColor: 'black', color: 'grey.50' }}
+        sx={{  color: 'black' }}
       />
       <CardContent>
         <Stack spacing={3}>
