@@ -12,7 +12,7 @@ import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceCategoryCreatePage() {
+export default function CreateCategories() {
     const { translate } = useLocales();
   
   const { themeStretch } = useSettingsContext();

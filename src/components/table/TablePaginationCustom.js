@@ -18,6 +18,7 @@ export default function TablePaginationCustom({
   sx,
   ...other
 }) {
+  
   return (
     <Box sx={{ position: 'relative', ...sx }}>
       <TablePagination rowsPerPageOptions={rowsPerPageOptions} component="div" {...other} />

@@ -14,8 +14,8 @@ ConfirmDialog.propTypes = {
 };
 
 export default function ConfirmDialog({ title, content, action, open, onClose, ...other }) {
-    const { translate } = useLocales();
-  
+  const { translate } = useLocales();
+
   return (
     <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose} {...other}>
       <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
@@ -26,7 +26,7 @@ export default function ConfirmDialog({ title, content, action, open, onClose, .
         {action}
 
         <Button variant="outlined" color="inherit" onClick={onClose}>
-        {`${translate('category.cancel')}`}
+          {`${translate('category.cancel')}`}
 
         </Button>
       </DialogActions>

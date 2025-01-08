@@ -11,11 +11,15 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
+import useLoginMutation from 'src/hooks/useLoginMutation';
+import { useNavigate } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 export default function AuthLoginForm() {
   const { login } = useAuthContext();
+  const mutation = useLoginMutation();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -31,7 +35,6 @@ export default function AuthLoginForm() {
 
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
-    defaultValues,
   });
 
   const {
@@ -43,18 +46,45 @@ export default function AuthLoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      await login(data.email, data.password);
+      const { email, password } = data;
+      const response = await mutation.mutateAsync({ email, password });
+  
+      // حفظ التوكن في localStorage
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('refreshToken', response.refreshToken);
+      console.log(response);
+  
+      // إعادة التوجيه إلى الصفحة المطلوبة
+      navigate('/dashboard');
+  
     } catch (error) {
-      console.error(error);
-
+      console.error('Full error:', error);
+  
       reset();
-
+  
+      let errorMessage = 'حدث خطأ غير متوقع';
+      const errors = error.response?.data?.errors;
+  
+      if (errors) {
+        // تحويل الأخطاء إلى نصوص ديناميكية
+        errorMessage = Object.entries(errors)
+          .map(([field, message]) => `${field}: ${message}`)
+          .join('\n');
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+  
+      // عرض الخطأ في الفورم
       setError('afterSubmit', {
-        ...error,
-        message: error.message,
+        type: 'manual',
+        message: errorMessage,
       });
     }
   };
+  
+  
+  
+  
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -79,11 +109,11 @@ export default function AuthLoginForm() {
         />
       </Stack>
 
-      <Stack alignItems="flex-end" sx={{ my: 2 }}>
+      {/* <Stack alignItems="flex-end" sx={{ my: 2 }}>
         <Link variant="body2" color="inherit" underline="always">
           Forgot password?
         </Link>
-      </Stack>
+      </Stack> */}
 
       <LoadingButton
         fullWidth

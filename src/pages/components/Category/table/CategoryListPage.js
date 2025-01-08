@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
@@ -37,26 +37,38 @@ import {
   TablePaginationCustom,
 } from '../../../../components/table';
 // sections
-import { UserTableToolbar, UserTableRow } from '../../../../sections/@dashboard/user/list/index';
 import { useLocales } from '../../../../locales';
-
-// ----------------------------------------------------------------------
-
-
-
-
+import { useCategoryList } from './useCategoryList';
+import CategoryTableRow from './list/CategoryTableRow';
 
 // ----------------------------------------------------------------------
 
 export default function CategoryListPage() {
+  const { themeStretch } = useSettingsContext();
+  const { translate } = useLocales();
+  const navigate = useNavigate();
+
+  const [openConfirm, setOpenConfirm] = useState(false);
+
+  const [filterName, setFilterName] = useState('');
+
+  const [filterRole, setFilterRole] = useState(`${translate('category.all')}`);
+  
+
+  const [filterStatus, setFilterStatus] = useState(`${translate('category.all')}`);
+  const [loading, setLoading] = useState(false);
+
   const {
     dense,
     page,
     order,
+    offset,
     orderBy,
     rowsPerPage,
     setPage,
     //
+    pageCount,
+     setpageCount,
     selected,
     setSelected,
     onSelectRow,
@@ -66,69 +78,50 @@ export default function CategoryListPage() {
     onChangeDense,
     onChangePage,
     onChangeRowsPerPage,
+    
   } = useTable();
+  const { data, applyFilter, handleDeleteCategory,  isLoading, isError, error,refetch } = useCategoryList({
+    limit: 5,
+    page,
+    order,
+    orderBy,
+    filterName,
+    filterRole,
+    filterStatus,
+    setPage,
+    pageCount,
+     setpageCount,
+     loading, setLoading,setOpenConfirm
+     
+  });
 
-  const { themeStretch } = useSettingsContext();
-  const { translate } = useLocales();
+  const [total, settotal] = useState(data?.total);
+
   const TABLE_HEAD = [
-    { id: 'image', label: `${translate('category.image')}`, align: 'left' },
+    { id: 'id', label: `${translate('category.id')}`, align: 'left' },
 
+
+    { id: 'image', label: `${translate('category.image')}`, align: 'left' },
     { id: 'name_ar', label: `${translate('category.NameAr')}`, align: 'left' },
     { id: 'name_en', label: `${translate('category.NameEn')}`, align: 'left' },
-  
-    // { id: 'company', label: 'Company', align: 'left' },
-    // { id: 'role', label: 'Role', align: 'left' },
-    { id: 'isVerified', label: `${translate('category.Verified')}`, align: 'center' },
-    { id: 'status', label: `${translate('category.status')}`, align: 'left' },
     { id: '' },
   ];
-  
-  const navigate = useNavigate();
-
-  const [tableData, setTableData] = useState(_userList);
-
-  const [openConfirm, setOpenConfirm] = useState(false);
-
-  const [filterName, setFilterName] = useState('');
-
-  const [filterRole, setFilterRole] = useState(`${translate('category.all')}`);
-
-  const [filterStatus, setFilterStatus] = useState(`${translate('category.all')}`);
 
   const dataFiltered = applyFilter({
-    inputData: tableData,
+    inputData: data?.data,
     comparator: getComparator(order, orderBy),
     filterName,
     filterRole,
     filterStatus,
     translate
   });
-  const STATUS_OPTIONS = [`${translate('category.all')}`];
 
-  // const STATUS_OPTIONS = [`${translate('category.all')}`, `${translate('category.active')}`, `${translate('category.banned')}`];
-  const ROLE_OPTIONS = [
-    `${translate('category.all')}`,
-    'ux designer',
-    'full stack designer',
-    'backend developer',
-    'project manager',
-    'leader',
-    'ui designer',
-    'ui/ux designer',
-    'front end developer',
-    'full stack developer',
-  ];
 
-  const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-  const denseHeight = dense ? 52 : 72;
-
-  const isFiltered = filterName !== '' || filterRole !== `${translate('category.all')}`|| filterStatus !== `${translate('category.all')}`;
-
+  
   const isNotFound =
-    (!dataFiltered.length && !!filterName) ||
-    (!dataFiltered.length && !!filterRole) ||
-    (!dataFiltered.length && !!filterStatus);
+    (!dataFiltered?.length && !!filterName) ||
+    (!dataFiltered?.length && !!filterRole) ||
+    (!dataFiltered?.length && !!filterStatus);
 
   const handleOpenConfirm = () => {
     setOpenConfirm(true);
@@ -139,12 +132,12 @@ export default function CategoryListPage() {
   };
 
   const handleFilterStatus = (event, newValue) => {
-    setPage(0);
+    // setPage(0);
     setFilterStatus(newValue);
   };
 
   const handleFilterName = (event) => {
-    setPage(0);
+    // setPage(0);
     setFilterName(event.target.value);
   };
 
@@ -154,36 +147,20 @@ export default function CategoryListPage() {
   };
 
   const handleDeleteRow = (id) => {
-    const deleteRow = tableData.filter((row) => row.id !== id);
-    setSelected([]);
-    setTableData(deleteRow);
+    handleDeleteCategory(id)
 
-    if (page > 0) {
-      if (dataInPage.length < 2) {
-        setPage(page - 1);
-      }
-    }
+   
   };
+useEffect(() => {
+  if(data){
+    settotal(data?.total)
 
-  const handleDeleteRows = (selectedRows) => {
-    const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
-    setSelected([]);
-    setTableData(deleteRows);
+  }
+}, [data])
 
-    if (page > 0) {
-      if (selectedRows.length === dataInPage.length) {
-        setPage(page - 1);
-      } else if (selectedRows.length === dataFiltered.length) {
-        setPage(0);
-      } else if (selectedRows.length > dataInPage.length) {
-        const newPage = Math.ceil((tableData.length - selectedRows.length) / rowsPerPage) - 1;
-        setPage(newPage);
-      }
-    }
-  };
 
   const handleEditRow = (id) => {
-    navigate("/dashboard/category/edit:4");
+    navigate(`/dashboard/category/edit${id}`);
   };
 
   const handleResetFilter = () => {
@@ -193,16 +170,11 @@ export default function CategoryListPage() {
   };
 
 
-  const handleClick = () => {
-    console.log(PATH_DASHBOARD.category.new);
-    
-    navigate('dashboard/user/six');
-  };
 
   return (
     <>
       <Helmet>
-        <title> User: List | Minimal UI</title>
+        <title> Category: List | Plaissir</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -210,7 +182,7 @@ export default function CategoryListPage() {
           heading={`${translate('category.category')}`}
           links={[
             { name: `${translate('category.Dashboard')}`, href: PATH_DASHBOARD.root },
-            { name: `${translate('category.category')}`, href: PATH_DASHBOARD.category},
+            { name: `${translate('category.category')}`, href: PATH_DASHBOARD.category },
             { name: `${translate('category.list')}` },
           ]}
           action={
@@ -227,22 +199,10 @@ export default function CategoryListPage() {
         />
 
         <Card>
-          <Tabs
-            value={filterStatus}
-            onChange={handleFilterStatus}
-            sx={{
-              px: 2,
-              bgcolor: 'background.neutral',
-            }}
-          >
-            {STATUS_OPTIONS.map((tab) => (
-              <Tab key={tab} label={tab} value={tab} />
-            ))}
-          </Tabs>
+          
 
-          <Divider />
 
-          <UserTableToolbar
+          {/* <UserTableToolbar
             isFiltered={isFiltered}
             filterName={filterName}
             filterRole={filterRole}
@@ -250,27 +210,10 @@ export default function CategoryListPage() {
             onFilterName={handleFilterName}
             onFilterRole={handleFilterRole}
             onResetFilter={handleResetFilter}
-          />
+          /> */}
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-            <TableSelectedAction
-              dense={dense}
-              numSelected={selected.length}
-              rowCount={tableData.length}
-              onSelectAllRows={(checked) =>
-                onSelectAllRows(
-                  checked,
-                  tableData.map((row) => row.id)
-                )
-              }
-              action={
-                <Tooltip title={`${translate('category.delet')}`}>
-                  <IconButton color="primary" onClick={handleOpenConfirm}>
-                    <Iconify icon="eva:trash-2-outline" />
-                  </IconButton>
-                </Tooltip>
-              }
-            />
+         
 
             <Scrollbar>
               <Table size={dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
@@ -278,37 +221,29 @@ export default function CategoryListPage() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={tableData.length}
-                  numSelected={selected.length}
+                  rowCount={data?.data?.length}
+                  numSelected={selected?.length}
                   onSort={onSort}
-                  onSelectAllRows={(checked) =>
-                    onSelectAllRows(
-                      checked,
-                      tableData.map((row) => row.id)
-                    )
-                  }
+                
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
-                      <UserTableRow
+                  {data?.data?.map((row) => (
+                      <CategoryTableRow
                         key={row.id}
+                        keys={TABLE_HEAD}
                         row={row}
                         avtar={true}
-
-                        selected={selected.includes(row.id)}
-                        onSelectRow={() => onSelectRow(row.id)}
+                        isCategories={true}
+                        loading={loading}
                         onDeleteRow={() => handleDeleteRow(row.id)}
-                        onEditRow={() => handleEditRow(row.name)}
+                        onEditRow={() => handleEditRow(row.id)}
+                        openConfirm={openConfirm}
+                        setOpenConfirm={setOpenConfirm}
                       />
                     ))}
 
-                  <TableEmptyRows
-                    height={denseHeight}
-                    emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
-                  />
+                 
 
                   <TableNoData isNotFound={isNotFound} />
                 </TableBody>
@@ -317,7 +252,7 @@ export default function CategoryListPage() {
           </TableContainer>
 
           <TablePaginationCustom
-            count={dataFiltered.length}
+            count={total}
             page={page}
             rowsPerPage={rowsPerPage}
             onPageChange={onChangePage}
@@ -329,58 +264,8 @@ export default function CategoryListPage() {
         </Card>
       </Container>
 
-      <ConfirmDialog
-        open={openConfirm}
-        onClose={handleCloseConfirm}
-        title={`${translate('category.delet')}`}
-        content={
-          <>
-            Are you sure want to delete <strong> {selected.length} </strong> items?
-          </>
-        }
-        action={
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => {
-              handleDeleteRows(selected);
-              handleCloseConfirm();
-            }}
-          >
-            {`${translate('category.delet')}`}
-          </Button>
-        }
-      />
     </>
   );
 }
 
-// ----------------------------------------------------------------------
 
-function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole,translate }) {
-  const stabilizedThis = inputData.map((el, index) => [el, index]);
-
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el) => el[0]);
-
-  if (filterName) {
-    inputData = inputData.filter(
-      (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-    );
-  }
-
-  if (filterStatus !== `${translate('category.all')}`) {
-    inputData = inputData.filter((user) => user.status === filterStatus);
-  }
-
-  if (filterRole !== `${translate('category.all')}`) {
-    inputData = inputData.filter((user) => user.role === filterRole);
-  }
-
-  return inputData;
-}

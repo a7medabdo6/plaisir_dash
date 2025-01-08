@@ -16,14 +16,14 @@ import {
   Box
 } from '@mui/material';
 // components
-import Iconify from '../../../../components/iconify';
-import MenuPopover from '../../../../components/menu-popover';
-import ConfirmDialog from '../../../../components/confirm-dialog';
-import { useLocales } from '../../../../locales';
-import fallbackImage from '../../../../assets/images/noimage.png'
+import Iconify from '../../../../../components/iconify';
+import MenuPopover from '../../../../../components/menu-popover';
+import ConfirmDialog from '../../../../../components/confirm-dialog';
+import { useLocales } from '../../../../../locales';
+import fallbackImage from '../../../../../assets/images/noimage.png'
 // ----------------------------------------------------------------------
 
-UserTableRow.propTypes = {
+CategoryTableRow.propTypes = {
   avtar: PropTypes.bool,
   icon: PropTypes.bool,
   coupon: PropTypes.bool,
@@ -33,9 +33,12 @@ UserTableRow.propTypes = {
   onEditRow: PropTypes.func,
   onDeleteRow: PropTypes.func,
   onSelectRow: PropTypes.func,
+  openConfirm: PropTypes.bool,
+  setOpenConfirm: PropTypes.func,
 };
 
-export default function UserTableRow({ keys, row, selected, onEditRow, onSelectRow, onDeleteRow, avtar, icon, coupon, isCategories }) {
+export default function CategoryTableRow({ openConfirm,
+  setOpenConfirm, keys, row, selected, onEditRow, onSelectRow, onDeleteRow, avtar, icon, coupon, isCategories,loading }) {
 
 
   const [photoUrl, setPhotoUrl] = useState('');
@@ -49,7 +52,7 @@ export default function UserTableRow({ keys, row, selected, onEditRow, onSelectR
     }
   }, [photoUrl]); 
   const { translate } = useLocales();
-  const [openConfirm, setOpenConfirm] = useState(false);
+  // const [openConfirm, setOpenConfirm] = useState(false);
   const [openPopover, setOpenPopover] = useState(null);
   const handleOpenConfirm = () => {
     setOpenConfirm(true);
@@ -106,6 +109,7 @@ export default function UserTableRow({ keys, row, selected, onEditRow, onSelectR
           sx={{ color: 'error.main' }}
         >
           <Iconify icon="eva:trash-2-outline" />
+          
           {`${translate('category.delet')}`}
 
         </MenuItem>
@@ -128,8 +132,10 @@ export default function UserTableRow({ keys, row, selected, onEditRow, onSelectR
         title={`${translate('category.delet')}`}
         content={`${translate('category.are_you_sure_to_delete')}`}
         action={
-          <Button variant="contained" color="error" onClick={onDeleteRow}>
-            {`${translate('category.delet')}`}
+          <Button disabled={loading} variant="contained" color="error" onClick={onDeleteRow}>
+                  {loading ? translate('category.loading') : translate('category.delet')}
+
+            {/* {`${translate('category.delet')}`} */}
           </Button>
         }
       />

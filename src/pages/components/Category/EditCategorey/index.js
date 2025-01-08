@@ -9,13 +9,29 @@ import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
 // sections
 import CategoryNewEditForm from '../../../../sections/@dashboard/e-commerce/CategoryNewEditForm';
 import { useLocales } from '../../../../locales';
+import { useParams } from 'react-router-dom';  // لاستخراج الـ ID من الرابط
+import useSingleCategory from 'src/hooks/Category/useSingleCategory';
 
 // ----------------------------------------------------------------------
 
 export default function EditCategorey() {
-    const { translate } = useLocales();
-  
+  const { translate } = useLocales();
+  const { id } = useParams();
+
   const { themeStretch } = useSettingsContext();
+  const { data, error, isLoading } = useSingleCategory(id);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading category: {error.message}</div>;
+  }
+
+  if (!data) {
+    return <div>No category found.</div>;
+  }
 
   return (
     <>
@@ -27,16 +43,16 @@ export default function EditCategorey() {
         <CustomBreadcrumbs
           heading={`${translate('category.Edit')}`}
           links={[
-            
+
             { name: `${translate('category.Dashboard')}`, href: PATH_DASHBOARD.root },
             {
-              name:   `${translate('category.category')}`,
+              name: `${translate('category.category')}`,
               href: PATH_DASHBOARD.category.root,
             },
             { name: `${translate('category.Edit')}` },
           ]}
         />
-        <CategoryNewEditForm />
+        <CategoryNewEditForm data={data} isEdit={true} />
       </Container>
     </>
   );

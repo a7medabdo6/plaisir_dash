@@ -49,16 +49,22 @@ export default function AccountPopover() {
     setOpenPopover(null);
   };
 
-  const handleLogout = async () => {
-    try {
-      logout();
-      navigate(PATH_AUTH.login, { replace: true });
-      handleClosePopover();
-    } catch (error) {
-      console.error(error);
-      enqueueSnackbar('Unable to logout!', { variant: 'error' });
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    navigate('/login');
   };
+  
+  // const handleLogout = async () => {
+  //   try {
+  //     logout();
+  //     navigate(PATH_AUTH.login, { replace: true });
+  //     handleClosePopover();
+  //   } catch (error) {
+  //     console.error(error);
+  //     enqueueSnackbar('Unable to logout!', { variant: 'error' });
+  //   }
+  // };
 
   const handleClickItem = (path) => {
     handleClosePopover();

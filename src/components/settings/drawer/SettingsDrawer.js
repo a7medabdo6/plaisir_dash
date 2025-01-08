@@ -85,7 +85,7 @@ export default function SettingsDrawer() {
           sx={{ py: 2, pr: 1, pl: SPACING }}
         >
           <Typography variant="subtitle1" sx={{ flexGrow: 1 }}>
-            Settings
+            Settings4
           </Typography>
 
           <Tooltip title="Reset">
