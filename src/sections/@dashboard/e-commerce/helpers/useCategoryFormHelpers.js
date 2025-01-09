@@ -1,4 +1,3 @@
-// hooks/useCategoryFormHelpers.js
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUpdateCategoryMutation from 'src/hooks/Category/useUpdateCategoryMutation';
@@ -6,11 +5,9 @@ import useCreateCategoryMutation from 'src/hooks/Category/useCreateCategoryMutat
 import useUploadMutation from 'src/hooks/useUploadMutation';
 import { useSnackbar } from 'notistack';
 import { useLocales } from 'src/locales';
-
 export const useCategoryForm = (isEdit, currentCategory, data,setValue) => {
   const navigate = useNavigate();
-    const { translate } = useLocales();
-  
+  const { translate } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
   const [file, setFile] = useState(null);
   const [fileId, setFileId] = useState(null);
@@ -18,11 +15,9 @@ export const useCategoryForm = (isEdit, currentCategory, data,setValue) => {
   const [nameEn, setNameEn] = useState('');
   const [nameAr, setNameAr] = useState('');
   const [photo, setPhoto] = useState(null);
-
   const uploadMutation = useUploadMutation();
   const createMutation = useCreateCategoryMutation();
   const { mutate: updateCategory, isLoading: isUpdating } = useUpdateCategoryMutation();
-
   useEffect(() => {
     if (data) {
       setNameEn(data.name_en || '');
@@ -30,7 +25,6 @@ export const useCategoryForm = (isEdit, currentCategory, data,setValue) => {
       setPhoto(data?.photo?.id || null);
     }
   }, [data]);
-
   const handleDrop = useCallback(
     (acceptedFiles) => {
       const newFile = acceptedFiles[0];  // استقبل ملف واحد فقط
@@ -93,14 +87,9 @@ export const useCategoryForm = (isEdit, currentCategory, data,setValue) => {
       enqueueSnackbar(`${translate('addError')}`, { variant: 'error' });
     }
   };
-
-
   const handleRemoveFile = () => {
     setValue('images', []);
   };
-  
- 
-
   const handleRemoveAllFiles = () => {
     setValue('images', []);
   };

@@ -36,7 +36,7 @@ export default function EditFeatures() {
             { name: `${translate('features.Edit')}` },
           ]}
         />
-        <FeaturesNewEditForm />
+        <FeaturesNewEditForm isEdit={true} />
       </Container>
     </>
   );

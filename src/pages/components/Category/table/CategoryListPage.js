@@ -91,7 +91,9 @@ export default function CategoryListPage() {
     setPage,
     pageCount,
      setpageCount,
-     loading, setLoading,setOpenConfirm
+     loading, 
+     setLoading,
+     setOpenConfirm
      
   });
 

@@ -1,5 +1,5 @@
+import FeaturesListPage from "./components/Features/table/FeaturesListPage";
 
-import FeaturesListPage from './components/Features/table/FeaturesListPage';
 const Features = () => {
     return (
       <div>

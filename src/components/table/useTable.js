@@ -97,7 +97,6 @@
 // }
 
 import { useState, useCallback, useEffect } from 'react';
-import useCategories from 'src/hooks/Category/useCategories';
 
 // ----------------------------------------------------------------------
 
@@ -109,16 +108,12 @@ export default function useTable(props) {
 
   const [page, setPage] = useState(props?.defaultCurrentPage || 0);
   const [pageCount, setpageCount] = useState(1);
-console.log(pageCount);
 
   const [rowsPerPage, setRowsPerPage] = useState(props?.defaultRowsPerPage || 5);
   const [offset,setOffset] = useState() // Calculate offset based on page and rowsPerPage
 
   const [selected, setSelected] = useState(props?.defaultSelected || []);
-  // const {  refetch } = useCategories({
-  //   limit: rowsPerPage,
-  //   page : pageCount,
-  // });
+
   // Update offset whenever page or rowsPerPage (limit) changes
   useEffect(() => {
     setOffset(page * rowsPerPage);
