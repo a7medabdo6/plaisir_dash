@@ -14,7 +14,7 @@ const Loadable = (Component) => (props) =>
 // ----------------------------------------------------------------------
 
 export const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
-export const EcommerceProductCreatePage = Loadable(
+export const CreateCategories = Loadable(
   lazy(() => import('../pages/components/Category/CreateCategories/CreateCategories'))
 );
 export const CreateCoupon = Loadable(

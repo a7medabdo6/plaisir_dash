@@ -44,7 +44,6 @@ export default function ThemeContrast({ children }) {
       },
     }),
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isLight, themeContrast]
   );
 

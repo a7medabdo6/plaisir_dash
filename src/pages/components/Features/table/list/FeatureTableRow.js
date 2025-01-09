@@ -79,9 +79,7 @@ export default function FeatureTableRow({ openConfirm,
         <TableCell padding="checkbox">
           # {row.id}
         </TableCell>
-        <TableCell align="left">
-          {row.icon}
-        </TableCell>
+        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.icon }} />
         <TableCell align="left">
           {row.name_ar}
         </TableCell>
@@ -132,7 +130,7 @@ export default function FeatureTableRow({ openConfirm,
         title={`${translate('category.delet')}`}
         content={`${translate('category.are_you_sure_to_delete')}`}
         action={
-          <Button disabled={loading} variant="contained" color="error" onClick={() => onDeleteRow()}>
+          <Button disabled={loading} variant="contained" color="error" onClick={() => onDeleteRow("78")}>
             {loading ? translate('category.loading') : translate('category.delet')}
 
           </Button>

@@ -1,4 +1,3 @@
-// src/hooks/Features/useFeaturesList.js
 import { useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import useDeleteFeatureMutation from 'src/hooks/Features/useDeleteFeatureMutation';
@@ -17,9 +16,6 @@ export default function useFeaturesList(initialParams,pageCount, filterName, fil
 
   const { data, isLoading, isError, error } = useFeatures(params);
   const [total, setTotal] = useState(data?.total);
-  console.log(filterName);
-  
-
   useEffect(() => {
     if (data) {
       setTotal(data.total);
@@ -48,7 +44,6 @@ export default function useFeaturesList(initialParams,pageCount, filterName, fil
     let filteredData = inputData;
   
     if (filterName) {
-      // Ensure filterName is a string before using .toLowerCase()
       const lowercasedFilterName = filterName ? filterName.toString().toLowerCase() : '';
       filteredData = filteredData.filter((feature) =>
         feature.name_en.toLowerCase().includes(lowercasedFilterName)

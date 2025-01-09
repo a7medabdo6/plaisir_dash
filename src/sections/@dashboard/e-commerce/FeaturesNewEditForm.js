@@ -21,21 +21,11 @@ const FeaturesNewEditForm = ({ isEdit, currentFeatures }) => {
     defaultValues,
     onSubmit,
     isCreating,
+    isProcessing,
     isUpdating,
   } = useFeatureFormHelpers(isEdit, featureData);
   const { translate } = useLocales();
-  const { enqueueSnackbar } = useSnackbar();
-
-  // Initialize the form methods first
-
-
-  // Now you can use the helper function
-
-
-
-
   const { handleSubmit, formState: { isSubmitting } } = methods;
-
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading feature data!</div>;
 
@@ -54,8 +44,8 @@ const FeaturesNewEditForm = ({ isEdit, currentFeatures }) => {
                   type="submit"
                   variant="contained"
                   size="large"
-                  disabled={isSubmitting || isCreating || isUpdating}
-                  loading={isSubmitting || isCreating || isUpdating} // Handle all loading states
+                  disabled={isProcessing}
+                  loading={isProcessing} // Handle all loading states
                 >
                   {!isEdit ? `${translate('features.CreateFeatures')}` : `${translate('features.SaveChanges')}`}
                 </LoadingButton>

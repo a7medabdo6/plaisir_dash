@@ -66,7 +66,6 @@ export function SettingsProvider({ children }) {
     if (isArabic) {
       onChangeDirectionByLang('ar');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isArabic]);
 
   // Mode

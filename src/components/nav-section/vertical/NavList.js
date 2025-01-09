@@ -27,7 +27,6 @@ export default function NavList({ data, depth, hasChild }) {
     if (!active) {
       handleClose();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const handleToggle = () => {

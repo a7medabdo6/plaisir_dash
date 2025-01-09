@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,8 @@ export const useFeatureFormHelpers = (isEdit, featureData) => {
   const { translate } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const NewFeaturesSchema = Yup.object().shape({
     name_en: Yup.string().required(`${translate('features.errors.name_en_required')}`),
     name_ar: Yup.string().required(`${translate('features.errors.name_ar_required')}`),
@@ -37,8 +39,8 @@ export const useFeatureFormHelpers = (isEdit, featureData) => {
   }, [featureData, methods, defaultValues]);
   const { mutate: createFeature, isLoading: isCreating } = useCreateFeatureMutation();
   const { mutate: updateFeatureMutation, isLoading: isUpdating } = useUpdateFeatureMutation();
-
   const onSubmit = (formData) => {
+    setIsProcessing(true); // Set processing to true
     if (isEdit) {
       const updatedFeature = {
         id: featureData?.id,
@@ -53,6 +55,9 @@ export const useFeatureFormHelpers = (isEdit, featureData) => {
         },
         onError: (error) => {
           enqueueSnackbar(translate('editError'), { variant: 'error' });
+        },
+        onSettled: () => {
+          setIsProcessing(false); // Set processing to false
         },
       });
     } else {
@@ -70,11 +75,16 @@ export const useFeatureFormHelpers = (isEdit, featureData) => {
           enqueueSnackbar(translate('addError'), { variant: 'error' });
           console.error('Error creating feature:', error);
         },
+        onSettled: () => {
+          setIsProcessing(false); // Set processing to false
+        },
       });
     }
   };
+
   return {
     NewFeaturesSchema,
+    isProcessing,
     defaultValues,
     onSubmit,
     isCreating,

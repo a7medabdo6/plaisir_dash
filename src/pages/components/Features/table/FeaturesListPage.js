@@ -117,9 +117,7 @@ export default function FeaturesListPage() {
             isFiltered={isFiltered}
             filterName={filterName}
             filterRole={filterRole}
-            // optionsRole={ROLE_OPTIONS}
             onFilterName={handleFilterName}
-            // onFilterRole={handleFilterRole}
             onResetFilter={handleResetFilter}
           />
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>

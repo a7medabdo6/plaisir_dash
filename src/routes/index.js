@@ -16,7 +16,7 @@ import {
   PageFour,
   PageFive,
   LoginPage,
-  EcommerceProductCreatePage,
+  CreateCategories,
   EditCategorey,
   CreateCoupon,
   PageThree,
@@ -42,11 +42,14 @@ import {
   OrderListPage,
   UserOrederCreatePage
 } from './elements';
+import AuthRoleGuard from 'src/auth/AuthRoleGuard';
 
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const userRole = user?.role?.name;
   return useRoutes([
     {
       path: '/',
@@ -76,17 +79,65 @@ export default function Router() {
         { path: 'one', element: <PageOne /> },
         { path: 'two', element: <PageTwo /> },
         { path: 'three', element: <PageThree /> },
-        { path: 'category', element: <Category /> },
-        { path: 'category/new', element: <EcommerceProductCreatePage /> },
-        { path: 'category/edit:id', element: <EditCategorey /> },
+        {
+          path: 'category',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <Category />
+            </AuthRoleGuard>
+          ),
+        },
+        {
+          path: 'category/new',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <CreateCategories />
+            </AuthRoleGuard>
+          ),
+        },
+        
+        {
+          path: 'category/edit:id',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <EditCategorey />
+            </AuthRoleGuard>
+          ),
+        },
+        // { path: 'category', element: <Category /> },
+        // { path: 'category/new', element: <CreateCategories /> },
+        // { path: 'category/edit:id', element: <EditCategorey /> },
 
+        {
+          path: 'features',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <Features />
+            </AuthRoleGuard>
+          ),
+        },
+        {
+          path: 'features/new',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <CreateFeatures />
+            </AuthRoleGuard>
+          ),
+        },
+        
+        {
+          path: 'features/edit:id',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <EditFeatures />
+            </AuthRoleGuard>
+          ),
+        },
         { path: 'coupon', element: <Coupon /> },
         { path: 'coupon/new', element: <CreateCoupon /> },
         { path: 'coupon/edit:id', element: <EditCoupon /> },
 
-        { path: 'features', element: <Features /> },
-        { path: 'features/new', element: <CreateFeatures /> },
-        { path: 'features/edit:id', element: <EditFeatures /> },
+       
 
 
         { path: 'products', element: <Products /> },
@@ -128,7 +179,7 @@ export default function Router() {
             { path: 'account', element: <UserAccountPage /> },
           ],
         },
-        
+
         // {
         //   path: 'user',
         //   children: [

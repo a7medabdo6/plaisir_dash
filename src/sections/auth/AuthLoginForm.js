@@ -52,11 +52,14 @@ export default function AuthLoginForm() {
       // حفظ التوكن في localStorage
       localStorage.setItem('token', response.token);
       localStorage.setItem('refreshToken', response.refreshToken);
+      localStorage.setItem('user', JSON.stringify(response.user));
+
       console.log(response);
   
       // إعادة التوجيه إلى الصفحة المطلوبة
-      navigate('/dashboard');
-  
+      // navigate('/dashboard');
+      window.location.href = '/dashboard';
+
     } catch (error) {
       console.error('Full error:', error);
   
