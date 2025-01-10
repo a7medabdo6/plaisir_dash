@@ -7,40 +7,39 @@ import { PATH_DASHBOARD } from '../../../../routes/paths';
 import { useSettingsContext } from '../../../../components/settings';
 import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
 // sections
-import FeaturesNewEditForm from '../../../../sections/@dashboard/e-commerce/FeaturesNewEditForm';
 import { useLocales } from '../../../../locales';
+import FAQNewEditForm from 'src/sections/@dashboard/e-commerce/FAQNewEditForm';
 
 // ----------------------------------------------------------------------
 
-export default function CreateFeatures() {
-  const { translate } = useLocales();
-
+export default function EditFAQ() {
+    const { translate } = useLocales();
+  
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title> Ecommerce: Create a new features | Minimal UI</title>
+        <title> Ecommerce: Create a new Features | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading={`${translate('features.CreateanewFeatures')}`}
+          heading={`${translate('faq.Edit')}`}
           links={[
-
-            { name: `${translate('features.Dashboard')}`, href: PATH_DASHBOARD.root },
+            
+            { name: `${translate('faq.Dashboard')}`, href: PATH_DASHBOARD.root },
             {
-              name: `${translate('features.features')}`,
-              href: PATH_DASHBOARD.features,
+              name:   `${translate('faq.faq')}`,
+              href: PATH_DASHBOARD.features.root,
             },
-            { name: `${translate('features.NewFeatures')}` },
+            { name: `${translate('faq.Edit')}` },
           ]}
         />
-        {/* <Icon iconName="BiArrowBack" /> */}
-
-
-        <FeaturesNewEditForm />
+        <FAQNewEditForm isEdit={true} />
       </Container>
     </>
   );
 }
+
+

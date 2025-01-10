@@ -154,6 +154,95 @@ const ar = {
 
 
   },
+  BlogTags: {
+    create: `انشاء`,
+    BlogTags: `ارشادات`,
+    all: `الكل`,
+    banned: `غير نشط`,
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel: "ألغاء",
+    Edit: "تعديل",
+
+    search: 'بحث',
+    NewBlogTags: ' علامات مدونة جديدة',
+    CreateanewBlogTags: 'انشاء ',
+    title_ar: 'الاسم بالعربي',
+    title_en: 'الاسم بالانجليزيه',
+    icon: 'ايقونه',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateBlogTags: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
+    Dashboard: "لوحة التحكم",
+
+
+    errors: {
+      title_en_required: 'الاسم بالإنجليزية مطلوب',
+      title_ar_required: 'الاسم بالعربية مطلوب',
+      icon_required: 'الايقونة مطلوبة',
+      tags_required: 'يجب إضافة على الأقل علامتين',
+      price_required: 'السعر يجب أن يكون أكبر من 0',
+      description_required: 'الوصف مطلوب',
+    }
+
+
+
+
+
+  },
+  faq: {
+    create: `انشاء`,
+    faq: `الاسئله الشائعة`,
+    all: `الكل`,
+    banned: `غير نشط`,
+    active: 'نشط',
+    image: 'الصوره',
+    Verified: "موثق",
+    status: "الحاله",
+    are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
+    cancel: "ألغاء",
+    Edit: "تعديل",
+    answerAr:'الاجابه  باللغةالعربي',
+    search: 'بحث',
+    answerEn:"الاجابه باللغةالانجليزي",
+quesAr: "السؤال باللغة العربية",
+  quesEn: "السؤال باللغة الانجليزية",
+
+    NewFAQ: 'سؤال جديدة',
+    CreateanewFAQ: 'انشاء سؤال جديده',
+    NameAr: 'الاسم بالعربي',
+    NameEn: 'الاسم بالانجليزيه',
+    icon: 'ايقونه',
+    IsActive: 'نشط',
+    SaveChanges: 'حفظ',
+    CreateFAQ: 'انشاء',
+    list: 'القائمة',
+    delet: 'حذف',
+    Edit: 'تعديل',
+    Dashboard: "لوحة التحكم",
+
+
+    errors: {
+      name_en_required: 'الاسم بالإنجليزية مطلوب',
+      name_ar_required: 'الاسم بالعربية مطلوب',
+      answer_en_required: "الإجابة باللغة الإنجليزية مطلوبة.",
+    ques_en_required: "السؤال باللغة الإنجليزية مطلوب.",
+    ques_ar_required: "السؤال باللغة العربية مطلوب.",
+    answer_ar_required: "الإجابة باللغة العربية مطلوبة."
+    }
+
+
+
+
+
+  },
+  
   products: {
     create: `انشاء`,
     products: `المنتجات`,
@@ -465,6 +554,8 @@ save:'حفظ',
   coupondash: 'كوبون',
   featuresdash: `الخصائص`,
   productsdash: "المنتجات",
+  faqdash:'الاسئلة الشائعة',
+  BlogTagsdash:'اشارات المدونه',
 Order:"ألطلبات",
   blog: `مقالات`,
   post: `بريد`,

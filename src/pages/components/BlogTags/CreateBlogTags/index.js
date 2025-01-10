@@ -7,12 +7,12 @@ import { PATH_DASHBOARD } from '../../../../routes/paths';
 import { useSettingsContext } from '../../../../components/settings';
 import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
 // sections
-import FeaturesNewEditForm from '../../../../sections/@dashboard/e-commerce/FeaturesNewEditForm';
+import BlogTagsNewEditForm from '../../../../sections/@dashboard/e-commerce/BlogTagsNewEditForm';
 import { useLocales } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
-export default function CreateFeatures() {
+export default function CreateBlogTags() {
   const { translate } = useLocales();
 
   const { themeStretch } = useSettingsContext();
@@ -20,26 +20,26 @@ export default function CreateFeatures() {
   return (
     <>
       <Helmet>
-        <title> Ecommerce: Create a new features | Minimal UI</title>
+        <title> Ecommerce: Create a new BlogTags | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading={`${translate('features.CreateanewFeatures')}`}
+          heading={`${translate('BlogTags.CreateanewBlogTags')}`}
           links={[
 
-            { name: `${translate('features.Dashboard')}`, href: PATH_DASHBOARD.root },
+            { name: `${translate('BlogTags.Dashboard')}`, href: PATH_DASHBOARD.root },
             {
-              name: `${translate('features.features')}`,
-              href: PATH_DASHBOARD.features,
+              name: `${translate('BlogTags.BlogTags')}`,
+              href: PATH_DASHBOARD.blogtags,
             },
-            { name: `${translate('features.NewFeatures')}` },
+            { name: `${translate('BlogTags.CreateanewBlogTags')}` },
           ]}
         />
         {/* <Icon iconName="BiArrowBack" /> */}
 
 
-        <FeaturesNewEditForm />
+        <BlogTagsNewEditForm />
       </Container>
     </>
   );

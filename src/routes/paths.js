@@ -28,7 +28,12 @@ export const PATH_DASHBOARD = {
 
   features: path(ROOTS_DASHBOARD, '/features'),
   featuresNew: path(ROOTS_DASHBOARD, '/features/new'),
+  FAQ: path(ROOTS_DASHBOARD, '/FAQ'),
+  FAQNew: path(ROOTS_DASHBOARD, '/FAQ/new'),
 
+
+  blogtags: path(ROOTS_DASHBOARD, '/blogtags'),
+  blogtagsNew: path(ROOTS_DASHBOARD, '/blogtags/new'),
 
   products: path(ROOTS_DASHBOARD, '/products'),
   productsNew: path(ROOTS_DASHBOARD, '/products/new'),

@@ -40,7 +40,13 @@ import {
   UserEditPage,
   UserAccountPage,
   OrderListPage,
-  UserOrederCreatePage
+  UserOrederCreatePage,
+  FAQ,
+  CreateFAQ,
+  EditFAQ,
+  EditBlogTags,
+  BlogTags,
+  CreateBlogTags
 } from './elements';
 import AuthRoleGuard from 'src/auth/AuthRoleGuard';
 
@@ -130,6 +136,58 @@ export default function Router() {
           element: (
             <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
               <EditFeatures />
+            </AuthRoleGuard>
+          ),
+        },
+
+
+        {
+          path: 'FAQ',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <FAQ />
+            </AuthRoleGuard>
+          ),
+        },
+        {
+          path: 'FAQ/new',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <CreateFAQ />
+            </AuthRoleGuard>
+          ),
+        },
+        
+        {
+          path: 'FAQ/edit:id',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <EditFAQ />
+            </AuthRoleGuard>
+          ),
+        },
+        {
+          path: 'blogtags',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <BlogTags />
+            </AuthRoleGuard>
+          ),
+        },
+        {
+          path: 'blogtags/new',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <CreateBlogTags />
+            </AuthRoleGuard>
+          ),
+        },
+        
+        {
+          path: 'blogtags/edit:id',
+          element: (
+            <AuthRoleGuard allowedRoles={['Admin']} userRole={userRole}>
+              <EditBlogTags />
             </AuthRoleGuard>
           ),
         },

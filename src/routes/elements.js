@@ -60,6 +60,18 @@ export const Features = Loadable(lazy(() => import('../pages/Features')));
 export const EditFeatures = Loadable(lazy(() => import('../pages/components/Features/EditFeatures/')));
 
 
+export const CreateBlogTags = Loadable(
+  lazy(() => import('../pages/components/BlogTags/CreateBlogTags'))
+);
+export const BlogTags = Loadable(lazy(() => import('../pages/BlogTags')));
+export const EditBlogTags = Loadable(lazy(() => import('../pages/components/BlogTags/EditBlogTags/')));
+
+export const CreateFAQ = Loadable(
+  lazy(() => import('../pages/components/FAQ/CreateFAQ'))
+);
+export const FAQ = Loadable(lazy(() => import('../pages/FAQ')));
+export const EditFAQ = Loadable(lazy(() => import('../pages/components/FAQ/EditFAQ')));
+
 
 export const CreateProducts = Loadable(
   lazy(() => import('../pages/components/Products/CreateProducts'))
@@ -67,3 +79,4 @@ export const CreateProducts = Loadable(
 export const Products = Loadable(lazy(() => import('../pages/Products')));
 export const EditProducts = Loadable(lazy(() => import('../pages/components/Products/EditProducts/')));
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
+

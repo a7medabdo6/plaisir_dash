@@ -42,6 +42,10 @@ const navConfig = [
             { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon },
             { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
             { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
+            { title: 'faqdash', path: PATH_DASHBOARD.FAQ, icon: ICONS.Products },
+            { title: 'BlogTagsdash', path: PATH_DASHBOARD.blogtags, icon: ICONS.Products },
+
+
           ],
         },
         {
@@ -89,6 +93,7 @@ const navConfig = [
           { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon },
           // { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
           { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
+
         ],
       },
       {

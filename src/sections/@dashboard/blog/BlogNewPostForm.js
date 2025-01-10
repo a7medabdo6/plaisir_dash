@@ -21,6 +21,8 @@ import FormProvider, {
 //
 import BlogNewPostPreview from './BlogNewPostPreview';
 import { useLocales } from '../../../locales';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // استيراد أنماط Quill
 
 // ----------------------------------------------------------------------
 
@@ -54,7 +56,7 @@ export default function BlogNewPostForm() {
     title: Yup.string().required(`${translate('bloging.errors.title')}`),
     description: Yup.string().required(`${translate('bloging.errors.description')}`),
     tags: Yup.array().min(2, `${translate('bloging.errors.tags.min')}`),
-    metaKeywords: Yup.array().min(1,`${translate( 'bloging.errors.metaKeywords.min')}`),
+    metaKeywords: Yup.array().min(1, `${translate('bloging.errors.metaKeywords.min')}`),
     cover: Yup.mixed().required(`${translate('bloging.errors.cover.required')}`).nullable(true),
     content: Yup.string().required(`${translate('bloging.errors.content')}`),
   });
@@ -133,18 +135,115 @@ export default function BlogNewPostForm() {
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-              <RHFTextField name="title" label={`${translate('bloging.post_title')}`} />
 
-              <RHFTextField name="description" label={`${translate('bloging.description')}`} multiline rows={3} />
 
+
+              <div>
+                <Typography>{`${translate('faq.answerEn')}`}</Typography>
+                <ReactQuill
+                  value={methods.getValues('answer_en')}
+                  onChange={(value) => handleQuillChange('answer_en', value)}
+                  theme="snow"
+                  modules={{
+                    toolbar: [
+                      [{ header: '1' }, { header: '2' }, { font: [] }],
+                      [{ list: 'ordered' }, { list: 'bullet' }],
+                      ['bold', 'italic', 'underline'],
+                      ['link'],
+                      ['blockquote'],
+                      [{ align: [] }],
+                      ['image', 'video'],
+                    ],
+                  }}
+                  formats={[
+                    'header', 'font', 'list', 'bold', 'italic', 'underline',
+                    'link', 'blockquote', 'align', 'image', 'video',
+                  ]}
+                  style={{ height: '200px', marginBottom: '50px' }}
+                />
+
+              </div>
+
+              <div>
+                <Typography>{`${translate('faq.answerAr')}`}</Typography>
+
+                <ReactQuill
+                  value={methods.getValues('answer_ar')}
+                  onChange={(value) => handleQuillChange('answer_ar', value)}
+                  theme="snow"
+                  modules={{
+                    toolbar: [
+                      [{ header: '1' }, { header: '2' }, { font: [] }],
+                      [{ list: 'ordered' }, { list: 'bullet' }],
+                      ['bold', 'italic', 'underline'],
+                      ['link'],
+                      ['blockquote'],
+                      [{ align: [] }],
+                      ['image', 'video'],
+                    ],
+                  }}
+                  formats={[
+                    'header', 'font', 'list', 'bold', 'italic', 'underline',
+                    'link', 'blockquote', 'align', 'image', 'video',
+                  ]}
+                  style={{ height: '200px', marginBottom: '50px' }}
+                />
+
+              </div>
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                   {`${translate('bloging.content')}`}
                 </Typography>
 
-                <RHFEditor simple name="content" />
+                <ReactQuill
+                  value={methods.getValues('answer_ar')}
+                  onChange={(value) => handleQuillChange('answer_ar', value)}
+                  theme="snow"
+                  modules={{
+                    toolbar: [
+                      [{ header: '1' }, { header: '2' }, { font: [] }],
+                      [{ list: 'ordered' }, { list: 'bullet' }],
+                      ['bold', 'italic', 'underline'],
+                      ['link'],
+                      ['blockquote'],
+                      [{ align: [] }],
+                      ['image', 'video'],
+                    ],
+                  }}
+                  formats={[
+                    'header', 'font', 'list', 'bold', 'italic', 'underline',
+                    'link', 'blockquote', 'align', 'image', 'video',
+                  ]}
+                  style={{ height: '200px', marginBottom: '50px' }}
+                />
               </Stack>
+              <Stack spacing={1}>
+                <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+                  {`${translate('bloging.content')}`}
+                </Typography>
 
+                <ReactQuill
+                  value={methods.getValues('answer_ar')}
+                  onChange={(value) => handleQuillChange('answer_ar', value)}
+                  theme="snow"
+                  modules={{
+                    toolbar: [
+                      [{ header: '1' }, { header: '2' }, { font: [] }],
+                      [{ list: 'ordered' }, { list: 'bullet' }],
+                      ['bold', 'italic', 'underline'],
+                      ['link'],
+                      ['blockquote'],
+                      [{ align: [] }],
+                      ['image', 'video'],
+                    ],
+                  }}
+                  formats={[
+                    'header', 'font', 'list', 'bold', 'italic', 'underline',
+                    'link', 'blockquote', 'align', 'image', 'video',
+                  ]}
+                  style={{ height: '200px', marginBottom: '50px' }}
+                />
+              </Stack>
 
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
@@ -192,24 +291,9 @@ export default function BlogNewPostForm() {
                 ChipProps={{ size: 'small' }}
               />
 
-              <RHFTextField name="metaTitle" label={`${translate('bloging.meta_title')}`} />
+              <RHFTextField name="title" label={`${translate('bloging.post_title')}`} />
+              <RHFTextField name="title" label={`${translate('bloging.post_title')}`} />
 
-              <RHFTextField
-                name="metaDescription"
-                label={`${translate('bloging.meta_description')}`}
-                fullWidth
-                multiline
-                rows={3}
-              />
-
-              <RHFAutocomplete
-                name="metaKeywords"
-                label={`${translate('bloging.meta_keywords')}`}
-                multiple
-                freeSolo
-                options={TAGS_OPTION.map((option) => option)}
-                ChipProps={{ size: 'small' }}
-              />
             </Stack>
           </Card>
 
