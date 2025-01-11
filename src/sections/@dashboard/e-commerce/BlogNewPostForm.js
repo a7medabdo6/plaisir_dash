@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import { useState, useCallback, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -26,6 +26,9 @@ import useCreateBlogMutation from 'src/hooks/Blog/useCreateBlogMutation ';
 import useUploadMutation from 'src/hooks/useUploadMutation';
 import useBlogTags from 'src/hooks/BlogTags/useBlogTag';
 import RHFAutocomplete from 'src/pages/components/Blog/RHFAutocomplete';
+import useUpdateBlogMutation from 'src/hooks/Blog/useUpdateBlogMutation';
+import useSingleBlog from 'src/hooks/Blog/useSingleBlog';
+import { useHandleFile } from './helpers/useBlogFormHelpers';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +38,11 @@ import RHFAutocomplete from 'src/pages/components/Blog/RHFAutocomplete';
 export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
   const navigate = useNavigate();
   const { translate } = useLocales();
+  const { id } = useParams();
+  const { data: BlogData } = useSingleBlog(id);
+  console.log(BlogData);
+  const { mutate: updateBlog, isLoading: isUpdating } = useUpdateBlogMutation();
+
   const Params = {
 
     limit: 5,
@@ -61,22 +69,33 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
 
   const [selectedOptions, setSelectedOptions] = useState([]); // تخزين العناصر المختارة بالكامل
   const selectedOptionIds = selectedOptions.map(option => option.id);
-  const defaultValues = {
-    title_ar: '',
-    title_en: '',
-    photo: null,
-    tags: selectedOptionIds,
-    desc_en: '',
-    desc_ar: '',
-    content_en: '',
-    content_ar: '',
-  };
+  console.log(selectedOptionIds);
+  
+  const defaultValues = useMemo(
+    () => ({
+      title_ar: BlogData?.title_ar || '',
+      title_en: BlogData?.title_ar || '',
+      photo: null,
+      tags: BlogData?.tags || selectedOptionIds,
+      desc_en: BlogData?.desc_en || '',
+      desc_ar: BlogData?.desc_ar || '',
+      content_en: BlogData?.content_en || '',
+      content_ar: BlogData?.content_ar || '',
+    }),
+    [BlogData]
+  );
+
 
   const methods = useForm({
     resolver: yupResolver(NewBlogSchema),
     defaultValues,
   });
 
+  useEffect(() => {
+    if (BlogData) {
+      methods.reset(defaultValues);
+    }
+  }, [BlogData, methods, defaultValues]);
   const {
     reset,
     watch,
@@ -163,7 +182,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
   };
   const most_popular = methods.watch('most_popular');
 
-  
+
   const [photo, setPhoto] = useState(null);
 
   const [file, setFile] = useState(null);
@@ -200,13 +219,19 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
     setIsProcessing(true); // Set processing to true
     if (isEdit) {
       const updatedFeature = {
-        id: featureData?.id,
-        ques_en: formData.ques_en || featureData.ques_en,
-        ques_ar: formData.ques_ar || featureData.ques_ar,
-        answer_en: formData.answer_en || featureData.answer_en,
-        answer_ar: formData.answer_ar || featureData.answer_ar,
+        id: BlogData?.id,
+        title_en: formData.title_en || BlogData.title_en,
+        title_ar: formData.title_ar || BlogData.title_ar,
+        desc_en: formData.desc_en || BlogData.desc_en,
+        desc_ar: formData.desc_ar || BlogData.desc_ar,
+        content_en: formData.content_en || BlogData.content_en,
+        content_ar: formData.content_ar || BlogData.content_ar,
+        most_popular: formData.most_popular || BlogData.most_popular,
+        tags: selectedOptionIds || BlogData.tags,
+        photo: { id: fileId } || { id: photo?.id },
       };
-      updateFeatureMutation(updatedFeature, {
+
+      updateBlog(updatedFeature, {
         onSuccess: () => {
           enqueueSnackbar(translate('editSuccess'), { variant: 'success' });
           navigate('/dashboard/blog');
@@ -228,10 +253,9 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
         content_ar: formData?.content_ar || '',
         photo: { id: fileId },
         tags: selectedOptionIds || [],
-        most_popular: most_popular
-
-
+        most_popular: most_popular,
       };
+
       createBlog(data, {
         onSuccess: () => {
           enqueueSnackbar(translate('addSuccess'), { variant: 'success' });
@@ -247,6 +271,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
       });
     }
   };
+
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -358,8 +383,8 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
                 options={data?.data}
                 ChipProps={{ size: 'small' }}
                 selectedOptions={selectedOptions}
-               setSelectedOptions={setSelectedOptions}
-                
+                setSelectedOptions={setSelectedOptions}
+
               />
 
               <RHFTextField
