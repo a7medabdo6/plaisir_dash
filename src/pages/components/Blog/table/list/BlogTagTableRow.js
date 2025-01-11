@@ -23,13 +23,15 @@ import { useLocales } from '../../../../../locales';
 import fallbackImage from '../../../../../assets/images/noimage.png'
 // ----------------------------------------------------------------------
 
-CategoryTableRow.propTypes = {
+BlogTagTableRow.propTypes = {
   avtar: PropTypes.bool,
   icon: PropTypes.bool,
   coupon: PropTypes.bool,
   isCategories: PropTypes.bool,
   row: PropTypes.object,
   selected: PropTypes.bool,
+  loading: PropTypes.bool,
+
   onEditRow: PropTypes.func,
   onDeleteRow: PropTypes.func,
   onSelectRow: PropTypes.func,
@@ -37,12 +39,12 @@ CategoryTableRow.propTypes = {
   setOpenConfirm: PropTypes.func,
 };
 
-export default function CategoryTableRow({ openConfirm,
-  setOpenConfirm, keys, row, selected, onEditRow, onSelectRow, onDeleteRow, avtar, icon, coupon, isCategories,loading }) {
+export default function BlogTagTableRow({ openConfirm,
+  setOpenConfirm, keys, row, selected, onEditRow, onSelectRow, onDeleteRow, avtar, icon, coupon, isCategories, loading }) {
 
 
   const [photoUrl, setPhotoUrl] = useState(row?.photo?.path);
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function CategoryTableRow({ openConfirm,
       const updatedUrl = photoUrl.replace("localhost:3000", "51.20.18.35:3000");
       setPhotoUrl(updatedUrl);
     }
-  }, [photoUrl]); 
+  }, [photoUrl]);
   const { translate } = useLocales();
   // const [openConfirm, setOpenConfirm] = useState(false);
   const [openPopover, setOpenPopover] = useState(null);
@@ -83,11 +85,34 @@ export default function CategoryTableRow({ openConfirm,
           />
         </TableCell>
         <TableCell align="left">
-          {row.name_ar}
+          {row.title_ar}
         </TableCell>
         <TableCell align="left">
-          {row.name_en}
+          {row.title_en}
         </TableCell>
+       
+        
+        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.content_ar }} />
+
+        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.content_en }} />
+        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.desc_en }} />
+
+        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.desc_ar }} />
+        <TableCell align="left">
+          {row.tags[0]?.id}
+        </TableCell>
+        <TableCell align="center">
+          <Iconify
+            icon={row.most_popular ? 'eva:checkmark-circle-fill' : 'eva:clock-outline'}
+            sx={{
+              width: 20,
+              height: 20,
+              color: 'success.main',
+              ...(!row.most_popular && { color: 'warning.main' }),
+            }}
+          />
+        </TableCell>
+      
         <TableCell align="right">
           <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
             <Iconify icon="eva:more-vertical-fill" />
@@ -109,7 +134,7 @@ export default function CategoryTableRow({ openConfirm,
           sx={{ color: 'error.main' }}
         >
           <Iconify icon="eva:trash-2-outline" />
-          
+
           {`${translate('category.delet')}`}
 
         </MenuItem>
@@ -132,10 +157,9 @@ export default function CategoryTableRow({ openConfirm,
         title={`${translate('category.delet')}`}
         content={`${translate('category.are_you_sure_to_delete')}`}
         action={
-          <Button disabled={loading} variant="contained" color="error" onClick={onDeleteRow}>
-                  {loading ? translate('category.loading') : translate('category.delet')}
+          <Button disabled={loading} variant="contained" color="error" onClick={() => onDeleteRow("78")}>
+            {loading ? translate('category.loading') : translate('category.delet')}
 
-            {/* {`${translate('category.delet')}`} */}
           </Button>
         }
       />

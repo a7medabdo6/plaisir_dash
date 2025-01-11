@@ -45,6 +45,7 @@ import {
   CreateFAQ,
   EditFAQ,
   EditBlogTags,
+  BlogEditPostPage,
   BlogTags,
   CreateBlogTags
 } from './elements';
@@ -211,6 +212,8 @@ export default function Router() {
             { path: 'posts', element: <BlogPostsPage /> },
             { path: 'post/:title', element: <BlogPostPage /> },
             { path: 'new', element: <BlogNewPostPage /> },
+            { path: 'edit/:id', element: <BlogEditPostPage /> },
+
           ],
         },
         {

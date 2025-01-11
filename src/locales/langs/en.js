@@ -414,9 +414,21 @@ TotalBooking:"Total Booking",
     newpost: `New Post`,
     latest: `Latest`,
     post_details: `Post Details`,
-
+list:"list",
     oldest: `Oldest`,
+    most_popular:"Most Popular",
     popular: `Popular `,
+    title_ar: "Title in Arabic",
+    title_en: "Title in English",
+    desc_en: "Description in English",
+    desc_ar: "Description in Arabic",
+    content_en: "Content in English",
+    content_ar: "Content in Arabic",
+    photo: "photo",
+    tags: "tags",
+    
+    
+
     posts:'Posts',
     serach:`Serach...`,
     errors:{

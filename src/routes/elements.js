@@ -27,9 +27,11 @@ export const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 export const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
 export const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
 // DASHBOARD: BLOG
-export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));
+export const BlogPostsPage = Loadable(lazy(() => import('../pages/Blog')));
 export const BlogPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostPage')));
-export const BlogNewPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogNewPostPage')));
+export const BlogNewPostPage = Loadable(lazy(() => import('../pages/components/Blog/CreateBlog')));
+export const BlogEditPostPage = Loadable(lazy(() => import('../pages/components/Blog/EditBlog')));
+
 
 
 // DASHBOARD: USER
