@@ -46,7 +46,7 @@ export default function useBlogList(initialParams,pageCount, filterName, filterR
     if (filterName) {
       const lowercasedFilterName = filterName ? filterName.toString().toLowerCase() : '';
       filteredData = filteredData.filter((BlogTag) =>
-        BlogTag.name_en.toLowerCase().includes(lowercasedFilterName)
+        BlogTag?.title_en?.toLowerCase().includes(lowercasedFilterName)
       );
     }
   

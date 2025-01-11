@@ -61,7 +61,6 @@ export default function BlogListPage() {
   );
   const TABLE_HEAD = [
     { id: 'photo', label: `${translate('bloging.photo')}`, align: 'left' },
-
     { id: 'title_ar', label: `${translate('bloging.title_ar')}`, align: 'left' },
     { id: 'title_en', label: `${translate('bloging.title_en')}`, align: 'left' },
     { id: 'desc_ar', label: `${translate('bloging.desc_ar')}`, align: 'left' },
@@ -79,9 +78,7 @@ export default function BlogListPage() {
     setFilterName(event.target.value);
   };
 
-  const handleDeleteRow = (id) => {
-    console.log(id);
-    
+  const handleDeleteRow = (id) => {    
     handleDeleteBlogTag(id)
   };
   const handleEditRow = (id) => {
@@ -91,7 +88,7 @@ export default function BlogListPage() {
   const handleResetFilter = () => {
     setFilterName('');
     setFilterRole(`${translate('BlogNewEditForm.all')}`);
-    setFilterStatus(`${translate('Blog.all')}`);
+    setFilterStatus(`${translate('bloging.all')}`);
   };
 
   return (

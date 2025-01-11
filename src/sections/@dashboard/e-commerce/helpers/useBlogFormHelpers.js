@@ -1,17 +1,14 @@
-// blogFormFunctions.js
+// useBlogFormHelpers.js
+import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import useUploadMutation from 'src/hooks/useUploadMutation';
 
-import { useState, useEffect, useCallback } from 'react';
-
-// التحكم في تغيير Quill
-export const useQuillChange = (setValue) => {
-  return (field, value) => {
-    setValue(field, value, { shouldValidate: true });
-  };
-};
-
-// تحميل الملفات
-export const useHandleFile = (setValue) => {
+export function useFileHandler(setValue) {
   const [file, setFile] = useState(null);
+  const [fileId, setFileId] = useState(null);
+  const uploadMutation = useUploadMutation();
+  const { enqueueSnackbar } = useSnackbar();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDrop = useCallback(
     (acceptedFiles) => {
@@ -20,6 +17,7 @@ export const useHandleFile = (setValue) => {
         Object.assign(newFile, {
           preview: URL.createObjectURL(newFile),
         });
+
         setFile(newFile);
         setValue('photo', [newFile], { shouldValidate: true });
       }
@@ -27,56 +25,27 @@ export const useHandleFile = (setValue) => {
     [setValue]
   );
 
-  const handleRemoveFile = () => setValue('photo', null);
-  const handleRemoveAllFiles = () => setValue('photo', []);
+  const handleRemoveFile = () => {
+    setValue('photo', null);
+  };
 
-  return { file, handleDrop, handleRemoveFile, handleRemoveAllFiles, setFile };
-};
-
-// إدارة خطوات النموذج
-export const useStepNavigation = (methods) => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isNextDisabled, setIsNextDisabled] = useState(true);
-
-  const watchFields = methods.watch(['desc_en', 'desc_ar', 'content_en', 'content_ar', 'photo']);
-
-  useEffect(() => {
-    const [descEn, descAr, contentEn, contentAr, photoUp] = watchFields;
-    if (
-      (currentStep === 1 && descEn && descAr) ||
-      (currentStep === 2 && contentEn && contentAr) ||
-      (currentStep === 3 && photoUp)
-    ) {
-      setIsNextDisabled(false);
-    } else {
-      setIsNextDisabled(true);
-    }
-  }, [currentStep, watchFields]);
-
-  const handleNext = () => currentStep < 3 && setCurrentStep(currentStep + 1);
-  const handlePrev = () => currentStep > 1 && setCurrentStep(currentStep - 1);
-
-  return { currentStep, isNextDisabled, handleNext, handlePrev };
-};
-
-// إدارة رفع الصور
-export const usePhotoUpload = (enqueueSnackbar, translate, uploadMutation) => {
-  const [file, setFile] = useState(null);
-  const [fileId, setFileId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const handleRemoveAllFiles = () => {
+    setValue('photo', []);
+  };
 
   const onUpload = () => {
     if (!file) {
       alert('Please select a file first.');
       return;
     }
+
     setIsLoading(true);
 
     uploadMutation.mutate(file, {
       onSuccess: (data) => {
         setIsLoading(false);
         setFileId(data.file.id);
-        enqueueSnackbar(translate('imageUploadSuccess'), { variant: 'success' });
+        enqueueSnackbar('Image uploaded successfully', { variant: 'success' });
       },
       onError: (error) => {
         setIsLoading(false);
@@ -85,5 +54,41 @@ export const usePhotoUpload = (enqueueSnackbar, translate, uploadMutation) => {
     });
   };
 
-  return { file, setFile, fileId, onUpload, isLoading };
-};
+  return {
+    fileId,
+    handleDrop,
+    handleRemoveFile,
+    handleRemoveAllFiles,
+    onUpload,
+    isLoading,
+  };
+}
+
+export function useStepHandler(initialStep = 1) {
+  const [currentStep, setCurrentStep] = useState(initialStep);
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
+
+  const handleNext = () => {
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  useEffect(() => {
+    setIsNextDisabled(false);
+  }, [currentStep]);
+
+  return {
+    currentStep,
+    handleNext,
+    handlePrev,
+    isNextDisabled,
+    setIsNextDisabled,
+  };
+}

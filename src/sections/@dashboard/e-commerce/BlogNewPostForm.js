@@ -28,12 +28,10 @@ import useBlogTags from 'src/hooks/BlogTags/useBlogTag';
 import RHFAutocomplete from 'src/pages/components/Blog/RHFAutocomplete';
 import useUpdateBlogMutation from 'src/hooks/Blog/useUpdateBlogMutation';
 import useSingleBlog from 'src/hooks/Blog/useSingleBlog';
-import { useHandleFile } from './helpers/useBlogFormHelpers';
+import { useFileHandler, useStepHandler } from './helpers/useBlogFormHelpers';
 
 // ----------------------------------------------------------------------
 
-
-// ----------------------------------------------------------------------
 
 export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
   const navigate = useNavigate();
@@ -70,7 +68,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
   const [selectedOptions, setSelectedOptions] = useState([]); // تخزين العناصر المختارة بالكامل
   const selectedOptionIds = selectedOptions.map(option => option.id);
   console.log(selectedOptionIds);
-  
+
   const defaultValues = useMemo(
     () => ({
       title_ar: BlogData?.title_ar || '',
@@ -81,6 +79,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
       desc_ar: BlogData?.desc_ar || '',
       content_en: BlogData?.content_en || '',
       content_ar: BlogData?.content_ar || '',
+      most_popular:BlogData?.most_popular || '',
     }),
     [BlogData]
   );
@@ -103,120 +102,42 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
     handleSubmit,
     formState: { isSubmitting, isValid, errors },
   } = methods;
-
+  const { fileId, handleDrop, handleRemoveFile, handleRemoveAllFiles, onUpload, isLoading } = useFileHandler(setValue);
+  const { currentStep, handleNext, handlePrev, isNextDisabled, setIsNextDisabled } = useStepHandler();
   const values = watch();
-
   const handleOpenPreview = () => {
     setOpenPreview(true);
   };
-
   const handleClosePreview = () => {
     setOpenPreview(false);
   };
-
   const handleQuillChange = (field, value) => {
     setValue(field, value, { shouldValidate: true });
   };
-
-
-
-  const handleDrop = useCallback(
-    (acceptedFiles) => {
-      const newFile = acceptedFiles[0];  // استقبل ملف واحد فقط
-      if (newFile) {
-        Object.assign(newFile, {
-          preview: URL.createObjectURL(newFile),
-        });
-
-        setFile(newFile);  // حفظ الملف في state
-        setValue('photo', [newFile], { shouldValidate: true });  // استبدل الصورة السابقة
-      }
-    },
-    [setValue]
-  );
-
-  const handleRemoveFile = () => {
-    setValue('photo', null);
-  };
-
-
-  const [currentStep, setCurrentStep] = useState(1); // لتتبع الخطوة الحالية
-  const [isNextDisabled, setIsNextDisabled] = useState(true); // لتتبع ما إذا كان الزر معطلاً أم لا
-
 
   const descEn = methods.watch('desc_en');
   const descAr = methods.watch('desc_ar');
   const contentEn = methods.watch('content_en');
   const contentAr = methods.watch('content_ar');
   const photoUp = methods.watch('photo');
-
-  // التعامل مع تغيير الخطوات
-  const handleNext = () => {
-    if (currentStep < 3) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  // التعامل مع خطوات الرجوع
-  const handlePrev = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  // تحديث حالة الزر بناءً على قيمة الحقل
-  useEffect(() => {
-    // التحقق من الحقول وتفعيل زر Next
-    if (
-      (currentStep === 1 && descEn && descAr) ||  // إذا كانت الحقول الخاصة بالعناوين والوصف موجودة
-      (currentStep === 2 && contentEn && contentAr) || // إذا كانت الصورة قد تم تحميلها
-      (currentStep === 3 && photoUp) // إذا كانت الحقول الخاصة بالمحتوى والتصنيفات مكتملة
-    ) {
-      setIsNextDisabled(false); // تفعيل الزر
-    } else {
-      setIsNextDisabled(true); // تعطيل الزر
-    }
-  }, [currentStep, descEn, descAr, contentEn, contentAr, photoUp]);
-  const handleRemoveAllFiles = () => {
-    setValue('photo', []);
-  };
   const most_popular = methods.watch('most_popular');
 
 
-  const [photo, setPhoto] = useState(null);
-
-  const [file, setFile] = useState(null);
-  const [fileId, setFileId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const uploadMutation = useUploadMutation();
-
-  const { mutate: createBlog, isLoading: isCreating } = useCreateBlogMutation();
-  const onUpload = () => {
-    console.log("45454");
-
-    if (!file) {
-      alert('Please select a file first.');
-      return;
+  useEffect(() => {
+    if (
+      (currentStep === 1 && descEn && descAr) ||  
+      (currentStep === 2 && contentEn && contentAr) || 
+      (currentStep === 3 && photoUp) 
+    ) {
+      setIsNextDisabled(false); 
+    } else {
+      setIsNextDisabled(true); 
     }
-    setIsLoading(true);
-
-    uploadMutation.mutate(file, {
-      onSuccess: (data) => {
-        setIsLoading(false);
-        setPhoto(data.file.id);
-        setFileId(data.file.id);
-        enqueueSnackbar(`${translate('imageUploadSuccess')}`, { variant: 'success' });
-      },
-      onError: (error) => {
-        setIsLoading(false);
-        console.error('Upload failed:', error);
-      },
-    });
-  };
+  }, [currentStep, descEn, descAr, contentEn, contentAr, photoUp]);
+  const [photo, setPhoto] = useState(null);
+  const { mutate: createBlog, isLoading: isCreating } = useCreateBlogMutation();
   const onSubmit = (formData) => {
-    console.log("45");
-
-    setIsProcessing(true); // Set processing to true
+    setIsProcessing(true); 
     if (isEdit) {
       const updatedFeature = {
         id: BlogData?.id,
@@ -226,7 +147,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
         desc_ar: formData.desc_ar || BlogData.desc_ar,
         content_en: formData.content_en || BlogData.content_en,
         content_ar: formData.content_ar || BlogData.content_ar,
-        most_popular: formData.most_popular || BlogData.most_popular,
+        most_popular: most_popular ,
         tags: selectedOptionIds || BlogData.tags,
         photo: { id: fileId } || { id: photo?.id },
       };
@@ -240,7 +161,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
           enqueueSnackbar(translate('editError'), { variant: 'error' });
         },
         onSettled: () => {
-          setIsProcessing(false); // Set processing to false
+          setIsProcessing(false); 
         },
       });
     } else {
@@ -272,15 +193,12 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
     }
   };
 
-
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-
-
               {currentStep === 1 && (
                 <div>
                   <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
@@ -373,8 +291,6 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
         <Grid item xs={12} md={4}>
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
-
-
               <RHFAutocomplete
                 name="tags"
                 label={`${translate('bloging.tags')}`}
