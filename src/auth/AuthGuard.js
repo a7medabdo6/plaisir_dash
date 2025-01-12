@@ -10,6 +10,8 @@ AuthGuard.propTypes = {
   children: PropTypes.node,
 };
 
+
+
 export default function AuthGuard({ children }) {
   const { pathname } = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
