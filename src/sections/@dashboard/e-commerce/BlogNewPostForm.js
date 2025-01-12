@@ -67,7 +67,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
 
   const [selectedOptions, setSelectedOptions] = useState([]); // تخزين العناصر المختارة بالكامل
   const selectedOptionIds = selectedOptions.map(option => option.id);
-  console.log(selectedOptionIds);
+  console.log(BlogData);
 
   const defaultValues = useMemo(
     () => ({
@@ -149,7 +149,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
         content_ar: formData.content_ar || BlogData.content_ar,
         most_popular: most_popular ,
         tags: selectedOptionIds || BlogData.tags,
-        photo: { id: fileId } || { id: photo?.id },
+        photo:fileId === null ? { id: BlogData?.photo?.id} : { id: fileId },
       };
 
       updateBlog(updatedFeature, {
@@ -351,7 +351,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
               type="submit"
               variant="contained"
               size="large"
-              loading={isSubmitting}
+              loading={isProcessing}
               disabled={!isValid} // تعطيل الزر إذا كانت الحقول غير صحيحة
 
             >

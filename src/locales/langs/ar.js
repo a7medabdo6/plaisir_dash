@@ -597,6 +597,7 @@ Order:"ألطلبات",
   addSuccess: "تم إضافة الفئة بنجاح!",
   addError: "حدث خطأ أثناء إضافة الفئة. يرجى المحاولة مرة أخرى.",
   imageUploadSuccess: "تم تحميل الصورة بنجاح",
+  HomeContentdash:"الرئيسية",
 
   menu_level_2a: `مستوى القائمة 2 أ`,
   menu_level_2b: `مستوى القائمة 2 ب`,

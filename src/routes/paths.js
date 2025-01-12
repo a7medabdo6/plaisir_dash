@@ -25,6 +25,7 @@ export const PATH_DASHBOARD = {
   CouponNew: path(ROOTS_DASHBOARD, '/Coupon/new'),
 
 
+  HomeContent: path(ROOTS_DASHBOARD, '/HomeContent'),
 
   features: path(ROOTS_DASHBOARD, '/features'),
   featuresNew: path(ROOTS_DASHBOARD, '/features/new'),

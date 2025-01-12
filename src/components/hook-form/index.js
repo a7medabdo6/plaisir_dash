@@ -11,6 +11,8 @@ export { default as RHFTextField } from './RHFTextField';
 export { default as RHFRadioGroup } from './RHFRadioGroup';
 export { default as RHFAutocomplete } from './RHFAutocomplete';
 export { default as RHFEditor } from './RHFEditor';
-export { RHFUpload } from './RHFUpload';
+export { RHFUpload,RHFUploadWithLabel } from './RHFUpload';
+
+
 export { RHFMultiSelect } from './RHFSelect';
 

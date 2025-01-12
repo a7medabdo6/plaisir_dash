@@ -31,7 +31,7 @@ const StyledDropZone = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-Upload.propTypes = {
+UploadHomeContent.propTypes = {
   sx: PropTypes.object,
   error: PropTypes.bool,
   files: PropTypes.array,
@@ -46,7 +46,7 @@ Upload.propTypes = {
   onRemoveAll: PropTypes.func,
 };
 
-export default function Upload({
+export default function UploadHomeContent({
   disabled,
   multiple = false,
   error,
@@ -137,25 +137,39 @@ export default function Upload({
 
       {hasFiles && (
         <>
-          <Box sx={{ my: 3 }}>
+          {
+            files
+              .filter(i => i.id !== null)  // فلترة العناصر بحيث لا يتم تضمين العناصر التي تحتوي على id == null
+              .map((i) => {
+                return (
+                  // قم بإرجاع العنصر فقط إذا كان id ليس null
+                  <div key={i.id}>
+                    <>
+                      <Box sx={{ my: 3 }}>
 
-            <MultiFilePreview files={files} thumbnail={thumbnail} onRemove={onRemove} />
-          </Box>
+                        <MultiFilePreview files={files} thumbnail={thumbnail} onRemove={onRemove} />
+                      </Box>
 
-          <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
-            {onRemoveAll && (
-              <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
-                Remove all
-              </Button>
-            )}
+                      <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
+                        {onRemoveAll && (
+                          <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
+                            Remove all
+                          </Button>
+                        )}
 
-            {onUpload && (
-              <Button size="small" variant="contained" onClick={onUpload}>
-                Upload files
-              </Button>
-            )}
-          </Stack>
+                        {onUpload && (
+                          <Button size="small" variant="contained" onClick={onUpload}>
+                            Upload files
+                          </Button>
+                        )}
+                      </Stack>
+                    </>
+                  </div>
+                );
+              })
+          }
         </>
+
       )}
     </Box>
   );

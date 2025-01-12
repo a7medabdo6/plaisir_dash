@@ -594,7 +594,7 @@ list:"list",
   chat: `chat`,
   Order:"Order",
   BlogTagsdash:'BlogTags',
-
+  HomeContentdash:"HomeContent",
   cards: `cards`,
   posts: `posts`,
   create: `create`,

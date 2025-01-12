@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 // form
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
-import { FormHelperText } from '@mui/material';
+import { FormHelperText, Stack, Typography } from '@mui/material';
 //
 import { UploadAvatar, Upload, UploadBox } from '../upload';
+import UploadHomeContent from '../upload/UploadHomeContent';
 
 // ----------------------------------------------------------------------
 
@@ -83,7 +84,7 @@ export function RHFUpload({ name, multiple, helperText, ...other }) {
           <Upload
             multiple
             accept={{ 'image/*': [] }}
-            files={field.value}
+            files={field?.value}
             error={!!error}
             helperText={
               (!!error || helperText) && (
@@ -111,5 +112,66 @@ export function RHFUpload({ name, multiple, helperText, ...other }) {
         )
       }
     />
+  );
+}
+
+
+RHFUploadWithLabel.propTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+
+  multiple: PropTypes.bool,
+  helperText: PropTypes.node,
+};
+
+export function RHFUploadWithLabel({ name, multiple, label, helperText, ...other }) {
+  const { control } = useFormContext();
+
+  return (
+    <Stack>
+      <Typography>
+        {label}
+      </Typography>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field, fieldState: { error } }) => {
+          // إذا كانت multiple يتم تمرير المصفوفة كما هي
+          const files = Array.isArray(field?.value) ? field?.value : (field?.value ? [field.value] : []);
+
+          return multiple ? (
+            
+            <UploadHomeContent
+              multiple
+              accept={{ 'image/*': [] }}
+              files={files}
+              error={!!error}
+              helperText={
+                (!!error || helperText) && (
+                  <FormHelperText error={!!error} sx={{ px: 2 }}>
+                    {error ? error?.message : helperText}
+                  </FormHelperText>
+                )
+              }
+              {...other}
+            />
+          ) : (
+            <UploadHomeContent
+              accept={{ 'image/*': [] }}
+              file={field.value}
+              error={!!error}
+              helperText={
+                (!!error || helperText) && (
+                  <FormHelperText error={!!error} sx={{ px: 2 }}>
+                    {error ? error?.message : helperText}
+                  </FormHelperText>
+                )
+              }
+              {...other}
+            />
+          );
+        }}
+      />
+    </Stack>
   );
 }
