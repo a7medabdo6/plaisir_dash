@@ -39,6 +39,7 @@ import {
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
 import { useLocales } from '../../locales';
+import useUser from 'src/hooks/Users/useUsers';
 
 // ----------------------------------------------------------------------
 
@@ -69,6 +70,7 @@ export default function UserListPage() {
     orderBy,
     rowsPerPage,
     setPage,
+    pageCount,
     //
     selected,
     setSelected,
@@ -190,6 +192,14 @@ export default function UserListPage() {
     { id: 'status', label: `${translate('users.status')}`, align: 'left' },
     { id: '' },
   ];
+  const initialParams = {
+    
+    limit: 5,
+    page: pageCount,
+    // filterOptions: { searchKey: 'name_en', searchValue: filterName },
+  };
+  const { data, isError, error } = useUser(initialParams);
+  console.log(data);
   return (
     <>
       <Helmet>

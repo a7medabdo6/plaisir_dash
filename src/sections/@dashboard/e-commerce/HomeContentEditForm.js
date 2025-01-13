@@ -19,6 +19,7 @@ import FormProvider, {
 import { useLocales } from '../../../locales';
 import useUploadMutation from 'src/hooks/useUploadMutation';
 import { useStepHandlerHomeContent } from './helpers/useHomeContentFormHelpers';
+import useUpdateHomeContentMutation from 'src/hooks/HomeContent/useUpdateBlogTagMutation';
 
 // ----------------------------------------------------------------------
 
@@ -34,8 +35,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
 
 
 
-  const { defaultValues, NewHomeContentSchema, HomeContentsData } = useStepHandlerHomeContent(currentHomeContent);
-  console.log(HomeContentsData);
+  const { defaultValues, NewHomeContentSchema, HomeContentsData, onSubmit,onUpload,isLoading ,handleDrop,uploadedFileDetails} = useStepHandlerHomeContent(currentHomeContent);
 
 
   const methods = useForm({
@@ -50,67 +50,25 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
     handleSubmit,
     formState: { isSubmitting, errors },
   } = methods;
-  const uploadMutation = useUploadMutation();
 
   const values = watch();
-  const [photo, setPhoto] = useState(null);
 
-  const [file, setFile] = useState(null);
-  const [fileId, setFileId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    if (isEdit && currentHomeContent) {
-      reset(defaultValues);
+    if (isEdit && HomeContentsData) {
+      reset(HomeContentsData);
     }
     if (!isEdit) {
-      reset(defaultValues);
+      reset(HomeContentsData);
     }
-  }, [isEdit, currentHomeContent]);
+  }, [isEdit, HomeContentsData]);
 
-  const onSubmit = async (data) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate API call
-      enqueueSnackbar(translate('HomeContent.success'), { variant: 'success' });
-      navigate(PATH_DASHBOARD.home);
-    } catch (error) {
-      enqueueSnackbar(translate('HomeContent.error'), { variant: 'error' });
-    }
-  };
-  const handleDrop = useCallback(
-    (acceptedFiles, fieldName) => {
-      const newFile = acceptedFiles[0];  // استقبل ملف واحد فقط
-      if (newFile) {
-        Object.assign(newFile, {
-          preview: URL.createObjectURL(newFile),
-        });
 
-        setFile(newFile);  // حفظ الملف في state
-        setValue(fieldName, newFile, { shouldValidate: true });  // استبدل الصورة السابقة
-      }
-    },
-    [setValue]
-  );
+ 
+  
 
-  const onUpload = () => {
-    if (!file) {
-      alert('Please select a file first.');
-      return;
-    }
-    setIsLoading(true);
 
-    uploadMutation.mutate(file, {
-      onSuccess: (data) => {
-        setIsLoading(false);
-        setPhoto(data.file.id);
-        setFileId(data.file.id);
-        enqueueSnackbar(`${translate('imageUploadSuccess')}`, { variant: 'success' });
-      },
-      onError: (error) => {
-        setIsLoading(false);
-        console.error('Upload failed:', error);
-      },
-    });
-  };
+
+
   const handleRemoveFile = (fieldName) => {
     setValue(fieldName, null);  // إزالة الصورة المحددة
   };
@@ -160,7 +118,8 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo')}
                         onRemove={() => handleRemoveFile('banner_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('banner_photo')}
-                        onUpload={onUpload}
+                        onUpload={()=>onUpload('banner_photo')
+                        }
                       />
                       <RHFUploadWithLabel
                         thumbnail
@@ -171,7 +130,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo_ar')}
                         onRemove={() => handleRemoveFile('banner_photo_ar')}
                         onRemoveAll={() => handleRemoveAllFiles('banner_photo_ar')}
-                        onUpload={onUpload}
+                        onUpload={()=>onUpload('banner_photo_ar')}
                       />
                     </Stack>
                   )
@@ -215,25 +174,25 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                       <RHFTextField name="know_us_left_title_ar" label={translate('HomeContent.labels.know_us_left_title_ar')} />
                       <RHFUploadWithLabel
                         thumbnail
-                        name="images"
+                        name="know_us_photo"
                         label="Upload Know Us Photo"
                         defaultValue={defaultValues.know_us_photo.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'know_us_photo')}
                         onRemove={() => handleRemoveFile('know_us_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('know_us_photo')}
-                        onUpload={onUpload}
+                        onUpload={()=>onUpload('know_us_photo')}
                       />
                       <RHFUploadWithLabel
                         thumbnail
-                        name="images"
+                        name="know_us_photo_ar"
                         label="Upload Know Us Photo ar"
                         defaultValue={defaultValues.know_us_photo_ar.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'know_us_photo_ar')}
                         onRemove={() => handleRemoveFile('know_us_photo_ar')}
                         onRemoveAll={() => handleRemoveAllFiles('know_us_photo_ar')}
-                        onUpload={onUpload}
+                        onUpload={()=>onUpload('know_us_photo_ar')}
                       />
                     </Stack>
                   )}
@@ -250,25 +209,25 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                       <RHFTextField name="why_choose_sec_item_ar" label={translate('HomeContent.labels.why_choose_sec_item_ar')} />
                       <RHFUploadWithLabel
                         thumbnail
-                        name="images"
+                        name="why_choose_photo"
                         label="Upload Why Choose Photo"
                         defaultValue={defaultValues.why_choose_photo.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'why_choose_photo')}
                         onRemove={() => handleRemoveFile('why_choose_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('why_choose_photo')}
-                        onUpload={onUpload}
+                        onUpload={()=>onUpload('why_choose_photo')}
                       />
                       <RHFUploadWithLabel
                         thumbnail
-                        name="images"
+                        name="why_choose_photo_ar"
                         label="Upload Why Choose Photo (Arabic)"
                         defaultValue={defaultValues.why_choose_photo_ar.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'why_choose_photo_ar')}
                         onRemove={() => handleRemoveFile('why_choose_photo_ar')}
                         onRemoveAll={() => handleRemoveAllFiles('why_choose_photo_ar')}
-                        onUpload={onUpload}
+                        onUpload={()=>onUpload('why_choose_photo_ar')}
                       />
                     </Stack>
                   )}
@@ -303,47 +262,47 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                       <Stack spacing={2}>
                         <RHFUploadWithLabel
                           thumbnail
-                          name="images"
+                          name="ready_to_travel_photo"
                           label="Upload Ready to Travel Photo"
                           defaultValue={defaultValues.ready_to_travel_photo.id}
                           multiple
                           onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_photo')}
                           onRemove={() => handleRemoveFile('ready_to_travel_photo')}
                           onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_photo')}
-                          onUpload={onUpload}
-                        />
+                          onUpload={()=>onUpload('ready_to_travel_photo')}
+                          />
                         <RHFUploadWithLabel
                           thumbnail
-                          name="images"
+                          name="ready_to_travel_sec_photo"
                           label="Upload Ready to Travel Sec Photo"
                           defaultValue={defaultValues.ready_to_travel_sec_photo.id}
                           multiple
                           onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_sec_photo')}
                           onRemove={() => handleRemoveFile('ready_to_travel_sec_photo')}
                           onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_sec_photo')}
-                          onUpload={onUpload}
+                          onUpload={()=>onUpload('ready_to_travel_sec_photo')}
                         />
                         <RHFUploadWithLabel
                           thumbnail
-                          name="images"
+                          name="ready_to_travel_third_photo"
                           label="Upload Ready to Travel Third Photo"
                           defaultValue={defaultValues.ready_to_travel_third_photo.id}
                           multiple
                           onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_third_photo')}
                           onRemove={() => handleRemoveFile('ready_to_travel_third_photo')}
                           onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_third_photo')}
-                          onUpload={onUpload}
+                          onUpload={()=>onUpload('ready_to_travel_third_photo')}
                         />
                         <RHFUploadWithLabel
                           thumbnail
-                          name="images"
+                          name="ready_to_travel_forth_photo"
                           label="Upload Ready to Travel Forth Photo"
                           defaultValue={defaultValues.ready_to_travel_forth_photo.id}
                           multiple
                           onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_forth_photo')}
                           onRemove={() => handleRemoveFile('ready_to_travel_forth_photo')}
                           onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_forth_photo')}
-                          onUpload={onUpload}
+                          onUpload={()=>onUpload('ready_to_travel_forth_photo')}
                         />
                       </Stack>
                     </Stack>

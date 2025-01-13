@@ -1,7 +1,10 @@
 // useBlogFormHelpers.js
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import useSingleHomeContent from 'src/hooks/HomeContent/useSingleBlogTag';
+import useUpdateHomeContentMutation from 'src/hooks/HomeContent/useUpdateBlogTagMutation';
 import useUploadMutation from 'src/hooks/useUploadMutation';
 import { useLocales } from 'src/locales';
 import * as Yup from 'yup';
@@ -10,8 +13,24 @@ import * as Yup from 'yup';
 export function useStepHandlerHomeContent(currentHomeContent) {
     const { translate } = useLocales();
     const [dataLoaded, setDataLoaded] = useState(false);
-    const { data: HomeContentsData, isLoading, isError } = useSingleHomeContent();
-console.log(dataLoaded);
+    const { data: HomeContentsData, isError } = useSingleHomeContent();
+    const { mutate: updateHomeContent, isLoading: isUpdating } = useUpdateHomeContentMutation();
+    const { enqueueSnackbar } = useSnackbar();
+    const uploadMutation = useUploadMutation();
+    const [isLoading, setIsLoading] = useState(false);
+    const [uploadedFileDetails, setUploadedFileDetails] = useState({
+      banner_photo: null,
+      banner_photo_ar: null,
+      know_us_photo: null,
+      know_us_photo_ar: null, // Added
+      why_choose_photo: null, // Added
+      why_choose_photo_ar: null, // Added
+      ready_to_travel_photo: null, // Added
+      ready_to_travel_sec_photo: null, // Added
+      ready_to_travel_third_photo: null, // Added
+      ready_to_travel_forth_photo: null, // Added
+    });
+console.log(uploadedFileDetails);
 
     useEffect(() => {
       if (HomeContentsData) {
@@ -294,9 +313,220 @@ useEffect(() => {
 }, [HomeContentsData, dataLoaded]);
 
 
+const onSubmit = async (formData) => {
+  try {
+   
+    const updatedHomeContent = {
+      id: HomeContentsData?.id,
+      banner_fir_title_en: formData.banner_fir_title_en || HomeContentsData?.banner_fir_title_en,
+      banner_fir_title_ar: formData.banner_fir_title_ar || HomeContentsData?.banner_fir_title_ar,
+      banner_sec_title_en: formData.banner_sec_title_en || HomeContentsData?.banner_sec_title_en,
+      banner_sec_title_ar: formData.banner_sec_title_ar || HomeContentsData?.banner_sec_title_ar,
+      banner_third_title_en: formData.banner_third_title_en || HomeContentsData?.banner_third_title_en,
+      banner_third_title_ar: formData.banner_third_title_ar || HomeContentsData?.banner_third_title_ar,
+      banner_btn_en: formData.banner_btn_en || HomeContentsData?.banner_btn_en,
+      banner_btn_ar: formData.banner_btn_ar || HomeContentsData?.banner_btn_ar,
+      service_fir_title_en: formData.service_fir_title_en || HomeContentsData?.service_fir_title_en,
+      service_fir_title_ar: formData.service_fir_title_ar || HomeContentsData?.service_fir_title_ar,
+      service_fir_sub_title_en: formData.service_fir_sub_title_en || HomeContentsData?.service_fir_sub_title_en,
+      service_fir_sub_title_ar: formData.service_fir_sub_title_ar || HomeContentsData?.service_fir_sub_title_ar,
+      service_sec_title_en: formData.service_sec_title_en || HomeContentsData?.service_sec_title_en,
+      service_sec_title_ar: formData.service_sec_title_ar || HomeContentsData?.service_sec_title_ar,
+      service_sec_sub_title_en: formData.service_sec_sub_title_en || HomeContentsData?.service_sec_sub_title_en,
+      service_sec_sub_title_ar: formData.service_sec_sub_title_ar || HomeContentsData?.service_sec_sub_title_ar,
+      service_third_title_en: formData.service_third_title_en || HomeContentsData?.service_third_title_en,
+      service_third_title_ar: formData.service_third_title_ar || HomeContentsData?.service_third_title_ar,
+      service_third_sub_title_en: formData.service_third_sub_title_en || HomeContentsData?.service_third_sub_title_en,
+      service_third_sub_title_ar: formData.service_third_sub_title_ar || HomeContentsData?.service_third_sub_title_ar,
+      service_forth_title_en: formData.service_forth_title_en || HomeContentsData?.service_forth_title_en,
+      service_forth_title_ar: formData.service_forth_title_ar || HomeContentsData?.service_forth_title_ar,
+      service_fivth_title_en: formData.service_fivth_title_en || HomeContentsData?.service_fivth_title_en,
+      service_fivth_title_ar: formData.service_fivth_title_ar || HomeContentsData?.service_fivth_title_ar,
+      service_sex_title_en: formData.service_sex_title_en || HomeContentsData?.service_sex_title_en,
+      service_sex_title_ar: formData.service_sex_title_ar || HomeContentsData?.service_sex_title_ar,
+      service_seven_title_en: formData.service_seven_title_en || HomeContentsData?.service_seven_title_en,
+      service_seven_title_ar: formData.service_seven_title_ar || HomeContentsData?.service_seven_title_ar,
+      know_us_title_en: formData.know_us_title_en || HomeContentsData?.know_us_title_en,
+      know_us_title_ar: formData.know_us_title_ar || HomeContentsData?.know_us_title_ar,
+      know_us_sub_title_en: formData.know_us_sub_title_en || HomeContentsData?.know_us_sub_title_en,
+      know_us_sub_title_ar: formData.know_us_sub_title_ar || HomeContentsData?.know_us_sub_title_ar,
+      know_us_sec_title_en: formData.know_us_sec_title_en || HomeContentsData?.know_us_sec_title_en,
+      know_us_sec_title_ar: formData.know_us_sec_title_ar || HomeContentsData?.know_us_sec_title_ar,
+      know_us_fir_item_en: formData.know_us_fir_item_en || HomeContentsData?.know_us_fir_item_en,
+      know_us_fir_item_ar: formData.know_us_fir_item_ar || HomeContentsData?.know_us_fir_item_ar,
+      know_us_sec_item_en: formData.know_us_sec_item_en || HomeContentsData?.know_us_sec_item_en,
+      know_us_sec_item_ar: formData.know_us_sec_item_ar || HomeContentsData?.know_us_sec_item_ar,
+      know_us_third_item_en: formData.know_us_third_item_en || HomeContentsData?.know_us_third_item_en,
+      know_us_third_item_ar: formData.know_us_third_item_ar || HomeContentsData?.know_us_third_item_ar,
+      know_us_left_title_en: formData.know_us_left_title_en || HomeContentsData?.know_us_left_title_en,
+      know_us_left_title_ar: formData.know_us_left_title_ar || HomeContentsData?.know_us_left_title_ar,
+      why_choose_title_en: formData.why_choose_title_en || HomeContentsData?.why_choose_title_en,
+      why_choose_title_ar: formData.why_choose_title_ar || HomeContentsData?.why_choose_title_ar,
+      why_choose_left_title_en: formData.why_choose_left_title_en || HomeContentsData?.why_choose_left_title_en,
+      why_choose_left_title_ar: formData.why_choose_left_title_ar || HomeContentsData?.why_choose_left_title_ar,
+      why_choose_fir_item_en: formData.why_choose_fir_item_en || HomeContentsData?.why_choose_fir_item_en,
+      why_choose_fir_item_ar: formData.why_choose_fir_item_ar || HomeContentsData?.why_choose_fir_item_ar,
+      why_choose_sec_item_en: formData.why_choose_sec_item_en || HomeContentsData?.why_choose_sec_item_en,
+      why_choose_sec_item_ar: formData.why_choose_sec_item_ar || HomeContentsData?.why_choose_sec_item_ar,
+      banner_photo: {
+        id: uploadedFileDetails.banner_photo?.id || HomeContentsData?.banner_photo?.id,
+      },
+      banner_photo_ar: {
+        id: uploadedFileDetails.banner_photo_ar?.id || HomeContentsData?.banner_photo_ar?.id,
+      },
+      know_us_photo: {
+        id: uploadedFileDetails.know_us_photo?.id || HomeContentsData?.know_us_photo?.id,
+      },
+      know_us_photo_ar: {
+        id: uploadedFileDetails.know_us_photo_ar?.id || HomeContentsData?.know_us_photo_ar?.id,
+      },
+      why_choose_photo: {
+        id: uploadedFileDetails.why_choose_photo?.id || HomeContentsData?.why_choose_photo?.id,
+      },
+      why_choose_photo_ar: {
+        id: uploadedFileDetails.why_choose_photo_ar?.id || HomeContentsData?.why_choose_photo_ar?.id,
+      },
+      ready_to_travel_title_en: formData.ready_to_travel_title_en || HomeContentsData?.ready_to_travel_title_en,
+      ready_to_travel_title_ar: formData.ready_to_travel_title_ar || HomeContentsData?.ready_to_travel_title_ar,
+      ready_to_travel_sub_title_en: formData.ready_to_travel_sub_title_en || HomeContentsData?.ready_to_travel_sub_title_en,
+      ready_to_travel_sub_title_ar: formData.ready_to_travel_sub_title_ar || HomeContentsData?.ready_to_travel_sub_title_ar,
+      ready_to_travel_photo: {
+        id: uploadedFileDetails.ready_to_travel_photo?.id || HomeContentsData?.ready_to_travel_photo?.id,
+      },
+      ready_to_travel_sec_photo: {
+        id: uploadedFileDetails.ready_to_travel_sec_photo?.id || HomeContentsData?.ready_to_travel_sec_photo?.id,
+      },
+      ready_to_travel_third_photo: {
+        id: uploadedFileDetails.ready_to_travel_third_photo?.id || HomeContentsData?.ready_to_travel_third_photo?.id,
+      },
+      ready_to_travel_forth_photo: {
+        id: uploadedFileDetails.ready_to_travel_forth_photo?.id || HomeContentsData?.ready_to_travel_forth_photo?.id,
+      },
+    };
+    
+      updateHomeContent(updatedHomeContent);
+      enqueueSnackbar(`${translate('editSuccess')}`, { variant: 'success' });
+    
+    // navigate(PATH_DASHBOARD.home);
+  } catch (error) {
+    enqueueSnackbar(translate('HomeContent.error'), { variant: 'error' });
+  }
+};
+
+const [file, setFile] = useState(null);
+const [fileId, setFileId] = useState(null);
+const methods = useForm({
+  resolver: yupResolver(NewHomeContentSchema),
+  defaultValues,
+});
+const {
+reset,
+watch,
+setValue,
+handleSubmit,
+formState: { isSubmitting, errors },
+} = methods;
+
+const handleDrop = useCallback(
+  (acceptedFiles, fieldName) => {
+    const newFile = acceptedFiles[0];  // استقبل ملف واحد فقط
+    if (newFile) {
+      Object.assign(newFile, {
+        preview: URL.createObjectURL(newFile),
+      });
+
+      setFile(newFile);  // حفظ الملف في state
+      setValue(fieldName, newFile, { shouldValidate: true });  // استبدل الصورة السابقة
+    }
+  },
+  [setValue]
+);
 
 
+
+const onUpload = (fileType) => {
+  if (!file) {
+    alert('Please select a file first.');
+    return;
+  }
+  setIsLoading(true);
+
+  uploadMutation.mutate(file, {
+    onSuccess: (data) => {
+      setIsLoading(false);
+
+      const uploadedFile = data.file;
+
+      // Update the field based on fileType
+      setUploadedFileDetails((prevState) => {
+        switch (fileType) {
+          case 'banner_photo':
+            return {
+              ...prevState,
+              banner_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'banner_photo_ar':
+            return {
+              ...prevState,
+              banner_photo_ar: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'know_us_photo':
+            return {
+              ...prevState,
+              know_us_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'know_us_photo_ar':
+            return {
+              ...prevState,
+              know_us_photo_ar: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'why_choose_photo':
+            return {
+              ...prevState,
+              why_choose_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'why_choose_photo_ar':
+            return {
+              ...prevState,
+              why_choose_photo_ar: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'ready_to_travel_photo':
+            return {
+              ...prevState,
+              ready_to_travel_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'ready_to_travel_sec_photo':
+            return {
+              ...prevState,
+              ready_to_travel_sec_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'ready_to_travel_third_photo':
+            return {
+              ...prevState,
+              ready_to_travel_third_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          case 'ready_to_travel_forth_photo':
+            return {
+              ...prevState,
+              ready_to_travel_forth_photo: { id: uploadedFile.id, path: uploadedFile.path },
+            };
+          default:
+            return prevState;
+        }
+      });
+
+      // Update form values for the uploaded file
+      setValue(fileType, { id: uploadedFile.id, path: uploadedFile.path }, { shouldValidate: true });
+
+      enqueueSnackbar(`${translate('imageUploadSuccess')}`, { variant: 'success' });
+    },
+    onError: (error) => {
+      setIsLoading(false);
+      console.error('Upload failed:', error);
+    },
+  });
+};
   return {
-    defaultValues,NewHomeContentSchema,HomeContentsData
+    defaultValues,NewHomeContentSchema,HomeContentsData,onSubmit,onUpload,isLoading,handleDrop,uploadedFileDetails
   };
 }

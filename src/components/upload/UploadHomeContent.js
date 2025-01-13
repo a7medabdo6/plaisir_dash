@@ -11,6 +11,7 @@ import Iconify from '../iconify';
 import RejectionFiles from './errors/RejectionFiles';
 import MultiFilePreview from './preview/MultiFilePreview';
 import SingleFilePreview from './preview/SingleFilePreview';
+import MultiFilePreviewHomeContent from './preview/MultiFilePreviewHomeContent';
 
 // ----------------------------------------------------------------------
 
@@ -146,8 +147,8 @@ export default function UploadHomeContent({
                   <div key={i.id}>
                     <>
                       <Box sx={{ my: 3 }}>
-
-                        <MultiFilePreview files={files} thumbnail={thumbnail} onRemove={onRemove} />
+                      {/* <img src={i?.path} alt="Logo" />           */}
+                                    <MultiFilePreviewHomeContent files={files} thumbnail={thumbnail} onRemove={onRemove} />
                       </Box>
 
                       <Stack direction="row" justifyContent="flex-end" spacing={1.5}>

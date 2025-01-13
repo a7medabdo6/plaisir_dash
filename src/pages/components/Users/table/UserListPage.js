@@ -17,39 +17,51 @@ import {
   TableContainer,
 } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
 // _mock_
-import { _userList } from '../../../../_mock/arrays';
 // components
-import Iconify from '../../../../components/iconify';
-import Scrollbar from '../../../../components/scrollbar';
-import ConfirmDialog from '../../../../components/confirm-dialog';
-import CustomBreadcrumbs from '../../../../components/custom-breadcrumbs';
-import { useSettingsContext } from '../../../../components/settings';
-import {
-  useTable,
+import Iconify from 'src/components/iconify';
+import Scrollbar from 'src/components/scrollbar';
+import ConfirmDialog from 'src/components/confirm-dialog';
+
+// sections
+import useUser from 'src/hooks/Users/useUsers';
+import UserTableRow from './list/UserTableRow';
+import UserTableToolbar from './list/UserTableToolbar';
+import { useLocales } from 'src/locales';
+import { useSettingsContext } from 'src/components/settings';
+import {useTable,
   getComparator,
   emptyRows,
   TableNoData,
   TableEmptyRows,
   TableHeadCustom,
-  TableSelectedAction,
-  TablePaginationCustom,
-} from '../../../../components/table';
-// sections
-import { UserTableToolbar, UserTableRow } from '../../../../sections/@dashboard/user/list/index';
-import { useLocales } from '../../../../locales';
-import useCoupon from 'src/hooks/Coupon/useCoupon';
+  TableSelectedAction, TablePaginationCustom } from 'src/components/table';
+import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+import { _userList } from 'src/_mock/arrays';
+import { PATH_DASHBOARD } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
 
 
+const ROLE_OPTIONS = [
+  'all',
+  'ux designer',
+  'full stack designer',
+  'backend developer',
+  'project manager',
+  'leader',
+  'ui designer',
+  'ui/ux designer',
+  'front end developer',
+  'full stack developer',
+];
+
 
 
 // ----------------------------------------------------------------------
 
-export default function CouponListPage() {
+export default function UserListPage() {
   const {
     dense,
     page,
@@ -69,23 +81,17 @@ export default function CouponListPage() {
     onChangePage,
     onChangeRowsPerPage,
   } = useTable();
-
+  const initialParams = {
+    
+    limit: 5,
+    page: pageCount,
+    // filterOptions: { searchKey: 'name_en', searchValue: filterName },
+  };
+  const { data, isError, error } = useUser(initialParams);
+  console.log(data);
   const { themeStretch } = useSettingsContext();
   const { translate } = useLocales();
-  const TABLE_HEAD = [
-    { id: 'code', label: `${translate('coupon.code')}`, align: 'left' },
 
-    { id: 'discountPercentage', label: `${translate('coupon.discountPercentage')}`, align: 'left' },
-    { id: 'expirationDate', label: `${translate('coupon.expirationDate')}`, align: 'left' },
-    { id: 'products', label: `${translate('coupon.products')}`, align: 'left' },
-
-    // { id: 'company', label: 'Company', align: 'left' },
-    // { id: 'role', label: 'Role', align: 'left' },
-    // { id: 'isVerified', label: `${translate('coupon.Verified')}`, align: 'center' },
-    { id: 'status', label: `${translate('coupon.status')}`, align: 'left' },
-    { id: '' },
-  ];
-  
   const navigate = useNavigate();
 
   const [tableData, setTableData] = useState(_userList);
@@ -94,9 +100,9 @@ export default function CouponListPage() {
 
   const [filterName, setFilterName] = useState('');
 
-  const [filterRole, setFilterRole] = useState(`${translate('coupon.all')}`);
+  const [filterRole, setFilterRole] = useState('all');
 
-  const [filterStatus, setFilterStatus] = useState(`${translate('coupon.all')}`);
+  const [filterStatus, setFilterStatus] = useState('all');
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -104,38 +110,13 @@ export default function CouponListPage() {
     filterName,
     filterRole,
     filterStatus,
-    translate
   });
-  const STATUS_OPTIONS = [`${translate('coupon.all')}`];
-  const initialParams = {
-    orderBy: 'id',
-    order: 'desc',
-    limit: 5,
-    page: pageCount,
-    filterOptions: { searchKey: 'name_en', searchValue: filterName },
-  };
-  const { data, isError, error } = useCoupon(initialParams);
-  console.log(data);
-  
-  // const STATUS_OPTIONS = [`${translate('coupon.all')}`, `${translate('coupon.active')}`, `${translate('coupon.banned')}`];
-  const ROLE_OPTIONS = [
-    `${translate('coupon.all')}`,
-    'ux designer',
-    'full stack designer',
-    'backend developer',
-    'project manager',
-    'leader',
-    'ui designer',
-    'ui/ux designer',
-    'front end developer',
-    'full stack developer',
-  ];
 
   const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const denseHeight = dense ? 52 : 72;
 
-  const isFiltered = filterName !== '' || filterRole !== `${translate('coupon.all')}`|| filterStatus !== `${translate('coupon.all')}`;
+  const isFiltered = filterName !== '' || filterRole !== 'all' || filterStatus !== 'all';
 
   const isNotFound =
     (!dataFiltered.length && !!filterName) ||
@@ -195,17 +176,28 @@ export default function CouponListPage() {
   };
 
   const handleEditRow = (id) => {
-    navigate("/dashboard/coupon/edit:4");
+    navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
   };
 
   const handleResetFilter = () => {
     setFilterName('');
-    setFilterRole(`${translate('coupon.all')}`);
-    setFilterStatus(`${translate('coupon.all')}`);
+    setFilterRole('all');
+    setFilterStatus('all');
   };
+  const STATUS_OPTIONS = [
+    { value: 'all', label: `${translate('users.all')}` },
+    { value: 'active', label: `${translate('users.active')}` },
+    { value: 'banned', label: `${translate('users.banned')}` }
+  ];
 
-
-
+  const TABLE_HEAD = [
+    { id: 'name', label: `${translate('users.name')}`, align: 'left' },
+    { id: 'company', label: `${translate('users.Company')}`, align: 'left' },
+    { id: 'role', label: `${translate('users.Role')}`, align: 'left' },
+    // { id: 'isVerified', label: `${translate('users.isVerified')}`, align: 'center' },
+    { id: 'status', label: `${translate('users.status')}`, align: 'left' },
+    { id: '' },
+  ];
 
   return (
     <>
@@ -215,21 +207,30 @@ export default function CouponListPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading={`${translate('coupon.coupon')}`}
+          heading="User List"
           links={[
-            { name: `${translate('coupon.Dashboard')}`, href: PATH_DASHBOARD.root },
-            { name: `${translate('coupon.coupon')}`, href: PATH_DASHBOARD.Coupon},
-            { name: `${translate('coupon.list')}` },
+            {
+              name: `${translate('users.dashboard')}`,
+              href: PATH_DASHBOARD.root
+            },
+            {
+              name: `${translate('users.User')}`,
+              href: PATH_DASHBOARD.user.root
+            },
+            {
+              name: `${translate('users.List')}`,
+            },
           ]}
           action={
             <Button
-
               component={RouterLink}
-              to="/dashboard/coupon/new"
+              to={PATH_DASHBOARD.user.new}
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              {`${translate('coupon.create')}`}
+            >{
+                `${translate('users.newuser')}`
+              }
+
             </Button>
           }
         />
@@ -244,7 +245,7 @@ export default function CouponListPage() {
             }}
           >
             {STATUS_OPTIONS.map((tab) => (
-              <Tab key={tab} label={tab} value={tab} />
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
             ))}
           </Tabs>
 
@@ -272,7 +273,7 @@ export default function CouponListPage() {
                 )
               }
               action={
-                <Tooltip title={`${translate('coupon.delet')}`}>
+                <Tooltip title="Delete">
                   <IconButton color="primary" onClick={handleOpenConfirm}>
                     <Iconify icon="eva:trash-2-outline" />
                   </IconButton>
@@ -298,14 +299,10 @@ export default function CouponListPage() {
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
+                  {data?.data.map((row) => (
                       <UserTableRow
                         key={row.id}
                         row={row}
-                        avtar={false}
-                        coupon={true}
                         selected={selected.includes(row.id)}
                         onSelectRow={() => onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
@@ -340,7 +337,7 @@ export default function CouponListPage() {
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title={`${translate('coupon.delet')}`}
+        title="Delete"
         content={
           <>
             Are you sure want to delete <strong> {selected.length} </strong> items?
@@ -355,7 +352,7 @@ export default function CouponListPage() {
               handleCloseConfirm();
             }}
           >
-            {`${translate('coupon.delet')}`}
+            Delete
           </Button>
         }
       />
@@ -365,7 +362,7 @@ export default function CouponListPage() {
 
 // ----------------------------------------------------------------------
 
-function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole,translate }) {
+function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole }) {
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
   stabilizedThis.sort((a, b) => {
@@ -382,11 +379,11 @@ function applyFilter({ inputData, comparator, filterName, filterStatus, filterRo
     );
   }
 
-  if (filterStatus !== `${translate('coupon.all')}`) {
+  if (filterStatus !== 'all') {
     inputData = inputData.filter((user) => user.status === filterStatus);
   }
 
-  if (filterRole !== `${translate('coupon.all')}`) {
+  if (filterRole !== 'all') {
     inputData = inputData.filter((user) => user.role === filterRole);
   }
 
