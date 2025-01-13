@@ -119,12 +119,13 @@ export function RHFUpload({ name, multiple, helperText, ...other }) {
 RHFUploadWithLabel.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
-
+  defaultValue:PropTypes.string,
+  newValue:PropTypes.string,
   multiple: PropTypes.bool,
   helperText: PropTypes.node,
 };
 
-export function RHFUploadWithLabel({ name, multiple, label, helperText, ...other }) {
+export function RHFUploadWithLabel({ name, multiple, label, helperText,defaultValue,newValue, ...other }) {
   const { control } = useFormContext();
 
   return (
@@ -145,6 +146,7 @@ export function RHFUploadWithLabel({ name, multiple, label, helperText, ...other
               multiple
               accept={{ 'image/*': [] }}
               files={files}
+              newValue={newValue}
               error={!!error}
               helperText={
                 (!!error || helperText) && (

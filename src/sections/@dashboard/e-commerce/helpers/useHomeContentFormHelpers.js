@@ -3,8 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useSingleHomeContent from 'src/hooks/HomeContent/useSingleBlogTag';
-import useUpdateHomeContentMutation from 'src/hooks/HomeContent/useUpdateBlogTagMutation';
+import useSingleHomeContent from 'src/hooks/HomeContent/useSingleHomeContent';
+import useUpdateHomeContentMutation from 'src/hooks/HomeContent/useUpdateHomeContentMutation';
 import useUploadMutation from 'src/hooks/useUploadMutation';
 import { useLocales } from 'src/locales';
 import * as Yup from 'yup';
@@ -30,7 +30,6 @@ export function useStepHandlerHomeContent(currentHomeContent) {
       ready_to_travel_third_photo: null, // Added
       ready_to_travel_forth_photo: null, // Added
     });
-console.log(uploadedFileDetails);
 
     useEffect(() => {
       if (HomeContentsData) {

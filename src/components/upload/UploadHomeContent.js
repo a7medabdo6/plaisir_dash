@@ -45,6 +45,7 @@ UploadHomeContent.propTypes = {
   thumbnail: PropTypes.bool,
   helperText: PropTypes.node,
   onRemoveAll: PropTypes.func,
+  newValue:PropTypes.string,
 };
 
 export default function UploadHomeContent({
@@ -52,6 +53,7 @@ export default function UploadHomeContent({
   multiple = false,
   error,
   helperText,
+  newValue,
   //
   file,
   onDelete,
@@ -142,13 +144,17 @@ export default function UploadHomeContent({
             files
               .filter(i => i.id !== null)  // فلترة العناصر بحيث لا يتم تضمين العناصر التي تحتوي على id == null
               .map((i) => {
+                const correctedUrl = i?.path.replace("51.20.18.35/:", "51.20.18.35:");
+                const correctedUrlNew = newValue?.replace("51.20.18.35/:", "51.20.18.35:");
+console.log(correctedUrlNew);
+
                 return (
                   // قم بإرجاع العنصر فقط إذا كان id ليس null
                   <div key={i.id}>
                     <>
                       <Box sx={{ my: 3 }}>
-                      {/* <img src={i?.path} alt="Logo" />           */}
-                                    <MultiFilePreviewHomeContent files={files} thumbnail={thumbnail} onRemove={onRemove} />
+                      <img src={correctedUrlNew ? correctedUrlNew : correctedUrl} alt="Logo" style={{ width: '50%' ,height:"280px",padding:"5px" }} />
+                      {/* <MultiFilePreviewHomeContent files={files} thumbnail={thumbnail} onRemove={onRemove} /> */}
                       </Box>
 
                       <Stack direction="row" justifyContent="flex-end" spacing={1.5}>

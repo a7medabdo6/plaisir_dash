@@ -18,8 +18,8 @@ import FormProvider, {
 
 import { useLocales } from '../../../locales';
 import useUploadMutation from 'src/hooks/useUploadMutation';
-import { useStepHandlerHomeContent } from './helpers/useHomeContentFormHelpers';
-import useUpdateHomeContentMutation from 'src/hooks/HomeContent/useUpdateHomeContentMutation';
+import { useStepHandlerFooterContent } from './helpers/useFooterContentFormHelpers';
+import useUpdateFooterContentMutation from 'src/hooks/FooterContent/useUpdateFooterContentMutation';
 import imageBanner from '../../../assets/images/bannerImag.png'
 import imageSectionTwo from '../../../assets/images/SectionTwo.png'
 import imageSectionThree from '../../../assets/images/SectionThree.png'
@@ -30,24 +30,24 @@ import Modal from 'react-modal';
 Modal.setAppElement('#root'); // لتجنب التحذيرات
 // ----------------------------------------------------------------------
 
-HomeContentEditForm.propTypes = {
+FooterContentEditForm.propTypes = {
   isEdit: PropTypes.bool,
-  currentHomeContent: PropTypes.object,
+  currentFooterContent: PropTypes.object,
 };
 
-export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
+export default function FooterContentEditForm({ isEdit, currentFooterContent }) {
   const navigate = useNavigate();
   const { translate } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
 
 
 
-  const { defaultValues, NewHomeContentSchema, HomeContentsData, onSubmit, onUpload, isLoading, handleDrop, uploadedFileDetails } = useStepHandlerHomeContent(currentHomeContent);
+  const { defaultValues, NewFooterContentSchema, FooterContentsData, onSubmit, onUpload, isLoading, handleDrop, uploadedFileDetails } = useStepHandlerFooterContent(currentFooterContent);
 
   console.log(uploadedFileDetails);
 
   const methods = useForm({
-    resolver: yupResolver(NewHomeContentSchema),
+    resolver: yupResolver(NewFooterContentSchema),
     defaultValues,
   });
 
@@ -62,13 +62,13 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && HomeContentsData) {
-      reset(HomeContentsData);
+    if (isEdit && FooterContentsData) {
+      reset(FooterContentsData);
     }
     if (!isEdit) {
-      reset(HomeContentsData);
+      reset(FooterContentsData);
     }
-  }, [isEdit, HomeContentsData]);
+  }, [isEdit, FooterContentsData]);
 
 
 
@@ -119,7 +119,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             {
-              HomeContentsData ? (
+              FooterContentsData ? (
                 <Stack spacing={3}>
                   {currentSection === 1 && (
                     <Stack spacing={2} >
@@ -131,29 +131,29 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                       />
 
 
-                      <RHFTextField name="banner_fir_title_en" label={translate('HomeContent.labels.banner_fir_title_en')} />
-                      <RHFTextField name="banner_fir_title_ar" label={translate('HomeContent.labels.banner_fir_title_ar')} />
-                      <RHFTextField name="banner_sec_title_en" label={translate('HomeContent.labels.banner_sec_title_en')} />
-                      <RHFTextField name="banner_sec_title_ar" label={translate('HomeContent.labels.banner_sec_title_ar')} />
-                      <RHFTextField name="banner_third_title_en" label={translate('HomeContent.labels.banner_third_title_en')} />
-                      <RHFTextField name="banner_third_title_ar" label={translate('HomeContent.labels.banner_third_title_ar')} />
-                      <RHFTextField name="banner_btn_en" label={translate('HomeContent.labels.banner_btn_en')} />
-                      <RHFTextField name="banner_btn_ar" label={translate('HomeContent.labels.banner_btn_ar')} />
+                      <RHFTextField name="adventure_title_en" label={translate('FooterContent.labels.adventure_title_en')} />
+                      <RHFTextField name="adventure_title_ar" label={translate('FooterContent.labels.adventure_title_ar')} />
+                      <RHFTextField name="adventure_service_title_en_1" label={translate('FooterContent.labels.adventure_service_title_en_1')} />
+                      <RHFTextField name="adventure_service_title_ar_1" label={translate('FooterContent.labels.adventure_service_title_ar_1')} />
+                      <RHFTextField name="adventure_service_desc_en_1" label={translate('FooterContent.labels.adventure_service_desc_en_1')} />
+                      <RHFTextField name="adventure_service_desc_ar_1" label={translate('FooterContent.labels.adventure_service_desc_ar_1')} />
+                      <RHFTextField name="adventure_service_title_en_2" label={translate('FooterContent.labels.adventure_service_title_en_2')} />
+                      <RHFTextField name="adventure_service_title_ar_2" label={translate('FooterContent.labels.adventure_service_title_ar_2')} />
 
                       <RHFUploadWithLabel
                         label="Upload Banner Photo"
-                        defaultValue={defaultValues.banner_photo.id}
-                        newValue={uploadedFileDetails?.banner_photo?.path}
+                        defaultValue={defaultValues.adventure_photo.id}
+                        newValue={uploadedFileDetails?.adventure_photo?.path}
                         multiple
                         thumbnail
-                        name="banner_photo"
-                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo')}
-                        onRemove={() => handleRemoveFile('banner_photo')}
-                        onRemoveAll={() => handleRemoveAllFiles('banner_photo')}
-                        onUpload={() => onUpload('banner_photo')
+                        name="adventure_photo"
+                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'adventure_photo')}
+                        onRemove={() => handleRemoveFile('adventure_photo')}
+                        onRemoveAll={() => handleRemoveAllFiles('adventure_photo')}
+                        onUpload={() => onUpload('adventure_photo')
                         }
                       />
-                      <RHFUploadWithLabel
+                      {/* <RHFUploadWithLabel
                         thumbnail
                         name="banner_photo_ar"
                         label="Upload Banner Photo (Arabic)"
@@ -165,7 +165,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         onRemove={() => handleRemoveFile('banner_photo_ar')}
                         onRemoveAll={() => handleRemoveAllFiles('banner_photo_ar')}
                         onUpload={() => onUpload('banner_photo_ar')}
-                      />
+                      /> */}
                     </Stack>
                   )
                   }
@@ -178,40 +178,40 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         style={{ width: '100%', cursor: 'pointer' }}
                         onClick={() => handleOpenModal(imageSectionTwo)}
                       />
-                      <RHFTextField name="service_fir_title_en" label={translate('HomeContent.labels.service_fir_title_en')} />
-                      <RHFTextField name="service_fir_title_ar" label={translate('HomeContent.labels.service_fir_title_ar')} />
-                      <RHFTextField name="service_fir_sub_title_en" label={translate('HomeContent.labels.service_fir_sub_title_en')} />
-                      <RHFTextField name="service_fir_sub_title_ar" label={translate('HomeContent.labels.service_fir_sub_title_ar')} />
-                      <RHFTextField name="service_sec_title_en" label={translate('HomeContent.labels.service_sec_title_en')} />
-                      <RHFTextField name="service_sec_title_ar" label={translate('HomeContent.labels.service_sec_title_ar')} />
-                      <RHFTextField name="service_sec_sub_title_en" label={translate('HomeContent.labels.service_sec_sub_title_en')} />
-                      <RHFTextField name="service_sec_sub_title_ar" label={translate('HomeContent.labels.service_sec_sub_title_ar')} />
-                      <RHFTextField name="service_third_title_en" label={translate('HomeContent.labels.service_third_title_en')} />
-                      <RHFTextField name="service_third_title_ar" label={translate('HomeContent.labels.service_third_title_ar')} />
-                      <RHFTextField name="service_third_sub_title_en" label={translate('HomeContent.labels.service_third_sub_title_en')} />
-                      <RHFTextField name="service_third_sub_title_ar" label={translate('HomeContent.labels.service_third_sub_title_ar')} />
-                      <RHFTextField name="service_forth_title_en" label={translate('HomeContent.labels.service_forth_title_en')} />
-                      <RHFTextField name="service_forth_title_ar" label={translate('HomeContent.labels.service_forth_title_ar')} />
-                      <RHFTextField name="service_fivth_title_en" label={translate('HomeContent.labels.service_fivth_title_en')} />
-                      <RHFTextField name="service_fivth_title_ar" label={translate('HomeContent.labels.service_fivth_title_ar')} />
-                      <RHFTextField name="service_sex_title_en" label={translate('HomeContent.labels.service_sex_title_en')} />
-                      <RHFTextField name="service_sex_title_ar" label={translate('HomeContent.labels.service_sex_title_ar')} />
-                      <RHFTextField name="service_seven_title_en" label={translate('HomeContent.labels.service_seven_title_en')} />
-                      <RHFTextField name="service_seven_title_ar" label={translate('HomeContent.labels.service_seven_title_ar')} />
-                      <RHFTextField name="know_us_title_en" label={translate('HomeContent.labels.know_us_title_en')} />
-                      <RHFTextField name="know_us_title_ar" label={translate('HomeContent.labels.know_us_title_ar')} />
-                      <RHFTextField name="know_us_sub_title_en" label={translate('HomeContent.labels.know_us_sub_title_en')} />
-                      <RHFTextField name="know_us_sub_title_ar" label={translate('HomeContent.labels.know_us_sub_title_ar')} />
-                      <RHFTextField name="know_us_sec_title_en" label={translate('HomeContent.labels.know_us_sec_title_en')} />
-                      <RHFTextField name="know_us_sec_title_ar" label={translate('HomeContent.labels.know_us_sec_title_ar')} />
-                      <RHFTextField name="know_us_fir_item_en" label={translate('HomeContent.labels.know_us_fir_item_en')} />
-                      <RHFTextField name="know_us_fir_item_ar" label={translate('HomeContent.labels.know_us_fir_item_ar')} />
-                      <RHFTextField name="know_us_sec_item_en" label={translate('HomeContent.labels.know_us_sec_item_en')} />
-                      <RHFTextField name="know_us_sec_item_ar" label={translate('HomeContent.labels.know_us_sec_item_ar')} />
-                      <RHFTextField name="know_us_third_item_en" label={translate('HomeContent.labels.know_us_third_item_en')} />
-                      <RHFTextField name="know_us_third_item_ar" label={translate('HomeContent.labels.know_us_third_item_ar')} />
-                      <RHFTextField name="know_us_left_title_en" label={translate('HomeContent.labels.know_us_left_title_en')} />
-                      <RHFTextField name="know_us_left_title_ar" label={translate('HomeContent.labels.know_us_left_title_ar')} />
+                      <RHFTextField name="service_fir_title_en" label={translate('FooterContent.labels.service_fir_title_en')} />
+                      <RHFTextField name="service_fir_title_ar" label={translate('FooterContent.labels.service_fir_title_ar')} />
+                      <RHFTextField name="service_fir_sub_title_en" label={translate('FooterContent.labels.service_fir_sub_title_en')} />
+                      <RHFTextField name="service_fir_sub_title_ar" label={translate('FooterContent.labels.service_fir_sub_title_ar')} />
+                      <RHFTextField name="service_sec_title_en" label={translate('FooterContent.labels.service_sec_title_en')} />
+                      <RHFTextField name="service_sec_title_ar" label={translate('FooterContent.labels.service_sec_title_ar')} />
+                      <RHFTextField name="service_sec_sub_title_en" label={translate('FooterContent.labels.service_sec_sub_title_en')} />
+                      <RHFTextField name="service_sec_sub_title_ar" label={translate('FooterContent.labels.service_sec_sub_title_ar')} />
+                      <RHFTextField name="service_third_title_en" label={translate('FooterContent.labels.service_third_title_en')} />
+                      <RHFTextField name="service_third_title_ar" label={translate('FooterContent.labels.service_third_title_ar')} />
+                      <RHFTextField name="service_third_sub_title_en" label={translate('FooterContent.labels.service_third_sub_title_en')} />
+                      <RHFTextField name="service_third_sub_title_ar" label={translate('FooterContent.labels.service_third_sub_title_ar')} />
+                      <RHFTextField name="service_forth_title_en" label={translate('FooterContent.labels.service_forth_title_en')} />
+                      <RHFTextField name="service_forth_title_ar" label={translate('FooterContent.labels.service_forth_title_ar')} />
+                      <RHFTextField name="service_fivth_title_en" label={translate('FooterContent.labels.service_fivth_title_en')} />
+                      <RHFTextField name="service_fivth_title_ar" label={translate('FooterContent.labels.service_fivth_title_ar')} />
+                      <RHFTextField name="service_sex_title_en" label={translate('FooterContent.labels.service_sex_title_en')} />
+                      <RHFTextField name="service_sex_title_ar" label={translate('FooterContent.labels.service_sex_title_ar')} />
+                      <RHFTextField name="service_seven_title_en" label={translate('FooterContent.labels.service_seven_title_en')} />
+                      <RHFTextField name="service_seven_title_ar" label={translate('FooterContent.labels.service_seven_title_ar')} />
+                      <RHFTextField name="know_us_title_en" label={translate('FooterContent.labels.know_us_title_en')} />
+                      <RHFTextField name="know_us_title_ar" label={translate('FooterContent.labels.know_us_title_ar')} />
+                      <RHFTextField name="know_us_sub_title_en" label={translate('FooterContent.labels.know_us_sub_title_en')} />
+                      <RHFTextField name="know_us_sub_title_ar" label={translate('FooterContent.labels.know_us_sub_title_ar')} />
+                      <RHFTextField name="know_us_sec_title_en" label={translate('FooterContent.labels.know_us_sec_title_en')} />
+                      <RHFTextField name="know_us_sec_title_ar" label={translate('FooterContent.labels.know_us_sec_title_ar')} />
+                      <RHFTextField name="know_us_fir_item_en" label={translate('FooterContent.labels.know_us_fir_item_en')} />
+                      <RHFTextField name="know_us_fir_item_ar" label={translate('FooterContent.labels.know_us_fir_item_ar')} />
+                      <RHFTextField name="know_us_sec_item_en" label={translate('FooterContent.labels.know_us_sec_item_en')} />
+                      <RHFTextField name="know_us_sec_item_ar" label={translate('FooterContent.labels.know_us_sec_item_ar')} />
+                      <RHFTextField name="know_us_third_item_en" label={translate('FooterContent.labels.know_us_third_item_en')} />
+                      <RHFTextField name="know_us_third_item_ar" label={translate('FooterContent.labels.know_us_third_item_ar')} />
+                      <RHFTextField name="know_us_left_title_en" label={translate('FooterContent.labels.know_us_left_title_en')} />
+                      <RHFTextField name="know_us_left_title_ar" label={translate('FooterContent.labels.know_us_left_title_ar')} />
                       <RHFUploadWithLabel
                         thumbnail
                         name="know_us_photo"
@@ -245,14 +245,14 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         style={{ width: '100%', cursor: 'pointer' }}
                         onClick={() => handleOpenModal(imageSectionThree)}
                       />
-                      <RHFTextField name="why_choose_title_en" label={translate('HomeContent.labels.why_choose_title_en')} />
-                      <RHFTextField name="why_choose_title_ar" label={translate('HomeContent.labels.why_choose_title_ar')} />
-                      <RHFTextField name="why_choose_left_title_en" label={translate('HomeContent.labels.why_choose_left_title_en')} />
-                      <RHFTextField name="why_choose_left_title_ar" label={translate('HomeContent.labels.why_choose_left_title_ar')} />
-                      <RHFTextField name="why_choose_fir_item_en" label={translate('HomeContent.labels.why_choose_fir_item_en')} />
-                      <RHFTextField name="why_choose_fir_item_ar" label={translate('HomeContent.labels.why_choose_fir_item_ar')} />
-                      <RHFTextField name="why_choose_sec_item_en" label={translate('HomeContent.labels.why_choose_sec_item_en')} />
-                      <RHFTextField name="why_choose_sec_item_ar" label={translate('HomeContent.labels.why_choose_sec_item_ar')} />
+                      <RHFTextField name="why_choose_title_en" label={translate('FooterContent.labels.why_choose_title_en')} />
+                      <RHFTextField name="why_choose_title_ar" label={translate('FooterContent.labels.why_choose_title_ar')} />
+                      <RHFTextField name="why_choose_left_title_en" label={translate('FooterContent.labels.why_choose_left_title_en')} />
+                      <RHFTextField name="why_choose_left_title_ar" label={translate('FooterContent.labels.why_choose_left_title_ar')} />
+                      <RHFTextField name="why_choose_fir_item_en" label={translate('FooterContent.labels.why_choose_fir_item_en')} />
+                      <RHFTextField name="why_choose_fir_item_ar" label={translate('FooterContent.labels.why_choose_fir_item_ar')} />
+                      <RHFTextField name="why_choose_sec_item_en" label={translate('FooterContent.labels.why_choose_sec_item_en')} />
+                      <RHFTextField name="why_choose_sec_item_ar" label={translate('FooterContent.labels.why_choose_sec_item_ar')} />
                       <RHFUploadWithLabel
                         thumbnail
                         name="why_choose_photo"
@@ -399,7 +399,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
         </Button>
       </Stack>
       <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        {translate(isEdit ? 'HomeContent.edit' : 'HomeContent.create')}
+        {translate(isEdit ? 'FooterContent.edit' : 'FooterContent.create')}
       </LoadingButton>
     </FormProvider>
   );

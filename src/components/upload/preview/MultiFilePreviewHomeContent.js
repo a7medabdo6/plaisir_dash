@@ -23,6 +23,7 @@ export default function MultiFilePreviewHomeContent({ thumbnail, files, onRemove
   if (!files?.length) {
     return null;
   }
+console.log(files);
 
   return (
     <AnimatePresence initial={false}>
