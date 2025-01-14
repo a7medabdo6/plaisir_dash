@@ -36,6 +36,8 @@ import {
   TableSelectedAction,
   TablePaginationCustom,
 } from '../../../../components/table';
+import queryString from 'query-string';
+
 // sections
 import { UserTableToolbar, UserTableRow } from '../../../../sections/@dashboard/user/list/index';
 import { useLocales } from '../../../../locales';
@@ -107,15 +109,30 @@ export default function CouponListPage() {
     translate
   });
   const STATUS_OPTIONS = [`${translate('coupon.all')}`];
-  const initialParams = {
-    orderBy: 'id',
-    order: 'desc',
-    limit: 5,
-    page: pageCount,
-    filterOptions: { searchKey: 'name_en', searchValue: filterName },
-  };
-  const { data, isError, error } = useCoupon(initialParams);
-  console.log(data);
+  
+const initialParams = {
+  orderBy: 'id',
+  order: 'desc',
+  limit: 5,
+  page: pageCount,
+  filterOptions: { searchKey: 'name_en', searchValue: filterName },
+};
+
+// تحويل filterOptions إلى سلسلة استعلام
+const filterQuery = queryString.stringify(initialParams.filterOptions, {
+  skipNull: true,
+  skipEmptyString: true,
+});
+
+// دمج سلسلة الاستعلام مع بقية المعاملات
+const finalParams = {
+  ...initialParams,
+  filterOptions: filterQuery, // استبدال filterOptions بسلسلة الاستعلام
+};
+
+// استخدام finalParams مع useCoupon
+const { data, isError, error } = useCoupon(finalParams);
+    console.log(data);
   
   // const STATUS_OPTIONS = [`${translate('coupon.all')}`, `${translate('coupon.active')}`, `${translate('coupon.banned')}`];
   const ROLE_OPTIONS = [

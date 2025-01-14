@@ -45,9 +45,10 @@ export default function useBlogTagsList(initialParams,pageCount, filterName, fil
   
     if (filterName) {
       const lowercasedFilterName = filterName ? filterName.toString().toLowerCase() : '';
-      filteredData = filteredData.filter((BlogTag) =>
-        BlogTag.name_en.toLowerCase().includes(lowercasedFilterName)
-      );
+      filteredData = filteredData.filter((BlogTag) => {
+        const title = BlogTag?.title_en?.toString().toLowerCase() || '';
+        return title.includes(lowercasedFilterName);
+      });
     }
   
     if (filterStatus !== 'all') {

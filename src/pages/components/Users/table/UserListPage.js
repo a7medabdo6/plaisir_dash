@@ -81,11 +81,14 @@ export default function UserListPage() {
     onChangePage,
     onChangeRowsPerPage,
   } = useTable();
+  const [filterName, setFilterName] = useState('');
+
   const initialParams = {
-    
-    limit: 5,
+    orderBy: 'id',
+    order: 'desc',
+    limit: 2,
     page: pageCount,
-    // filterOptions: { searchKey: 'name_en', searchValue: filterName },
+    // filterOptions: { searchKey: 'username', searchValue: filterName },
   };
   const { data, isError, error } = useUser(initialParams);
   console.log(data);
@@ -98,7 +101,6 @@ export default function UserListPage() {
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
-  const [filterName, setFilterName] = useState('');
 
   const [filterRole, setFilterRole] = useState('all');
 

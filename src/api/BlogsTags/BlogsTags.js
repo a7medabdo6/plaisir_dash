@@ -28,10 +28,9 @@ export const getBlogTags = async ({
       order,
       limit,
       page,
-      filterOptions: JSON.stringify(filterOptions) // Convert filterOptions to a string format
     };
 
-    const response = await axiosInstance.get('/blog-tag', { params });
+    const response = await axiosInstance.get(`/blog-tag?filterOptions={searchKey:${filterOptions.searchKey},searchValue:${filterOptions.searchValue}}`, { params });
     return response.data;  // Return the list of BlogTags
   } catch (error) {
     throw error;  // Throw error to handle in the component

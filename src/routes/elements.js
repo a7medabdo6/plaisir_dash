@@ -57,6 +57,8 @@ export const EditCoupon = Loadable(lazy(() => import('../pages/components/Coupon
 
 export const EditHomeContent = Loadable(lazy(() => import('../pages/components/HomeContent/EditFooterContent')));
 export const EditFooterContent = Loadable(lazy(() => import('../pages/components/FotterContent/EditHomeContent')));
+export const EditTerms = Loadable(lazy(() => import('../pages/components/Terms/EditTerms')));
+export const EditPrivacy = Loadable(lazy(() => import('../pages/components/Privacy/EditPrivacy')));
 
 
 export const CreateFeatures = Loadable(

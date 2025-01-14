@@ -47,6 +47,9 @@ const navConfig = [
 
             { title: 'HomeContentdash', path: PATH_DASHBOARD.HomeContent, icon: ICONS.Products },
             { title: 'FooterContentdash', path: PATH_DASHBOARD.FooterContent, icon: ICONS.Products },
+            { title: 'Termsdash', path: PATH_DASHBOARD.Terms, icon: ICONS.Products },
+            { title: 'Privacydash', path: PATH_DASHBOARD.Privacy, icon: ICONS.Products },
+
 
           ],
         },

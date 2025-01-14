@@ -579,7 +579,7 @@ list:"list",
   
   },
 
-  footerContent: {
+  FooterContent: {
     adventure_title_en: {
       value: "Adventure Title (English)",
       error: "This field is required"

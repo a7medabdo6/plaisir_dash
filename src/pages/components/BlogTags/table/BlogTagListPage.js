@@ -10,6 +10,8 @@ import {
   Container,
   TableContainer,
 } from '@mui/material';
+import queryString from 'query-string';
+
 import { PATH_DASHBOARD } from '../../../../routes/paths';
 import { _userList, _BlogTagsList } from '../../../../_mock/arrays';
 import Iconify from '../../../../components/iconify';
@@ -46,13 +48,18 @@ export default function BlogTagsListPage() {
   const [filterStatus, setFilterStatus] = useState('all');
   const { themeStretch } = useSettingsContext();
   const navigate = useNavigate();
+
   const initialParams = {
     orderBy: 'id',
     order: 'desc',
     limit: 5,
     page: pageCount,
-    filterOptions: { searchKey: 'name_en', searchValue: filterName },
+      filterOptions: { searchKey: 'title_en', searchValue: filterName },
   };
+  
+
+  
+  // استخدام finalParams مع useCoupon
   const { loading, total, data, isFiltered, handleDeleteBlogTag } = useBlogTagsList(
     initialParams,
     pageCount,

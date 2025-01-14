@@ -49,7 +49,9 @@ import {
   BlogTags,
   CreateBlogTags,
   EditHomeContent,
-  EditFooterContent
+  EditFooterContent,
+  EditTerms,
+  EditPrivacy
 } from './elements';
 import AuthRoleGuard from 'src/auth/AuthRoleGuard';
 
@@ -201,6 +203,8 @@ export default function Router() {
        
         { path: 'HomeContent', element: <EditHomeContent /> },
         { path: 'FooterContent', element: <EditFooterContent /> },
+        { path: 'Terms', element: <EditTerms /> },
+        { path: 'Privacy', element: <EditPrivacy /> },
 
         
         { path: 'products', element: <Products /> },

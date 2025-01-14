@@ -27,6 +27,8 @@ export const PATH_DASHBOARD = {
 
   HomeContent: path(ROOTS_DASHBOARD, '/HomeContent'),
   FooterContent: path(ROOTS_DASHBOARD, '/FooterContent'),
+  Terms: path(ROOTS_DASHBOARD, '/Terms'),
+  Privacy: path(ROOTS_DASHBOARD, '/Privacy'),
 
   features: path(ROOTS_DASHBOARD, '/features'),
   featuresNew: path(ROOTS_DASHBOARD, '/features/new'),

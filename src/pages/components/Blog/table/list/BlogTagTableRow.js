@@ -97,7 +97,14 @@ export default function BlogTagTableRow({ openConfirm,
         <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.content_en }} />
         <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.desc_en }} />
 
-        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.desc_ar }} />
+<TableCell
+  align="left"
+  dangerouslySetInnerHTML={{
+    __html: row.desc_ar
+      ? `${row.desc_ar.slice(0, 10)}${row.desc_ar.length > 10 ? '...' : ''}`
+      : '',
+  }}
+/>
         <TableCell align="left">
           {row.tags[0]?.id}
         </TableCell>
