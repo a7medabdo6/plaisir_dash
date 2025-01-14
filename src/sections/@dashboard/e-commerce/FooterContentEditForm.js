@@ -21,9 +21,11 @@ import useUploadMutation from 'src/hooks/useUploadMutation';
 import { useStepHandlerFooterContent } from './helpers/useFooterContentFormHelpers';
 import useUpdateFooterContentMutation from 'src/hooks/FooterContent/useUpdateFooterContentMutation';
 import imageBanner from '../../../assets/images/bannerImag.png'
-import imageSectionTwo from '../../../assets/images/SectionTwo.png'
-import imageSectionThree from '../../../assets/images/SectionThree.png'
+import FooterSectionThree from '../../../assets/images/FooterSectionThree.png'
+import FooterSectionOne from '../../../assets/images/FooterSectionOne.png'
 import imageSectionFour from '../../../assets/images/SectionFour.png'
+
+import FooterSectionTwo from '../../../assets/images/FooterSectionTwo.png'
 
 import Modal from 'react-modal';
 
@@ -124,24 +126,50 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                   {currentSection === 1 && (
                     <Stack spacing={2} >
                       <img
-                        src={imageBanner}
+                        src={FooterSectionOne}
                         alt="Uploaded Banner"
                         style={{ width: '100%', cursor: 'pointer' }}
-                        onClick={() => handleOpenModal(imageBanner)}
+                        onClick={() => handleOpenModal(FooterSectionOne)}
                       />
 
 
-                      <RHFTextField name="adventure_title_en" label={translate('FooterContent.labels.adventure_title_en')} />
-                      <RHFTextField name="adventure_title_ar" label={translate('FooterContent.labels.adventure_title_ar')} />
-                      <RHFTextField name="adventure_service_title_en_1" label={translate('FooterContent.labels.adventure_service_title_en_1')} />
-                      <RHFTextField name="adventure_service_title_ar_1" label={translate('FooterContent.labels.adventure_service_title_ar_1')} />
-                      <RHFTextField name="adventure_service_desc_en_1" label={translate('FooterContent.labels.adventure_service_desc_en_1')} />
-                      <RHFTextField name="adventure_service_desc_ar_1" label={translate('FooterContent.labels.adventure_service_desc_ar_1')} />
-                      <RHFTextField name="adventure_service_title_en_2" label={translate('FooterContent.labels.adventure_service_title_en_2')} />
-                      <RHFTextField name="adventure_service_title_ar_2" label={translate('FooterContent.labels.adventure_service_title_ar_2')} />
+                      <RHFTextField name="adventure_title_en" label={translate('FooterContent.adventure_title_en.value')} />
+                      <RHFTextField name="adventure_title_ar" label={translate('FooterContent.adventure_title_ar.value')} />
+
+                      <RHFTextField name="adventure_service_title_en_1" label={translate('FooterContent.adventure_service_title_en_1.value')} />
+                      <RHFTextField name="adventure_service_title_ar_1" label={translate('FooterContent.adventure_service_title_ar_1.value')} />
+                      <RHFTextField name="adventure_service_desc_en_1" label={translate('FooterContent.adventure_service_desc_en_1.value')} />
+                      <RHFTextField name="adventure_service_desc_ar_1" label={translate('FooterContent.adventure_service_desc_ar_1.value')} />
+
+                      <RHFTextField name="adventure_service_title_en_2" label={translate('FooterContent.adventure_service_title_en_2.value')} />
+                      <RHFTextField name="adventure_service_title_ar_2" label={translate('FooterContent.adventure_service_title_ar_2.value')} />
+                      <RHFTextField name="adventure_service_desc_en_2" label={translate('FooterContent.adventure_service_desc_en_2.value')} />
+                      <RHFTextField name="adventure_service_desc_ar_2" label={translate('FooterContent.adventure_service_desc_ar_2.value')} />
+
+                      <RHFTextField name="adventure_service_title_en_3" label={translate('FooterContent.adventure_service_title_en_3.value')} />
+                      <RHFTextField name="adventure_service_title_ar_3" label={translate('FooterContent.adventure_service_title_ar_3.value')} />
+                      <RHFTextField name="adventure_service_desc_en_3" label={translate('FooterContent.adventure_service_desc_en_3.value')} />
+                      <RHFTextField name="adventure_service_desc_ar_3" label={translate('FooterContent.adventure_service_desc_ar_3.value')} />
+
+                      <RHFTextField name="adventure_service_title_en_4" label={translate('FooterContent.adventure_service_title_en_4.value')} />
+                      <RHFTextField name="adventure_service_title_ar_4" label={translate('FooterContent.adventure_service_title_ar_4.value')} />
+                      <RHFTextField name="adventure_service_desc_en_4" label={translate('FooterContent.adventure_service_desc_en_4.value')} />
+                      <RHFTextField name="adventure_service_desc_ar_4" label={translate('FooterContent.adventure_service_desc_ar_4.value')} />
+
+                      <RHFTextField name="adventure_service_title_en_5" label={translate('FooterContent.adventure_service_title_en_5.value')} />
+                      <RHFTextField name="adventure_service_title_ar_5" label={translate('FooterContent.adventure_service_title_ar_5.value')} />
+                      <RHFTextField name="adventure_service_desc_en_5" label={translate('FooterContent.adventure_service_desc_en_5.value')} />
+                      <RHFTextField name="adventure_service_desc_ar_5" label={translate('FooterContent.adventure_service_desc_ar_5.value')} />
+
+                      <RHFTextField name="adventure_service_title_en_6" label={translate('FooterContent.adventure_service_title_en_6.value')} />
+                      <RHFTextField name="adventure_service_title_ar_6" label={translate('FooterContent.adventure_service_title_ar_6.value')} />
+                      <RHFTextField name="adventure_service_desc_en_6" label={translate('FooterContent.adventure_service_desc_en_6.value')} />
+                      <RHFTextField name="adventure_service_desc_ar_6" label={translate('FooterContent.adventure_service_desc_ar_6.value')} />
+
+
 
                       <RHFUploadWithLabel
-                        label="Upload Banner Photo"
+                        label="adventure photo"
                         defaultValue={defaultValues.adventure_photo.id}
                         newValue={uploadedFileDetails?.adventure_photo?.path}
                         multiple
@@ -153,19 +181,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onUpload={() => onUpload('adventure_photo')
                         }
                       />
-                      {/* <RHFUploadWithLabel
-                        thumbnail
-                        name="banner_photo_ar"
-                        label="Upload Banner Photo (Arabic)"
-                        newValue={uploadedFileDetails?.banner_photo_ar?.path}
 
-                        defaultValue={defaultValues.banner_photo_ar.id}
-                        multiple
-                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo_ar')}
-                        onRemove={() => handleRemoveFile('banner_photo_ar')}
-                        onRemoveAll={() => handleRemoveAllFiles('banner_photo_ar')}
-                        onUpload={() => onUpload('banner_photo_ar')}
-                      /> */}
                     </Stack>
                   )
                   }
@@ -173,192 +189,97 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                   {currentSection === 2 && (
                     <Stack spacing={2}>
                       <img
-                        src={imageSectionTwo}
+                        src={FooterSectionTwo}
                         alt="Uploaded Banner"
                         style={{ width: '100%', cursor: 'pointer' }}
-                        onClick={() => handleOpenModal(imageSectionTwo)}
+                        onClick={() => handleOpenModal(FooterSectionTwo)}
                       />
-                      <RHFTextField name="service_fir_title_en" label={translate('FooterContent.labels.service_fir_title_en')} />
-                      <RHFTextField name="service_fir_title_ar" label={translate('FooterContent.labels.service_fir_title_ar')} />
-                      <RHFTextField name="service_fir_sub_title_en" label={translate('FooterContent.labels.service_fir_sub_title_en')} />
-                      <RHFTextField name="service_fir_sub_title_ar" label={translate('FooterContent.labels.service_fir_sub_title_ar')} />
-                      <RHFTextField name="service_sec_title_en" label={translate('FooterContent.labels.service_sec_title_en')} />
-                      <RHFTextField name="service_sec_title_ar" label={translate('FooterContent.labels.service_sec_title_ar')} />
-                      <RHFTextField name="service_sec_sub_title_en" label={translate('FooterContent.labels.service_sec_sub_title_en')} />
-                      <RHFTextField name="service_sec_sub_title_ar" label={translate('FooterContent.labels.service_sec_sub_title_ar')} />
-                      <RHFTextField name="service_third_title_en" label={translate('FooterContent.labels.service_third_title_en')} />
-                      <RHFTextField name="service_third_title_ar" label={translate('FooterContent.labels.service_third_title_ar')} />
-                      <RHFTextField name="service_third_sub_title_en" label={translate('FooterContent.labels.service_third_sub_title_en')} />
-                      <RHFTextField name="service_third_sub_title_ar" label={translate('FooterContent.labels.service_third_sub_title_ar')} />
-                      <RHFTextField name="service_forth_title_en" label={translate('FooterContent.labels.service_forth_title_en')} />
-                      <RHFTextField name="service_forth_title_ar" label={translate('FooterContent.labels.service_forth_title_ar')} />
-                      <RHFTextField name="service_fivth_title_en" label={translate('FooterContent.labels.service_fivth_title_en')} />
-                      <RHFTextField name="service_fivth_title_ar" label={translate('FooterContent.labels.service_fivth_title_ar')} />
-                      <RHFTextField name="service_sex_title_en" label={translate('FooterContent.labels.service_sex_title_en')} />
-                      <RHFTextField name="service_sex_title_ar" label={translate('FooterContent.labels.service_sex_title_ar')} />
-                      <RHFTextField name="service_seven_title_en" label={translate('FooterContent.labels.service_seven_title_en')} />
-                      <RHFTextField name="service_seven_title_ar" label={translate('FooterContent.labels.service_seven_title_ar')} />
-                      <RHFTextField name="know_us_title_en" label={translate('FooterContent.labels.know_us_title_en')} />
-                      <RHFTextField name="know_us_title_ar" label={translate('FooterContent.labels.know_us_title_ar')} />
-                      <RHFTextField name="know_us_sub_title_en" label={translate('FooterContent.labels.know_us_sub_title_en')} />
-                      <RHFTextField name="know_us_sub_title_ar" label={translate('FooterContent.labels.know_us_sub_title_ar')} />
-                      <RHFTextField name="know_us_sec_title_en" label={translate('FooterContent.labels.know_us_sec_title_en')} />
-                      <RHFTextField name="know_us_sec_title_ar" label={translate('FooterContent.labels.know_us_sec_title_ar')} />
-                      <RHFTextField name="know_us_fir_item_en" label={translate('FooterContent.labels.know_us_fir_item_en')} />
-                      <RHFTextField name="know_us_fir_item_ar" label={translate('FooterContent.labels.know_us_fir_item_ar')} />
-                      <RHFTextField name="know_us_sec_item_en" label={translate('FooterContent.labels.know_us_sec_item_en')} />
-                      <RHFTextField name="know_us_sec_item_ar" label={translate('FooterContent.labels.know_us_sec_item_ar')} />
-                      <RHFTextField name="know_us_third_item_en" label={translate('FooterContent.labels.know_us_third_item_en')} />
-                      <RHFTextField name="know_us_third_item_ar" label={translate('FooterContent.labels.know_us_third_item_ar')} />
-                      <RHFTextField name="know_us_left_title_en" label={translate('FooterContent.labels.know_us_left_title_en')} />
-                      <RHFTextField name="know_us_left_title_ar" label={translate('FooterContent.labels.know_us_left_title_ar')} />
+                      <RHFTextField name="app_title_en" label={translate('FooterContent.app_title_en.value')} />
+                      <RHFTextField name="app_title_ar" label={translate('FooterContent.app_title_ar.value')} />
+
+                      <RHFTextField name="app_sec_title_en" label={translate('FooterContent.app_sec_title_en.value')} />
+                      <RHFTextField name="app_sec_title_ar" label={translate('FooterContent.app_sec_title_ar.value')} />
+
+                      <RHFTextField name="discount_fir_title_en" label={translate('FooterContent.discount_fir_title_en.value')} />
+                      <RHFTextField name="discount_fir_title_ar" label={translate('FooterContent.discount_fir_title_ar.value')} />
+
+                      <RHFTextField name="discount_sec_title_en" label={translate('FooterContent.discount_sec_title_en.value')} />
+                      <RHFTextField name="discount_sec_title_ar" label={translate('FooterContent.discount_sec_title_ar.value')} />
+
+                      <RHFTextField name="discount_btn_title_en" label={translate('FooterContent.discount_btn_title_en.value')} />
+                      <RHFTextField name="discount_btn_title_ar" label={translate('FooterContent.discount_btn_title_ar.value')} />
+
+                      <RHFTextField name="discount_percentage_en" label={translate('FooterContent.discount_percentage_en.value')} />
+                      <RHFTextField name="discount_percentage_ar" label={translate('FooterContent.discount_percentage_ar.value')} />
+
+                      <RHFTextField name="discount_percentage_title_en" label={translate('FooterContent.discount_percentage_title_en.value')} />
+                      <RHFTextField name="discount_percentage_title_ar" label={translate('FooterContent.discount_percentage_title_ar.value')} />
+
                       <RHFUploadWithLabel
                         thumbnail
-                        name="know_us_photo"
-                        label="Upload Know Us Photo"
-                        defaultValue={defaultValues.know_us_photo.id}
+                        name="banner_photo_for_app"
+                        label="banner photo for app"
+                        newValue={uploadedFileDetails?.banner_photo_for_app?.path}
+
+                        defaultValue={defaultValues.banner_photo_for_app.id}
                         multiple
-                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'know_us_photo')}
-                        onRemove={() => handleRemoveFile('know_us_photo')}
-                        onRemoveAll={() => handleRemoveAllFiles('know_us_photo')}
-                        onUpload={() => onUpload('know_us_photo')}
+                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo_for_app')}
+                        onRemove={() => handleRemoveFile('banner_photo_for_app')}
+                        onRemoveAll={() => handleRemoveAllFiles('banner_photo_for_app')}
+                        onUpload={() => onUpload('banner_photo_for_app')}
                       />
+
                       <RHFUploadWithLabel
                         thumbnail
-                        name="know_us_photo_ar"
-                        label="Upload Know Us Photo ar"
-                        defaultValue={defaultValues.know_us_photo_ar.id}
+                        name="discount_photo"
+                        label="discount photo"
+                        newValue={uploadedFileDetails?.discount_photo?.path}
+
+                        defaultValue={defaultValues.discount_photo.id}
                         multiple
-                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'know_us_photo_ar')}
-                        onRemove={() => handleRemoveFile('know_us_photo_ar')}
-                        onRemoveAll={() => handleRemoveAllFiles('know_us_photo_ar')}
-                        onUpload={() => onUpload('know_us_photo_ar')}
+                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'discount_photo')}
+                        onRemove={() => handleRemoveFile('discount_photo')}
+                        onRemoveAll={() => handleRemoveAllFiles('discount_photo')}
+                        onUpload={() => onUpload('discount_photo')}
                       />
+
                     </Stack>
                   )}
 
                   {currentSection === 3 && (
                     <Stack spacing={2}>
                       <img
-                        src={imageSectionThree}
+                        src={FooterSectionThree}
                         alt="Uploaded Banner"
                         style={{ width: '100%', cursor: 'pointer' }}
-                        onClick={() => handleOpenModal(imageSectionThree)}
+                        onClick={() => handleOpenModal(FooterSectionThree)}
                       />
-                      <RHFTextField name="why_choose_title_en" label={translate('FooterContent.labels.why_choose_title_en')} />
-                      <RHFTextField name="why_choose_title_ar" label={translate('FooterContent.labels.why_choose_title_ar')} />
-                      <RHFTextField name="why_choose_left_title_en" label={translate('FooterContent.labels.why_choose_left_title_en')} />
-                      <RHFTextField name="why_choose_left_title_ar" label={translate('FooterContent.labels.why_choose_left_title_ar')} />
-                      <RHFTextField name="why_choose_fir_item_en" label={translate('FooterContent.labels.why_choose_fir_item_en')} />
-                      <RHFTextField name="why_choose_fir_item_ar" label={translate('FooterContent.labels.why_choose_fir_item_ar')} />
-                      <RHFTextField name="why_choose_sec_item_en" label={translate('FooterContent.labels.why_choose_sec_item_en')} />
-                      <RHFTextField name="why_choose_sec_item_ar" label={translate('FooterContent.labels.why_choose_sec_item_ar')} />
+                      <RHFTextField name="email" label={translate('FooterContent.email.value')} />
+                      <RHFTextField name="phone" label={translate('FooterContent.phone.value')} />
+
+                      <RHFTextField name="facebook" label={translate('FooterContent.facebook.value')} />
+                      <RHFTextField name="x" label={translate('FooterContent.x.value')} />
+                      <RHFTextField name="instgram" label={translate('FooterContent.instgram.value')} />
+                      <RHFTextField name="twitter" label={translate('FooterContent.twitter.value')} />
+                      <RHFTextField name="youtube" label={translate('FooterContent.youtube.value')} />
+
+
                       <RHFUploadWithLabel
                         thumbnail
-                        name="why_choose_photo"
-                        label="Upload Why Choose Photo"
-                        defaultValue={defaultValues.why_choose_photo.id}
+                        name="logo"
+                        label="logo"
+                        defaultValue={defaultValues.logo.id}
                         multiple
-                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'why_choose_photo')}
-                        onRemove={() => handleRemoveFile('why_choose_photo')}
-                        onRemoveAll={() => handleRemoveAllFiles('why_choose_photo')}
-                        onUpload={() => onUpload('why_choose_photo')}
+                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'logo')}
+                        onRemove={() => handleRemoveFile('logo')}
+                        onRemoveAll={() => handleRemoveAllFiles('logo')}
+                        onUpload={() => onUpload('logo')}
                       />
-                      <RHFUploadWithLabel
-                        thumbnail
-                        name="why_choose_photo_ar"
-                        label="Upload Why Choose Photo (Arabic)"
-                        defaultValue={defaultValues.why_choose_photo_ar.id}
-                        multiple
-                        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'why_choose_photo_ar')}
-                        onRemove={() => handleRemoveFile('why_choose_photo_ar')}
-                        onRemoveAll={() => handleRemoveAllFiles('why_choose_photo_ar')}
-                        onUpload={() => onUpload('why_choose_photo_ar')}
-                      />
+
                     </Stack>
                   )}
 
-                  {currentSection === 4 && (
-                    <Stack spacing={2}>
-                      <img
-                        src={imageSectionFour}
-                        alt="Uploaded Banner"
-                        style={{ width: '100%', cursor: 'pointer' }}
-                        onClick={() => handleOpenModal(imageSectionFour)}
-                      />
-                      <RHFTextField
-                        name="ready_to_travel_title_en"
-                        label="Ready to Travel (English)"
-                        defaultValue={defaultValues.ready_to_travel_title_en}
-                      />
-                      <RHFTextField
-                        name="ready_to_travel_title_ar"
-                        label="Ready to Travel (Arabic)"
-                        defaultValue={defaultValues.ready_to_travel_title_ar}
-                      />
-                      <RHFTextField
-                        name="ready_to_travel_sub_title_en"
-                        label="Sub Title (English)"
-                        defaultValue={defaultValues.ready_to_travel_sub_title_en}
-                      />
-                      <RHFTextField
-                        name="ready_to_travel_sub_title_ar"
-                        label="Sub Title (Arabic)"
-                        defaultValue={defaultValues.ready_to_travel_sub_title_ar}
-                      />
-                      <RHFTextField
-                        name="percentage"
-                        label="Percentage"
-                        defaultValue={defaultValues.percentage}
-                      />
-                      <Stack spacing={2}>
-                        <RHFUploadWithLabel
-                          thumbnail
-                          name="ready_to_travel_photo"
-                          label="Upload Ready to Travel Photo"
-                          defaultValue={defaultValues.ready_to_travel_photo.id}
-                          multiple
-                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_photo')}
-                          onRemove={() => handleRemoveFile('ready_to_travel_photo')}
-                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_photo')}
-                          onUpload={() => onUpload('ready_to_travel_photo')}
-                        />
-                        <RHFUploadWithLabel
-                          thumbnail
-                          name="ready_to_travel_sec_photo"
-                          label="Upload Ready to Travel Sec Photo"
-                          defaultValue={defaultValues.ready_to_travel_sec_photo.id}
-                          multiple
-                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_sec_photo')}
-                          onRemove={() => handleRemoveFile('ready_to_travel_sec_photo')}
-                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_sec_photo')}
-                          onUpload={() => onUpload('ready_to_travel_sec_photo')}
-                        />
-                        <RHFUploadWithLabel
-                          thumbnail
-                          name="ready_to_travel_third_photo"
-                          label="Upload Ready to Travel Third Photo"
-                          defaultValue={defaultValues.ready_to_travel_third_photo.id}
-                          multiple
-                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_third_photo')}
-                          onRemove={() => handleRemoveFile('ready_to_travel_third_photo')}
-                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_third_photo')}
-                          onUpload={() => onUpload('ready_to_travel_third_photo')}
-                        />
-                        <RHFUploadWithLabel
-                          thumbnail
-                          name="ready_to_travel_forth_photo"
-                          label="Upload Ready to Travel Forth Photo"
-                          defaultValue={defaultValues.ready_to_travel_forth_photo.id}
-                          multiple
-                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_forth_photo')}
-                          onRemove={() => handleRemoveFile('ready_to_travel_forth_photo')}
-                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_forth_photo')}
-                          onUpload={() => onUpload('ready_to_travel_forth_photo')}
-                        />
-                      </Stack>
-                    </Stack>
-                  )}
+
 
                 </Stack>
               ) : (<>
@@ -377,7 +298,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
               },
             }}>
               <button onClick={handleCloseModal} style={{ marginBottom: '10px' }}>Close</button>
-              <img src={currentImage} alt="Full Size" style={{ width: '100%',height:"280px",padding:"5px" }} />
+              <img src={currentImage} alt="Full Size" style={{ width: '100%', height: "280px", padding: "5px" }} />
             </Modal>
           </Card>
         </Grid>
@@ -393,7 +314,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
         <Button
           variant="contained"
           onClick={nextSection}
-          disabled={currentSection === 4}  // Adjust based on total sections
+          disabled={currentSection === 3}  // Adjust based on total sections
         >
           Next
         </Button>

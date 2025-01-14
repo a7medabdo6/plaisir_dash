@@ -578,6 +578,221 @@ list:"list",
   
   
   },
+
+  footerContent: {
+    adventure_title_en: {
+      value: "Adventure Title (English)",
+      error: "This field is required"
+    },
+    adventure_title_ar: {
+      value: "Adventure Title (Arabic)",
+      error: "This field is required"
+    },
+    adventure_service_title_en_1: {
+      value: "Adventure Service Title (English) (1)",
+      error: "This field is required"
+    },
+    adventure_service_title_ar_1: {
+      value: "Adventure Service Title (Arabic) (1)",
+      error: "This field is required"
+    },
+    adventure_service_title_en_2: {
+      value: "Adventure Service Title (English) (2)",
+      error: "This field is required"
+    },
+    adventure_service_title_ar_2: {
+      value: "Adventure Service Title (Arabic) (2)",
+      error: "This field is required"
+    },
+    adventure_service_title_en_3: {
+      value: "Adventure Service Title (English) (3)",
+      error: "This field is required"
+    },
+    adventure_service_title_ar_3: {
+      value: "Adventure Service Title (Arabic) (3)",
+      error: "This field is required"
+    },
+    adventure_service_title_en_4: {
+      value: "Adventure Service Title (English) (4)",
+      error: "This field is required"
+    },
+    adventure_service_title_ar_4: {
+      value: "Adventure Service Title (Arabic) (4)",
+      error: "This field is required"
+    },
+    adventure_service_title_en_5: {
+      value: "Adventure Service Title (English) (5)",
+      error: "This field is required"
+    },
+    adventure_service_title_ar_5: {
+      value: "Adventure Service Title (Arabic) (5)",
+      error: "This field is required"
+    },
+    adventure_service_title_en_6: {
+      value: "Adventure Service Title (English) (6)",
+      error: "This field is required"
+    },
+    adventure_service_title_ar_6: {
+      value: "Adventure Service Title (Arabic) (6)",
+      error: "This field is required"
+    },
+  
+    adventure_service_desc_ar_1: {
+      value: "Adventure Service Description (Arabic) (1)",
+      error: "This field is required"
+    },
+    adventure_service_desc_en_1: {
+      value: "Adventure Service Description (English) (1)",
+      error: "This field is required"
+    },
+    adventure_service_desc_ar_2: {
+      value: "Adventure Service Description (Arabic) (2)",
+      error: "This field is required"
+    },
+    adventure_service_desc_en_2: {
+      value: "Adventure Service Description (English) (2)",
+      error: "This field is required"
+    },
+    adventure_service_desc_ar_3: {
+      value: "Adventure Service Description (Arabic) (3)",
+      error: "This field is required"
+    },
+    adventure_service_desc_en_3: {
+      value: "Adventure Service Description (English) (3)",
+      error: "This field is required"
+    },
+    adventure_service_desc_ar_4: {
+      value: "Adventure Service Description (Arabic) (4)",
+      error: "This field is required"
+    },
+    adventure_service_desc_en_4: {
+      value: "Adventure Service Description (English) (4)",
+      error: "This field is required"
+    },
+    adventure_service_desc_ar_5: {
+      value: "Adventure Service Description (Arabic) (5)",
+      error: "This field is required"
+    },
+    adventure_service_desc_en_5: {
+      value: "Adventure Service Description (English) (5)",
+      error: "This field is required"
+    },
+    adventure_service_desc_ar_6: {
+      value: "Adventure Service Description (Arabic) (6)",
+      error: "This field is required"
+    },
+    adventure_service_desc_en_6: {
+      value: "Adventure Service Description (English) (6)",
+      error: "This field is required"
+    },
+  
+    app_title_en: {
+      value: "App Title (English)",
+      error: "This field is required"
+    },
+    app_title_ar: {
+      value: "App Title (Arabic)",
+      error: "This field is required"
+    },
+    app_sec_title_en: {
+      value: "App Section Title (English)",
+      error: "This field is required"
+    },
+    app_sec_title_ar: {
+      value: "App Section Title (Arabic)",
+      error: "This field is required"
+    },
+  
+    discount_fir_title_en: {
+      value: "Discount Title (English)",
+      error: "This field is required"
+    },
+    discount_fir_title_ar: {
+      value: "Discount Title (Arabic)",
+      error: "This field is required"
+    },
+  
+    discount_sec_title_en: {
+      value: "Discount Section Title (English)",
+      error: "This field is required"
+    },
+    discount_sec_title_ar: {
+      value: "Discount Section Title (Arabic)",
+      error: "This field is required"
+    },
+    discount_btn_title_en: {
+      value: "Discount Button Title (English)",
+      error: "This field is required"
+    },
+    discount_btn_title_ar: {
+      value: "Discount Button Title (Arabic)",
+      error: "This field is required"
+    },
+  
+    discount_percentage_ar: {
+      value: "Discount Percentage (Arabic)",
+      error: "This field is required"
+    },
+    discount_percentage_en: {
+      value: "Discount Percentage (English)",
+      error: "This field is required"
+    },
+  
+    discount_percentage_title_ar: {
+      value: "Discount Percentage Title (Arabic)",
+      error: "This field is required"
+    },
+    discount_percentage_title_en: {
+      value: "Discount Percentage Title (English)",
+      error: "This field is required"
+    },
+  
+    email: {
+      value: "Email",
+      error: "This field is required"
+    },
+    phone: {
+      value: "Phone",
+      error: "This field is required"
+    },
+    facebook: {
+      value: "Facebook",
+      error: "This field is required"
+    },
+    instgram: {
+      value: "Instagram",
+      error: "This field is required"
+    },
+    x: {
+      value: "X",
+      error: "This field is required"
+    },
+    twitter: {
+      value: "Twitter",
+      error: "This field is required"
+    },
+    youtube: {
+      value: "YouTube",
+      error: "This field is required"
+    },
+    adventure_photo: {
+      value: "Adventure Photo",
+      error: "This field is required"
+    },
+    banner_photo_for_app: {
+      value: "Banner Photo for App",
+      error: "This field is required"
+    },
+    discount_photo: {
+      value: "Discount Photo",
+      error: "This field is required"
+    },
+    logo: {
+      value: "Logo",
+      error: "This field is required"
+    }
+  }
+  ,
   app: `app`,
   user: `user`,
   categorydash: 'category',

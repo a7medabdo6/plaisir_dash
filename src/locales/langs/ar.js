@@ -554,7 +554,220 @@ save:'حفظ',
   
   },
 
-
+  footerContent: {
+    adventure_title_en: {
+      value: "عنوان المغامرة (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_title_ar: {
+      value: "عنوان المغامرة (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_en_1: {
+      value: "عنوان خدمة المغامرة (بالإنجليزية) (1)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_ar_1: {
+      value: "عنوان خدمة المغامرة (بالعربية) (1)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_en_2: {
+      value: "عنوان خدمة المغامرة (بالإنجليزية) (2)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_ar_2: {
+      value: "عنوان خدمة المغامرة (بالعربية) (2)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_en_3: {
+      value: "عنوان خدمة المغامرة (بالإنجليزية) (3)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_ar_3: {
+      value: "عنوان خدمة المغامرة (بالعربية) (3)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_en_4: {
+      value: "عنوان خدمة المغامرة (بالإنجليزية) (4)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_ar_4: {
+      value: "عنوان خدمة المغامرة (بالعربية) (4)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_en_5: {
+      value: "عنوان خدمة المغامرة (بالإنجليزية) (5)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_ar_5: {
+      value: "عنوان خدمة المغامرة (بالعربية) (5)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_en_6: {
+      value: "عنوان خدمة المغامرة (بالإنجليزية) (6)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_title_ar_6: {
+      value: "عنوان خدمة المغامرة (بالعربية) (6)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    adventure_service_desc_ar_1: {
+      value: "وصف خدمة المغامرة (بالعربية) (1)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_en_1: {
+      value: "وصف خدمة المغامرة (بالإنجليزية) (1)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_ar_2: {
+      value: "وصف خدمة المغامرة (بالعربية) (2)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_en_2: {
+      value: "وصف خدمة المغامرة (بالإنجليزية) (2)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_ar_3: {
+      value: "وصف خدمة المغامرة (بالعربية) (3)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_en_3: {
+      value: "وصف خدمة المغامرة (بالإنجليزية) (3)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_ar_4: {
+      value: "وصف خدمة المغامرة (بالعربية) (4)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_en_4: {
+      value: "وصف خدمة المغامرة (بالإنجليزية) (4)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_ar_5: {
+      value: "وصف خدمة المغامرة (بالعربية) (5)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_en_5: {
+      value: "وصف خدمة المغامرة (بالإنجليزية) (5)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_ar_6: {
+      value: "وصف خدمة المغامرة (بالعربية) (6)",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_service_desc_en_6: {
+      value: "وصف خدمة المغامرة (بالإنجليزية) (6)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    app_title_en: {
+      value: "عنوان التطبيق (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    app_title_ar: {
+      value: "عنوان التطبيق (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    app_sec_title_en: {
+      value: "عنوان قسم التطبيق (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    app_sec_title_ar: {
+      value: "عنوان قسم التطبيق (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    discount_fir_title_en: {
+      value: "عنوان الخصم (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_fir_title_ar: {
+      value: "عنوان الخصم (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    discount_sec_title_en: {
+      value: "عنوان قسم الخصم (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_sec_title_ar: {
+      value: "عنوان قسم الخصم (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_btn_title_en: {
+      value: "عنوان زر الخصم (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_btn_title_ar: {
+      value: "عنوان زر الخصم (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    discount_percentage_ar: {
+      value: "نسبة الخصم (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_percentage_en: {
+      value: "نسبة الخصم (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    discount_percentage_title_ar: {
+      value: "عنوان نسبة الخصم (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_percentage_title_en: {
+      value: "عنوان نسبة الخصم (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+  
+    email: {
+      value: "البريد الإلكتروني",
+      error: "هذا الحقل مطلوب"
+    },
+    phone: {
+      value: "الهاتف",
+      error: "هذا الحقل مطلوب"
+    },
+    facebook: {
+      value: "فيسبوك",
+      error: "هذا الحقل مطلوب"
+    },
+    instgram: {
+      value: "إنستجرام",
+      error: "هذا الحقل مطلوب"
+    },
+    x: {
+      value: "إكس",
+      error: "هذا الحقل مطلوب"
+    },
+    twitter: {
+      value: "تويتر",
+      error: "هذا الحقل مطلوب"
+    },
+    youtube: {
+      value: "يوتيوب",
+      error: "هذا الحقل مطلوب"
+    },
+    adventure_photo: {
+      value: "صورة المغامرة",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_photo_for_app: {
+      value: "صورة البانر للتطبيق",
+      error: "هذا الحقل مطلوب"
+    },
+    discount_photo: {
+      value: "صورة الخصم",
+      error: "هذا الحقل مطلوب"
+    },
+    logo: {
+      value: "الشعار",
+      error: "هذا الحقل مطلوب"
+    }
+  },
+  
 
   app: `تطبيق`,
   user: `المستعمل`,

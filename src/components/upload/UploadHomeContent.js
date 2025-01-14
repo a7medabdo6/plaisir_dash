@@ -144,9 +144,9 @@ export default function UploadHomeContent({
             files
               .filter(i => i.id !== null)  // فلترة العناصر بحيث لا يتم تضمين العناصر التي تحتوي على id == null
               .map((i) => {
-                const correctedUrl = i?.path.replace("51.20.18.35/:", "51.20.18.35:");
-                const correctedUrlNew = newValue?.replace("51.20.18.35/:", "51.20.18.35:");
-console.log(correctedUrlNew);
+                const correctedUrl = i?.path?.replace("51.20.18.35:3000", "api.plaissir.com");
+                const correctedUrlNew = newValue?.replace("51.20.18.35:3000", "api.plaissir.com");
+console.log(newValue);
 
                 return (
                   // قم بإرجاع العنصر فقط إذا كان id ليس null
