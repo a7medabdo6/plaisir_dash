@@ -6,6 +6,8 @@ import useUploadMutation from 'src/hooks/useUploadMutation';
 export function useFileHandler(setValue) {
   const [file, setFile] = useState(null);
   const [fileId, setFileId] = useState(null);
+  console.log(fileId);
+  
   const uploadMutation = useUploadMutation();
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);

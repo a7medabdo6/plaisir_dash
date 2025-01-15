@@ -63,7 +63,7 @@ export default function Upload({
   sx,
   ...other
 }) {
-  const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, isDragReject,fileRejections } = useDropzone({
     multiple,
     disabled,
     ...other,

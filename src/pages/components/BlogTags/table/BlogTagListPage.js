@@ -54,7 +54,7 @@ export default function BlogTagsListPage() {
     order: 'desc',
     limit: 5,
     page: pageCount,
-      filterOptions: { searchKey: 'title_en', searchValue: filterName },
+    filterOptions: { searchKey: 'title_en', searchValue: filterName },
   };
   
 

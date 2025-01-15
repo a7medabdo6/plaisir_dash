@@ -50,7 +50,7 @@ export default function BlogListPage() {
     order: 'desc',
     limit: 5,
     page: pageCount,
-    filterOptions: { searchKey: 'name_en', searchValue: filterName },
+    filterOptions: { searchKey: 'title_en', searchValue: filterName },
   };
   const { loading, total, data, isFiltered, handleDeleteBlogTag } = useBlogList(
     initialParams,
@@ -71,14 +71,14 @@ export default function BlogListPage() {
     { id: 'most popular', label: `${translate('bloging.most_popular')}`, align: 'left' },
 
   ];
-  
+
   const [openConfirm, setOpenConfirm] = useState(false);
-  
+
   const handleFilterName = (event) => {
     setFilterName(event.target.value);
   };
 
-  const handleDeleteRow = (id) => {    
+  const handleDeleteRow = (id) => {
     handleDeleteBlogTag(id)
   };
   const handleEditRow = (id) => {

@@ -12,6 +12,8 @@ import RejectionFiles from './errors/RejectionFiles';
 import MultiFilePreview from './preview/MultiFilePreview';
 import SingleFilePreview from './preview/SingleFilePreview';
 import MultiFilePreviewHomeContent from './preview/MultiFilePreviewHomeContent';
+import { useLocales } from 'src/locales';
+import { LoadingButton } from '@mui/lab';
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +47,7 @@ UploadHomeContent.propTypes = {
   thumbnail: PropTypes.bool,
   helperText: PropTypes.node,
   onRemoveAll: PropTypes.func,
-  newValue:PropTypes.string,
+  newValue: PropTypes.string,
 };
 
 export default function UploadHomeContent({
@@ -53,6 +55,7 @@ export default function UploadHomeContent({
   multiple = false,
   error,
   helperText,
+  isLoading,
   newValue,
   //
   file,
@@ -71,13 +74,14 @@ export default function UploadHomeContent({
     disabled,
     ...other,
   });
+  const { translate } = useLocales();
 
   const hasFile = !!file && !multiple;
 
   const hasFiles = files && multiple && files.length > 0;
 
   const isError = isDragReject || !!error;
-  console.log(files);
+console.log(isLoading);
 
   return (
     <Box sx={{ width: 1, position: 'relative', ...sx }}>
@@ -146,30 +150,33 @@ export default function UploadHomeContent({
               .map((i) => {
                 const correctedUrl = i?.path?.replace("51.20.18.35:3000", "api.plaissir.com");
                 const correctedUrlNew = newValue?.replace("51.20.18.35:3000", "api.plaissir.com");
-console.log(newValue);
 
                 return (
                   // قم بإرجاع العنصر فقط إذا كان id ليس null
                   <div key={i.id}>
                     <>
                       <Box sx={{ my: 3 }}>
-                      <img src={correctedUrlNew ? correctedUrlNew : correctedUrl} alt="Logo" style={{ width: '50%' ,height:"280px",padding:"5px" }} />
-                      {/* <MultiFilePreviewHomeContent files={files} thumbnail={thumbnail} onRemove={onRemove} /> */}
+                        <img src={correctedUrlNew ? correctedUrlNew : correctedUrl} alt="Logo" style={{ width: '50%', height: "280px", padding: "5px" }} />
+                        {/* <MultiFilePreviewHomeContent files={files} thumbnail={thumbnail} onRemove={onRemove} /> */}
                       </Box>
+                      
+                          <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
+                            {onRemoveAll && (
+                              <LoadingButton color="inherit" variant="outlined" loading={isLoading} size="small" onClick={onRemoveAll}>
+                                {translate('RemoveAll')}
 
-                      <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
-                        {onRemoveAll && (
-                          <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
-                            Remove all
-                          </Button>
-                        )}
+                              </LoadingButton>
+                            )}
 
-                        {onUpload && (
-                          <Button size="small" variant="contained" onClick={onUpload}>
-                            Upload files
-                          </Button>
-                        )}
-                      </Stack>
+                            {onUpload && (
+                              <LoadingButton size="small" variant="contained" loading={isLoading} onClick={onUpload}>
+                                {translate('UploadAll')}
+
+                              </LoadingButton>
+                            )}
+                          </Stack>
+                        
+
                     </>
                   </div>
                 );

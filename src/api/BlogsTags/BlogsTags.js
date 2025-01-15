@@ -38,6 +38,28 @@ export const getBlogTags = async ({
 };
 
 
+export const getBlogTagsWithOutSearch = async ({
+  orderBy = 'id',
+  order = 'desc',
+  limit = 10,
+  page = 1,
+  filterOptions = {}
+}) => {
+  try {
+    // Constructing the query parameters
+    const params = {
+      orderBy,
+      order,
+      limit,
+      page,
+    };
+
+    const response = await axiosInstance.get(`/blog-tag`);
+    return response.data;  // Return the list of BlogTags
+  } catch (error) {
+    throw error;  // Throw error to handle in the component
+  }
+};
 // Assuming you already have axiosInstance set up
 export const deleteBlogTag = async (BlogTagId) => {
   

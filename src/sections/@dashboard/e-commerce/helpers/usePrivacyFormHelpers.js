@@ -15,7 +15,7 @@ export function useStepHandlerPrivacy(currentPrivacy) {
   const { translate } = useLocales();
   const [dataLoaded, setDataLoaded] = useState(false);
   const { data: PrivacyData, isError } = useSinglePrivacy();
-  const { mutate: updatePrivacy, isLoading: isUpdating } = useUpdatePrivacyMutation();
+  const { mutateAsync: updatePrivacy } = useUpdatePrivacyMutation();
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,6 +54,8 @@ export function useStepHandlerPrivacy(currentPrivacy) {
 
 
   const onSubmit = async (formData) => {
+    setIsLoading(true)
+
     try {
 
       const updatedPrivacy = {
@@ -62,19 +64,16 @@ export function useStepHandlerPrivacy(currentPrivacy) {
         content_ar: formData.content_ar || PrivacyData?.content_ar,
 
       };
-
-
-      updatePrivacy(updatedPrivacy);
+     await updatePrivacy(updatedPrivacy);
       enqueueSnackbar(`${translate('editSuccess')}`, { variant: 'success' });
-
-      // navigate(PATH_DASHBOARD.home);
     } catch (error) {
       enqueueSnackbar(translate('Privacy.error'), { variant: 'error' });
+    }finally{
+      setIsLoading(false)
+
     }
   };
 
-  const [file, setFile] = useState(null);
-  const [fileId, setFileId] = useState(null);
   const methods = useForm({
     resolver: yupResolver(NewPrivacychema),
     defaultValues,

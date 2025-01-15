@@ -27,9 +27,9 @@ const ar = {
     are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
     cancel: "ألغاء",
     Edit: "تعديل",
-    Clear:`حذف`,
-    id:'id',
-    loading:'جاري الحذف',
+    Clear: `حذف`,
+    id: 'id',
+    loading: 'جاري الحذف',
 
     search: 'بحث',
     NewCategory: 'فئه جديدة',
@@ -62,7 +62,7 @@ const ar = {
   },
   coupon: {
     create: `انشاء`,
-    Clear:"مسح",
+    Clear: "مسح",
 
     coupon: `كوبون خصم`,
     category: `الفئات`,
@@ -209,11 +209,11 @@ const ar = {
     are_you_sure_to_delete: "هل أنت متأكد أنك تريد الحذف؟",
     cancel: "ألغاء",
     Edit: "تعديل",
-    answerAr:'الاجابه  باللغةالعربي',
+    answerAr: 'الاجابه  باللغةالعربي',
     search: 'بحث',
-    answerEn:"الاجابه باللغةالانجليزي",
-quesAr: "السؤال باللغة العربية",
-  quesEn: "السؤال باللغة الانجليزية",
+    answerEn: "الاجابه باللغةالانجليزي",
+    quesAr: "السؤال باللغة العربية",
+    quesEn: "السؤال باللغة الانجليزية",
 
     NewFAQ: 'سؤال جديدة',
     CreateanewFAQ: 'انشاء سؤال جديده',
@@ -233,9 +233,9 @@ quesAr: "السؤال باللغة العربية",
       name_en_required: 'الاسم بالإنجليزية مطلوب',
       name_ar_required: 'الاسم بالعربية مطلوب',
       answer_en_required: "الإجابة باللغة الإنجليزية مطلوبة.",
-    ques_en_required: "السؤال باللغة الإنجليزية مطلوب.",
-    ques_ar_required: "السؤال باللغة العربية مطلوب.",
-    answer_ar_required: "الإجابة باللغة العربية مطلوبة."
+      ques_en_required: "السؤال باللغة الإنجليزية مطلوب.",
+      ques_ar_required: "السؤال باللغة العربية مطلوب.",
+      answer_ar_required: "الإجابة باللغة العربية مطلوبة."
     }
 
 
@@ -243,7 +243,7 @@ quesAr: "السؤال باللغة العربية",
 
 
   },
-  
+
   products: {
     create: `انشاء`,
     products: `المنتجات`,
@@ -422,10 +422,343 @@ quesAr: "السؤال باللغة العربية",
 
 
   },
+  HomeContent: {
+    HomeContent: "محتوى الصفحة الرئيسية",
+    Dashboard: "لوحة التحكم",
+    Edit: "تعديل",
+    Next: "التالي",
+    banner_fir_title_en: {
+      value: "عنوان بانر أول باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fivth_title_en: {
+      value: "عنوان الخدمة الخامسة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fivth_title_ar: {
+      value: "عنوان الخدمة الخامسة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sex_title_en: {
+      value: "عنوان الخدمة السادسة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sex_title_ar: {
+      value: "عنوان الخدمة السادسة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_fir_title_ar: {
+      value: "عنوان بانر أول باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_sec_title_en: {
+      value: "عنوان بانر ثاني باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_sec_title_ar: {
+      value: "عنوان بانر ثاني باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_third_title_en: {
+      value: "عنوان بانر ثالث باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_third_title_ar: {
+      value: "عنوان بانر ثالث باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_btn_en: {
+      value: "زر بانر باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_btn_ar: {
+      value: "زر بانر باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fir_title_en: {
+      value: "عنوان الخدمة الأولى باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fir_title_ar: {
+      value: "عنوان الخدمة الأولى باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fir_sub_title_en: {
+      value: "العنوان الفرعي للخدمة الأولى باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fir_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة الأولى باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sec_title_en: {
+      value: "عنوان الخدمة الثانية باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sec_title_ar: {
+      value: "عنوان الخدمة الثانية باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sec_sub_title_en: {
+      value: "العنوان الفرعي للخدمة الثانية باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sec_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة الثانية باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_third_title_en: {
+      value: "عنوان الخدمة الثالثة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_third_title_ar: {
+      value: "عنوان الخدمة الثالثة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_third_sub_title_en: {
+      value: "العنوان الفرعي للخدمة الثالثة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_third_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة الثالثة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_forth_title_en: {
+      value: "عنوان الخدمة الرابعة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_forth_title_ar: {
+      value: "عنوان الخدمة الرابعة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_forth_sub_title_en: {
+      value: "العنوان الفرعي للخدمة الرابعة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_forth_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة الرابعة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fifth_title_en: {
+      value: "عنوان الخدمة الخامسة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fifth_title_ar: {
+      value: "عنوان الخدمة الخامسة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fifth_sub_title_en: {
+      value: "العنوان الفرعي للخدمة الخامسة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_fifth_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة الخامسة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sixth_title_en: {
+      value: "عنوان الخدمة السادسة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sixth_title_ar: {
+      value: "عنوان الخدمة السادسة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sixth_sub_title_en: {
+      value: "العنوان الفرعي للخدمة السادسة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_sixth_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة السادسة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_photo: {
+      value: "صورة البانر للتطبيق",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_photo_ar: {
+      value: "صورة البانر للتطبيق (عربي)",
+      error: "هذا الحقل مطلوب"
+    },
+    service_seven_title_en: {
+      value: "عنوان الخدمة السابعة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_seven_title_ar: {
+      value: "عنوان الخدمة السابعة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_seven_sub_title_en: {
+      value: "العنوان الفرعي للخدمة السابعة باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    service_seven_sub_title_ar: {
+      value: "العنوان الفرعي للخدمة السابعة باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_title_en: {
+      value: "عنوان اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_title_ar: {
+      value: "عنوان اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_sub_title_en: {
+      value: "العنوان الفرعي اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_sub_title_ar: {
+      value: "العنوان الفرعي اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_sec_title_en: {
+      value: "العنوان الثاني اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_sec_title_ar: {
+      value: "العنوان الثاني اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_fir_item_en: {
+      value: "العنصر الأول اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_fir_item_ar: {
+      value: "العنصر الأول اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_sec_item_en: {
+      value: "العنصر الثاني اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_sec_item_ar: {
+      value: "العنصر الثاني اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_third_item_en: {
+      value: "العنصر الثالث اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_third_item_ar: {
+      value: "العنصر الثالث اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_left_title_en: {
+      value: "عنوان يسار اعرفنا باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_left_title_ar: {
+      value: "عنوان يسار اعرفنا باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_photo: {
+      value: "صورة اعرفنا",
+      error: "هذا الحقل مطلوب"
+    },
+    know_us_photo_ar: {
+      value: "صورة اعرفنا بالعربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_title_en: {
+      value: "لماذا تختارنا عنوان باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_title_ar: {
+      value: "لماذا تختارنا عنوان باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_left_title_en: {
+      value: "لماذا تختارنا عنوان يسار باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_left_title_ar: {
+      value: "لماذا تختارنا عنوان يسار باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_fir_item_en: {
+      value: "لماذا تختارنا العنصر الأول باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_fir_item_ar: {
+      value: "لماذا تختارنا العنصر الأول باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_fir_item_desc_en: {
+      value: "لماذا تختارنا الوصف العنصر الأول باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_fir_item_desc_ar: {
+      value: "لماذا تختارنا الوصف العنصر الأول باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_sec_item_en: {
+      value: "لماذا تختارنا العنصر الثاني باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_sec_item_ar: {
+      value: "لماذا تختارنا العنصر الثاني باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_sec_item_desc_en: {
+      value: "لماذا تختارنا الوصف العنصر الثاني باللغة الإنجليزية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_sec_item_desc_ar: {
+      value: "لماذا تختارنا الوصف العنصر الثاني باللغة العربية",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_photo: {
+      value: "صورة لماذا تختارنا",
+      error: "هذا الحقل مطلوب"
+    },
+    why_choose_photo_ar: {
+      value: "صورة لماذا تختارنا بالعربية",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_title_en: {
+      value: "جاهز للسفر (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_title_ar: {
+      value: "جاهز للسفر (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_sub_title_en: {
+      value: "العنوان الفرعي (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_sub_title_ar: {
+      value: "العنوان الفرعي (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    percentage: {
+      value: "النسبة المئوية",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_photo: {
+      value: "صورة جاهز للسفر",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_sec_photo: {
+      value: "صورة جاهز للسفر الثانية",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_third_photo: {
+      value: "صورة جاهز للسفر الثالثة",
+      error: "هذا الحقل مطلوب"
+    },
+    ready_to_travel_forth_photo: {
+      value: "صورة جاهز للسفر الرابعة",
+      error: "هذا الحقل مطلوب"
+    }
+  },
+  
   bloging: {
     create_a_new_post: `إنشاء منشور جديد`,
     dashboard: `لوحة التحكم`,
     blog: `مدونة`,
+    Edit:"تعديل",
+
     create: `إنشاء`,
     post_title: `عنوان المنشور`,
     post_details: `تفاصيل المنشور`,
@@ -455,13 +788,13 @@ quesAr: "السؤال باللغة العربية",
     latest: `الأحدث`,
     oldest: `الأقدم`,
     popular: `الأكثر شهرة`,
-    list:"القائمة",
-    most_popular:"الاكثر شيوعا",
+    list: "القائمة",
+    most_popular: "الاكثر شيوعا",
 
 
     posts: `المنشورات`,
     serach: `بحث ...`,
-    errors:{
+    errors: {
       title: "العنوان مطلوب",
       description: "الوصف مطلوب",
       tags: {
@@ -487,23 +820,23 @@ quesAr: "السؤال باللغة العربية",
     All: 'الكل',
     Completed: 'مكتمل',
     Refunded: 'تم الاسترداد',
-    Add_to_Blacklist:"حظر",
-    Customer_Info:"معلومات العميل",
-    Delivery:"التوصيل",
-    Ship_by:"Ship by",
-    Payment:"الدفع",
-    Shipping_History:"سجل الشحن",
-    Details:"التفاصيل",
-    Discount:"الخصم",
-    Taxes:"ضرائب",
-    Subtotal:"المجموع",
-    Shipping:"الشحن",
-    Price:"السعر",
-    Quantity:"العدد",
+    Add_to_Blacklist: "حظر",
+    Customer_Info: "معلومات العميل",
+    Delivery: "التوصيل",
+    Ship_by: "Ship by",
+    Payment: "الدفع",
+    Shipping_History: "سجل الشحن",
+    Details: "التفاصيل",
+    Discount: "الخصم",
+    Taxes: "ضرائب",
+    Subtotal: "المجموع",
+    Shipping: "الشحن",
+    Price: "السعر",
+    Quantity: "العدد",
 
     Cancelled: 'ملغي',
-        banned: 'غير نشط',
-    Edit_Order:'تعديل الطلب',
+    banned: 'غير نشط',
+    Edit_Order: 'تعديل الطلب',
     active: 'نشط',
     Apply_disable_account: 'تعطيل الحساب',
     Email_Verified: 'التحقق من البريد الإلكتروني',
@@ -511,24 +844,24 @@ quesAr: "السؤال باللغة العربية",
     Full_Name: 'الاسم بالكامل',
     Email_Address: 'البريد الإلكتروني',
     Phone_Number: 'رقم الهاتف',
-    Total:"المجموع",
+    Total: "المجموع",
     Country: 'الدولة',
     City: 'المدينة',
     State_region: 'المنطقة',
     zip_code: 'الرمز البريدي',
     neworder: 'مستخدم جديد',
-    Clear:`حذف`,
+    Clear: `حذف`,
     Address: 'العنوان',
     Company: 'الشركة',
-    name:'الاسم',
-    isVerified:`توثيق`,
+    name: 'الاسم',
+    isVerified: `توثيق`,
     status: "الحاله",
-Create:`انشاء`,
-save:'حفظ',
+    Create: `انشاء`,
+    save: 'حفظ',
     Role: 'الوظيفة',
     Allowed_File_Types: 'أنواع الملفات المسموح بها: *.jpeg, *.jpg, *.png, *.gif',
     Max_File_Size: 'الحد الأقصى لحجم الملف: 3.1 ميجابايت',
-    errors :{
+    errors: {
       validation_errors: {
         name: "الاسم مطلوب",
         email: {
@@ -541,7 +874,7 @@ save:'حفظ',
         company: "الشركة مطلوبة",
         state: "المنطقة مطلوبة",
         city: "المدينة مطلوبة",
-        zipCode:"ألرقم البريدي مطلوب",
+        zipCode: "ألرقم البريدي مطلوب",
 
         role: "الوظيفة مطلوبة",
         avatarUrl: {
@@ -550,14 +883,23 @@ save:'حفظ',
         }
       }
     }
-    
-  
-  
+
+
+
   },
 
-  footerContent: {
+  FooterContent: {
+    Edit: "تعديل",
+    Next: "التالي",
+    Previous: "السابق",
+    FooterContent: "محتوى الفوتر",
+    Dashboard: "لوحة التحكم",
     adventure_title_en: {
       value: "عنوان المغامرة (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_photo_for_app: {
+      value: "صوره البانر",
       error: "هذا الحقل مطلوب"
     },
     adventure_title_ar: {
@@ -612,7 +954,6 @@ save:'حفظ',
       value: "عنوان خدمة المغامرة (بالعربية) (6)",
       error: "هذا الحقل مطلوب"
     },
-  
     adventure_service_desc_ar_1: {
       value: "وصف خدمة المغامرة (بالعربية) (1)",
       error: "هذا الحقل مطلوب"
@@ -661,7 +1002,6 @@ save:'حفظ',
       value: "وصف خدمة المغامرة (بالإنجليزية) (6)",
       error: "هذا الحقل مطلوب"
     },
-  
     app_title_en: {
       value: "عنوان التطبيق (بالإنجليزية)",
       error: "هذا الحقل مطلوب"
@@ -671,14 +1011,13 @@ save:'حفظ',
       error: "هذا الحقل مطلوب"
     },
     app_sec_title_en: {
-      value: "عنوان قسم التطبيق (بالإنجليزية)",
+      value: "عنوان القسم بالتطبيق (بالإنجليزية)",
       error: "هذا الحقل مطلوب"
     },
     app_sec_title_ar: {
-      value: "عنوان قسم التطبيق (بالعربية)",
+      value: "عنوان القسم بالتطبيق (بالعربية)",
       error: "هذا الحقل مطلوب"
     },
-  
     discount_fir_title_en: {
       value: "عنوان الخصم (بالإنجليزية)",
       error: "هذا الحقل مطلوب"
@@ -687,7 +1026,6 @@ save:'حفظ',
       value: "عنوان الخصم (بالعربية)",
       error: "هذا الحقل مطلوب"
     },
-  
     discount_sec_title_en: {
       value: "عنوان قسم الخصم (بالإنجليزية)",
       error: "هذا الحقل مطلوب"
@@ -704,7 +1042,6 @@ save:'حفظ',
       value: "عنوان زر الخصم (بالعربية)",
       error: "هذا الحقل مطلوب"
     },
-  
     discount_percentage_ar: {
       value: "نسبة الخصم (بالعربية)",
       error: "هذا الحقل مطلوب"
@@ -713,7 +1050,6 @@ save:'حفظ',
       value: "نسبة الخصم (بالإنجليزية)",
       error: "هذا الحقل مطلوب"
     },
-  
     discount_percentage_title_ar: {
       value: "عنوان نسبة الخصم (بالعربية)",
       error: "هذا الحقل مطلوب"
@@ -722,13 +1058,12 @@ save:'حفظ',
       value: "عنوان نسبة الخصم (بالإنجليزية)",
       error: "هذا الحقل مطلوب"
     },
-  
     email: {
       value: "البريد الإلكتروني",
       error: "هذا الحقل مطلوب"
     },
     phone: {
-      value: "الهاتف",
+      value: "رقم الهاتف",
       error: "هذا الحقل مطلوب"
     },
     facebook: {
@@ -736,7 +1071,7 @@ save:'حفظ',
       error: "هذا الحقل مطلوب"
     },
     instgram: {
-      value: "إنستجرام",
+      value: "إنستغرام",
       error: "هذا الحقل مطلوب"
     },
     x: {
@@ -755,7 +1090,7 @@ save:'حفظ',
       value: "صورة المغامرة",
       error: "هذا الحقل مطلوب"
     },
-    banner_photo_for_app: {
+    banner_photo: {
       value: "صورة البانر للتطبيق",
       error: "هذا الحقل مطلوب"
     },
@@ -768,8 +1103,44 @@ save:'حفظ',
       error: "هذا الحقل مطلوب"
     }
   },
-  
 
+
+
+  Terms: {
+    content_ar: {
+
+      value: "الشروط والأحكام (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    content_en: {
+
+      value: "الشروط والأحكام (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+
+    Edit: "تعديل",
+    Terms: "الشروط",
+    Dashboard: "لوحة التحكم",
+
+  },
+
+
+  Privacy: {
+    content_ar: {
+
+      value: "الخصوصيه  (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    content_en: {
+      value: " الخصوصيه (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+
+    Edit: "تعديل",
+    Privacy: "الخصوصيه",
+    Dashboard: "لوحة التحكم",
+
+  },
   app: `تطبيق`,
   user: `المستعمل`,
   list: `قائمة`,
@@ -779,11 +1150,13 @@ save:'حفظ',
   coupondash: 'كوبون',
   featuresdash: `الخصائص`,
   productsdash: "المنتجات",
-  faqdash:'الاسئلة الشائعة',
-  BlogTagsdash:'اشارات المدونه',
-Order:"ألطلبات",
+  faqdash: 'الاسئلة الشائعة',
+  BlogTagsdash: 'اشارات المدونه',
+  Order: "ألطلبات",
   blog: `مقالات`,
   post: `بريد`,
+  Edit: "تعديل",
+  Next: "التالي",
   mail: `بريد`,
   chat: `دردشة`,
   cards: `البطاقات`,
@@ -798,6 +1171,8 @@ Order:"ألطلبات",
   product: `المنتوج`,
   invoice: `فاتورة`,
   details: `تفاصيل`,
+  UploadAll: "رفع الملفات",
+  RemoveAll: "إزالة الكل",
   checkout: `الدفع`,
   calendar: `التقويم`,
   analytics: `التحليلات`,
@@ -811,7 +1186,11 @@ Order:"ألطلبات",
   addSuccess: "تم إضافة الفئة بنجاح!",
   addError: "حدث خطأ أثناء إضافة الفئة. يرجى المحاولة مرة أخرى.",
   imageUploadSuccess: "تم تحميل الصورة بنجاح",
-  HomeContentdash:"الرئيسية",
+  HomeContentdash: "محتوى الصفحة الرئيسية",
+  FooterContentdash: "محتوى التذييل",
+  Termsdash: "الشروط",
+  Privacydash: "الخصوصية",
+    Previous: "السابق",
 
   menu_level_2a: `مستوى القائمة 2 أ`,
   menu_level_2b: `مستوى القائمة 2 ب`,

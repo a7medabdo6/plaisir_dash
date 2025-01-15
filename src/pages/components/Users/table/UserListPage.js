@@ -88,7 +88,7 @@ export default function UserListPage() {
     order: 'desc',
     limit: 2,
     page: pageCount,
-    // filterOptions: { searchKey: 'username', searchValue: filterName },
+    filterOptions: { searchKey: 'username', searchValue: filterName },
   };
   const { data, isError, error } = useUser(initialParams);
   console.log(data);

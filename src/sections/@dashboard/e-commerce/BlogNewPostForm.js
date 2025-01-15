@@ -24,11 +24,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // استيراد أنماط Quill
 import useCreateBlogMutation from 'src/hooks/Blog/useCreateBlogMutation ';
 import useUploadMutation from 'src/hooks/useUploadMutation';
-import useBlogTags from 'src/hooks/BlogTags/useBlogTag';
 import RHFAutocomplete from 'src/pages/components/Blog/RHFAutocomplete';
 import useUpdateBlogMutation from 'src/hooks/Blog/useUpdateBlogMutation';
 import useSingleBlog from 'src/hooks/Blog/useSingleBlog';
 import { useFileHandler, useStepHandler } from './helpers/useBlogFormHelpers';
+import useBlogTagWithOutSearch from 'src/hooks/BlogTags/useBlogTagWithOutSearch';
 
 // ----------------------------------------------------------------------
 
@@ -42,11 +42,13 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
   const { mutate: updateBlog, isLoading: isUpdating } = useUpdateBlogMutation();
 
   const Params = {
-
+    orderBy: 'id',
+    order: 'desc',
     limit: 5,
-
+    // page: pageCount,
+    // filterOptions: { searchKey: 'title_en', searchValue: filterName },
   };
-  const { data, isError, error } = useBlogTags(Params);
+  const { data, isError, error } = useBlogTagWithOutSearch(Params);
 
   const { enqueueSnackbar } = useSnackbar();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -65,10 +67,15 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
     content_ar: Yup.string().required(`${translate('bloging.errors.content')}`),
   });
 
-  const [selectedOptions, setSelectedOptions] = useState([]); // تخزين العناصر المختارة بالكامل
+  const [selectedOptions, setSelectedOptions] = useState(BlogData?.tags ? BlogData?.tags : []); // تخزين العناصر المختارة بالكامل
   const selectedOptionIds = selectedOptions.map(option => option.id);
   console.log(BlogData);
+useEffect(()=>{
+if(BlogData?.tags.length > 0){
+  setSelectedOptions(BlogData?.tags)
+}
 
+},[BlogData?.tags])
   const defaultValues = useMemo(
     () => ({
       title_ar: BlogData?.title_ar || '',
@@ -273,7 +280,8 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
                   onClick={handlePrev}
                   disabled={currentStep === 1} // Disable Previous on the first step
                 >
-                  Prev
+                            {translate('Previous')}
+
                 </Button>
 
                 <Button
@@ -281,8 +289,8 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
                   onClick={handleNext}
                   disabled={isNextDisabled} // تعطيل الزر إذا كان معطلاً
                 >
-                  Next
-                </Button>
+          {translate('Next')}
+          </Button>
               </Stack>
             </Stack>
           </Card>
@@ -365,7 +373,7 @@ export default function BlogNewPostForm({ isEdit, currentBlogTags }) {
         values={values}
         open={openPreview}
         isValid={isValid}
-        isSubmitting={isSubmitting}
+        isSubmitting={isLoading}
         onClose={handleClosePreview}
         onSubmit={handleSubmit(onSubmit)}
       />

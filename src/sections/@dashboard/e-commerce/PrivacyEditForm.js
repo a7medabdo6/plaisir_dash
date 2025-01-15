@@ -178,8 +178,8 @@ export default function PrivacyEditForm({ currentPrivacy }) {
         </Grid>
       </Grid>
 
-      <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        {translate('Privacy.edit')}
+      <LoadingButton type="submit" variant="contained" loading={isLoading} style={{width:"100%",marginTop:"30px"}}>
+        {translate('Privacy.Edit')}
       </LoadingButton>
     </FormProvider>
   );

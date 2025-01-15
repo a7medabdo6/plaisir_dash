@@ -21,7 +21,13 @@ const ICONS = {
   booking: icon('ic_booking'),
   blog: icon('ic_blog'),
   order: icon('ic_order'),
-
+  HomeContent: icon('i_HomeContent'),
+  FooterContent: icon('i_FooterContent'),
+  Terms: icon('i_Terms'),
+  Privacy:icon('i_Privacy'),
+  Tag:icon('i_Tag'),
+  Faq:icon('i_Fag'),
+  
 
 
 
@@ -42,13 +48,13 @@ const navConfig = [
             { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon },
             { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
             { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
-            { title: 'faqdash', path: PATH_DASHBOARD.FAQ, icon: ICONS.Products },
-            { title: 'BlogTagsdash', path: PATH_DASHBOARD.blogtags, icon: ICONS.Products },
+            { title: 'faqdash', path: PATH_DASHBOARD.FAQ, icon: ICONS.Faq },
+            { title: 'BlogTagsdash', path: PATH_DASHBOARD.blogtags, icon: ICONS.Tag },
 
-            { title: 'HomeContentdash', path: PATH_DASHBOARD.HomeContent, icon: ICONS.Products },
-            { title: 'FooterContentdash', path: PATH_DASHBOARD.FooterContent, icon: ICONS.Products },
-            { title: 'Termsdash', path: PATH_DASHBOARD.Terms, icon: ICONS.Products },
-            { title: 'Privacydash', path: PATH_DASHBOARD.Privacy, icon: ICONS.Products },
+            { title: 'HomeContentdash', path: PATH_DASHBOARD.HomeContent, icon: ICONS.HomeContent },
+            { title: 'FooterContentdash', path: PATH_DASHBOARD.FooterContent, icon: ICONS.FooterContent },
+            { title: 'Termsdash', path: PATH_DASHBOARD.Terms, icon: ICONS.Terms },
+            { title: 'Privacydash', path: PATH_DASHBOARD.Privacy, icon: ICONS.Privacy },
 
 
           ],
@@ -62,8 +68,8 @@ const navConfig = [
               icon: ICONS.blog,
               children: [
                 { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-                { title: 'post', path: PATH_DASHBOARD.blog.demoView },
-                { title: 'create', path: PATH_DASHBOARD.blog.new },
+                // { title: 'post', path: PATH_DASHBOARD.blog.demoView },
+                // { title: 'create', path: PATH_DASHBOARD.blog.new },
               ],
             },
           ],

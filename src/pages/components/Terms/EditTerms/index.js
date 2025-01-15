@@ -26,15 +26,15 @@ export default function EditFooterContent() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading={`${translate('coupon.Edit')}`}
+          heading={`${translate('Terms.Edit')}`}
           links={[
             
-            { name: `${translate('coupon.Dashboard')}`, href: PATH_DASHBOARD.root },
+            { name: `${translate('Terms.Dashboard')}`, href: PATH_DASHBOARD.root },
             {
-              name:   `${translate('coupon.coupon')}`,
+              name:   `${translate('Terms.Terms')}`,
               href: PATH_DASHBOARD.category.root,
             },
-            { name: `${translate('coupon.Edit')}` },
+            { name: `${translate('Terms.Edit')}` },
           ]}
         />
         <TermsEditForm />

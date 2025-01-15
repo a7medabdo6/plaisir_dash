@@ -25,15 +25,15 @@ export default function EditHomeContent() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading={`${translate('coupon.Edit')}`}
+          heading={`${translate('HomeContent.Edit')}`}
           links={[
             
-            { name: `${translate('coupon.Dashboard')}`, href: PATH_DASHBOARD.root },
+            { name: `${translate('HomeContent.Dashboard')}`, href: PATH_DASHBOARD.root },
             {
-              name:   `${translate('coupon.coupon')}`,
+              name:   `${translate('HomeContent.HomeContent')}`,
               href: PATH_DASHBOARD.category.root,
             },
-            { name: `${translate('coupon.Edit')}` },
+            { name: `${translate('HomeContent.Edit')}` },
           ]}
         />
         <HomeContentEditForm />

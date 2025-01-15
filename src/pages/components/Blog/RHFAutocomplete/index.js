@@ -35,6 +35,9 @@ export default function RHFAutocomplete({ name, label,setSelectedOptions,selecte
     const filteredOptions = options?.filter(
         (option) => option?.id && !selectedOptions.some((selected) => selected?.id === option?.id)
     );
+    console.log(selectedOptions);
+    
+    console.log(filteredOptions);
 
     return (
         <div>
@@ -42,6 +45,8 @@ export default function RHFAutocomplete({ name, label,setSelectedOptions,selecte
                 multiple
                 freeSolo
                 onChange={handleChange}
+                value={selectedOptions} // عرض القيم المختارة حاليًا
+
                 options={filteredOptions}
                 getOptionLabel={(option) => option?.title_en || option?.title_ar || ''}
                 renderInput={(params) => (

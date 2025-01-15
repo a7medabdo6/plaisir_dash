@@ -80,31 +80,60 @@ export default function BlogTagTableRow({ openConfirm,
           # {row.id}
         </TableCell>
         <TableCell align="left">
-          <img  src={imageSrc} style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 0 }}
+          <img src={imageSrc} style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 0 }}
             onClick={handleOpen}
           />
         </TableCell>
-        <TableCell align="left">
-          {row.title_ar}
-        </TableCell>
-        <TableCell align="left">
-          {row.title_en}
-        </TableCell>
        
-        
-        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.content_ar }} />
+        <TableCell
+          align="left"
+          dangerouslySetInnerHTML={{
+            __html: row.title_ar
+              ? `${row.title_ar.slice(0, 20)}${row.title_ar.length > 10 ? '...' : ''}`
+              : '',
+          }}
+        />
+        <TableCell
+          align="left"
+          dangerouslySetInnerHTML={{
+            __html: row.title_en
+              ? `${row.title_en.slice(0, 20)}${row.title_en.length > 10 ? '...' : ''}`
+              : '',
+          }}
+        />
 
-        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.content_en }} />
-        <TableCell align="left" dangerouslySetInnerHTML={{ __html: row.desc_en }} />
-
-<TableCell
-  align="left"
-  dangerouslySetInnerHTML={{
-    __html: row.desc_ar
-      ? `${row.desc_ar.slice(0, 10)}${row.desc_ar.length > 10 ? '...' : ''}`
-      : '',
-  }}
-/>
+        <TableCell
+          align="left"
+          dangerouslySetInnerHTML={{
+            __html: row.content_ar
+              ? `${row.content_ar.slice(0, 20)}${row.content_ar.length > 10 ? '...' : ''}`
+              : '',
+          }}
+        />
+        <TableCell
+          align="left"
+          dangerouslySetInnerHTML={{
+            __html: row.content_en
+              ? `${row.content_en.slice(0, 20)}${row.content_en.length > 10 ? '...' : ''}`
+              : '',
+          }}
+        />
+        <TableCell
+          align="left"
+          dangerouslySetInnerHTML={{
+            __html: row.desc_en
+              ? `${row.desc_en.slice(0, 20)}${row.desc_en.length > 10 ? '...' : ''}`
+              : '',
+          }}
+        />
+        <TableCell
+          align="left"
+          dangerouslySetInnerHTML={{
+            __html: row.desc_ar
+              ? `${row.desc_ar.slice(0, 20)}${row.desc_ar.length > 10 ? '...' : ''}`
+              : '',
+          }}
+        />
         <TableCell align="left">
           {row.tags[0]?.id}
         </TableCell>
@@ -119,7 +148,7 @@ export default function BlogTagTableRow({ openConfirm,
             }}
           />
         </TableCell>
-      
+
         <TableCell align="right">
           <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
             <Iconify icon="eva:more-vertical-fill" />

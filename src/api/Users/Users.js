@@ -5,9 +5,21 @@ export const createUser = async (UserData) => {
   return response.data;
 };
 
-export const getUsers = async (params) => {
+export const getUsers = async ({
+  orderBy = 'id',
+  order = 'desc',
+  limit = 10,
+  page = 1,
+  filterOptions = {}
+}) => {
   try {
-    const response = await axiosInstance.get('/v1/users',{params});
+    const params = {
+      orderBy,
+      order,
+      limit,
+      page,
+    };
+    const response = await axiosInstance.get(`/v1/users?filterOptions={searchKey:${filterOptions.searchKey},searchValue:${filterOptions.searchValue}}`,{params});
     return response.data;  // Return the list of Users
   } catch (error) {
     throw error;  // Throw error to handle in the component

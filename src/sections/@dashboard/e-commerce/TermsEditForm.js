@@ -190,8 +190,8 @@ export default function TermsEditForm({ isEdit, currentTerms }) {
         </Grid>
       </Grid>
 
-      <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        {translate(isEdit ? 'Terms.edit' : 'Terms.create')}
+      <LoadingButton type="submit" variant="contained" loading={isLoading} style={{width:"100%",marginTop:"30px"}}>
+        {translate('Terms.Edit')}
       </LoadingButton>
     </FormProvider>
   );

@@ -46,7 +46,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
 
   const { defaultValues, NewFooterContentSchema, FooterContentsData, onSubmit, onUpload, isLoading, handleDrop, uploadedFileDetails } = useStepHandlerFooterContent(currentFooterContent);
 
-  console.log(uploadedFileDetails);
+  console.log(isLoading);
 
   const methods = useForm({
     resolver: yupResolver(NewFooterContentSchema),
@@ -169,7 +169,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
 
 
                       <RHFUploadWithLabel
-                        label="adventure photo"
+                        label={translate('FooterContent.adventure_photo.value')}
                         defaultValue={defaultValues.adventure_photo.id}
                         newValue={uploadedFileDetails?.adventure_photo?.path}
                         multiple
@@ -178,6 +178,8 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'adventure_photo')}
                         onRemove={() => handleRemoveFile('adventure_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('adventure_photo')}
+                        isLoading={isLoading}
+
                         onUpload={() => onUpload('adventure_photo')
                         }
                       />
@@ -218,7 +220,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                       <RHFUploadWithLabel
                         thumbnail
                         name="banner_photo_for_app"
-                        label="banner photo for app"
+                        label={translate('FooterContent.banner_photo_for_app.value')}
                         newValue={uploadedFileDetails?.banner_photo_for_app?.path}
 
                         defaultValue={defaultValues.banner_photo_for_app.id}
@@ -227,12 +229,14 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onRemove={() => handleRemoveFile('banner_photo_for_app')}
                         onRemoveAll={() => handleRemoveAllFiles('banner_photo_for_app')}
                         onUpload={() => onUpload('banner_photo_for_app')}
+                        isLoading={isLoading}
+
                       />
 
                       <RHFUploadWithLabel
                         thumbnail
                         name="discount_photo"
-                        label="discount photo"
+                        label={translate('FooterContent.discount_photo.value')}
                         newValue={uploadedFileDetails?.discount_photo?.path}
 
                         defaultValue={defaultValues.discount_photo.id}
@@ -241,6 +245,8 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onRemove={() => handleRemoveFile('discount_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('discount_photo')}
                         onUpload={() => onUpload('discount_photo')}
+                        isLoading={isLoading}
+
                       />
 
                     </Stack>
@@ -267,13 +273,15 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                       <RHFUploadWithLabel
                         thumbnail
                         name="logo"
-                        label="logo"
+                        label={translate('FooterContent.logo.value')}
                         defaultValue={defaultValues.logo.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'logo')}
                         onRemove={() => handleRemoveFile('logo')}
                         onRemoveAll={() => handleRemoveAllFiles('logo')}
                         onUpload={() => onUpload('logo')}
+                        isLoading={isLoading}
+
                       />
 
                     </Stack>
@@ -309,18 +317,21 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
           onClick={prevSection}
           disabled={currentSection === 1}
         >
-          Previous
+          {translate('Previous')}
+
+
         </Button>
         <Button
           variant="contained"
           onClick={nextSection}
           disabled={currentSection === 3}  // Adjust based on total sections
         >
-          Next
+          {translate('Next')}
+
         </Button>
       </Stack>
-      <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        {translate(isEdit ? 'FooterContent.edit' : 'FooterContent.create')}
+      <LoadingButton type="submit" variant="contained" loading={isLoading} style={{width:"100%",marginTop:"30px"}}>
+        {translate('FooterContent.Edit')}
       </LoadingButton>
     </FormProvider>
   );

@@ -69,10 +69,11 @@ export function RHFUploadBox({ name, ...other }) {
 RHFUpload.propTypes = {
   name: PropTypes.string,
   multiple: PropTypes.bool,
+  isLoading: PropTypes.bool,
   helperText: PropTypes.node,
 };
 
-export function RHFUpload({ name, multiple, helperText, ...other }) {
+export function RHFUpload({ name, multiple,isLoading, helperText, ...other }) {
   const { control } = useFormContext();
 
   return (
@@ -85,6 +86,8 @@ export function RHFUpload({ name, multiple, helperText, ...other }) {
             multiple
             accept={{ 'image/*': [] }}
             files={field?.value}
+            isLoading={isLoading}
+
             error={!!error}
             helperText={
               (!!error || helperText) && (
@@ -121,11 +124,13 @@ RHFUploadWithLabel.propTypes = {
   label: PropTypes.string,
   defaultValue:PropTypes.string,
   newValue:PropTypes.string,
+  isLoading: PropTypes.bool,
+
   multiple: PropTypes.bool,
   helperText: PropTypes.node,
 };
 
-export function RHFUploadWithLabel({ name, multiple, label, helperText,defaultValue,newValue, ...other }) {
+export function RHFUploadWithLabel({ name, multiple, label, helperText,defaultValue,isLoading,newValue, ...other }) {
   const { control } = useFormContext();
 
   return (
@@ -148,6 +153,7 @@ export function RHFUploadWithLabel({ name, multiple, label, helperText,defaultVa
               files={files}
               newValue={newValue}
               error={!!error}
+              isLoading={isLoading}
               helperText={
                 (!!error || helperText) && (
                   <FormHelperText error={!!error} sx={{ px: 2 }}>

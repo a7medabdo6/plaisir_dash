@@ -6,7 +6,7 @@ import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
-import {  Card, Grid, Stack, Typography } from '@mui/material';
+import { Card, Grid, Stack, Typography } from '@mui/material';
 import FormProvider, {
   RHFUpload,
   RHFTextField,
@@ -90,7 +90,7 @@ export default function CategoryNewEditForm({ isEdit, currentCategory, data }) {
                 />
               </Stack>
               <Stack spacing={3}>
-                <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting || isLoading} 
+                <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting || isLoading}
                 >
                   {!isEdit ? `${translate('category.CreateCategory')}` : `${translate('category.SaveChanges')}`}
                 </LoadingButton>

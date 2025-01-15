@@ -14,7 +14,7 @@ export function useStepHandlerFooterContent(currentFooterContent) {
     const { translate } = useLocales();
     const [dataLoaded, setDataLoaded] = useState(false);
     const { data: FooterContentsData, isError } = useSingleFooterContent();
-    const { mutate: updateFooterContent, isLoading: isUpdating } = useUpdateFooterContentMutation();
+    const { mutateAsync: updateFooterContent, isLoading: isUpdating } = useUpdateFooterContentMutation();
     const { enqueueSnackbar } = useSnackbar();
     const uploadMutation = useUploadMutation();
     const [isLoading, setIsLoading] = useState(false);

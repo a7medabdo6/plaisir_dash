@@ -14,10 +14,11 @@ export function useStepHandlerTerms(currentTerms) {
   const { translate } = useLocales();
   const [dataLoaded, setDataLoaded] = useState(false);
   const { data: TermssData, isError } = useSingleTerms();
-  const { mutate: updateTerms, isLoading: isUpdating } = useUpdateTermsMutation();
+  const { mutateAsync: updateTerms } = useUpdateTermsMutation();
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(false);
 
+console.log(isLoading);
 
   useEffect(() => {
     if (TermssData) {
@@ -54,8 +55,9 @@ export function useStepHandlerTerms(currentTerms) {
 
 
   const onSubmit = async (formData) => {
-    try {
+    setIsLoading(true)
 
+    try {
       const updatedTerms = {
         id: TermssData?.id,
         content_en: formData.content_en || TermssData?.content_en,
@@ -64,12 +66,15 @@ export function useStepHandlerTerms(currentTerms) {
       };
 
 
-      updateTerms(updatedTerms);
+      await  updateTerms(updatedTerms);
       enqueueSnackbar(`${translate('editSuccess')}`, { variant: 'success' });
 
       // navigate(PATH_DASHBOARD.home);
     } catch (error) {
       enqueueSnackbar(translate('Terms.error'), { variant: 'error' });
+    } finally{
+      setIsLoading(false)
+
     }
   };
 

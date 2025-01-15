@@ -44,7 +44,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
 
   const { defaultValues, NewHomeContentSchema, HomeContentsData, onSubmit, onUpload, isLoading, handleDrop, uploadedFileDetails } = useStepHandlerHomeContent(currentHomeContent);
 
-  console.log(uploadedFileDetails);
+  console.log(isLoading);
 
   const methods = useForm({
     resolver: yupResolver(NewHomeContentSchema),
@@ -145,6 +145,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         newValue={uploadedFileDetails?.banner_photo?.path}
                         multiple
                         thumbnail
+                        isLoading={isLoading}
                         name="banner_photo"
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo')}
                         onRemove={() => handleRemoveFile('banner_photo')}
@@ -157,6 +158,7 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         name="banner_photo_ar"
                         label="Upload Banner Photo (Arabic)"
                         newValue={uploadedFileDetails?.banner_photo_ar?.path}
+                        isLoading={isLoading}
 
                         defaultValue={defaultValues.banner_photo_ar.id}
                         multiple
@@ -222,6 +224,8 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         onRemove={() => handleRemoveFile('know_us_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('know_us_photo')}
                         onUpload={() => onUpload('know_us_photo')}
+                        isLoading={isLoading}
+
                       />
                       <RHFUploadWithLabel
                         thumbnail
@@ -233,6 +237,8 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         onRemove={() => handleRemoveFile('know_us_photo_ar')}
                         onRemoveAll={() => handleRemoveAllFiles('know_us_photo_ar')}
                         onUpload={() => onUpload('know_us_photo_ar')}
+                        isLoading={isLoading}
+
                       />
                     </Stack>
                   )}
@@ -257,13 +263,15 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         thumbnail
                         name="why_choose_photo"
                         label={translate('HomeContent.why_choose_photo.value')}
-                        
+
                         defaultValue={defaultValues.why_choose_photo.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'why_choose_photo')}
                         onRemove={() => handleRemoveFile('why_choose_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('why_choose_photo')}
                         onUpload={() => onUpload('why_choose_photo')}
+                        isLoading={isLoading}
+
                       />
                       <RHFUploadWithLabel
                         thumbnail
@@ -275,91 +283,101 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
                         onRemove={() => handleRemoveFile('why_choose_photo_ar')}
                         onRemoveAll={() => handleRemoveAllFiles('why_choose_photo_ar')}
                         onUpload={() => onUpload('why_choose_photo_ar')}
+                        isLoading={isLoading}
+
                       />
                     </Stack>
                   )}
 
-{currentSection === 4 && (
-  <Stack spacing={2}>
-    <img
-      src={imageSectionFour}
-      alt="Uploaded Banner"
-      style={{ width: '100%', cursor: 'pointer' }}
-      onClick={() => handleOpenModal(imageSectionFour)}
-    />
-    <RHFTextField
-      name="ready_to_travel_title_en"
-      label={translate('HomeContent.ready_to_travel_title_en.value')}
-      defaultValue={defaultValues.ready_to_travel_title_en}
-    />
-    <RHFTextField
-      name="ready_to_travel_title_ar"
-      label={translate('HomeContent.ready_to_travel_title_ar.value')}
-      defaultValue={defaultValues.ready_to_travel_title_ar}
-    />
-    <RHFTextField
-      name="ready_to_travel_sub_title_en"
-      label={translate('HomeContent.ready_to_travel_sub_title_en.value')}
-      defaultValue={defaultValues.ready_to_travel_sub_title_en}
-    />
-    <RHFTextField
-      name="ready_to_travel_sub_title_ar"
-      label={translate('HomeContent.ready_to_travel_sub_title_ar.value')}
-      defaultValue={defaultValues.ready_to_travel_sub_title_ar}
-    />
-    <RHFTextField
-      name="percentage"
-      label={translate('HomeContent.percentage.value')}
-      defaultValue={defaultValues.percentage}
-    />
-    <Stack spacing={2}>
-      <RHFUploadWithLabel
-        thumbnail
-        name="ready_to_travel_photo"
-        label={translate('HomeContent.ready_to_travel_photo.value')}
-        defaultValue={defaultValues.ready_to_travel_photo.id}
-        multiple
-        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_photo')}
-        onRemove={() => handleRemoveFile('ready_to_travel_photo')}
-        onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_photo')}
-        onUpload={() => onUpload('ready_to_travel_photo')}
-      />
-      <RHFUploadWithLabel
-        thumbnail
-        name="ready_to_travel_sec_photo"
-        label={translate('HomeContent.ready_to_travel_sec_photo.value')}
-        defaultValue={defaultValues.ready_to_travel_sec_photo.id}
-        multiple
-        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_sec_photo')}
-        onRemove={() => handleRemoveFile('ready_to_travel_sec_photo')}
-        onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_sec_photo')}
-        onUpload={() => onUpload('ready_to_travel_sec_photo')}
-      />
-      <RHFUploadWithLabel
-        thumbnail
-        name="ready_to_travel_third_photo"
-        label={translate('HomeContent.ready_to_travel_third_photo.value')}
-        defaultValue={defaultValues.ready_to_travel_third_photo.id}
-        multiple
-        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_third_photo')}
-        onRemove={() => handleRemoveFile('ready_to_travel_third_photo')}
-        onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_third_photo')}
-        onUpload={() => onUpload('ready_to_travel_third_photo')}
-      />
-      <RHFUploadWithLabel
-        thumbnail
-        name="ready_to_travel_forth_photo"
-        label={translate('HomeContent.ready_to_travel_forth_photo.value')}
-        defaultValue={defaultValues.ready_to_travel_forth_photo.id}
-        multiple
-        onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_forth_photo')}
-        onRemove={() => handleRemoveFile('ready_to_travel_forth_photo')}
-        onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_forth_photo')}
-        onUpload={() => onUpload('ready_to_travel_forth_photo')}
-      />
-    </Stack>
-  </Stack>
-)}
+                  {currentSection === 4 && (
+                    <Stack spacing={2}>
+                      <img
+                        src={imageSectionFour}
+                        alt="Uploaded Banner"
+                        style={{ width: '100%', cursor: 'pointer' }}
+                        onClick={() => handleOpenModal(imageSectionFour)}
+                      />
+                      <RHFTextField
+                        name="ready_to_travel_title_en"
+                        label={translate('HomeContent.ready_to_travel_title_en.value')}
+                        defaultValue={defaultValues.ready_to_travel_title_en}
+                      />
+                      <RHFTextField
+                        name="ready_to_travel_title_ar"
+                        label={translate('HomeContent.ready_to_travel_title_ar.value')}
+                        defaultValue={defaultValues.ready_to_travel_title_ar}
+                      />
+                      <RHFTextField
+                        name="ready_to_travel_sub_title_en"
+                        label={translate('HomeContent.ready_to_travel_sub_title_en.value')}
+                        defaultValue={defaultValues.ready_to_travel_sub_title_en}
+                      />
+                      <RHFTextField
+                        name="ready_to_travel_sub_title_ar"
+                        label={translate('HomeContent.ready_to_travel_sub_title_ar.value')}
+                        defaultValue={defaultValues.ready_to_travel_sub_title_ar}
+                      />
+                      <RHFTextField
+                        name="percentage"
+                        label={translate('HomeContent.percentage.value')}
+                        defaultValue={defaultValues.percentage}
+                      />
+                      <Stack spacing={2}>
+                        <RHFUploadWithLabel
+                          thumbnail
+                          name="ready_to_travel_photo"
+                          label={translate('HomeContent.ready_to_travel_photo.value')}
+                          defaultValue={defaultValues.ready_to_travel_photo.id}
+                          multiple
+                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_photo')}
+                          onRemove={() => handleRemoveFile('ready_to_travel_photo')}
+                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_photo')}
+                          onUpload={() => onUpload('ready_to_travel_photo')}
+                          isLoading={isLoading}
+
+                        />
+                        <RHFUploadWithLabel
+                          thumbnail
+                          name="ready_to_travel_sec_photo"
+                          label={translate('HomeContent.ready_to_travel_sec_photo.value')}
+                          defaultValue={defaultValues.ready_to_travel_sec_photo.id}
+                          multiple
+                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_sec_photo')}
+                          onRemove={() => handleRemoveFile('ready_to_travel_sec_photo')}
+                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_sec_photo')}
+                          onUpload={() => onUpload('ready_to_travel_sec_photo')}
+                          isLoading={isLoading}
+
+                        />
+                        <RHFUploadWithLabel
+                          thumbnail
+                          name="ready_to_travel_third_photo"
+                          label={translate('HomeContent.ready_to_travel_third_photo.value')}
+                          defaultValue={defaultValues.ready_to_travel_third_photo.id}
+                          multiple
+                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_third_photo')}
+                          onRemove={() => handleRemoveFile('ready_to_travel_third_photo')}
+                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_third_photo')}
+                          onUpload={() => onUpload('ready_to_travel_third_photo')}
+                          isLoading={isLoading}
+
+                        />
+                        <RHFUploadWithLabel
+                          thumbnail
+                          name="ready_to_travel_forth_photo"
+                          label={translate('HomeContent.ready_to_travel_forth_photo.value')}
+                          defaultValue={defaultValues.ready_to_travel_forth_photo.id}
+                          multiple
+                          onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'ready_to_travel_forth_photo')}
+                          onRemove={() => handleRemoveFile('ready_to_travel_forth_photo')}
+                          onRemoveAll={() => handleRemoveAllFiles('ready_to_travel_forth_photo')}
+                          onUpload={() => onUpload('ready_to_travel_forth_photo')}
+                          isLoading={isLoading}
+
+                        />
+                      </Stack>
+                    </Stack>
+                  )}
 
 
                 </Stack>
@@ -390,18 +408,21 @@ export default function HomeContentEditForm({ isEdit, currentHomeContent }) {
           onClick={prevSection}
           disabled={currentSection === 1}
         >
-          Previous
+
+          {translate('Previous')}
         </Button>
         <Button
           variant="contained"
           onClick={nextSection}
           disabled={currentSection === 4}  // Adjust based on total sections
         >
-          Next
+          {translate('Next')}
+
         </Button>
       </Stack>
-      <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        {translate(isEdit ? 'HomeContent.edit' : 'HomeContent.create')}
+      
+      <LoadingButton type="submit" variant="contained" loading={isLoading} style={{width:"100%",marginTop:"30px"}}>
+        {translate('HomeContent.Edit')}
       </LoadingButton>
     </FormProvider>
   );
