@@ -24,16 +24,16 @@ const ICONS = {
   HomeContent: icon('i_HomeContent'),
   FooterContent: icon('i_FooterContent'),
   Terms: icon('i_Terms'),
-  Privacy:icon('i_Privacy'),
-  Tag:icon('i_Tag'),
-  Faq:icon('i_Fag'),
-  
+  Privacy: icon('i_Privacy'),
+  Tag: icon('i_Tag'),
+  Faq: icon('i_Fag'),
+
 
 
 
 
 };
-const userRole = JSON.parse(localStorage.getItem('user') || '{}')?.role?.name; 
+const userRole = JSON.parse(localStorage.getItem('user') || '{}')?.role?.name;
 console.log(userRole);
 
 const navConfig = [
@@ -41,62 +41,103 @@ const navConfig = [
   // ----------------------------------------------------------------------
   ...(userRole === 'Admin'
     ? [
-        {
-          subheader: 'general v4.1.0',
-          items: [
-            { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
-            { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon },
-            { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
-            { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
-            { title: 'faqdash', path: PATH_DASHBOARD.FAQ, icon: ICONS.Faq },
-            { title: 'BlogTagsdash', path: PATH_DASHBOARD.blogtags, icon: ICONS.Tag },
+      {
+        subheader: 'general v4.1.0',
+        items: [
+          { title: 'categorydash', path: PATH_DASHBOARD.category, icon: ICONS.category },
+          { title: 'coupondash', path: PATH_DASHBOARD.Coupon, icon: ICONS.Coupon },
+          { title: 'featuresdash', path: PATH_DASHBOARD.features, icon: ICONS.Features },
+          { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
+          { title: 'faqdash', path: PATH_DASHBOARD.FAQ, icon: ICONS.Faq },
+          { title: 'BlogTagsdash', path: PATH_DASHBOARD.blogtags, icon: ICONS.Tag },
 
-            { title: 'HomeContentdash', path: PATH_DASHBOARD.HomeContent, icon: ICONS.HomeContent },
-            { title: 'FooterContentdash', path: PATH_DASHBOARD.FooterContent, icon: ICONS.FooterContent },
-            { title: 'Termsdash', path: PATH_DASHBOARD.Terms, icon: ICONS.Terms },
-            { title: 'Privacydash', path: PATH_DASHBOARD.Privacy, icon: ICONS.Privacy },
+          // { title: 'HomeContentdash', path: PATH_DASHBOARD.HomeContent, icon: ICONS.HomeContent },
+          // { title: 'FooterContentdash', path: PATH_DASHBOARD.FooterContent, icon: ICONS.FooterContent },
+          // { title: 'Termsdash', path: PATH_DASHBOARD.Terms, icon: ICONS.Terms },
+          // { title: 'Privacydash', path: PATH_DASHBOARD.Privacy, icon: ICONS.Privacy },
 
 
-          ],
-        },
-        {
-          subheader: 'blog',
-          items: [
-            {
-              title: 'blog',
-              path: PATH_DASHBOARD.blog.root,
-              icon: ICONS.blog,
-              children: [
-                { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-                // { title: 'post', path: PATH_DASHBOARD.blog.demoView },
-                // { title: 'create', path: PATH_DASHBOARD.blog.new },
-              ],
-            },
-          ],
-        },
-        {
-          subheader: 'management',
-          items: [
-            {
-              title: 'user',
-              path: PATH_DASHBOARD.user.root,
-              icon: ICONS.user,
-              children: [
-                { title: 'list', path: PATH_DASHBOARD.user.list },
-              ],
-            },
-            {
-              title: 'Order',
-              path: PATH_DASHBOARD.order.root,
-              icon: ICONS.order,
-              children: [
-                { title: 'list', path: PATH_DASHBOARD.order.list },
-              ],
-            },
-          ],
-        },
-      ]
-    :  [
+        ],
+      },
+      {
+        subheader: 'blog',
+        items: [
+          {
+            title: 'blog',
+            path: PATH_DASHBOARD.blog.root,
+            icon: ICONS.blog,
+            children: [
+              { title: 'posts', path: PATH_DASHBOARD.blog.posts },
+              // { title: 'post', path: PATH_DASHBOARD.blog.demoView },
+              // { title: 'create', path: PATH_DASHBOARD.blog.new },
+            ],
+          },
+        ],
+      },
+      {
+        subheader: 'management',
+        items: [
+          {
+            title: 'user',
+            path: PATH_DASHBOARD.user.root,
+            icon: ICONS.user,
+            children: [
+              { title: 'list', path: PATH_DASHBOARD.user.list },
+            ],
+          },
+          {
+            title: 'Order',
+            path: PATH_DASHBOARD.order.root,
+            icon: ICONS.order,
+            children: [
+              { title: 'list', path: PATH_DASHBOARD.order.list },
+            ],
+          },
+        ],
+      },
+      {
+        subheader: 'settings',
+        items: [
+          {
+
+            title: 'HomeContentdash',
+            path: PATH_DASHBOARD.HomeContent,
+            icon: ICONS.HomeContent,
+            children: [
+              { title: 'Edit', path: PATH_DASHBOARD.HomeContent },
+            ],
+          },
+          {
+
+            title: 'FooterContentdash',
+            path: PATH_DASHBOARD.FooterContent,
+            icon: ICONS.FooterContent,
+            children: [
+              { title: 'Edit', path: PATH_DASHBOARD.FooterContent },
+            ],
+          },
+          {
+
+            title: 'Termsdash',
+            path: PATH_DASHBOARD.Terms,
+            icon: ICONS.Terms,
+            children: [
+              { title: 'Edit', path: PATH_DASHBOARD.Terms },
+            ],
+          },
+          {
+
+            title: 'Privacydash',
+            path: PATH_DASHBOARD.Privacy,
+            icon: ICONS.Privacy,
+            children: [
+              { title: 'Edit', path: PATH_DASHBOARD.Privacy },
+            ],
+          },
+        ],
+      },
+    ]
+    : [
       {
         subheader: 'general v4.1.0',
         items: [
@@ -143,6 +184,8 @@ const navConfig = [
           },
         ],
       },
+
+     
     ]),];
 // const navConfig = [
 //   // GENERAL
@@ -214,11 +257,11 @@ const navConfig = [
 //           // { title: 'account', path: PATH_DASHBOARD.user.account },
 //         ],
 //       },
-    
-    
+
+
 //     ],
 //   },
-  
+
 //   // {
 //   //   subheader: 'management',
 //   //   items: [

@@ -1172,6 +1172,8 @@ const ar = {
   invoice: `فاتورة`,
   details: `تفاصيل`,
   UploadAll: "رفع الملفات",
+  Logout:"تسجيل خروج",
+
   RemoveAll: "إزالة الكل",
   checkout: `الدفع`,
   calendar: `التقويم`,

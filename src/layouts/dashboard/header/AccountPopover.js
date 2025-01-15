@@ -12,6 +12,7 @@ import { CustomAvatar } from '../../../components/custom-avatar';
 import { useSnackbar } from '../../../components/snackbar';
 import MenuPopover from '../../../components/menu-popover';
 import { IconButtonAnimate } from '../../../components/animate';
+import { useLocales } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,7 @@ const OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
+  const { translate } = useLocales();
 
   const { user, logout } = useAuthContext();
 
@@ -108,18 +110,19 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <Stack sx={{ p: 1 }}>
+        {/* <Stack sx={{ p: 1 }}>
           {OPTIONS.map((option) => (
             <MenuItem key={option.label} onClick={() => handleClickItem(option.linkTo)}>
               {option.label}
             </MenuItem>
           ))}
-        </Stack>
+        </Stack> */}
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
-          Logout
+        {translate('Logout')}
+          
         </MenuItem>
       </MenuPopover>
     </>

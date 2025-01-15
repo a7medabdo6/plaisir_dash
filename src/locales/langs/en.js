@@ -1197,8 +1197,8 @@ const en = {
   Order: "Order",
   Next: "Next",
   BlogTagsdash: 'BlogTags',
-  HomeContentdash: "HomeContent",
-  FooterContentdash: "FooterContent",
+  HomeContentdash: "Home Content",
+  FooterContentdash: "Footer Content",
   Termsdash: "Terms",
   Privacydash: "Privacy",
 
@@ -1234,7 +1234,7 @@ const en = {
   addSuccess: " added successfully!",
   addError: "Error adding . Please try again.",
   imageUploadSuccess: "Image uploaded successfully",
-
+  Logout:"Logout",
   menu_level_4b: `menu level 4b`,
   item_disabled: `item disabled`,
   item_label: `item label`,
