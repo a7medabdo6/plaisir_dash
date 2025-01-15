@@ -5,9 +5,21 @@ export const createCategory = async (categoryData) => {
   return response.data;
 };
 
-export const getCategories = async (params) => {
+export const getCategories = async ({
+  orderBy = 'id',
+  order = 'desc',
+  limit = 10,
+  page = 1,
+  filterOptions = {}
+}) => {
   try {
-    const response = await axiosInstance.get('/categories',{params});
+    const params = {
+      orderBy,
+      order,
+      limit,
+      page,
+    };
+    const response = await axiosInstance.get(`/categories?filterOptions={searchKey:${filterOptions.searchKey},searchValue:${filterOptions.searchValue}}`,{params});
     return response.data;  // Return the list of categories
   } catch (error) {
     throw error;  // Throw error to handle in the component

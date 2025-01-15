@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 // @mui
 import { Stack, InputAdornment, TextField, OutlinedInput, Button } from '@mui/material';
 // components
-import Iconify from '../../../../../../../components/iconify';
-import { useLocales } from '../../../../../../../locales';
 import SearchIcon from '@mui/icons-material/Search'; // Importing the MUI Search icon
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import DateRangeIcon from '@mui/icons-material/DateRange';  // استيراد أيقونة التاريخ
+import { useLocales } from 'src/locales';
+import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ export default function CategoryTableToolbar({
     >
   
 
-
+{/* 
       <DatePicker
         selected={filterEndDate}
         onChange={onFilterEndDate}
@@ -82,7 +82,7 @@ export default function CategoryTableToolbar({
             }
           />
         }
-      />
+      /> */}
 
 
       <TextField

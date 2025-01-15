@@ -51,39 +51,6 @@ export default function BlogTagTableToolbar({
   
 
 
-      <DatePicker
-        selected={filterEndDate}
-        onChange={onFilterEndDate}
-        placeholderText="Start Date"
-        dateFormat="MM/dd/yyyy"
-        customInput={
-          <OutlinedInput
-            sx={{ width: '300px' }}  // عرض المدخل
-            startAdornment={  // إضافة الأيقونة إلى بداية المدخل
-              <InputAdornment position="start">
-                <DateRangeIcon sx={{ color: 'text.disabled' }} />
-              </InputAdornment>
-            }
-          />
-        }
-      />
-      <DatePicker
-        selected={filterEndDate}
-        onChange={onFilterEndDate}
-        placeholderText="End Date"
-        dateFormat="MM/dd/yyyy"
-        customInput={
-          <OutlinedInput
-            sx={{ width: '300px' }}  // عرض المدخل
-            startAdornment={  // إضافة الأيقونة إلى بداية المدخل
-              <InputAdornment position="start">
-                <DateRangeIcon sx={{ color: 'text.disabled' }} />
-              </InputAdornment>
-            }
-          />
-        }
-      />
-
 
       <TextField
         fullWidth

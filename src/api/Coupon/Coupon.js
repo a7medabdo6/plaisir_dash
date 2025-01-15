@@ -5,9 +5,21 @@ export const createCoupon = async (CouponData) => {
   return response.data;
 };
 
-export const getCoupons = async (params) => {
+export const getCoupons = async ({
+  orderBy = 'id',
+  order = 'desc',
+  limit = 10,
+  page = 1,
+  filterOptions = {}
+}) => {
   try {
-    const response = await axiosInstance.get('/coupon',{params});
+    const params = {
+      orderBy,
+      order,
+      limit,
+      page,
+    };
+    const response = await axiosInstance.get(`/coupon?filterOptions={searchKey:${filterOptions.searchKey},searchValue:${filterOptions.searchValue}}`,{params});
     return response.data;  // Return the list of Coupons
   } catch (error) {
     throw error;  // Throw error to handle in the component

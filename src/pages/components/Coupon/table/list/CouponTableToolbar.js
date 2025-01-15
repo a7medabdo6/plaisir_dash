@@ -13,7 +13,7 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-FeatureTableToolbar.propTypes = {
+CouponTableToolbar.propTypes = {
   isFiltered: PropTypes.bool,
   filterName: PropTypes.string,
   filterRole: PropTypes.string,
@@ -23,7 +23,7 @@ FeatureTableToolbar.propTypes = {
   optionsRole: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default function FeatureTableToolbar({
+export default function CouponTableToolbar({
   isFiltered,
   filterName,
   filterRole,
@@ -66,8 +66,8 @@ export default function FeatureTableToolbar({
             }
           />
         }
-      /> */}
-      {/* <DatePicker
+      />
+      <DatePicker
         selected={filterEndDate}
         onChange={onFilterEndDate}
         placeholderText="End Date"
@@ -89,7 +89,7 @@ export default function FeatureTableToolbar({
         fullWidth
         value={filterName}
         onChange={onFilterName}
-        placeholder={`${translate('category.search')}`}
+        placeholder={`${translate('coupon.search')}`}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -106,7 +106,7 @@ export default function FeatureTableToolbar({
           onClick={onResetFilter}
           startIcon={<Iconify icon="eva:trash-2-outline" />}
         >
-          {`${translate('category.Clear')}`}
+          {`${translate('coupon.Clear')}`}
 
         </Button>
       )}

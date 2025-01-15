@@ -316,7 +316,7 @@ const onSubmit = async (formData) => {
   try {
    
     const updatedHomeContent = {
-      id: HomeContentsData?.id,
+      // id: HomeContentsData?.id,
       banner_fir_title_en: formData.banner_fir_title_en || HomeContentsData?.banner_fir_title_en,
       banner_fir_title_ar: formData.banner_fir_title_ar || HomeContentsData?.banner_fir_title_ar,
       banner_sec_title_en: formData.banner_sec_title_en || HomeContentsData?.banner_sec_title_en,

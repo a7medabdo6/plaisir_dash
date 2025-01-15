@@ -40,6 +40,7 @@ import {
 import { useLocales } from '../../../../locales';
 import { useCategoryList } from './useCategoryList';
 import CategoryTableRow from './list/CategoryTableRow';
+import { CategoryTableToolbar } from './list';
 
 // ----------------------------------------------------------------------
 
@@ -80,7 +81,7 @@ export default function CategoryListPage() {
     onChangeRowsPerPage,
     
   } = useTable();
-  const { data, applyFilter, handleDeleteCategory,  isLoading, isError, error,refetch } = useCategoryList({
+  const { data, applyFilter, handleDeleteCategory,  isLoading, isError, error,refetch ,isFiltered} = useCategoryList({
     limit: 5,
     page,
     order,
@@ -98,6 +99,12 @@ export default function CategoryListPage() {
   });
 
   const [total, settotal] = useState(data?.total);
+  useEffect(() => {
+    if(data){
+      settotal(data?.total)
+  
+    }
+  }, [data])
 
   const TABLE_HEAD = [
     { id: 'id', label: `${translate('category.id')}`, align: 'left' },
@@ -153,12 +160,7 @@ export default function CategoryListPage() {
 
    
   };
-useEffect(() => {
-  if(data){
-    settotal(data?.total)
 
-  }
-}, [data])
 
 
   const handleEditRow = (id) => {
@@ -204,15 +206,14 @@ useEffect(() => {
           
 
 
-          {/* <UserTableToolbar
+          <CategoryTableToolbar
             isFiltered={isFiltered}
             filterName={filterName}
             filterRole={filterRole}
-            optionsRole={ROLE_OPTIONS}
             onFilterName={handleFilterName}
             onFilterRole={handleFilterRole}
             onResetFilter={handleResetFilter}
-          /> */}
+          />
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
          
@@ -247,7 +248,6 @@ useEffect(() => {
 
                  
 
-                  <TableNoData isNotFound={isNotFound} />
                 </TableBody>
               </Table>
             </Scrollbar>

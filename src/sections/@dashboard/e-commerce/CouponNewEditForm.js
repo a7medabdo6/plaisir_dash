@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,6 +27,9 @@ import FormProvider, {
 } from '../../../components/hook-form';
 
 import { useLocales } from '../../../locales';
+import useCreateCouponMutation from 'src/hooks/Coupon/useCreateCouponMutation ';
+import useUpdateCouponMutation from 'src/hooks/Coupon/useUpdateCouponMutation';
+import useSingleCoupon from 'src/hooks/Coupon/useSingleCoupon';
 
 // ----------------------------------------------------------------------
 
@@ -37,11 +40,7 @@ const options = [
   { value: 'grape', label: 'Grape' },
 ];
 
-const Category_OPTION = [
-  { group: 'Clothing', classify: ['Shirts', 'T-shirts', 'Jeans', 'Leather'] },
-  { group: 'Tailored', classify: ['Suits', 'Blazers', 'Trousers', 'Waistcoats'] },
-  { group: 'Accessories', classify: ['Shoes', 'Backpacks and bags', 'Bracelets', 'Face masks'] },
-];
+
 
 CouponNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
@@ -52,22 +51,26 @@ export default function CouponNewEditForm({ isEdit, currentCoupon }) {
   const navigate = useNavigate();
   const { translate } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
+  const createMutation = useCreateCouponMutation();
+  const { mutate: updateCoupon, isLoading: isUpdating } = useUpdateCouponMutation();
+  const { id } = useParams();
 
+  const { data:Onecoupon, error, isLoading } = useSingleCoupon(id);
   const NewCouponSchema = Yup.object().shape({
     code: Yup.string().required(`${translate('coupon.errors.code')}`),
-    discountPercentage: Yup.number().nullable().required(`${translate('coupon.errors.discountPercentage')}`),
+    discountPercentage: Yup.string().nullable().required(`${translate('coupon.errors.discountPercentage')}`),
     expirationDate: Yup.date().nullable().required(`${translate('coupon.errors.expirationDate')}`),
     products: Yup.array().min(1, `${translate('coupon.errors.products.min')}`),
   });
 
   const defaultValues = useMemo(
     () => ({
-      code: currentCoupon?.code || '',
-      discountPercentage: currentCoupon?.discountPercentage,
-      expirationDate: currentCoupon?.expirationDate || new Date().toISOString().split('T')[0],
-      products: currentCoupon?.products || [],
+      code: Onecoupon?.code || '',
+      discountPercentage: Onecoupon?.discountPercentage,
+      expirationDate: Onecoupon?.expirationDate || new Date().toISOString().split('T')[0],
+      products: Onecoupon?.products || [],
     }),
-    [currentCoupon]
+    [Onecoupon]
   );
 
   const methods = useForm({
@@ -86,28 +89,54 @@ export default function CouponNewEditForm({ isEdit, currentCoupon }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentCoupon) {
+    if (isEdit && Onecoupon) {
       reset(defaultValues);
     }
     if (!isEdit) {
       reset(defaultValues);
     }
-  }, [isEdit, currentCoupon]);
+  }, [isEdit, Onecoupon]);
 
-  const onSubmit = async (data) => {
+ 
+  const handleSubmitCoupon= async (formData) => {
+    const CouponData = {
+      code: formData.code,
+      discountPercentage: formData.discountPercentage.toString(),
+      expirationDate: formData.expirationDate,
+      products: [
+        {
+          id: 6, // يمكنك ضبط الرقم كما يناسبك
+        },
+      ],
+    };
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.eCommerce.list);
-      console.log('DATA', data);
+      if (isEdit) {
+        const updatedCoupon= {
+          code: formData.code,
+          discountPercentage: formData.discountPercentage.toString(),
+          expirationDate: formData.expirationDate,
+          products: [
+            {
+              id: 6, // يمكنك ضبط الرقم كما يناسبك
+            },
+          ],
+        };
+        updateCoupon(updatedCoupon);
+        enqueueSnackbar(`${translate('editSuccess')}`, { variant: 'success' });
+      } else {
+        await createMutation.mutateAsync(CouponData);
+        enqueueSnackbar(`${translate('addSuccess')}`, { variant: 'success' });
+      }
+      navigate('/dashboard/coupon');
     } catch (error) {
-      console.error(error);
+      console.error('Error during submission:', error);
+      enqueueSnackbar(`${translate('addError')}`, { variant: 'error' });
     }
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(handleSubmitCoupon)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
@@ -117,7 +146,7 @@ export default function CouponNewEditForm({ isEdit, currentCoupon }) {
               </FormControl>
 
               <FormControl fullWidth error={!!errors.discountPercentage}>
-                <RHFTextField name="discountPercentage" type="number" label={`${translate('coupon.discountPercentage')}`} />
+                <RHFTextField name="discountPercentage" type="text" label={`${translate('coupon.discountPercentage')}`} />
               </FormControl>
 
               <FormControl fullWidth error={!!errors.expirationDate}>
@@ -137,9 +166,7 @@ export default function CouponNewEditForm({ isEdit, currentCoupon }) {
               />
 
               <Stack spacing={3}>
-                <Card sx={{ p: 3 }}>
-                  <RHFSwitch name="inStock" label={`${translate('coupon.IsActive')}`} />
-                </Card>
+               
                 <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting}>
                   {!isEdit ? `${translate('coupon.CreateCoupon')}` : `${translate('coupon.SaveChanges')}`}
                 </LoadingButton>

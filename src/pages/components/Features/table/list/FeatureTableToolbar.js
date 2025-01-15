@@ -51,7 +51,7 @@ export default function FeatureTableToolbar({
   
 
 
-      <DatePicker
+      {/* <DatePicker
         selected={filterEndDate}
         onChange={onFilterEndDate}
         placeholderText="Start Date"
@@ -66,8 +66,8 @@ export default function FeatureTableToolbar({
             }
           />
         }
-      />
-      <DatePicker
+      /> */}
+      {/* <DatePicker
         selected={filterEndDate}
         onChange={onFilterEndDate}
         placeholderText="End Date"
@@ -82,7 +82,7 @@ export default function FeatureTableToolbar({
             }
           />
         }
-      />
+      /> */}
 
 
       <TextField

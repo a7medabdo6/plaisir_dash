@@ -51,7 +51,7 @@ export default function FAQListPage() {
     order: 'desc',
     limit: 5,
     page: pageCount,
-    filterOptions: { searchKey: 'name_en', searchValue: filterName },
+    filterOptions: { searchKey: 'ques_en', searchValue: filterName },
   };
   const { loading, total, data, isFiltered, handleDeleteFeature } = useFAQList(
     initialParams,

@@ -44,19 +44,13 @@ export default function useFAQList(initialParams,pageCount, filterName, filterRo
     let filteredData = inputData;
   
     if (filterName) {
-      const lowercasedFilterName = filterName ? filterName.toString().toLowerCase() : '';
-      filteredData = filteredData.filter((feature) =>
-        feature.name_en.toLowerCase().includes(lowercasedFilterName)
+      const lowercasedFilterName = filterName ? filterName?.toString().toLowerCase() : '';
+      filteredData = filteredData?.filter((feature) =>
+        feature?.ques_en?.toLowerCase().includes(lowercasedFilterName)
       );
     }
   
-    if (filterStatus !== 'all') {
-      filteredData = filteredData.filter((feature) => feature.status === filterStatus);
-    }
-  
-    if (filterRole !== 'all') {
-      filteredData = filteredData.filter((feature) => feature.role === filterRole);
-    }
+
   
     return filteredData;
   };

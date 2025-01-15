@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
@@ -42,6 +42,9 @@ import queryString from 'query-string';
 import { UserTableToolbar, UserTableRow } from '../../../../sections/@dashboard/user/list/index';
 import { useLocales } from '../../../../locales';
 import useCoupon from 'src/hooks/Coupon/useCoupon';
+import CouponTableRow from './list/CouponTableRow';
+import CouponTableToolbar from './list/CouponTableToolbar';
+import useDeleteCouponMutation from 'src/hooks/Coupon/useDeleteCouponMutation';
 
 // ----------------------------------------------------------------------
 
@@ -84,7 +87,7 @@ export default function CouponListPage() {
     // { id: 'company', label: 'Company', align: 'left' },
     // { id: 'role', label: 'Role', align: 'left' },
     // { id: 'isVerified', label: `${translate('coupon.Verified')}`, align: 'center' },
-    { id: 'status', label: `${translate('coupon.status')}`, align: 'left' },
+    // { id: 'status', label: `${translate('coupon.status')}`, align: 'left' },
     { id: '' },
   ];
   
@@ -115,38 +118,18 @@ const initialParams = {
   order: 'desc',
   limit: 5,
   page: pageCount,
-  filterOptions: { searchKey: 'name_en', searchValue: filterName },
+  filterOptions: { searchKey: 'code', searchValue: filterName },
 };
 
 // تحويل filterOptions إلى سلسلة استعلام
-const filterQuery = queryString.stringify(initialParams.filterOptions, {
-  skipNull: true,
-  skipEmptyString: true,
-});
 
-// دمج سلسلة الاستعلام مع بقية المعاملات
-const finalParams = {
-  ...initialParams,
-  filterOptions: filterQuery, // استبدال filterOptions بسلسلة الاستعلام
-};
 
 // استخدام finalParams مع useCoupon
-const { data, isError, error } = useCoupon(finalParams);
+const { data, isError, error } = useCoupon(initialParams);
     console.log(data);
-  
-  // const STATUS_OPTIONS = [`${translate('coupon.all')}`, `${translate('coupon.active')}`, `${translate('coupon.banned')}`];
-  const ROLE_OPTIONS = [
-    `${translate('coupon.all')}`,
-    'ux designer',
-    'full stack designer',
-    'backend developer',
-    'project manager',
-    'leader',
-    'ui designer',
-    'ui/ux designer',
-    'front end developer',
-    'full stack developer',
-  ];
+    const { mutate: deleteCouponMutation } = useDeleteCouponMutation();
+
+
 
   const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
@@ -181,38 +164,40 @@ const { data, isError, error } = useCoupon(finalParams);
     setPage(0);
     setFilterRole(event.target.value);
   };
+const [total, settotal] = useState(data?.total);
+  useEffect(() => {
+    if(data){
+      settotal(data?.total)
+  
+    }
+  }, [data])
+  const [loading, setLoading] = useState(false);
 
+
+  const handleDeleteCoupon = (CouponId) => {
+    setLoading(true)
+    deleteCouponMutation(CouponId, {
+      onSuccess: () => {
+        // عرض رسالة النجاح باستخدام useSnackbar
+        enqueueSnackbar(`${translate('deleteSuccess')}`, { variant: 'success' });
+        setLoading(false)
+        setOpenConfirm(false)
+
+      },
+      onError: (error) => {
+        console.error('Error deleting Coupon:', error);
+        // عرض رسالة الخطأ باستخدام useSnackbar
+        enqueueSnackbar(`${translate('deleteError')}`, { variant: 'error' });
+        setLoading(false)
+
+      },
+    });
+  };
   const handleDeleteRow = (id) => {
-    const deleteRow = tableData.filter((row) => row.id !== id);
-    setSelected([]);
-    setTableData(deleteRow);
-
-    if (page > 0) {
-      if (dataInPage.length < 2) {
-        setPage(page - 1);
-      }
-    }
+    handleDeleteCoupon(id)
   };
-
-  const handleDeleteRows = (selectedRows) => {
-    const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
-    setSelected([]);
-    setTableData(deleteRows);
-
-    if (page > 0) {
-      if (selectedRows.length === dataInPage.length) {
-        setPage(page - 1);
-      } else if (selectedRows.length === dataFiltered.length) {
-        setPage(0);
-      } else if (selectedRows.length > dataInPage.length) {
-        const newPage = Math.ceil((tableData.length - selectedRows.length) / rowsPerPage) - 1;
-        setPage(newPage);
-      }
-    }
-  };
-
   const handleEditRow = (id) => {
-    navigate("/dashboard/coupon/edit:4");
+    navigate(`/dashboard/coupon/edit${id}`);
   };
 
   const handleResetFilter = () => {
@@ -267,11 +252,10 @@ const { data, isError, error } = useCoupon(finalParams);
 
           <Divider />
 
-          <UserTableToolbar
+          <CouponTableToolbar
             isFiltered={isFiltered}
             filterName={filterName}
             filterRole={filterRole}
-            optionsRole={ROLE_OPTIONS}
             onFilterName={handleFilterName}
             onFilterRole={handleFilterRole}
             onResetFilter={handleResetFilter}
@@ -315,34 +299,34 @@ const { data, isError, error } = useCoupon(finalParams);
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
-                      <UserTableRow
+                  {data?.data.map((row) => (
+                      <CouponTableRow
                         key={row.id}
                         row={row}
                         avtar={false}
                         coupon={true}
+                        setOpenConfirm={setOpenConfirm}
+                        openConfirm={openConfirm}
+
                         selected={selected.includes(row.id)}
                         onSelectRow={() => onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
-                        onEditRow={() => handleEditRow(row.name)}
+                        onEditRow={() => handleEditRow(row.id)}
                       />
                     ))}
 
-                  <TableEmptyRows
+                  {/* <TableEmptyRows
                     height={denseHeight}
                     emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
-                  />
+                  /> */}
 
-                  <TableNoData isNotFound={isNotFound} />
                 </TableBody>
               </Table>
             </Scrollbar>
           </TableContainer>
 
           <TablePaginationCustom
-            count={dataFiltered.length}
+            count={total}
             page={page}
             rowsPerPage={rowsPerPage}
             onPageChange={onChangePage}
@@ -354,28 +338,7 @@ const { data, isError, error } = useCoupon(finalParams);
         </Card>
       </Container>
 
-      <ConfirmDialog
-        open={openConfirm}
-        onClose={handleCloseConfirm}
-        title={`${translate('coupon.delet')}`}
-        content={
-          <>
-            Are you sure want to delete <strong> {selected.length} </strong> items?
-          </>
-        }
-        action={
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => {
-              handleDeleteRows(selected);
-              handleCloseConfirm();
-            }}
-          >
-            {`${translate('coupon.delet')}`}
-          </Button>
-        }
-      />
+   
     </>
   );
 }

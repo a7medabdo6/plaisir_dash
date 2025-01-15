@@ -62,6 +62,7 @@ const ar = {
   },
   coupon: {
     create: `انشاء`,
+    Clear:"مسح",
 
     coupon: `كوبون خصم`,
     category: `الفئات`,

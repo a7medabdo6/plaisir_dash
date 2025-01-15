@@ -62,7 +62,7 @@ const en = {
     banned: `banned`,
     active: 'active',
     search: 'Search',
-
+Clear:"Clear",
     NewCoupon: 'New Coupon',
     CreateanewCoupon: 'Create a new Coupon',
     CreateCoupon: 'Create Coupon',
@@ -579,6 +579,326 @@ list:"list",
   
   },
 
+  
+  
+    HomeContent: {
+      banner_fir_title_en: {
+        value: "banner fir title english",
+        error: "This field is required"
+      },
+      banner_fir_title_ar: {
+        value: "banner fir title arabic",
+        error: "This field is required"
+      },
+      banner_sec_title_en: {
+        value: "banner sec title english",
+        error: "This field is required"
+      },
+      banner_sec_title_ar: {
+        value: "banner sec title arabic",
+        error: "This field is required"
+      },
+      banner_third_title_en: {
+        value: "banner third title english",
+        error: "This field is required"
+      },
+      banner_third_title_ar: {
+        value: "banner third title arabic",
+        error: "This field is required"
+      },
+      banner_btn_en: {
+        value: "banner button english",
+        error: "This field is required"
+      },
+      banner_btn_ar: {
+        value: "banner button arabic",
+        error: "This field is required"
+      },
+      service_fir_title_en: {
+        value: "service first title english",
+        error: "This field is required"
+      },
+      service_fir_title_ar: {
+        value: "service first title arabic",
+        error: "This field is required"
+      },
+      service_fir_sub_title_en: {
+        value: "service first subtitle english",
+        error: "This field is required"
+      },
+      service_fir_sub_title_ar: {
+        value: "service first subtitle arabic",
+        error: "This field is required"
+      },
+      service_sec_title_en: {
+        value: "service second title english",
+        error: "This field is required"
+      },
+      service_sec_title_ar: {
+        value: "service second title arabic",
+        error: "This field is required"
+      },
+      service_sec_sub_title_en: {
+        value: "service second subtitle english",
+        error: "This field is required"
+      },
+      service_sec_sub_title_ar: {
+        value: "service second subtitle arabic",
+        error: "This field is required"
+      },
+      service_third_title_en: {
+        value: "service third title english",
+        error: "This field is required"
+      },
+      service_third_title_ar: {
+        value: "service third title arabic",
+        error: "This field is required"
+      },
+      service_third_sub_title_en: {
+        value: "service third subtitle english",
+        error: "This field is required"
+      },
+      service_third_sub_title_ar: {
+        value: "service third subtitle arabic",
+        error: "This field is required"
+      },
+      service_forth_title_en: {
+        value: "service fourth title english",
+        error: "This field is required"
+      },
+      service_forth_title_ar: {
+        value: "service fourth title arabic",
+        error: "This field is required"
+      },
+      service_forth_sub_title_en: {
+        value: "service fourth subtitle english",
+        error: "This field is required"
+      },
+      service_forth_sub_title_ar: {
+        value: "service fourth subtitle arabic",
+        error: "This field is required"
+      },
+      service_fifth_title_en: {
+        value: "service fifth title english",
+        error: "This field is required"
+      },
+      service_fifth_title_ar: {
+        value: "service fifth title arabic",
+        error: "This field is required"
+      },
+      service_fifth_sub_title_en: {
+        value: "service fifth subtitle english",
+        error: "This field is required"
+      },
+      service_fifth_sub_title_ar: {
+        value: "service fifth subtitle arabic",
+        error: "This field is required"
+      },
+      service_sixth_title_en: {
+        value: "service sixth title english",
+        error: "This field is required"
+      },
+      service_sixth_title_ar: {
+        value: "service sixth title arabic",
+        error: "This field is required"
+      },
+      service_sixth_sub_title_en: {
+        value: "service sixth subtitle english",
+        error: "This field is required"
+      },
+      service_sixth_sub_title_ar: {
+        value: "service sixth subtitle arabic",
+        error: "This field is required"
+      },
+      banner_photo: {
+        value: "Banner Photo for App",
+        error: "This field is required"
+      },
+      banner_photo_ar: {
+        value: "Banner Photo for App (Arabic)",
+        error: "This field is required"
+      },
+      service_seven_title_en: {
+        value: "service seventh title english",
+        error: "This field is required"
+      },
+      service_seven_title_ar: {
+        value: "service seventh title arabic",
+        error: "This field is required"
+      },
+      service_seven_sub_title_en: {
+        value: "service seventh subtitle english",
+        error: "This field is required"
+      },
+      service_seven_sub_title_ar: {
+        value: "service seventh subtitle arabic",
+        error: "This field is required"
+      },
+      know_us_title_en: {
+        value: "know us title english",
+        error: "This field is required"
+      },
+      know_us_title_ar: {
+        value: "know us title arabic",
+        error: "This field is required"
+      },
+      know_us_sub_title_en: {
+        value: "know us subtitle english",
+        error: "This field is required"
+      },
+      know_us_sub_title_ar: {
+        value: "know us subtitle arabic",
+        error: "This field is required"
+      },
+      know_us_sec_title_en: {
+        value: "know us second title english",
+        error: "This field is required"
+      },
+      know_us_sec_title_ar: {
+        value: "know us second title arabic",
+        error: "This field is required"
+      },
+      know_us_fir_item_en: {
+        value: "know us first item english",
+        error: "This field is required"
+      },
+      know_us_fir_item_ar: {
+        value: "know us first item arabic",
+        error: "This field is required"
+      },
+      know_us_sec_item_en: {
+        value: "know us second item english",
+        error: "This field is required"
+      },
+      know_us_sec_item_ar: {
+        value: "know us second item arabic",
+        error: "This field is required"
+      },
+      know_us_third_item_en: {
+        value: "know us third item english",
+        error: "This field is required"
+      },
+      know_us_third_item_ar: {
+        value: "know us third item arabic",
+        error: "This field is required"
+      },
+      know_us_left_title_en: {
+        value: "know us left title english",
+        error: "This field is required"
+      },
+      know_us_left_title_ar: {
+        value: "know us left title arabic",
+        error: "This field is required"
+      },
+      know_us_photo: {
+        value: "know us photo",
+        error: "This field is required"
+      },
+      know_us_photo_ar: {
+        value: "know us photo arabic",
+        error: "This field is required"
+      },
+      why_choose_title_en: {
+        value: "why choose title english",
+        error: "This field is required"
+      },
+      why_choose_title_ar: {
+        value: "why choose title arabic",
+        error: "This field is required"
+      },
+      why_choose_left_title_en: {
+        value: "why choose left title english",
+        error: "This field is required"
+      },
+      why_choose_left_title_ar: {
+        value: "why choose left title arabic",
+        error: "This field is required"
+      },
+      why_choose_fir_item_en: {
+        value: "why choose first item english",
+        error: "This field is required"
+      },
+      why_choose_fir_item_ar: {
+        value: "why choose first item arabic",
+        error: "This field is required"
+      },
+      why_choose_fir_item_desc_en: {
+        value: "why choose first item description english",
+        error: "This field is required"
+      },
+      why_choose_fir_item_desc_ar: {
+        value: "why choose first item description arabic",
+        error: "This field is required"
+      },
+      why_choose_sec_item_en: {
+        value: "why choose second item english",
+        error: "This field is required"
+      },
+      why_choose_sec_item_ar: {
+        value: "why choose second item arabic",
+        error: "This field is required"
+      },
+      why_choose_sec_item_desc_en: {
+        value: "why choose second item description english",
+        error: "This field is required"
+      },
+      why_choose_sec_item_desc_ar: {
+        value: "why choose second item description arabic",
+        error: "This field is required"
+      },
+      why_choose_photo: {
+        value: "why choose photo",
+        error: "This field is required"
+      },
+      why_choose_photo_ar: {
+        value: "why choose photo arabic",
+        error: "This field is required"
+      },
+      
+        ready_to_travel_title_en: {
+          value: "Ready to Travel (English)",
+          error: "This field is required"
+        },
+        ready_to_travel_title_ar: {
+          value: "Ready to Travel (Arabic)",
+          error: "This field is required"
+        },
+        ready_to_travel_sub_title_en: {
+          value: "Sub Title (English)",
+          error: "This field is required"
+        },
+        ready_to_travel_sub_title_ar: {
+          value: "Sub Title (Arabic)",
+          error: "This field is required"
+        },
+        percentage: {
+          value: "Percentage",
+          error: "This field is required"
+        },
+        ready_to_travel_photo: {
+          value: "Ready to Travel Photo",
+          error: "This field is required"
+        },
+        ready_to_travel_sec_photo: {
+          value: "Ready to Travel Sec Photo",
+          error: "This field is required"
+        },
+        ready_to_travel_third_photo: {
+          value: "Ready to Travel Third Photo",
+          error: "This field is required"
+        },
+        ready_to_travel_forth_photo: {
+          value: "Ready to Travel Forth Photo",
+          error: "This field is required"
+        }
+      
+      
+    },
+  
+  
+  
+  
+
   FooterContent: {
     adventure_title_en: {
       value: "Adventure Title (English)",
@@ -779,7 +1099,7 @@ list:"list",
       value: "Adventure Photo",
       error: "This field is required"
     },
-    banner_photo_for_app: {
+    banner_photo: {
       value: "Banner Photo for App",
       error: "This field is required"
     },
