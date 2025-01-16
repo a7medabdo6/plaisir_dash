@@ -35,7 +35,7 @@ export const BlogEditPostPage = Loadable(lazy(() => import('../pages/components/
 
 
 // DASHBOARD: USER
-export const UserProfilePage = Loadable(lazy(() => import('../pages/dashboard/UserProfilePage')));
+export const UserProfilePage = Loadable(lazy(() => import('../pages/components//Users//Profile/UserProfilePage')));
 export const UserCardsPage = Loadable(lazy(() => import('../pages/dashboard/UserCardsPage')));
 export const UserListPage = Loadable(lazy(() => import('../pages/Users')));
 export const OrderListPage = Loadable(lazy(() => import('../pages/dashboard/OrderListPage')));
@@ -59,6 +59,7 @@ export const EditHomeContent = Loadable(lazy(() => import('../pages/components/H
 export const EditFooterContent = Loadable(lazy(() => import('../pages/components/FotterContent/EditHomeContent')));
 export const EditTerms = Loadable(lazy(() => import('../pages/components/Terms/EditTerms')));
 export const EditPrivacy = Loadable(lazy(() => import('../pages/components/Privacy/EditPrivacy')));
+export const EditOurPartner = Loadable(lazy(() => import('../pages/components/OurPartner/EditOurPartner/')));
 
 
 export const CreateFeatures = Loadable(

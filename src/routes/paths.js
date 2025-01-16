@@ -27,6 +27,8 @@ export const PATH_DASHBOARD = {
 
   HomeContent: path(ROOTS_DASHBOARD, '/HomeContent'),
   FooterContent: path(ROOTS_DASHBOARD, '/FooterContent'),
+  OurPartner: path(ROOTS_DASHBOARD, '/OurPartner'),
+
   Terms: path(ROOTS_DASHBOARD, '/Terms'),
   Privacy: path(ROOTS_DASHBOARD, '/Privacy'),
 
@@ -64,7 +66,9 @@ export const PATH_DASHBOARD = {
     new: path(ROOTS_DASHBOARD, '/user/new'),
     list: path(ROOTS_DASHBOARD, '/user/list'),
     cards: path(ROOTS_DASHBOARD, '/user/cards'),
-    profile: path(ROOTS_DASHBOARD, '/user/profile'),
+    // profile: path(ROOTS_DASHBOARD, '/user/profile'),
+    profile: (name) => path(ROOTS_DASHBOARD, `/user/${name}/profile`),
+
     account: path(ROOTS_DASHBOARD, '/user/account'),
     edit: (name) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
     demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),

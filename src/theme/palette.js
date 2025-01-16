@@ -17,10 +17,18 @@ const GREY = {
   900: '#161C24',
 };
 
+// const PRIMARY = {
+//   lighter: '#C8FACD',
+//   light: '#5BE584',
+//   main: '#00AB55',
+//   dark: '#007B55',
+//   darker: '#005249',
+//   contrastText: '#fff',
+// };
 const PRIMARY = {
-  lighter: '#C8FACD',
-  light: '#5BE584',
-  main: '#00AB55',
+  lighter: '#FFA500',
+  light: '#0e575c',
+  main: '#004A50',
   dark: '#007B55',
   darker: '#005249',
   contrastText: '#fff',

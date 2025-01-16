@@ -10,6 +10,7 @@ import { useLocales } from 'src/locales';
 import * as Yup from 'yup';
 
 
+
 export function useStepHandlerFooterContent(currentFooterContent) {
     const { translate } = useLocales();
     const [dataLoaded, setDataLoaded] = useState(false);

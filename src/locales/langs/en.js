@@ -1178,6 +1178,87 @@ const en = {
     }
   }
   ,
+  OurPartner: {
+    Edit: "Edit",
+    Next: "Next",
+    OurPartner:"OurPartner",
+    Previous: "Previous",
+    PartnerContent: "Partner Content",
+    Dashboard: "Dashboard",
+    partner_title_en: {
+      value: "Partner Title (English)",
+      error: "This field is required"
+    },
+    partner_title_ar: {
+      value: "Partner Title (Arabic)",
+      error: "This field is required"
+    },
+    partner_subtitle_en: {
+      value: "Partner Subtitle (English)",
+      error: "This field is required"
+    },
+    partner_subtitle_ar: {
+      value: "Partner Subtitle (Arabic)",
+      error: "This field is required"
+    },
+    why_partner_title_en: {
+      value: "Why Partner Title (English)",
+      error: "This field is required"
+    },
+    why_partner_title_ar: {
+      value: "Why Partner Title (Arabic)",
+      error: "This field is required"
+    },
+    why_partner_answer_en: {
+      value: "Why Partner Answer (English)",
+      error: "This field is required"
+    },
+    why_partner_answer_ar: {
+      value: "Why Partner Answer (Arabic)",
+      error: "This field is required"
+    },
+    banner_partner_photo: {
+      value: "Banner Partner Photo",
+      error: "This field is required"
+    },
+    partner_photo_1: {
+      value: "Partner Photo 1",
+      error: "This field is required"
+    },
+    partner_photo_2: {
+      value: "Partner Photo 2",
+      error: "This field is required"
+    },
+    email: {
+      value: "Email",
+      error: "This field is required"
+    },
+    phone: {
+      value: "Phone",
+      error: "This field is required"
+    },
+    facebook: {
+      value: "Facebook",
+      error: "This field is required"
+    },
+    instagram: {
+      value: "Instagram",
+      error: "This field is required"
+    },
+    twitter: {
+      value: "Twitter",
+      error: "This field is required"
+    },
+    youtube: {
+      value: "YouTube",
+      error: "This field is required"
+    },
+    logo: {
+      value: "Logo",
+      error: "This field is required"
+    }
+},
+
   app: `app`,
   user: `user`,
   categorydash: 'category',

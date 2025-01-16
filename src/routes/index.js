@@ -51,7 +51,8 @@ import {
   EditHomeContent,
   EditFooterContent,
   EditTerms,
-  EditPrivacy
+  EditPrivacy,
+  EditOurPartner
 } from './elements';
 import AuthRoleGuard from 'src/auth/AuthRoleGuard';
 
@@ -203,6 +204,8 @@ export default function Router() {
        
         { path: 'HomeContent', element: <EditHomeContent /> },
         { path: 'FooterContent', element: <EditFooterContent /> },
+        { path: 'OurPartner', element: <EditOurPartner /> },
+
         { path: 'Terms', element: <EditTerms /> },
         { path: 'Privacy', element: <EditPrivacy /> },
 
@@ -228,7 +231,9 @@ export default function Router() {
           path: 'user',
           children: [
             { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
-            { path: 'profile', element: <UserProfilePage /> },
+            { path: ':name/profile', element: <UserProfilePage /> },
+
+            // { path: 'profile', element: <UserProfilePage /> },
             { path: 'cards', element: <UserCardsPage /> },
             { path: 'list', element: <UserListPage /> },
             { path: 'new', element: <UserCreatePage /> },

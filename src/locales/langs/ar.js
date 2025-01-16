@@ -422,6 +422,87 @@ const ar = {
 
 
   },
+  OurPartner: {
+    Edit: "تعديل",
+    Next: "التالي",
+    OurPartner: "شركاؤنا",
+    Previous: "السابق",
+    PartnerContent: "محتوى الشريك",
+    Dashboard: "لوحة التحكم",
+    partner_title_en: {
+      value: "عنوان الشريك (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    partner_title_ar: {
+      value: "عنوان الشريك (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    partner_subtitle_en: {
+      value: "العنوان الفرعي للشريك (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    partner_subtitle_ar: {
+      value: "العنوان الفرعي للشريك (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    why_partner_title_en: {
+      value: "لماذا عنوان الشريك (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    why_partner_title_ar: {
+      value: "لماذا عنوان الشريك (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    why_partner_answer_en: {
+      value: "لماذا إجابة الشريك (بالإنجليزية)",
+      error: "هذا الحقل مطلوب"
+    },
+    why_partner_answer_ar: {
+      value: "لماذا إجابة الشريك (بالعربية)",
+      error: "هذا الحقل مطلوب"
+    },
+    banner_partner_photo: {
+      value: "صورة بانر الشريك",
+      error: "هذا الحقل مطلوب"
+    },
+    partner_photo_1: {
+      value: "صورة الشريك 1",
+      error: "هذا الحقل مطلوب"
+    },
+    partner_photo_2: {
+      value: "صورة الشريك 2",
+      error: "هذا الحقل مطلوب"
+    },
+    email: {
+      value: "البريد الإلكتروني",
+      error: "هذا الحقل مطلوب"
+    },
+    phone: {
+      value: "رقم الهاتف",
+      error: "هذا الحقل مطلوب"
+    },
+    facebook: {
+      value: "فيسبوك",
+      error: "هذا الحقل مطلوب"
+    },
+    instagram: {
+      value: "إنستغرام",
+      error: "هذا الحقل مطلوب"
+    },
+    twitter: {
+      value: "تويتر",
+      error: "هذا الحقل مطلوب"
+    },
+    youtube: {
+      value: "يوتيوب",
+      error: "هذا الحقل مطلوب"
+    },
+    logo: {
+      value: "الشعار",
+      error: "هذا الحقل مطلوب"
+    }
+  }
+,  
   HomeContent: {
     HomeContent: "محتوى الصفحة الرئيسية",
     Dashboard: "لوحة التحكم",

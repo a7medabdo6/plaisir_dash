@@ -27,7 +27,7 @@ import { PATH_DASHBOARD } from 'src/routes/paths';
 import { paramCase } from 'change-case';
 // ----------------------------------------------------------------------
 
-UserTableRow.propTypes = {
+OrderTableRow.propTypes = {
   avtar: PropTypes.bool,
   icon: PropTypes.bool,
   coupon: PropTypes.bool,
@@ -43,7 +43,7 @@ UserTableRow.propTypes = {
   setOpenConfirm: PropTypes.func,
 };
 
-export default function UserTableRow({ openConfirm,
+export default function OrderTableRow({ openConfirm,
   setOpenConfirm, keys, row, selected, onEditRow, onSelectRow, onDeleteRow, avtar, icon, coupon, isCategories, loading }) {
 
 
@@ -81,8 +81,8 @@ export default function UserTableRow({ openConfirm,
 
   const handleClick = (name) => {
     // Use navigate to go to the desired page
-    const params = { user: row, anotherKey: 'anotherValue' };  // Example params
-    navigate(PATH_DASHBOARD.user.profile(paramCase(name)),{ state: { params } });
+    console.log(PATH_DASHBOARD.user.profile(paramCase(name)));
+    navigate(PATH_DASHBOARD.user.profile(paramCase(name)));
 
     // navigate(`/dashboard/user/${name}/profile`);  // Change `/some-path/${name}` to your target path
   };

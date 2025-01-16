@@ -46,8 +46,6 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
 
   const { defaultValues, NewFooterContentSchema, FooterContentsData, onSubmit, onUpload, isLoading, handleDrop, uploadedFileDetails } = useStepHandlerFooterContent(currentFooterContent);
 
-  console.log(isLoading);
-
   const methods = useForm({
     resolver: yupResolver(NewFooterContentSchema),
     defaultValues,
@@ -124,7 +122,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
               FooterContentsData ? (
                 <Stack spacing={3}>
                   {currentSection === 1 && (
-                    <Stack spacing={2} >
+                    <Stack spacing={2}>
                       <img
                         src={FooterSectionOne}
                         alt="Uploaded Banner"
@@ -132,41 +130,101 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onClick={() => handleOpenModal(FooterSectionOne)}
                       />
 
+                      <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_title_en" label={translate('FooterContent.adventure_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_title_ar" label={translate('FooterContent.adventure_title_ar.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_title_en" label={translate('FooterContent.adventure_title_en.value')} />
-                      <RHFTextField name="adventure_title_ar" label={translate('FooterContent.adventure_title_ar.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_en_1" label={translate('FooterContent.adventure_service_title_en_1.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_ar_1" label={translate('FooterContent.adventure_service_title_ar_1.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_service_title_en_1" label={translate('FooterContent.adventure_service_title_en_1.value')} />
-                      <RHFTextField name="adventure_service_title_ar_1" label={translate('FooterContent.adventure_service_title_ar_1.value')} />
-                      <RHFTextField name="adventure_service_desc_en_1" label={translate('FooterContent.adventure_service_desc_en_1.value')} />
-                      <RHFTextField name="adventure_service_desc_ar_1" label={translate('FooterContent.adventure_service_desc_ar_1.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_en_1" label={translate('FooterContent.adventure_service_desc_en_1.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_ar_1" label={translate('FooterContent.adventure_service_desc_ar_1.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_service_title_en_2" label={translate('FooterContent.adventure_service_title_en_2.value')} />
-                      <RHFTextField name="adventure_service_title_ar_2" label={translate('FooterContent.adventure_service_title_ar_2.value')} />
-                      <RHFTextField name="adventure_service_desc_en_2" label={translate('FooterContent.adventure_service_desc_en_2.value')} />
-                      <RHFTextField name="adventure_service_desc_ar_2" label={translate('FooterContent.adventure_service_desc_ar_2.value')} />
+                        {/* تكرار نفس النمط للحقول التالية */}
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_en_2" label={translate('FooterContent.adventure_service_title_en_2.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_ar_2" label={translate('FooterContent.adventure_service_title_ar_2.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_service_title_en_3" label={translate('FooterContent.adventure_service_title_en_3.value')} />
-                      <RHFTextField name="adventure_service_title_ar_3" label={translate('FooterContent.adventure_service_title_ar_3.value')} />
-                      <RHFTextField name="adventure_service_desc_en_3" label={translate('FooterContent.adventure_service_desc_en_3.value')} />
-                      <RHFTextField name="adventure_service_desc_ar_3" label={translate('FooterContent.adventure_service_desc_ar_3.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_en_2" label={translate('FooterContent.adventure_service_desc_en_2.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_ar_2" label={translate('FooterContent.adventure_service_desc_ar_2.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_service_title_en_4" label={translate('FooterContent.adventure_service_title_en_4.value')} />
-                      <RHFTextField name="adventure_service_title_ar_4" label={translate('FooterContent.adventure_service_title_ar_4.value')} />
-                      <RHFTextField name="adventure_service_desc_en_4" label={translate('FooterContent.adventure_service_desc_en_4.value')} />
-                      <RHFTextField name="adventure_service_desc_ar_4" label={translate('FooterContent.adventure_service_desc_ar_4.value')} />
+                        {/* الحقول التالية */}
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_en_3" label={translate('FooterContent.adventure_service_title_en_3.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_ar_3" label={translate('FooterContent.adventure_service_title_ar_3.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_service_title_en_5" label={translate('FooterContent.adventure_service_title_en_5.value')} />
-                      <RHFTextField name="adventure_service_title_ar_5" label={translate('FooterContent.adventure_service_title_ar_5.value')} />
-                      <RHFTextField name="adventure_service_desc_en_5" label={translate('FooterContent.adventure_service_desc_en_5.value')} />
-                      <RHFTextField name="adventure_service_desc_ar_5" label={translate('FooterContent.adventure_service_desc_ar_5.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_en_3" label={translate('FooterContent.adventure_service_desc_en_3.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_ar_3" label={translate('FooterContent.adventure_service_desc_ar_3.value')} />
+                        </Grid>
 
-                      <RHFTextField name="adventure_service_title_en_6" label={translate('FooterContent.adventure_service_title_en_6.value')} />
-                      <RHFTextField name="adventure_service_title_ar_6" label={translate('FooterContent.adventure_service_title_ar_6.value')} />
-                      <RHFTextField name="adventure_service_desc_en_6" label={translate('FooterContent.adventure_service_desc_en_6.value')} />
-                      <RHFTextField name="adventure_service_desc_ar_6" label={translate('FooterContent.adventure_service_desc_ar_6.value')} />
+                        {/* الحقول المتبقية */}
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_en_4" label={translate('FooterContent.adventure_service_title_en_4.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_ar_4" label={translate('FooterContent.adventure_service_title_ar_4.value')} />
+                        </Grid>
 
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_en_4" label={translate('FooterContent.adventure_service_desc_en_4.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_ar_4" label={translate('FooterContent.adventure_service_desc_ar_4.value')} />
+                        </Grid>
 
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_en_5" label={translate('FooterContent.adventure_service_title_en_5.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_ar_5" label={translate('FooterContent.adventure_service_title_ar_5.value')} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_en_5" label={translate('FooterContent.adventure_service_desc_en_5.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_ar_5" label={translate('FooterContent.adventure_service_desc_ar_5.value')} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_en_6" label={translate('FooterContent.adventure_service_title_en_6.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_title_ar_6" label={translate('FooterContent.adventure_service_title_ar_6.value')} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_en_6" label={translate('FooterContent.adventure_service_desc_en_6.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="adventure_service_desc_ar_6" label={translate('FooterContent.adventure_service_desc_ar_6.value')} />
+                        </Grid>
+                      </Grid>
 
                       <RHFUploadWithLabel
                         label={translate('FooterContent.adventure_photo.value')}
@@ -179,14 +237,11 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onRemove={() => handleRemoveFile('adventure_photo')}
                         onRemoveAll={() => handleRemoveAllFiles('adventure_photo')}
                         isLoading={isLoading}
-
-                        onUpload={() => onUpload('adventure_photo')
-                        }
+                        onUpload={() => onUpload('adventure_photo')}
                       />
-
                     </Stack>
-                  )
-                  }
+                  )}
+
 
                   {currentSection === 2 && (
                     <Stack spacing={2}>
@@ -196,33 +251,63 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         style={{ width: '100%', cursor: 'pointer' }}
                         onClick={() => handleOpenModal(FooterSectionTwo)}
                       />
-                      <RHFTextField name="app_title_en" label={translate('FooterContent.app_title_en.value')} />
-                      <RHFTextField name="app_title_ar" label={translate('FooterContent.app_title_ar.value')} />
 
-                      <RHFTextField name="app_sec_title_en" label={translate('FooterContent.app_sec_title_en.value')} />
-                      <RHFTextField name="app_sec_title_ar" label={translate('FooterContent.app_sec_title_ar.value')} />
+                      <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                          <RHFTextField name="app_title_en" label={translate('FooterContent.app_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="app_title_ar" label={translate('FooterContent.app_title_ar.value')} />
+                        </Grid>
 
-                      <RHFTextField name="discount_fir_title_en" label={translate('FooterContent.discount_fir_title_en.value')} />
-                      <RHFTextField name="discount_fir_title_ar" label={translate('FooterContent.discount_fir_title_ar.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="app_sec_title_en" label={translate('FooterContent.app_sec_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="app_sec_title_ar" label={translate('FooterContent.app_sec_title_ar.value')} />
+                        </Grid>
 
-                      <RHFTextField name="discount_sec_title_en" label={translate('FooterContent.discount_sec_title_en.value')} />
-                      <RHFTextField name="discount_sec_title_ar" label={translate('FooterContent.discount_sec_title_ar.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_fir_title_en" label={translate('FooterContent.discount_fir_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_fir_title_ar" label={translate('FooterContent.discount_fir_title_ar.value')} />
+                        </Grid>
 
-                      <RHFTextField name="discount_btn_title_en" label={translate('FooterContent.discount_btn_title_en.value')} />
-                      <RHFTextField name="discount_btn_title_ar" label={translate('FooterContent.discount_btn_title_ar.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_sec_title_en" label={translate('FooterContent.discount_sec_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_sec_title_ar" label={translate('FooterContent.discount_sec_title_ar.value')} />
+                        </Grid>
 
-                      <RHFTextField name="discount_percentage_en" label={translate('FooterContent.discount_percentage_en.value')} />
-                      <RHFTextField name="discount_percentage_ar" label={translate('FooterContent.discount_percentage_ar.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_btn_title_en" label={translate('FooterContent.discount_btn_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_btn_title_ar" label={translate('FooterContent.discount_btn_title_ar.value')} />
+                        </Grid>
 
-                      <RHFTextField name="discount_percentage_title_en" label={translate('FooterContent.discount_percentage_title_en.value')} />
-                      <RHFTextField name="discount_percentage_title_ar" label={translate('FooterContent.discount_percentage_title_ar.value')} />
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_percentage_en" label={translate('FooterContent.discount_percentage_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_percentage_ar" label={translate('FooterContent.discount_percentage_ar.value')} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_percentage_title_en" label={translate('FooterContent.discount_percentage_title_en.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="discount_percentage_title_ar" label={translate('FooterContent.discount_percentage_title_ar.value')} />
+                        </Grid>
+                      </Grid>
 
                       <RHFUploadWithLabel
                         thumbnail
                         name="banner_photo_for_app"
                         label={translate('FooterContent.banner_photo_for_app.value')}
                         newValue={uploadedFileDetails?.banner_photo_for_app?.path}
-
                         defaultValue={defaultValues.banner_photo_for_app.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'banner_photo_for_app')}
@@ -230,7 +315,6 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onRemoveAll={() => handleRemoveAllFiles('banner_photo_for_app')}
                         onUpload={() => onUpload('banner_photo_for_app')}
                         isLoading={isLoading}
-
                       />
 
                       <RHFUploadWithLabel
@@ -238,7 +322,6 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         name="discount_photo"
                         label={translate('FooterContent.discount_photo.value')}
                         newValue={uploadedFileDetails?.discount_photo?.path}
-
                         defaultValue={defaultValues.discount_photo.id}
                         multiple
                         onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'discount_photo')}
@@ -246,11 +329,10 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onRemoveAll={() => handleRemoveAllFiles('discount_photo')}
                         onUpload={() => onUpload('discount_photo')}
                         isLoading={isLoading}
-
                       />
-
                     </Stack>
                   )}
+
 
                   {currentSection === 3 && (
                     <Stack spacing={2}>
@@ -260,15 +342,33 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         style={{ width: '100%', cursor: 'pointer' }}
                         onClick={() => handleOpenModal(FooterSectionThree)}
                       />
-                      <RHFTextField name="email" label={translate('FooterContent.email.value')} />
-                      <RHFTextField name="phone" label={translate('FooterContent.phone.value')} />
 
-                      <RHFTextField name="facebook" label={translate('FooterContent.facebook.value')} />
-                      <RHFTextField name="x" label={translate('FooterContent.x.value')} />
-                      <RHFTextField name="instgram" label={translate('FooterContent.instgram.value')} />
-                      <RHFTextField name="twitter" label={translate('FooterContent.twitter.value')} />
-                      <RHFTextField name="youtube" label={translate('FooterContent.youtube.value')} />
+                      <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                          <RHFTextField name="email" label={translate('FooterContent.email.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="phone" label={translate('FooterContent.phone.value')} />
+                        </Grid>
 
+                        <Grid item xs={6}>
+                          <RHFTextField name="facebook" label={translate('FooterContent.facebook.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="x" label={translate('FooterContent.x.value')} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <RHFTextField name="instgram" label={translate('FooterContent.instgram.value')} />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <RHFTextField name="twitter" label={translate('FooterContent.twitter.value')} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          <RHFTextField name="youtube" label={translate('FooterContent.youtube.value')} />
+                        </Grid>
+                      </Grid>
 
                       <RHFUploadWithLabel
                         thumbnail
@@ -281,11 +381,10 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
                         onRemoveAll={() => handleRemoveAllFiles('logo')}
                         onUpload={() => onUpload('logo')}
                         isLoading={isLoading}
-
                       />
-
                     </Stack>
                   )}
+
 
 
 
@@ -330,7 +429,7 @@ export default function FooterContentEditForm({ isEdit, currentFooterContent }) 
 
         </Button>
       </Stack>
-      <LoadingButton type="submit" variant="contained" loading={isLoading} style={{width:"100%",marginTop:"30px"}}>
+      <LoadingButton type="submit" variant="contained" loading={isLoading} style={{ width: "100%", marginTop: "30px" }}>
         {translate('FooterContent.Edit')}
       </LoadingButton>
     </FormProvider>

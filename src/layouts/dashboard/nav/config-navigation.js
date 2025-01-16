@@ -134,6 +134,15 @@ const navConfig = [
               { title: 'Edit', path: PATH_DASHBOARD.Privacy },
             ],
           },
+          {
+
+            title: 'OurPartnerdash',
+            path: PATH_DASHBOARD.OurPartner,
+            icon: ICONS.Privacy,
+            children: [
+              { title: 'Edit', path: PATH_DASHBOARD.OurPartner },
+            ],
+          },
         ],
       },
     ]
