@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { Box, Card, Grid, Stack, Typography, InputAdornment } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from '../../../components/snackbar';
-import FormProvider, { RHFTextField, RHFUpload } from '../../../components/hook-form';
+import FormProvider, { RHFTextField, RHFUpload, RHFUploadWithLabel } from '../../../components/hook-form';
 import { useLocales } from 'src/locales';
 import useSingleCompany from 'src/hooks/Company/useSingleCompany';
 import { useCompanyFormHelpers } from './helpers/useCompanyFormHelpers';
@@ -17,12 +17,12 @@ import { useMemo } from 'react';
 
 const CompanyNewEditForm = ({ isEdit, currentCompany }) => {
   const { translate } = useLocales();
-console.log(isEdit);
+  console.log(isEdit);
 
   const { id } = useParams();
-  const { data: CompanyData, isLoading, isError, 
-    
-} = useSingleCompany(id);
+  const { data: CompanyData, isLoading, isError,
+
+  } = useSingleCompany(id);
   const NewCompanysSchema = Yup.object().shape({
     commercial_name_en: Yup.string().required(`${translate('Companys.errors.commercial_name_en_required')}`),
     commercial_name_ar: Yup.string().required(`${translate('Companys.errors.commercial_name_ar_required')}`),
@@ -70,7 +70,7 @@ console.log(isEdit);
     onSubmit,
     handleDrop,
     handleRemoveFile,
-    handleRemoveAllFiles ,
+    handleRemoveAllFiles,
     onUpload,
     isCreating,
     isProcessing,
@@ -93,20 +93,39 @@ console.log(isEdit);
               <RHFTextField name="phone" label={`${translate('Company.phone')}`} />
               <RHFTextField name="notes" label={`${translate('Company.notes')}`} />
               <RHFTextField name="locaton" label={`${translate('Company.locaton')}`} />
-              <RHFTextField name="commercial_register.id" label={`${translate('Company.commercialRegister')}`} />
+              <Stack spacing={1}>
+                <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+                  {`${translate('Company.commercialRegister')}`}
+                </Typography>
+
+                <RHFUploadWithLabel
+                  thumbnail
+                  name="commercial_register"
+                  label={translate('HomeContent.commercial_register.value')}
+                  defaultValue={defaultValues.commercial_register}
+                  multiple
+                  onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'commercial_register')}
+                  onRemove={() => handleRemoveFile('commercial_register')}
+                  onRemoveAll={() => handleRemoveAllFiles('commercial_register')}
+                  onUpload={() => onUpload('commercial_register')}
+                  isLoading={isLoading}
+                />
+              </Stack>
               <Stack spacing={1}>
                 <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
                   {`${translate('Company.images')}`}
                 </Typography>
-                <RHFUpload
-                  multiple
+                <RHFUploadWithLabel
                   thumbnail
-                  name="images"
-                  maxSize={3145728}
-                  onDrop={handleDrop}
-                  onRemove={handleRemoveFile}
-                  onRemoveAll={handleRemoveAllFiles}
-                  onUpload={onUpload}
+                  name="photo_id"
+                  label={translate('HomeContent.photo_id.value')}
+                  defaultValue={defaultValues.photo_id}
+                  multiple
+                  onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'photo_id')}
+                  onRemove={() => handleRemoveFile('photo_id')}
+                  onRemoveAll={() => handleRemoveAllFiles('photo_id')}
+                  onUpload={() => onUpload('photo_id')}
+                  isLoading={isLoading}
                 />
               </Stack>
 

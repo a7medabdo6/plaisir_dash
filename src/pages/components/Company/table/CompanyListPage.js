@@ -100,16 +100,16 @@ export default function CompanysListPage() {
             { name: `${translate('Companys.Companys')}`, href: PATH_DASHBOARD.Companys },
             { name: `${translate('Companys.list')}` },
           ]}
-          action={
-            <Button
-              component={RouterLink}
-              to="/dashboard/Companys/new"
-              variant="contained"
-              startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              {`${translate('Companys.create')}`}
-            </Button>
-          }
+          // action={
+          //   <Button
+          //     component={RouterLink}
+          //     to="/dashboard/Companys/new"
+          //     variant="contained"
+          //     startIcon={<Iconify icon="eva:plus-fill" />}
+          //   >
+          //     {`${translate('Companys.create')}`}
+          //   </Button>
+          // }
         />
         <Card>
           <Divider />

@@ -20,9 +20,17 @@ import FormProvider, {
   RHFTextField,
   RHFUpload,
   RHFMultiSelect,
+  RHFSelect,
+  RHFUploadWithLabel,
 } from '../../../components/hook-form';
 
 import { useLocales } from '../../../locales';
+import useCompany from 'src/hooks/Company/useCompany';
+import useFeatures from 'src/hooks/Features/useFeatures';
+import useCategories from 'src/hooks/Category/useCategories';
+import useUploadMutation from 'src/hooks/useUploadMutation';
+import useCreateTripMutation from 'src/hooks/Trips/useCreateTripsMutation ';
+import useUpdateTripMutation from 'src/hooks/Trips/useUpdateTripsMutation';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +43,23 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
   const navigate = useNavigate();
   const { translate } = useLocales();
   const { enqueueSnackbar } = useSnackbar();
+  const initialParams = {
+    orderBy: 'id',
+    order: 'desc',
+
+  };
+  const initialParamsCate = {
+    orderBy: 'id',
+    order: 'desc',
+
+    filterOptions: { searchKey: 'name_en', searchValue: '' },
+  };
+  const { data: CompanyData } = useCompany(initialParams);
+  const { data: FeaturesData } = useFeatures(initialParams);
+  const { data: CategoriesData } = useCategories(initialParamsCate);
+  const uploadMutation = useUploadMutation();
+  const { mutate: createTrip, isLoading: isCreating } = useCreateTripMutation();
+  const { mutate: updateTripsMutation, isLoading: isUpdating } = useUpdateTripMutation();
 
   const NewProductsSchema = Yup.object().shape({
     name_en: Yup.string().required(`${translate('products.placeholders.name_en')}`),
@@ -57,9 +82,12 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
     cancellation_policy_en: Yup.string().required(`${translate('products.placeholders.cancellation_policy_en')}`),
     cancellation_policy_ar: Yup.string().required(`${translate('products.placeholders.cancellation_policy_ar')}`),
     price_per_night: Yup.number().moreThan(0, `${translate('products.placeholders.price_per_night')}`),
-    photo: Yup.object().shape({
-      id: Yup.string().required(`${translate('products.placeholders.photo_id')}`),
-    }),
+    photo: Yup.object()
+      .shape({
+        id: Yup.string().required(`${translate('products.placeholders.photo_id')}`),
+      })
+      .nullable(),
+
     categories: Yup.array().min(1, `${translate('products.placeholders.categories')}`),
     features: Yup.array().min(1, `${translate('products.placeholders.features')}`),
     user_id: Yup.string().required(`${translate('products.placeholders.user_id')}`),
@@ -68,12 +96,23 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
     price_for_each_child: Yup.number().required(`${translate('products.placeholders.price_for_each_child')}`),
     start_date: Yup.string().required(),
     end_date: Yup.string().required(),
-    min_age_allowed: Yup.number().required(),
+    min_age_allowed: Yup.boolean().required(),
     is_free: Yup.boolean().required(),
     is_new: Yup.boolean().required(),
     is_Quantitive: Yup.boolean().required(),
-    tickets_num: Yup.number().required(`${translate('products.placeholders.tickets_num')}`),
-    company: Yup.array().min(1, `${translate('products.placeholders.company')}`),
+    tickets_num: Yup.number().when('is_Quantitive', {
+      is: true, // إذا كانت القيمة true
+      then: (schema) => schema.required(`${translate('products.placeholders.tickets_num')}`),
+      otherwise: (schema) => schema.notRequired(),
+    }), company: Yup.object()
+      .shape({
+        id: Yup.number()
+          .required(`${translate('products.placeholders.company')}`)
+          .integer()
+          .positive(),
+      })
+      .nullable(),
+
 
 
   });
@@ -109,20 +148,22 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
       price_for_each_child: currentProducts?.price_for_each_child || null,
       start_date: currentProducts?.start_date || '',
       end_date: currentProducts?.end_date || '',
-      min_age_allowed: currentProducts?.min_age_allowed || null,
+      min_age_allowed: currentProducts?.min_age_allowed || false,
       is_free: currentProducts?.is_free || false,
       is_new: currentProducts?.is_new || false,
       is_Quantitive: currentProducts?.is_Quantitive || false,
-      tickets_num: currentProducts?.is_Quantitive === false ? 0 : currentProducts?.tickets_num || 0,
+      tickets_num: currentProducts?.tickets_num || null,
       company: currentProducts?.company || [],
     }),
     [currentProducts]
   );
 
+
   const methods = useForm({
     resolver: yupResolver(NewProductsSchema),
-    defaultValues,
+    defaultValues
   });
+
 
   const {
     reset,
@@ -134,6 +175,7 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
 
   const values = watch();
   const isQuantitive = values.is_Quantitive;
+  const [isProcessing, setIsProcessing] = useState(false);
 
 
 
@@ -148,226 +190,91 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
     }
   }, [isEdit, currentProducts]);
 
-  const onSubmit = async (data) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.eCommerce.list);
-      console.log('DATA', data);
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit = (formData) => {
+    console.log(formData);
+
+    setIsProcessing(true); // Set processing to true
+    const data = {
+      name_en: formData.name_en || "name_en",
+      name_ar: formData.name_ar || "name_ar",
+      desc_ar: formData.desc_ar || "desc_ar",
+      is_child_allowed: formData.is_child_allowed ?? false,
+      most_popular: formData.most_popular ?? true,
+      price_for_each_child: formData.price_for_each_child || "20",
+      start_date: formData.start_date || "2025-01-10T",
+      end_date: formData.end_date || "2025-01-10T",
+      min_age_allowed: formData.min_age_allowed || false,
+      is_free: formData.is_free ?? false,
+      is_new: formData.is_new ?? true,
+      is_Quantitive: formData.is_Quantitive ?? false,
+      tickets_num: formData.tickets_num || 100,
+      desc_en: formData.desc_en || "desc_en",
+      working_hours_en: formData.working_hours_en || "working hours en",
+      working_hours_ar: formData.working_hours_ar || "working hours ar",
+      location_en: formData.location_en || "location_en",
+      location_ar: formData.location_ar || "location_ar",
+      map: formData.map || "map",
+      policy_en: formData.policy_en || "policy_en",
+      policy_ar: formData.policy_ar || "policy_ar",
+      terms_en: formData.terms_en || "terms_en",
+      terms_ar: formData.terms_ar || "terms_ar",
+      cancellation_policy_en: formData.cancellation_policy_en || "cancellation_policy_en",
+      cancellation_policy_ar: formData.cancellation_policy_ar || "cancellation_policy_ar",
+      // minimum_nights: formData.minimum_nights || 200,
+      price_per_night: formData.price_per_night || 200,
+      userId: formData.userId || 1,
+      photo: {
+        id: formData.photo?.id || "string",
+      },
+      categories: formData.categories || [1],
+      features: formData.features || [1, 2],
+      company: {
+        id: formData.company?.id || 2,
+      },
+    };
+
+
+
+    createTrip(data, {
+
+      onSuccess: () => {
+        enqueueSnackbar(translate('addSuccess'), { variant: 'success' });
+        // navigate('/dashboard/company');
+      },
+      onError: (error) => {
+        enqueueSnackbar(translate('addError'), { variant: 'error' });
+        console.error('Error creating Company:', error);
+      },
+      onSettled: () => {
+        setIsProcessing(false); // Set processing to false
+      },
+    });
   };
-  const fields = [
-    {
-      name: 'name_en',
-      label: 'Name (English)',
-      placeholder: 'Enter name in English',
-    },
-    {
-      name: 'name_ar',
-      label: 'Name (Arabic)',
-      placeholder: 'Enter name in Arabic',
-    },
-    {
-      name: 'minimum_nights',
-      label: 'Minimum Nights',
-      placeholder: 'Enter minimum nights',
-      isNumber:true
-
-    },
-    {
-      name: 'price_per_night',
-      label: 'Price Per Night',
-      placeholder: 'Enter price per night',
-      isNumber:true
-    },
-
-    {
-      name: 'start_date',
-      label: 'Start Date',
-      placeholder: 'Enter start date',
-      isDate: true,
-    },
-    {
-      name: 'end_date',
-      label: 'End Date',
-      placeholder: 'Enter end date',
-      isDate: true,
-    },
-    {
-      name: 'desc_en',
-      label: 'Description (English)',
-      placeholder: `${translate('products.placeholders.desc_en')}`,
-      isEditor: true,
-    },
-    {
-      name: 'desc_ar',
-      label: 'Description (Arabic)',
-      placeholder: 'Enter description in Arabic',
-      isEditor: true,
-    },
-    {
-      name: 'photo',
-      label: 'Photo',
-      placeholder: 'Upload a photo',
-      isUpload: true,
-    },
-    {
-      name: 'most_popular',
-      label: 'Most Popular',
-      placeholder: 'Mark as popular',
-      isSwitch: true,
-    },
-    {
-      name: 'is_child_allowed',
-      label: 'Is Child Allowed',
-      placeholder: 'Allow children',
-      isSwitch: true,
-    },
-
-    {
-      name: 'price_for_each_child',
-      label: 'Price For Each Child',
-      placeholder: 'Enter price for each child',
-    },
-    {
-      name: 'working_hours_en',
-      label: 'Working Hours (English)',
-      placeholder: 'Enter working hours in English',
-      isEditor: true,
-    },
-    {
-      name: 'working_hours_ar',
-      label: 'Working Hours (Arabic)',
-      placeholder: 'Enter working hours in Arabic',
-      isEditor: true,
-    },
-    {
-      name: 'location_en',
-      label: 'Location (English)',
-      placeholder: 'Enter location in English',
-    },
-    {
-      name: 'location_ar',
-      label: 'Location (Arabic)',
-      placeholder: 'Enter location in Arabic',
-    },
-    {
-      name: 'map',
-      label: 'Map',
-      placeholder: 'Enter map link',
-    },
-    {
-      name: 'policy_en',
-      label: 'Policy (English)',
-      placeholder: 'Enter policy in English',
-      isEditor: true,
-    },
-    {
-      name: 'policy_ar',
-      label: 'Policy (Arabic)',
-      placeholder: 'Enter policy in Arabic',
-      isEditor: true,
-    },
-    {
-      name: 'terms_en',
-      label: 'Terms (English)',
-      placeholder: 'Enter terms in English',
-      isEditor: true,
-    },
-    {
-      name: 'terms_ar',
-      label: 'Terms (Arabic)',
-      placeholder: 'Enter terms in Arabic',
-      isEditor: true,
-    },
-    {
-      name: 'cancellation_policy_en',
-      label: 'Cancellation Policy (English)',
-      placeholder: 'Enter cancellation policy in English',
-      isEditor: true,
-    },
-    {
-      name: 'cancellation_policy_ar',
-      label: 'Cancellation Policy (Arabic)',
-      placeholder: 'Enter cancellation policy in Arabic',
-      isEditor: true,
-    },
-
-
-    {
-      name: 'user_id',
-      label: 'User ID',
-      placeholder: 'Enter user ID',
-    },
 
 
 
-    {
-      name: 'min_age_allowed',
-      label: 'Minimum Age Allowed',
-      placeholder: 'Enter minimum age allowed',
-    },
-    {
-      name: 'company',
-      label: 'company',
-      placeholder: 'Select company',
-      isMultiSelect: true,
-    },
+  const options = CategoriesData?.data?.map((category) => ({
+    value: category.id,
+    label: category.name_en, // يمكنك استخدام category.name_ar للعرض بالعربية
+  }));
+  const optionsfeatures = FeaturesData?.data?.map((category) => ({
+    value: category.id,
+    label: category.name_en, // أو استخدم category.name_ar إذا كنت تريد العرض بالعربية
+  }))
 
-
-  ];
-
-  const fieldsLeft = [
-    {
-      name: 'categories',
-      label: 'Categories',
-      placeholder: 'Select categories',
-      isMultiSelect: true,
-    },
-    {
-      name: 'features',
-      label: 'Features',
-      placeholder: 'Select features',
-      isMultiSelect: true,
-    },
-    {
-      name: 'is_free',
-      label: 'Is Free',
-      placeholder: 'Is this free?',
-      isSwitch: true,
-    },
-    {
-      name: 'is_new',
-      label: 'Is New',
-      placeholder: 'Mark as new',
-      isSwitch: true,
-    },
-    {
-      name: 'is_Quantitive',
-      label: 'Is Quantitive',
-      placeholder: 'Is quantitive?',
-      isSwitch: true,
-    },
-    {
-      name: 'tickets_num',
-      label: 'Number of Tickets',
-      placeholder: 'Enter number of tickets',
-    },
-
-  ];
+  const optionsCompany = CompanyData?.data?.map((category) => ({
+    value: category.id,
+    label: category.commercial_name_en, // أو استخدم category.name_ar إذا كنت تريد العرض بالعربية
+  }))
 
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState(null);
   const fieldsPerPage = 6; // عدد الحقول المعروضة في كل مرة
-  console.log(currentSlide);
 
   const handleNext = () => {
-    if (currentSlide < fields.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    }
+    setCurrentSlide(currentSlide + 1);
+
   };
 
   const handlePrevious = () => {
@@ -377,19 +284,21 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
   };
 
   const handleDrop = useCallback(
-    (acceptedFiles) => {
-      const files = values.images || [];
+    (acceptedFiles, fieldName) => {
+      const newFile = acceptedFiles[0];  // استقبل ملف واحد فقط
+      if (newFile) {
+        Object.assign(newFile, {
+          preview: URL.createObjectURL(newFile),
+        });
 
-      const newFiles = acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      );
-
-      setValue('images', [...files, ...newFiles], { shouldValidate: true });
+        setFile(newFile);  // حفظ الملف في state
+        setValue(fieldName, newFile, { shouldValidate: true });  // استبدل الصورة السابقة
+      }
     },
-    [setValue, values.images]
+    [setValue]
   );
+
+
 
   const handleRemoveFile = (inputFile) => {
     const filtered = values.images && values.images?.filter((file) => file !== inputFile);
@@ -399,6 +308,51 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
   const handleRemoveAllFiles = () => {
     setValue('images', []);
   };
+  const [uploadedFileDetails, setUploadedFileDetails] = useState({
+    photo: null,
+
+  });
+  const onUpload = (fileType) => {
+    if (!file) {
+      alert('Please select a file first.');
+      return;
+    }
+    setIsLoading(true);
+
+    uploadMutation.mutate(file, {
+      onSuccess: (data) => {
+        setIsLoading(false);
+
+        const uploadedFile = data.file;
+
+        // Update the field based on fileType
+        setUploadedFileDetails((prevState) => {
+          switch (fileType) {
+            case 'photo':
+              return {
+                ...prevState,
+                photo: { id: uploadedFile.id, path: uploadedFile.path },
+              };
+
+            default:
+              return prevState;
+          }
+        });
+
+        // Update form values for the uploaded file
+        setValue(fileType, { id: uploadedFile.id, path: uploadedFile.path }, { shouldValidate: true });
+
+        enqueueSnackbar(`${translate('imageUploadSuccess')}`, { variant: 'success' });
+      },
+      onError: (error) => {
+        setIsLoading(false);
+        console.error('Upload failed:', error);
+      },
+    });
+  };
+  const handleQuillChange = (field, value) => {
+    setValue(field, value, { shouldValidate: true });
+  };
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
@@ -406,114 +360,174 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
           <Card sx={{ p: 3 }}>
             <Stack spacing={3}>
               <Grid container spacing={3}>
-                {fields.slice(currentSlide * fieldsPerPage, (currentSlide + 1) * fieldsPerPage).map((field) => (
+                {currentSlide === 0 && (
+                  <Stack spacing={3} sx={12} style={{ width: "100%" }}>
+                    <RHFTextField name="name_en" label={`${translate('products.placeholders.name_en')}`} />
+                    <RHFTextField name="name_ar" label={`${translate('products.placeholders.name_ar')}`} />
+                    <RHFTextField name="minimum_nights" type='number' label={`${translate('products.placeholders.minimum_nights')}`} />
+                    <RHFTextField name="price_per_night" type='number' label={`${translate('products.placeholders.price_per_night')}`} />
+                    <RHFTextField name="start_date" type='date' label={`${translate('products.placeholders.start_date')}`} />
+                    <RHFTextField name="end_date" type='date' label={`${translate('products.placeholders.end_date')}`} />
 
-                  <Grid item xs={12} sm={12} key={field.name}>
-                    <FormControl error={!!errors[field.name]} style={{ width: '100%' }}
-                    >
-                      {field.isEditor ? (
+                  </Stack>
+                )}
+                {currentSlide === 1 && (
+                  <Stack spacing={3} sx={12} style={{ width: "100%" }}>
+                    <ReactQuill
+                      value={methods.getValues("desc_en")}
+                      onChange={(value) => handleQuillChange("desc_en", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.desc_en && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.desc_en.message}</span>
+                    )}
+                    <ReactQuill
+                      value={methods.getValues("desc_ar")}
+                      onChange={(value) => handleQuillChange("desc_ar", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.desc_ar && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.desc_ar.message}</span>
+                    )}
+                    <RHFUploadWithLabel
+                      thumbnail
+                      name="photo"
+                      label={translate('Company.photo.value')}
+                      defaultValue={defaultValues.photo.id}
+                      multiple
+                      onDrop={(acceptedFiles) => handleDrop(acceptedFiles, 'photo')}
+                      onRemove={() => handleRemoveFile('photo')}
+                      onRemoveAll={() => handleRemoveAllFiles('photo')}
+                      onUpload={() => onUpload('photo')}
+                      isLoading={isLoading}
+                    />
+                    <RHFSwitch name='most_popular' label='most_popular' />
+                    <RHFSwitch name='is_child_allowed' label='is_child_allowed' />
 
-                        <Controller
-                          name={field.name}
-                          control={methods.control}
-                          render={({ field }) => (
-                            <div style={{ marginBottom: "20px" }}>
+                    <RHFTextField name="price_for_each_child" label={`${translate('products.placeholders.price_for_each_child')}`} />
 
-                              <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                                {`${translate(`${field.name}`)}`}
-                              </Typography>
-                              <ReactQuill
-                                {...field}
-                                value={field.value || ''}
-                                onChange={field.onChange}
-                                onBlur={() => field.onBlur()}
-                                placeholder={field.placeholder}  // تأكد من تمريره مباشرة هنا
+                  </Stack>
 
-                                theme="snow"
-                                modules={{
-                                  toolbar: [
-                                    [{ header: '1' }, { header: '2' }, { font: [] }],
-                                    [{ list: 'ordered' }, { list: 'bullet' }],
-                                    ['bold', 'italic', 'underline'],
-                                    ['link'],
-                                    ['blockquote'],
-                                    [{ align: [] }],
-                                    ['image', 'video'],
-                                  ],
-                                }}
-                                formats={[
-                                  'header', 'font', 'list', 'bold', 'italic', 'underline',
-                                  'link', 'blockquote', 'align', 'image', 'video',
-                                ]}
-                                bounds={'.editor'}
-                                style={{ height: '200px', marginBottom: '30px' }}
+                )}
 
-                              />
+                {currentSlide === 2 && (
+                  <Stack spacing={3} sx={12} style={{ width: "100%" }}>
+                    <ReactQuill
+                      value={methods.getValues("working_hours_en")}
+                      onChange={(value) => handleQuillChange("working_hours_en", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.working_hours_en && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.working_hours_en.message}</span>
+                    )}
+                    <ReactQuill
+                      value={methods.getValues("working_hours_ar")}
+                      onChange={(value) => handleQuillChange("working_hours_ar", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
 
-                              {errors[field.name] && <p style={{ color: '#FF5630', paddingTop: '45px', fontSize: '0.75rem' }}>{errors[field.name]?.message}</p>}
-                            </div>
-                          )}
-                        />
-                      ) : field.isUpload ? (
-                        <>
+                    {methods.formState.errors.working_hours_ar && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.working_hours_ar.message}</span>
+                    )}
+                    <ReactQuill
+                      value={methods.getValues("terms_en")}
+                      onChange={(value) => handleQuillChange("terms_en", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.terms_en && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.terms_en.message}</span>
+                    )}
+                    <ReactQuill
+                      value={methods.getValues("terms_ar")}
+                      onChange={(value) => handleQuillChange("terms_ar", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.terms_ar && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.terms_ar.message}</span>
+                    )}
+                    <ReactQuill
+                      value={methods.getValues("policy_en")}
+                      onChange={(value) => handleQuillChange("policy_en", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.policy_en && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.policy_en.message}</span>
+                    )}
+                    <ReactQuill
+                      value={methods.getValues("policy_ar")}
+                      onChange={(value) => handleQuillChange("policy_ar", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.policy_ar && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.policy_ar.message}</span>
+                    )}
+                  </Stack>
 
-                          <RHFUpload
-                            multiple
-                            thumbnail
-                            name="photo"
-                            maxSize={3145728}
-                            onDrop={handleDrop}
-                            onRemove={handleRemoveFile}
-                            onRemoveAll={handleRemoveAllFiles}
-                            onUpload={() => console.log('ON UPLOAD')}
-                          />
-                          {
-                            field.name === 'photo' && !values.photo.id ? (
-                              <Typography variant="body2" color="text.secondary">No photo selected</Typography> // النص عند عدم وجود صورة
-                            ) : null
-                          }
-                        </>
-                      ) : field.isSwitch ? (
-                        <RHFSwitch name={field.name} label={field.label} />
-                      ) : field.isMultiSelect ? (
-                        <RHFMultiSelect
-                          name={field.name}
-                          label={field.label}
-                          options={[
-                            { value: 'apple', label: 'Apple' },
-                            { value: 'banana', label: 'Banana' },
-                            { value: 'orange', label: 'Orange' },
-                            { value: 'grape', label: 'Grape' },
-                          ]}
-                          placeholder=" "
-                        />
+                )}
 
-                      ) : field.isNumber ? (
-                        <RHFTextField
-                          type='number'
-                          name={field.name}
-                          label={field.label}
-                          placeholder={field.placeholder}
-                        />
-                      ) : field.isDate ? (
-                        <RHFTextField 
-                        type="date" // Ensure this is set to "date"
+                {currentSlide === 3 && (
 
-                         name={field.name}
-                        label={field.label}
-                        placeholder={field.placeholder} />
-                       
-                      ) : (
-                        <RHFTextField
 
-                          name={field.name}
-                          label={field.label}
-                          placeholder={field.placeholder}
-                        />
-                      )}
-                    </FormControl>
-                  </Grid>
-                ))}
+                  <Stack spacing={3} sx={12} style={{ width: "100%" }}>
+                    <ReactQuill
+                      value={methods.getValues("cancellation_policy_en")}
+                      onChange={(value) => handleQuillChange("cancellation_policy_en", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.cancellation_policy_en && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.cancellation_policy_en.message}</span>
+                    )}
+
+                    <ReactQuill
+                      value={methods.getValues("cancellation_policy_ar")}
+                      onChange={(value) => handleQuillChange("cancellation_policy_ar", value)}
+                      theme="snow"
+                      style={{ height: '200px', marginBottom: '50px' }}
+                    />
+                    {methods.formState.errors.cancellation_policy_ar && (
+                      <span style={{ color: "#FF5630" }}>{methods.formState.errors.cancellation_policy_ar.message}</span>
+                    )}
+
+
+                    <RHFTextField name="location_en" label={`${translate('products.placeholders.location_en')}`} />
+                    <RHFTextField name="location_ar" label={`${translate('products.placeholders.location_ar')}`} />
+                    <RHFTextField name="map" label={`${translate('products.placeholders.map')}`} />
+                    <RHFTextField name="user_id" label={`${translate('products.placeholders.user_id')}`} />
+
+
+                  </Stack>
+
+                )}
+                {currentSlide === 4 && (
+
+
+                  <Stack spacing={3} sx={12} style={{ width: "100%" }}>
+
+                    <RHFSwitch name="min_age_allowed" label="min_age_allowed" />
+
+                    <RHFSelect native name="company" label={`${translate('products.Country')}`} placeholder="company">
+                      <option value="6" />
+                      {optionsCompany.map((country) => (
+                        <option key={country.id} value={country.label}>
+                          {country.label}
+                        </option>
+                      ))}
+                    </RHFSelect>
+
+
+                  </Stack>
+
+                )}
+
               </Grid>
 
 
@@ -525,62 +539,32 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
           <Grid item xs={4}>
             <Card sx={{ p: 3 }}>
               <Stack spacing={3}>
-                <Grid container spacing={3}>
-                  {fieldsLeft.map((field) => {
-                    // إذا كان الحقل هو 'is_Quantitive'، يتم عرض الحقل فقط إذا كانت قيمته true
-                    if (field.name === 'is_Quantitive') {
-                      return (
-                        <Grid item xs={12} sm={12} key={field.name}>
-                          <FormControl style={{ width: '100%' }}>
-                            <RHFSwitch name={field.name} label={field.label} />
-                          </FormControl>
-                        </Grid>
-                      );
-                    }
+                <RHFMultiSelect
+                  name='categories'
+                  label='categories'
+                  options={options}
 
-                    // إذا كانت قيمة 'is_Quantitive' true، يتم عرض 'tickets_num'
-                    if (field.name === 'tickets_num' && isQuantitive === true) {
-                      return (
-                        <Grid item xs={12} sm={12} key={field.name}>
-                          <FormControl style={{ width: '100%' }}>
-                            <RHFTextField
-                              name={field.name}
-                              label={field.label}
-                              placeholder={field.placeholder}
-                            />
-                          </FormControl>
-                        </Grid>
-                      );
-                    }
+                  placeholder=" "
+                />
+                <RHFMultiSelect
+                  name='features'
+                  label='features'
+                  options={optionsfeatures}
 
-                    // عرض الحقول الأخرى
-                    return (
-                      <Grid item xs={12} sm={12} key={field.name}>
-                        <FormControl style={{ width: '100%' }}>
-                          {field.isMultiSelect ? (
-                            <RHFMultiSelect
-                              name={field.name}
-                              label={field.label}
-                              options={[
-                                { value: 'apple', label: 'Apple' },
-                                { value: 'banana', label: 'Banana' },
-                                { value: 'orange', label: 'Orange' },
-                                { value: 'grape', label: 'Grape' },
-                              ]}
-                              placeholder=" "
-                            />
-                          ) : field.isSwitch ? (
-                            <RHFSwitch name={field.name} label={field.label} />
-                          ) : null}
-                        </FormControl>
-                      </Grid>
-                    );
-                  })}
-
-
-                </Grid>
-
-
+                  placeholder=" "
+                />
+                <RHFSwitch name="is_free" label="is_free" />
+                <RHFSwitch name="is_new" label="is_new" />
+                <RHFSwitch name="is_Quantitive" label="is_Quantitive" />
+                {
+                  isQuantitive && (<Grid item xs={12} sm={12} >
+                    <RHFTextField
+                      name="tickets_num"
+                      label="tickets_num"
+                      placeholder="tickets_num"
+                    />
+                  </Grid>)
+                }
 
 
               </Stack>
@@ -599,15 +583,13 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
           <Button
             variant="contained"
             onClick={handleNext}
-            disabled={currentSlide === Math.ceil(fields.length / fieldsPerPage) - 1}
+            disabled={currentSlide === 4}
           >
             Next
           </Button>
         </Box>
 
-        <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting} style={{ width: '100%', marginTop: '10px' }}>
-          {!isEdit ? 'Create Product' : 'Save Changes'}
-        </LoadingButton>
+
 
         {/* {
                 currentSlide === Math.floor(fields.length / fieldsPerPage) - 1 && (
@@ -617,6 +599,9 @@ export default function ProductsNewEditForm({ isEdit, currentProducts }) {
                 )
               } */}
       </Grid>
+      <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting} style={{ width: '100%', marginTop: '10px' }}>
+        {!isEdit ? 'Create Product' : 'Save Changes'}
+      </LoadingButton>
     </FormProvider>
   );
 }

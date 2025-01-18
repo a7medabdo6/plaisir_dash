@@ -23,7 +23,11 @@ export const useCompanyFormHelpers = (isEdit, CompanyData,setValue,defaultValues
   const [photo, setPhoto] = useState(null);
   const [file, setFile] = useState(null);
   const [fileId, setFileId] = useState(null);
-
+  const [uploadedFileDetails, setUploadedFileDetails] = useState({
+    photo_id: null,
+    commercial_register: null,
+   
+  });
   
 
   useEffect(() => {
@@ -47,10 +51,10 @@ export const useCompanyFormHelpers = (isEdit, CompanyData,setValue,defaultValues
         notes: formData.notes || CompanyData.notes,
         locaton: formData.locaton || CompanyData.locaton,
         photo_id: {
-          id: formData.photo_id?.id || CompanyData.photo_id?.id,
+          id: uploadedFileDetails.photo_id?.id || HomeContentsData?.photo_id?.id,
         },
         commercial_register: {
-          id: formData.commercial_register?.id || CompanyData.commercial_register?.id,
+          id: uploadedFileDetails.commercial_register?.id || HomeContentsData?.commercial_register?.id,
         },
       };
       
@@ -114,7 +118,7 @@ export const useCompanyFormHelpers = (isEdit, CompanyData,setValue,defaultValues
       },
       [setValue]
     );
-    const onUpload = () => {
+    const onUpload = (fileType) => {
       if (!file) {
         alert('Please select a file first.');
         return;
@@ -124,8 +128,31 @@ export const useCompanyFormHelpers = (isEdit, CompanyData,setValue,defaultValues
       uploadMutation.mutate(file, {
         onSuccess: (data) => {
           setIsLoading(false);
-          setPhoto(data.file.id);
-          setFileId(data.file.id);
+  
+          const uploadedFile = data.file;
+  
+          // Update the field based on fileType
+          setUploadedFileDetails((prevState) => {
+            switch (fileType) {
+              case 'commercial_register':
+                return {
+                  ...prevState,
+                  commercial_register: { id: uploadedFile.id, path: uploadedFile.path },
+                };
+              case 'photo_id':
+                return {
+                  ...prevState,
+                  photo_id: { id: uploadedFile.id, path: uploadedFile.path },
+                };
+       
+              default:
+                return prevState;
+            }
+          });
+  
+          // Update form values for the uploaded file
+          setValue(fileType, { id: uploadedFile.id, path: uploadedFile.path }, { shouldValidate: true });
+  
           enqueueSnackbar(`${translate('imageUploadSuccess')}`, { variant: 'success' });
         },
         onError: (error) => {
@@ -134,12 +161,14 @@ export const useCompanyFormHelpers = (isEdit, CompanyData,setValue,defaultValues
         },
       });
     };
-    const handleRemoveFile = () => {
-      setValue('images', []);
+    const handleRemoveFile = (fieldName) => {
+      setValue(fieldName, null);  // إزالة الصورة المحددة
     };
-    const handleRemoveAllFiles = () => {
-      setValue('images', []);
+  
+    const handleRemoveAllFiles = (fieldName) => {
+      setValue(fieldName, null);  // إزالة كل الصور
     };
+  
   return {
     isProcessing,
     defaultValues,
