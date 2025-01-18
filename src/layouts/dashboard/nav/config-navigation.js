@@ -50,6 +50,7 @@ const navConfig = [
           { title: 'productsdash', path: PATH_DASHBOARD.products, icon: ICONS.Products },
           { title: 'faqdash', path: PATH_DASHBOARD.FAQ, icon: ICONS.Faq },
           { title: 'BlogTagsdash', path: PATH_DASHBOARD.blogtags, icon: ICONS.Tag },
+          { title: 'companydash', path: PATH_DASHBOARD.company, icon: ICONS.Features },
 
           // { title: 'HomeContentdash', path: PATH_DASHBOARD.HomeContent, icon: ICONS.HomeContent },
           // { title: 'FooterContentdash', path: PATH_DASHBOARD.FooterContent, icon: ICONS.FooterContent },

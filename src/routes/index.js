@@ -52,7 +52,10 @@ import {
   EditFooterContent,
   EditTerms,
   EditPrivacy,
-  EditOurPartner
+  EditOurPartner,
+  Company,
+  CreateCompany,
+  EditCompany
 } from './elements';
 import AuthRoleGuard from 'src/auth/AuthRoleGuard';
 
@@ -201,7 +204,11 @@ export default function Router() {
         { path: 'coupon/new', element: <CreateCoupon /> },
         { path: 'coupon/edit:id', element: <EditCoupon /> },
 
-       
+        { path: 'company', element: <Company/> },
+        { path: 'company/new', element: <CreateCompany/> },
+        { path: 'company/edit:id', element: <EditCompany /> },
+
+
         { path: 'HomeContent', element: <EditHomeContent /> },
         { path: 'FooterContent', element: <EditFooterContent /> },
         { path: 'OurPartner', element: <EditOurPartner /> },

@@ -68,6 +68,13 @@ export const CreateFeatures = Loadable(
 export const Features = Loadable(lazy(() => import('../pages/Features')));
 export const EditFeatures = Loadable(lazy(() => import('../pages/components/Features/EditFeatures/')));
 
+export const CreateCompany = Loadable(
+  lazy(() => import('../pages/components/Company/CreateComapny'))
+);
+export const Company = Loadable(lazy(() => import('../pages/Company')));
+export const EditCompany= Loadable(lazy(() => import('../pages/components/Company/EditCompany')));
+
+
 
 export const CreateBlogTags = Loadable(
   lazy(() => import('../pages/components/BlogTags/CreateBlogTags'))
